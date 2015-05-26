@@ -1,0 +1,626 @@
+2015/05/07 17:17:37 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice_id' in 'where clause'. The SQL statement executed was: SELECT sum(debet) as sumDebet, sum(credit) as sumCredit, `t`.`id` AS `t0_c0`, `InvoiceDet`.`id` AS `t1_c0`, `InvoiceDet`.`description` AS `t1_c1`, `InvoiceDet`.`user_id` AS `t1_c2`, `InvoiceDet`.`payment` AS `t1_c3`, `InvoiceDet`.`charge` AS `t1_c4`, `InvoiceDet`.`type` AS `t1_c5`, `InvoiceDet`.`code` AS `t1_c6`, `InvoiceDet`.`term_date` AS `t1_c7` FROM `acca_acc_coa_det` `t`  LEFT OUTER JOIN `acca_invoice_det` `InvoiceDet` ON (`t`.`invoice_det_id`=`InvoiceDet`.`id`)  WHERE (invoice_id =529) ORDER BY date_coa DESC.
+2015/05/07 17:17:37 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice_id' in 'where clause'. The SQL statement executed was: SELECT sum(debet) as sumDebet, sum(credit) as sumCredit, `t`.`id` AS `t0_c0`, `InvoiceDet`.`id` AS `t1_c0`, `InvoiceDet`.`description` AS `t1_c1`, `InvoiceDet`.`user_id` AS `t1_c2`, `InvoiceDet`.`payment` AS `t1_c3`, `InvoiceDet`.`charge` AS `t1_c4`, `InvoiceDet`.`type` AS `t1_c5`, `InvoiceDet`.`code` AS `t1_c6`, `InvoiceDet`.`term_date` AS `t1_c7` FROM `acca_acc_coa_det` `t`  LEFT OUTER JOIN `acca_invoice_det` `InvoiceDet` ON (`t`.`invoice_det_id`=`InvoiceDet`.`id`)  WHERE (invoice_id =529) ORDER BY date_coa DESC' in /var/www/landa/common/lib/yii/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/landa/common/lib/yii/db/CDbCommand.php(396): CDbCommand->queryInternal('fetchAll', Array, Array)
+#1 /var/www/landa/common/lib/yii/db/ar/CActiveFinder.php(803): CDbCommand->queryAll()
+#2 /var/www/landa/common/lib/yii/db/ar/CActiveFinder.php(437): CJoinElement->runQuery(Object(CJoinQuery))
+#3 /var/www/landa/common/lib/yii/db/ar/CActiveFinder.php(68): CJoinElement->find(Object(CDbCriteria))
+#4 /var/www/landa/common/lib/yii/db/ar/CActiveRecord.php(1356): CActiveFinder->query(Object(CDbCriteria), false)
+#5 /var/www/landa/common/lib/yii/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#6 /var/www/landa/ims/models/AccCoaDet.php(265): CActiveRecord->find(Array)
+#7 /var/www/landa/ims/controllers/AccCoaController.php(574): AccCoaDet->balanceInvoice('529')
+#8 /var/www/landa/common/lib/yii/web/actions/CInlineAction.php(49): AccCoaController->actionSelectInvoice()
+#9 /var/www/landa/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/landa/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#11 /var/www/landa/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#12 /var/www/landa/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#13 /var/www/landa/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#14 /var/www/landa/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#15 /var/www/landa/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#16 /var/www/landa/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#17 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('selectInvoice')
+#18 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('accCoa/selectIn...')
+#19 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#20 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#21 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/accCoa/selectInvoice.html
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/update/5282.html
+---
+2015/05/07 17:21:56 [error] [system.db.CDbCommand] CDbCommand::fetch() failed: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice_id' in 'where clause'. The SQL statement executed was: SELECT sum(debet) as sumDebet, sum(credit) as sumCredit FROM `acca_acc_coa_det` `t` WHERE invoice_id =244 LIMIT 1.
+2015/05/07 17:21:56 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand failed to execute the SQL statement: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'invoice_id' in 'where clause'. The SQL statement executed was: SELECT sum(debet) as sumDebet, sum(credit) as sumCredit FROM `acca_acc_coa_det` `t` WHERE invoice_id =244 LIMIT 1' in /var/www/landa/common/lib/yii/db/CDbCommand.php:543
+Stack trace:
+#0 /var/www/landa/common/lib/yii/db/CDbCommand.php(415): CDbCommand->queryInternal('fetch', Array, Array)
+#1 /var/www/landa/common/lib/yii/db/ar/CActiveRecord.php(1351): CDbCommand->queryRow()
+#2 /var/www/landa/common/lib/yii/db/ar/CActiveRecord.php(1456): CActiveRecord->query(Object(CDbCriteria))
+#3 /var/www/landa/ims/models/AccCoaDet.php(264): CActiveRecord->find(Array)
+#4 /var/www/landa/ims/controllers/AccCoaController.php(574): AccCoaDet->balanceInvoice('244')
+#5 /var/www/landa/common/lib/yii/web/actions/CInlineAction.php(49): AccCoaController->actionSelectInvoice()
+#6 /var/www/landa/common/lib/yii/web/CController.php(308): CInlineAction->runWithParams(Array)
+#7 /var/www/landa/common/lib/yii/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#8 /var/www/landa/common/lib/yii/web/filters/CFilter.php(40): CFilterChain->run()
+#9 /var/www/landa/common/lib/yii/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#10 /var/www/landa/common/lib/yii/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#11 /var/www/landa/common/lib/yii/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#12 /var/www/landa/common/lib/yii/web/CController.php(291): CFilterChain->run()
+#13 /var/www/landa/common/lib/yii/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#14 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('selectInvoice')
+#15 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('accCoa/selectIn...')
+#16 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#17 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#18 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/accCoa/selectInvoice.html
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/update/5282.html
+---
+2015/05/07 17:28:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/RekapHutang.html
+---
+2015/05/07 17:28:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/RekapHutang.html
+---
+2015/05/14 23:37:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/16 19:20:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/16 19:20:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/
+---
+2015/05/16 19:20:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/generalLedger.html
+---
+2015/05/16 19:20:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/generalLedger.html
+---
+2015/05/16 19:20:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/generalLedger.html
+---
+2015/05/16 19:24:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/RekapPiutang.html
+---
+2015/05/16 19:24:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/RekapPiutang.html
+---
+2015/05/18 09:54:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/18 09:54:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/
+---
+2015/05/18 14:38:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/
+---
+2015/05/20 13:28:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/22 06:54:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/22 11:25:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "images".' in /var/www/landa/common/lib/yii/web/CController.php:483
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CController.php(270): CController->missingAction('images')
+#1 /var/www/landa/common/lib/yii/web/CWebApplication.php(282): CController->run('images')
+#2 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('site/images/fav...')
+#3 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#4 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#5 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/site/images/favicon.ico
+---
+2015/05/22 11:26:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/
+---
+2015/05/22 11:26:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/customer.html
+---
+2015/05/22 11:26:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/supplier.html
+---
+2015/05/22 11:26:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/supplier.html
+---
+2015/05/22 11:26:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/supplier.html
+---
+2015/05/22 11:26:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/supplier.html
+---
+2015/05/22 11:26:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/user/userInvoice.html?type=supplier
+---
+2015/05/22 14:29:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut.html
+---
+2015/05/22 14:29:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut.html
+---
+2015/05/22 14:29:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/create.html
+---
+2015/05/22 14:29:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/create.html
+---
+2015/05/22 14:31:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html?berhasil=1
+---
+2015/05/22 14:33:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html?berhasil=1
+---
+2015/05/22 14:33:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/
+---
+2015/05/22 14:33:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/report/generalLedger.html
+---
+2015/05/22 14:41:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut.html
+---
+2015/05/22 14:41:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 14:41:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut.html
+---
+2015/05/22 14:41:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 14:43:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 14:44:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:09:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:09:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:09:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/
+---
+2015/05/22 15:09:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5283.html
+---
+2015/05/22 15:09:50 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5283.html
+---
+2015/05/22 15:09:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:10:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5283.html
+---
+2015/05/22 15:10:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/index.html
+---
+2015/05/22 15:10:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:10:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:11:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:11:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:11:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:13:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:13:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:13:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:13:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:14:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:15:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:15:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:15:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:15:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:15:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:15:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
+2015/05/22 15:27:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5282.html
+---
+2015/05/22 15:27:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/avatar/65-150x150--".' in /var/www/landa/common/lib/yii/web/CWebApplication.php:286
+Stack trace:
+#0 /var/www/landa/common/lib/yii/web/CWebApplication.php(141): CWebApplication->runController('images/avatar/6...')
+#1 /var/www/landa/common/lib/yii/base/CApplication.php(180): CWebApplication->processRequest()
+#2 /var/www/landa/ims/www/karyatugasanda/index.php(16): CApplication->run()
+#3 {main}
+REQUEST_URI=/landa/ims/www/karyatugasanda/images/avatar/65-150x150--
+HTTP_REFERER=http://localhost/landa/ims/www/karyatugasanda/accCashOut/5284.html
+---
