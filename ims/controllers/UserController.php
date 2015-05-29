@@ -684,8 +684,8 @@ class UserController extends Controller {
             'order' => 't.name',
             'condition' => 'Roles.type ="' . $_GET['type'] . '"'
         ));
-        if (!empty($_POST['code']) && isset($_POST['code'])) {
-            for ($i = 0; $i < count($_POST['description']); $i++) {
+        if (isset($_POST['code'])) {
+            for ($i = 0; $i < count($_POST['code']); $i++) {
                 if (empty($_POST['id'][$i])) {
                     $payment = new InvoiceDet();
                 } else {
@@ -697,21 +697,23 @@ class UserController extends Controller {
                 $payment->payment = $_POST['payment'][$i];
                 $payment->type = $_GET['type'];
                 $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
-                $payment->save();
-                if (empty($_POST['id_coaDet'][$i])) {
-                    $coaDet = new AccCoaDet();
-                } else {
-                    $coaDet = AccCoaDet::model()->findByPk($_POST['id_coaDet'][$i]);
+//                $payment->save();
+                if ($payment->save()) {
+                    if (empty($_POST['id_coaDet'][$i])) {
+                        $coaDet = new AccCoaDet();
+                    } else {
+                        $coaDet = AccCoaDet::model()->findByPk($_POST['id_coaDet'][$i]);
+                    }
+                    $coaDet->reff_type = "invoice";
+                    if ($_GET['type'] == "customer") {
+                        $coaDet->debet = $_POST['payment'][$i];
+                    } else {
+                        $coaDet->credit = $_POST['payment'][$i];
+                    }
+                    $coaDet->invoice_det_id = $payment->id;
+                    $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
+                    $coaDet->save();
                 }
-                $coaDet->reff_type = "invoice";
-                if ($_GET['type'] == "customer") {
-                    $coaDet->debet = $_POST['payment'][$i];
-                } else {
-                    $coaDet->credit = $_POST['payment'][$i];
-                }
-                $coaDet->invoice_det_id = $payment->id;
-                $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
-                $coaDet->save();
             }
         }
         $this->render('userInvoice', array(

@@ -27,12 +27,12 @@ class InvoiceDet extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('user_id', 'numerical', 'integerOnly' => true),
+            array('user_id, id', 'numerical', 'integerOnly' => true),
             array('payment, charge', 'numerical'),
             array('description, code', 'length', 'max' => 45),
             array('type', 'length', 'max' => 15),
 //            array('code', 'unique'),
-            array('term_date, charge', 'safe'),
+            array('term_date, charge, code, description', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
             array('id, term_date, description, code, user_id, payment, charge, type', 'safe', 'on' => 'search'),
