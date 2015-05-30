@@ -677,14 +677,14 @@ class UserController extends Controller {
     }
 
     public function actionUserInvoice() {
-//        $this->layout = 'main';
-//        $config = SiteConfig::model()->findAll();
         $header = User::model()->findAll(array(
             'with' => 'Roles',
             'order' => 't.name',
             'condition' => 'Roles.type ="' . $_GET['type'] . '"'
         ));
+        $alert = false;
         if (isset($_POST['code'])) {
+//            logs($_POST['code']);
             for ($i = 0; $i < count($_POST['code']); $i++) {
                 if (empty($_POST['id'][$i])) {
                     $payment = new InvoiceDet();
@@ -713,11 +713,17 @@ class UserController extends Controller {
                     $coaDet->invoice_det_id = $payment->id;
                     $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
                     $coaDet->save();
+//                    logs($coaDet->getErrors());
                 }
+//                logs($payment->getErrors());
+                $alert = true;
             }
+            
+            
         }
         $this->render('userInvoice', array(
-            'header' => $header
+            'header' => $header,
+            'alert' => $alert
         ));
     }
 
@@ -728,13 +734,13 @@ class UserController extends Controller {
             . '<input type="text" class="code span1" name="code[]" value="' . $_POST['code'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" readonly="readonly" class="dateStart" style="width:100px" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
+            . '<input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" readonly="readonly" class="term" style="width:100px" name="term_date[]" value="' . $_POST['terms'] . '">'
+            . '<input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $_POST['terms'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" class="description span4" name="description[]" value="' . $_POST['desc'] . '">'
+            . '<input type="text" class=" span4" name="description[]" value="' . $_POST['desc'] . '">'
             . '</td>'
             . '<td style="text-align:center">
                 <div class="input-prepend">
@@ -756,6 +762,19 @@ class UserController extends Controller {
                                     <td></td>
                                 </tr>';
         }
+    }
+
+    public function actionInvoiceDetail() {
+        $userInvoice = AccCoaDet::model()->findAll(array(
+            'with' => array('InvoiceDet'),
+            'condition' => 'InvoiceDet.user_id='.$_POST['id'].' AND reff_type="invoice"'
+        ));
+        $ambil = ($_POST['id'] == 0) ? false : true;
+        echo $this->renderPartial('_userInvoice',array(
+            'userInvoice' => $userInvoice,
+            'ambil' => $ambil,
+            'alert' => false
+        ),true);
     }
 
 }
