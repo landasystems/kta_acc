@@ -119,7 +119,7 @@ class AccCashInController extends Controller {
                             $cashInDet->as_id = $as;
                             $cashInDet->ar_id = $ar;
                             $cashInDet->save();
-                            
+
 //                            if (isset($_POST['inVoiceDet'][$i]) && $_POST['inVoiceDet'][$i] != 0) {
 //                                $invoiceDet = InvoiceDet::model()->findByPk($_POST['inVoiceDet'][$i]);
 //                                if ($invoiceDet->type == 'supplier') {
@@ -130,7 +130,6 @@ class AccCashInController extends Controller {
 //                                $invoiceDet->charge = $invoiceDet->charge + $_POST['AccCashInDet']['amount'][$i];
 //                                $invoiceDet->save();
 //                            }
-
 //                            $valSub[] = (object) array("id" => $model->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $cashInDet->description, "credit" => $cashInDet->amount, "code" => $model->code, "reff_type" => "cash_in", "ar" => $ar, "as" => $as, "ap" => $ap);
 
                             if ($cashInDet->amount < 0)
@@ -260,7 +259,7 @@ class AccCashInController extends Controller {
                             $cashInDet->as_id = $as;
                             $cashInDet->ar_id = $ar;
                             $cashInDet->save();
-                            
+
 //                            if (isset($_POST['inVoiceDet'][$i]) && $_POST['inVoiceDet'][$i] != 0) {
 //                                $invoiceDet = InvoiceDet::model()->findByPk($_POST['inVoiceDet'][$i]);
 //                                if ($invoiceDet->type == 'supplier') {
@@ -279,9 +278,9 @@ class AccCashInController extends Controller {
 //                                $valSub[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $cashInDet->description, "credit" => $cashInDet->amount, "code" => $cashin->code_acc, "reff_type" => "cash_in", "ar" => $ar, "as" => $as, "ap" => $ap);
 //                            }
                             if ($cashInDet->amount < 0)
-                                $debet[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $cashInDet->description, "total" => $cashInDet->amount * -1, "code" => $cashin->code_acc, "reff_type" => "cash_in","invoice_det_id" => (isset($_POST['inVoiceDet'][$i])) ? $_POST['inVoiceDet'][$i] : null);
+                                $debet[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $cashInDet->description, "total" => $cashInDet->amount * -1, "code" => $cashin->code_acc, "reff_type" => "cash_in", "invoice_det_id" => (isset($_POST['inVoiceDet'][$i])) ? $_POST['inVoiceDet'][$i] : null);
                             else
-                                $credit[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $cashInDet->description, "total" => $cashInDet->amount, "code" => $cashin->code_acc, "reff_type" => "cash_in","invoice_det_id" => (isset($_POST['inVoiceDet'][$i])) ? $_POST['inVoiceDet'][$i] : null);
+                                $credit[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashInDet->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $cashInDet->description, "total" => $cashInDet->amount, "code" => $cashin->code_acc, "reff_type" => "cash_in", "invoice_det_id" => (isset($_POST['inVoiceDet'][$i])) ? $_POST['inVoiceDet'][$i] : null);
                         }
 
                         //jika description kosong, br di hilangkan
@@ -290,7 +289,7 @@ class AccCashInController extends Controller {
                         else
                             $sDesc = $cashin->description . $sDesc;
 
-                        $debet[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashin->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $sDesc, "total" => $cashin->total, "code" => $cashin->code_acc, "reff_type" => "cash_in","invoice_det_id" => NULL);
+                        $debet[] = (object) array("id" => $cashin->id, "acc_coa_id" => $cashin->acc_coa_id, "date_trans" => (isset($_POST['date_post'])) ? $_POST['date_post'] : '', "description" => $sDesc, "total" => $cashin->total, "code" => $cashin->code_acc, "reff_type" => "cash_in", "invoice_det_id" => NULL);
 
                         // --------------------------Function Approve----------------------------
 
@@ -522,7 +521,7 @@ class AccCashInController extends Controller {
                             <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span> 
                         </td>
                         <td>' . $acca->code . ' - ' . $acca->name . '</td>
-                        <td>[ '. $code .' ]'. $name . '</td>
+                        <td>[ ' . $code . ' ]' . $name . '</td>
                         <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]"  value="' . $_POST['costDescription'] . '" style="width:95%;"/></td>
                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['credit'] . '"/></div></td>
                     </tr>';
@@ -535,7 +534,6 @@ class AccCashInController extends Controller {
         AccCashInDet::model()->deleteAll(array('condition' => 'acc_cash_in_id = ' . $idCash));
         AccCoaDet::model()->deleteAll(array('condition' => 'reff_type="cash_in" AND reff_id=' . $idCash));
 //        AccCoaSub::model()->deleteAll(array('condition' => 'reff_type="cash_in" AND reff_id=' . $idCash));
-
 //        echo 'data berhasil dihapus';
     }
 
@@ -555,20 +553,19 @@ class AccCashInController extends Controller {
             }
         }
     }
-    
-    public function actionGenerateExcel(){
-        $a = explode('-', $_GET['date']);
-        $start = date('Y-m-d', strtotime($a[0]));
-        $end = date('Y-m-d', strtotime($a[1]));
-        $model = AccCashIn::model()->findAll(array(
-            'condition' => 'date_posting >="'.$start.'" AND date_posting<="'.$end.'"'
-        ));
-        
+
+    public function actionGenerateExcel() {
+//        $criteria = new CDbCriteria();
+//        if (isset($_GET['AccCashIn'][])) {
+//            $model->attributes;
+//        }
+//        $model = AccCashIn::model()->findAll();
+
         return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
-            'model' => $model,
-            'start' => $start,
-            'end' => $end,
-        ), true)
+//                            'model' => $model,
+//                            'start' => $start,
+//                            'end' => $end,
+                                ), true)
         );
     }
 
