@@ -67,29 +67,31 @@
             </td>
         </tr>
         <?php
-        if (empty($userInvoice)) {
+        if (empty($balance)) {
             echo '<tr class="kosong"><td colspan="6">Data Kosong</td></tr>';
         } else {
             $paymentss = 0;
-            foreach ($userInvoice as $res) {
-                if (!empty($res->debet))
-                    $paymentss = $res->debet;
-                else
-                    $paymentss = $res->credit;
-
+            foreach ($balance as $res) {
+                $paymentss = $res->payment;
+                $coaDet = AccCoaDet::model()->find(array(
+                    'condition' => 'reff_type="invoice" AND invoice_det_id ='.$res->id,
+                    'order' => 'id ASC'
+                ));
+                $coaId = (!empty($coaDet->id)) ? $coaDet->id : '';
+                $coaDate = (!empty($coaDet->date_coa)) ? $coaDet->date_coa : '';
                 echo '<tr>';
-                echo '<td><input type="text" class="code span1" name="code[]" value="' . $res->InvoiceDet->code . '"></td>';
-                echo '<td><input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $res->date_coa . '"></td>';
-                echo '<td><input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $res->InvoiceDet->term_date . '"></td>';
-                echo '<td><input type="text" class="span4" name="description[]" value="' . $res->InvoiceDet->description . '"></td>';
+                echo '<td><input type="text" class="code span1" name="code[]" value="' . $res->code . '"></td>';
+                echo '<td><input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $coaDate . '"></td>';
+                echo '<td><input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $res->term_date . '"></td>';
+                echo '<td><input type="text" class="span4" name="description[]" value="' . $res->description . '"></td>';
                 echo '<td><div class="input-prepend">
                                 <span class="add-on">Rp.</span>
                                 <input class="angka nilai" style="width:75px;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
                 echo '<td>
                             <span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>
-                            <input type="hidden" class="user" name="user_id[]" value="' . $res->InvoiceDet->user_id . '">
-                            <input type="hidden" class="id_invoice" name="id[]" value="' . $res->invoice_det_id . '">
-                            <input type="hidden" class="id_coaDet" name="id_coaDet[]" value="' . $res->id . '">
+                            <input type="hidden" class="user" name="user_id[]" value="' . $res->user_id . '">
+                            <input type="hidden" class="id_invoice" name="id[]" value="' . $res->id. '">
+                            <input type="hidden" class="id_coaDet" name="id_coaDet[]" value="' . $coaId . '">
                         </td>';
                 echo '</tr>';
             }
@@ -105,7 +107,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="4" style="text-align:center;font-weight:bold">Total <?php // echo $sTot          ?></td>    
+            <td colspan="4" style="text-align:center;font-weight:bold">Total <?php // echo $sTot           ?></td>    
             <td class="span2" style="text-align:center">
                 <div class="input-prepend">
                     <span class="add-on">Rp.</span>

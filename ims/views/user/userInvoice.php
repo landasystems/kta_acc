@@ -74,17 +74,20 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             if (!empty($_POST['supplier_list'])) {
                 $userInvoice = AccCoaDet::model()->findAll(array(
                     'with' => array('InvoiceDet'),
-                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND reff_type="invoice"'
+                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND (reff_type="invoice" OR InvoiceDet.is_new_invoice=1)'
                 ));
+                $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['supplier_list']));
             }else{
                 $userInvoice = '';
+                $balance= '';
             }
 //            $alert = false;
             $this->renderPartial('_userInvoice', array(
 //                'sTot' => $sTot,
                 'userInvoice' => $userInvoice,
                 'ambil' => false,
-                'alert' => $alert
+                'alert' => $alert,
+                'balance' => $balance
             ));
             ?>
         </div>
