@@ -549,7 +549,10 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         $("#subLedgers").html('<a data-toggle="modal" data-target="#modalSub" style="display:" class="btn" id="showModal">Select Sub-Ledger</a>');
     }
     $("body").on("change", "#accountName", function () {
-        var id = $(this).val();
+        selectInvoice();
+    });
+    function selectInvoice() {
+        var id = $("#accountName").val();
         $.ajax({
             type: 'POST',
             url: "<?php echo url('accCoa/selectInvoice') ?>",
@@ -558,5 +561,33 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 $("#detail").html(data);
             }
         });
+    }
+
+    $("body").on("keyup", "#invoice_amount", function () {
+        var value = parseInt($(this).val());
+        $("#credit").val(value);
+    });
+    
+    $("body").on("click", ".addNewInvoice", function () {
+        var code = $("#code_invoice").val();
+        var user_id = $("#accountName").val();
+        var type = $("#type_invoice").val();
+        var term_date = $("#AccCashIn_date_trans").val();
+        var description = $("#invoice_description").val();
+        var amount = parseInt($("#invoice_amount").val());
+        if (amount !== 0 || amount !== "" || code !== "") {
+            $.ajax({
+                type: 'post',
+                data: {code: code, description: description, user_id: user_id, amount: amount, type: type, term_date: term_date},
+                url: "<?php echo url('accCoa/newInvoice'); ?>",
+                success: function (data) {
+                    if (data == 1) {
+                        selectInvoice();
+                    }
+                }
+            });
+        } else {
+            alert("code dan/atau nilai belum di inputkan!");
+        }
     });
 </script>

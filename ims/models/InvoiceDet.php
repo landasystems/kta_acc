@@ -32,10 +32,10 @@ class InvoiceDet extends CActiveRecord {
             array('description, code', 'length', 'max' => 45),
             array('type', 'length', 'max' => 15),
 //            array('code', 'unique'),
-            array('term_date, charge, code, description', 'safe'),
+            array('term_date, charge, is_new_invoice, code, description', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, term_date, description, code, user_id, payment, charge, type', 'safe', 'on' => 'search'),
+            array('id, term_date, is_new_invoice, description, code, user_id, payment, charge, type', 'safe', 'on' => 'search'),
         );
     }
 
@@ -63,6 +63,7 @@ class InvoiceDet extends CActiveRecord {
             'type' => 'Type',
             'code' => 'Code Invoice',
             'term_date' => 'Tanggal Jatuh Tempo',
+            'is_new_invoice' => 'Invoice Baru'
         );
     }
 
@@ -91,6 +92,7 @@ class InvoiceDet extends CActiveRecord {
         $criteria->compare('type', $this->type, true);
         $criteria->compare('code', $this->code);
         $criteria->compare('term_date', $this->term_date);
+        $criteria->compare('is_new_invoice', $this->is_new_invoice);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,

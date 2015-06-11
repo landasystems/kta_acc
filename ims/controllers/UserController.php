@@ -705,10 +705,15 @@ class UserController extends Controller {
                         $coaDet = AccCoaDet::model()->findByPk($_POST['id_coaDet'][$i]);
                     }
                     $coaDet->reff_type = "invoice";
-                    if ($_GET['type'] == "customer") {
-                        $coaDet->debet = $_POST['payment'][$i];
-                    } else {
-                        $coaDet->credit = $_POST['payment'][$i];
+                    if ($payment->is_new_invoice == 1) {
+                        $coaDet->credit = 0;
+                        $coaDet->debet = 0;
+                    }else{
+                        if ($_GET['type'] == "customer") {
+                            $coaDet->debet = $_POST['payment'][$i];
+                        } else {
+                            $coaDet->credit = $_POST['payment'][$i];
+                        }
                     }
                     $coaDet->invoice_det_id = $payment->id;
                     $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
@@ -718,8 +723,6 @@ class UserController extends Controller {
 //                logs($payment->getErrors());
                 $alert = true;
             }
-            
-            
         }
         $this->render('userInvoice', array(
             'header' => $header,
@@ -767,14 +770,16 @@ class UserController extends Controller {
     public function actionInvoiceDetail() {
         $userInvoice = AccCoaDet::model()->findAll(array(
             'with' => array('InvoiceDet'),
-            'condition' => 'InvoiceDet.user_id='.$_POST['id'].' AND reff_type="invoice"'
+            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"'
         ));
         $ambil = ($_POST['id'] == 0) ? false : true;
-        echo $this->renderPartial('_userInvoice',array(
+        $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
+        echo $this->renderPartial('_userInvoice', array(
             'userInvoice' => $userInvoice,
             'ambil' => $ambil,
-            'alert' => false
-        ),true);
+            'alert' => false,
+            'balance' => $balance
+                ), true);
     }
 
 }

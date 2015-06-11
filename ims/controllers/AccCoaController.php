@@ -85,7 +85,7 @@ class AccCoaController extends Controller {
                       $accCoaDet->save();
                      */
 //                    if (!isset($_POST['AccCoa']['filee'])) //jika bukan dari import excel
-                        $this->redirect(array('view', 'id' => $child->id));
+                    $this->redirect(array('view', 'id' => $child->id));
                 }
 //                if (!empty($child->id)) {
 //                    $this->redirect(array('view', 'id' => $child->id,'hgaha' => 'hahahaha'));
@@ -570,6 +570,11 @@ class AccCoaController extends Controller {
         if (isset($_POST['id'])) {
             $account = User::model()->findByPk($_POST['id']);
             $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
+            echo '<tr><th><input type="text" name="code_invoice" style="width:85%" id="code_invoice"></th>';
+            echo '<th><input style="width:95%" type="text" name="invoice_description" id="invoice_description"></th>';
+            echo '<th><input type="text" class="angka" id="invoice_amount" value="0"></th>';
+            echo '<th><input type="hidden" id="type_invoice" value="' . $account->Roles->type . '"></th>';
+            echo '<td style="text-align:center"><a href="#" style="height:15px;width:61%" class="addNewInvoice btn"><i class="icon-plus"></i></a></td></tr>';
             foreach ($balance as $b) {
                 $charge = AccCoaDet::model()->balanceInvoice($b->id); //filter no date
                 $payment = (!empty($b->payment) ? $b->payment : 0);
@@ -600,6 +605,23 @@ class AccCoaController extends Controller {
             . '<td><input type="hidden" name="subid[]" value="' . $_POST['idSub'] . '"</td>'
             . '<td><input type="hidden" name="valsub[]" value="' . $_POST['totalDet'] . '"</td>'
             . '</tr>';
+        }
+    }
+
+    public function actionNewInvoice() {
+
+        if (!empty($_POST['code'] && !empty($_POST['user_id']))) {
+            $model = new InvoiceDet();
+            $model->code = $_POST['code'];
+            $model->user_id = $_POST['user_id'];
+            $model->description = $_POST['description'];
+            $model->payment = $_POST['amount'];
+            $model->type = $_POST['type'];
+            $model->term_date = $_POST['term_date'];
+            $model->is_new_invoice = 1;
+            if ($model->save()) {
+                echo 1;
+            }
         }
     }
 
