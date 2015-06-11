@@ -65,8 +65,6 @@ $form = $this->beginWidget('CActiveForm', array(
                 <div class="row-fluid">
                     <label class="form-label span12" for="password">
                         Password:
-                        <span class="icon16 icomoon-icon-locked right gray marginR10"></span>
-                        <span class="forgot"><a href="<?php echo url('site/forgotPassword') ?>">Forgot your password?</a></span>
                     </label>
                     <?php echo $form->passwordField($model, 'password' , array('class'=>'span12')); ?>
                     <?php echo $form->error($model, 'password'); ?>

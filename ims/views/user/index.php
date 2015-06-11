@@ -112,22 +112,24 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             'value' => '"$data->tagImg"',
             'htmlOptions' => array('style' => 'text-align: center; width:180px;text-align:center;')
         ),
-        array(
-            'name' => 'Biodata',
-            'type' => 'raw',
-            'value' => '"$data->tagBiodata"',
-            'htmlOptions' => array('style' => 'text-align: center;')
-        ),
-        array(
-            'visible'=>($type=="user"),
-            'name' => 'Access',
-            'type' => 'raw',
-            'value' => '"$data->tagAccess"',
-            'htmlOptions' => array('style' => 'text-align: center;'),
-            'headerHtmlOptions' => array('text-align' => 'center'),
-//            'value' => '"<img src=\"$data->imgUrl[\\"medium\\"]\" class="image"/>"', 
-//            'value' => 'aa', 
-        ),
+        'code',
+        'name',
+//        array(
+//            'name' => 'Biodata',
+//            'type' => 'raw',
+//            'value' => '"$data->tagBiodata"',
+//            'htmlOptions' => array('style' => 'text-align: center;')
+//        ),
+//        array(
+//            'visible'=>($type=="user"),
+//            'name' => 'Access',
+//            'type' => 'raw',
+//            'value' => '"$data->tagAccess"',
+//            'htmlOptions' => array('style' => 'text-align: center;'),
+//            'headerHtmlOptions' => array('text-align' => 'center'),
+////            'value' => '"<img src=\"$data->imgUrl[\\"medium\\"]\" class="image"/>"', 
+////            'value' => 'aa', 
+//        ),
 //        array('header'=>'Enabled',
 //        'name'=>'enabled',
 //        'type'=>'raw',    
