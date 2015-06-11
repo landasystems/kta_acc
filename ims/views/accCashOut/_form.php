@@ -682,7 +682,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         var term_date = $("#AccCashOut_date_trans").val();
         var description = $("#invoice_description").val();
         var amount = parseInt($("#invoice_amount").val());
-        if (amount !== 0 || amount !== "" || code !== "") {
+        if (amount != 0 || amount != "" || code != "") {
             $.ajax({
                 type: 'post',
                 data: {code: code, description: description, user_id: user_id, amount: amount, type : type,term_date : term_date},
