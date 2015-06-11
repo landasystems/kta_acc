@@ -1,8 +1,3 @@
-<?php
-//$a = explode('-', $_POST['AccCoaSub']['created']);
-//$start = date('d M Y', strtotime($a[0]));
-//$end = date('d M Y', strtotime($a[1]));
-?>
 <div class='printableArea'>
     <style type="text/css" media="print">
         body {visibility:hidden;}
