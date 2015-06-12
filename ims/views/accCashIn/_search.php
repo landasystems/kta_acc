@@ -24,7 +24,6 @@ $this->widget('bootstrap.widgets.TbSelect2', array(
     'htmlOptions' => array(
         'id' => 'AccCashIn_account',
         'style' => 'width:250px;',
-        'onChange' => 'checkSelected();'
     ),
 ));
 ?>
@@ -65,13 +64,9 @@ echo $form->dateRangeRow(
     });
 
     function submitForm() {
-//        alert('test');
-        var data = $("#AccCashIn_date_posting").val();
-        if (data != "") {
-            window.open("<?php echo url('accCashIn/generateExcel') ?>?date=" + data);
-        } else {
-            alert('isikan range tanggal terlebih dahulu!');
-        }
+        var condition = $("#search-acc-cash-in-form").serialize();
+        alert(condition);
+        window.open("<?php echo url('accCashIn/generateExcel') ?>?"+condition);
     }
 </script>
 

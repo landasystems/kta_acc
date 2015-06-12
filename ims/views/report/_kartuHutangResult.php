@@ -1,8 +1,3 @@
-<?php
-//$a = explode('-', $_POST['AccCoaSub']['created']);
-//$start = date('d M Y', strtotime($a[0]));
-//$end = date('d M Y', strtotime($a[1]));
-?>
 <div class='printableArea'>
 
     <table width="100%">
@@ -12,19 +7,7 @@
             <td  style="text-align: center" colspan="2"><h2>KARTU HUTANG REPORT</h2>
                 <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
                 <hr></td>
-        </tr>   
-        <?php
-//        $acc = User::model()->findByPk($ap_id);
-        ?>
-
-        <tr>
-            <td width="10%" style="font-weight:bold">Nama Akun</td>
-            <td width="5px" style="font-weight:bold">:</td>
-            <td style="font-weight:bold"><?php // echo $acc->name; ?> </td>
-            <td></td>
-            <td></td>
-            <td align="right"><?php // echo 'Kode Akun = ' . $acc->code;     ?></td>    
-        </tr> 
+        </tr>    
 
     </table>
 
@@ -32,8 +15,9 @@
         <thead>
             <tr>
                 <th colspan="2" width="5%"><p align="center">Date</p></th>
-        <th width="30%"><p align="center">Description</p></th>
+        <th width="25%"><p align="center">Description</p></th>
         <th width="5%"><p align="center">Reff</p></th>
+        <th width="5%"><p align="center">Invoice Code</p></th>
         <th width="20%"><p align="center">Debet</p></th>
         <th  width="20%"><p align="center">Credit</p></th>
         <th width="20%"><p align="center">Saldo</p></th>
@@ -43,7 +27,7 @@
         </thead>
         <tr>
             <?php
-            $balance = AccCoaDet::model()->balanceInvoice($id, date('Y-m-d', strtotime($start)));
+            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)),$id);
             ?>
             <th></th>
             <th></th>
@@ -51,7 +35,8 @@
             <th></th>
             <th></th>
             <th></th>
-            <th style="text-align:right"><?php echo landa()->rp($balance); ?></th>
+            <th></th>
+            <th style="text-align:right;"><?php echo landa()->rp($balance); ?></th>
         </tr>
         <?php
         $total = 0;
@@ -68,6 +53,7 @@
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
 			<td>' . $a->description . '</td>
 			<td>' . $a->code . '</td>
+			<td>' . $a->InvoiceDet->code . '</td>
 			<td name="deb" style="text-align:right">' . landa()->rp($a->debet, false) . ',- </td>
 			<td name="cred" style="text-align:right">' . landa()->rp($a->credit, false) . ',- </td>
 			<td name="tdeb" style="text-align:right">' . landa()->rp($saldo) . ',- </td>
@@ -76,7 +62,7 @@
         ?>
         <tfoot>
             <tr>
-                <th colspan="6">Saldo Akhir</th>
+                <th colspan="7">Saldo Akhir</th>
                 <th style="text-align: right;"><?php echo landa()->rp($saldo, false) . ',-' ?></th>
             </tr>
         </tfoot>
