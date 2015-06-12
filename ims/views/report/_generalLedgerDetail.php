@@ -139,9 +139,9 @@
                             <td style="text-align: center">' . $dCoa . '</td>'; //data tanggal
                             echo '<td>' . $key . '</td>'; //code 
                             echo '<td>' . $sDesc . '</td>'; //
-                            echo '<td>' . $b['debet'] . '</td>'; //debet
-                            echo '<td>' . $b['credit'] . '</td>'; //credit
-                            echo '<td>' . landa()->rp($total, false, 2) . '</td>'; //total
+                            echo '<td style="text-align: right">' . landa()->rp($b['debet'],false) . '</td>'; //debet
+                            echo '<td style="text-align: right">' . landa()->rp($b['credit'],false) . '</td>'; //credit
+                            echo '<td style="text-align: right">' . landa()->rp($total, false, 2) . '</td>'; //total
                             echo '</tr>';
                             $totald += $b['debet'];
                             $totalk += $b['credit'];

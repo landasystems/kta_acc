@@ -30,7 +30,7 @@
         </thead>
         <tr>
             <?php
-            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)),$id);
+            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)), $id);
             ?>
             <th></th>
             <th></th>
@@ -49,8 +49,8 @@
         foreach ($accCoaDet as $a) {
             $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
             $monthYear = date('M Y', strtotime($a->date_coa));
-            
-            $saldo =  $saldo + $a->debet - $a->credit;
+
+            $saldo = $saldo + $a->debet - $a->credit;
             echo '<tr>
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
