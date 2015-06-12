@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr style="display:<?php echo ($ambil) ? '' : 'none'; ?>">
+        <tr style="display:<?php echo ($ambil || isset($_POST['yt0'])) ? '' : 'none'; ?>">
             <td width="5%">
                 <input type="text" class="codes span1" value="">
             </td>
@@ -119,7 +119,7 @@
     </tfoot>
     <?php // } ?>
 </table>
-<?php if ($ambil) { ?>
+<?php if ($ambil || isset($_POST['yt0'])) { ?>
     <div class="form-actions">
         <?php
         $this->widget('bootstrap.widgets.TbButton', array(
