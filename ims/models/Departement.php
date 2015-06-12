@@ -65,10 +65,10 @@ class Departement extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
-            'address' => 'Address',
-            'city_id' => 'city_id',
-            'phone' => 'Phone',
+            'name' => 'Nama',
+            'address' => 'Alamat',
+            'city_id' => 'Kota',
+            'phone' => 'Telephone',
             'email' => 'Email',
             'fax' => 'Fax',
         );

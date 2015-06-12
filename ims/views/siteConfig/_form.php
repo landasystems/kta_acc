@@ -19,97 +19,50 @@
 
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#site">Site</a></li>
-            <!--<li><a href="#formating">Formating</a></li>-->
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format Invoice<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <?php
-                    if (in_array('inventory', param('menu'))) {
-                        ?>
-                        <li><a style="padding: 5px 2px" href="#sellOrder">Sell Order</a></li>
-                        <li><a style="padding: 5px 2px" href="#sell">Sell</a></li>
-                        <li><a style="padding: 5px 2px" href="#sellRetur">Sell Retur</a></li>
-                        <li  class="divider"></li>
-                        <li><a style="padding: 5px 2px" href="#buyOrder">Buy Order</a></li>
-                        <li><a style="padding: 5px 2px" href="#buy">Buy</a></li>
-                        <li><a style="padding: 5px 2px" href="#buyRetur">Buy Retur</a></li> 
-                        <li  class="divider"></li>
-                        <li><a style="padding: 5px 2px" href="#in">In</a></li>
-                        <li><a style="padding: 5px 2px" href="#out">Out</a></li>
-                        <?php
-                    }if (in_array('accounting', param('menu'))) {
-                        ?>
-                        <li><a style="padding: 5px 2px" href="#reportCashIn">Report Cash In</a></li>
-                        <li><a style="padding: 5px 2px" href="#reportCashOut">Report Cash Out</a></li>
-                        <li><a style="padding: 5px 2px" href="#reportJurnal">Report Jurnal</a></li>
-                        <?php
-                    }
-                    ?>
+
+                    <li><a style="padding: 5px 2px" href="#reportCashIn">Report Cash In</a></li>
+                    <li><a style="padding: 5px 2px" href="#reportCashOut">Report Cash Out</a></li>
+                    <li><a style="padding: 5px 2px" href="#reportJurnal">Report Jurnal</a></li>
                 </ul>
             </li>   
-            <?php
-            if (in_array('accounting', param('menu'))) {
-                echo '<li><a href="#accounting">Accounting</a></li>';
-            }
-            ?>
         </ul>
 
         <div class="tab-content">
             <div class="tab-pane active" id="site">
                 <?php echo $form->textFieldRow($model, 'client_name', array('class' => 'span5', 'maxlength' => 255)); ?>
                 <?php echo $form->fileFieldRow($model, 'client_logo', array('class' => 'span5')); ?>
-                <?php // echo $form->dropDownListRow($model, 'language_default', array('en' => 'English', 'id' => 'Indonesia')); ?>
-
-                <?php
-                if (in_array('inventory', param('menu'))) {
-                    echo $form->dropDownListRow($model, 'method', array('fifo' => 'FIFO', 'lifo' => 'LIFO'));
-                }
-                ?>
-
-
-            </div>
-            <div class="tab-pane" id="formating">
-                <?php
-                if (in_array('inventory', param('menu'))) {
-                    ?>
-                    <?php echo $form->textFieldRow($model, 'format_buy', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_buy_order', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_buy_retur', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_sell', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_sell_order', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_sell_retur', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_in', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_out', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_opname', array('class' => 'span5', 'maxlength' => 255)); ?>
-                <?php } ?>
-                <?php
-                if (in_array('manufacture', param('menu'))) {
-                    ?>
-                    <?php echo $form->textFieldRow($model, 'format_workorder', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_spp', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_workorder_split', array('class' => 'span5', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_workorder_process', array('class' => 'span5', 'maxlength' => 255)); ?>
-                <?php } ?>
-                <?php
-                if (in_array('accounting', param('menu'))) {
-                    ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_in', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_inks_acc', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_inbk_acc', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_out', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_outks_acc', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_cash_outbk_acc', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_jurnal', array('class' => 'span3', 'maxlength' => 255)); ?>
-                    <?php echo $form->textFieldRow($model, 'format_jurnal_acc', array('class' => 'span3', 'maxlength' => 255)); ?>
-                <?php } ?>
-                <div class="well">
-                    <ul>
-                        <li>Isikan formating code, agar sistem dapat melakukan generate kode untuk module - module yang sudah tersedia</li>
-                        <li><b>{ai|<em>3</em>}</b> / <b>{ai|<em>4</em>}</b>  / <b>{ai|<em>5</em>}</b> / <b>{ai|<em>6</em>}</b> : berikan format berikut untuk generate Auto Increase Numbering, contoh {ai|5} untuk 5 digit angka, {ai|3} untuk 3 digit angka</li>
-                        <li><b>{dd}</b>/<b>{mm}</b>/<b>{yy}</b> : berikan format berikut untuk melakukan generate tanggal, bulan, dan tahun </li>
-                        <li>Contoh Formating : <b>PO/{dd}/{mm}{yy}/{ai|5}</b>, Hasil Generate : <b>PO/14/0713/00001</b></li>
-                    </ul>
+                <div class="control-group ">
+                    <label class="control-label">Tgl Mulai Applikasi</label>
+                    <div class="controls">
+                        <?php
+                        if ($model->date_system != "0000-00-00") {
+                            $dateSystem = $model->date_system;
+                        } else {
+                            $dateSystem = date("Y-m-d");
+                        }
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => 'SiteConfig[date_system]',
+                            'value' => $dateSystem,
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'changeMonth' => 'true',
+                                'changeYear' => 'true',
+                                'dateFormat' => 'yy-mm-dd'
+                            ),
+                            'htmlOptions' => array(
+                                'style' => 'height:20px;',
+                                'id' => 'acccoa',
+                                'class' => 'span2',
+                            ),
+                        ));
+                        ?>
+                    </div>        
                 </div>
+
+
             </div>
             <?php
             if (in_array('inventory', param('menu'))) {
@@ -426,55 +379,10 @@
                 </div>
                 <?php
             }
-            if ($model->date_system != "0000-00-00") {
-                $dateSystem = $model->date_system;
-            } else {
-                $dateSystem = date("Y-m-d");
-            }
             ?>
 
-            <?php if (in_array('accounting', param('menu'))) { ?>
-                <div class="tab-pane" id="accounting">
-                    <div class="control-group ">
-                        <label class="control-label">Tgl Mulai Applikasi</label>
-                        <div class="controls">
-                            <?php
-                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name' => 'SiteConfig[date_system]',
-                                'value' => $dateSystem,
-                                'options' => array(
-                                    'showAnim' => 'fold',
-                                    'changeMonth' => 'true',
-                                    'changeYear' => 'true',
-                                    'dateFormat' => 'yy-mm-dd'
-                                ),
-                                'htmlOptions' => array(
-                                    'style' => 'height:20px;',
-                                    'id' => 'acccoa',
-                                    'class' => 'span2',
-                                ),
-                            ));
-                            ?>
-                        </div>        
-                    </div>
-                    <div class="control-group ">
-                        <label class="control-label">Posting with Approval</label>
-                        <div class="controls">
-                            <?php
-                            echo $form->radioButtonList($model, 'is_approval', array('yes' => 'Ya', 'no' => 'Tidak', 'manual' => 'Manual'), array('separator' => ''));
-                            ?>
-                        </div>        
-                    </div>
-                    <div class="control-group ">
-                        <label class="control-label">Auto Posting Number</label>
-                        <div class="controls">
-                            <?php
-                            echo $form->radioButtonList($model, 'autopostnumber', array('1' => 'Ya', '0' => 'Tidak'), array('separator' => ''));
-                            ?>
-                        </div>        
-                    </div>
-                </div>
-            <?php } ?>
+
+
         </div>
 
 

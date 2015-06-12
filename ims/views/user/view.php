@@ -1,9 +1,5 @@
 <?php
-$this->setPageTitle('Lihat Users | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Users' => array('index'),
-    $model->name,
-);
+$this->setPageTitle('Lihat | ' . $model->name);
 ?>
 
 <?php
@@ -98,27 +94,19 @@ $this->endWidget();
                             <?php echo $model->name; ?>
                         </td>
                         <td style="text-align: left" class="span1">
-                            <span class="inventory"><b>Position</b></span>
+                            
                         </td>
                         <td style="text-align: left;width:1px" class="">
-                            <span class="inventory">:</span>
+                            
                         </td>                        
                         <td style="text-align: left" class="span4">
-                            <span class="inventory">
-                                <?php
-                                if ($model->roles_id == -1) {
-                                    echo 'Super User';
-                                } else {
-                                    echo $model->Roles->name;
-                                }
-                                ?>
-                            </span>
+                           
                         </td>
 
                     </tr>
                     <tr>
                         <td style="text-align: left" class="span1">
-                            <b>Province</b>
+                            <b>Provinsi</b>
                         </td>
                         <td style="text-align: left;width:1px">
                             :
@@ -127,7 +115,7 @@ $this->endWidget();
                             <?php echo $model->City->Province->name; ?>
                         </td>
                         <td style="text-align: left" class="span1">
-                            <span class="inventory"><b>Phone</b></span>
+                            <span class="inventory"><b>Telephone</b></span>
                         </td>
                         <td style="text-align: left;width:1px" class="">
                             <span class="inventory">:</span>
@@ -141,7 +129,7 @@ $this->endWidget();
                     </tr>
                     <tr>
                         <td style="text-align: left" class="span1">
-                            <b>City</b>
+                            <b>Kota</b>
                         </td>
                         <td style="text-align: left;width:1px">
                             :
@@ -168,7 +156,7 @@ $this->endWidget();
 
                     <tr class="inventory">
                         <td style="text-align: left" class="span2">
-                            <b>Address</b>
+                            <b>Alamat</b>
                         </td>
                         <td style="text-align: left;width:1px">
                             :
@@ -206,7 +194,7 @@ $this->endWidget();
 
 </div>
 <?php
-if (isset($_GET['type'])) {
+if (isset($_GET['type']) && $_GET['type']!='user') {
     $header = InvoiceDet::model()->findAll(array(
         'condition' => 'user_id=' . $_GET['id'],
     ));

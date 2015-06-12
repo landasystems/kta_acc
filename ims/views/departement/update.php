@@ -7,8 +7,6 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Update Departement <?php echo $model->id; ?></h1>
-<hr/>
 
 <?php 
 $this->beginWidget('zii.widgets.CPortlet', array(

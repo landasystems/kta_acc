@@ -53,7 +53,6 @@ $this->widget('bootstrap.widgets.TbGridView',array(
         'type'=>'striped bordered condensed',
         'template'=>'{summary}{pager}{items}{pager}',
 	'columns'=>array(
-		'id',
 		'name',
 		'address',
 		'City.name',
