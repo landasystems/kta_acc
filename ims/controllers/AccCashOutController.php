@@ -493,17 +493,14 @@ class AccCashOutController extends Controller {
     }
 
     public function actionGenerateExcel() {
-        $a = explode('-', $_GET['date']);
-        $start = date('Y-m-d', strtotime($a[0]));
-        $end = date('Y-m-d', strtotime($a[1]));
-        $model = AccCashOut::model()->findAll(array(
-            'condition' => 'date_posting >="' . $start . '" AND date_posting<="' . $end . '"'
-        ));
-
+        $model = new AccCashOut;
+        $model->attributes = $_GET['AccCashOut'];
+        $data = $model->search(true);
+        $a = explode('-', $model->date_posting);
         return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
-                            'model' => $model,
-                            'start' => $start,
-                            'end' => $end,
+                            'model' => $data,
+                            'start' => $a[0],
+                            'end' => $a[1],
                                 ), true)
         );
     }

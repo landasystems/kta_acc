@@ -685,18 +685,24 @@ class AccJurnalController extends Controller {
     }
 
     public function actionGenerateExcel() {
-        $a = explode('-', $_GET['date']);
-        $start = date('Y-m-d', strtotime($a[0]));
-        $end = date('Y-m-d', strtotime($a[1]));
-        $model = AccJurnalDet::model()->findAll(array(
-            'with' => 'AccJurnal',
-            'condition' => 'AccJurnal.date_posting >="' . $start . '" AND AccJurnal.date_posting<="' . $end . '"'
-        ));
+        $jurnal = new AccJurnal;
+        $jurnal->attributes = $_GET['AccJurnal'];
+
+        $criteria = new CDbCriteria();
+        $criteria->with = array('AccJurnal');
+        $criteria->compare('AccJurnal.code', $jurnal->code, true);
+        $criteria->compare('AccJurnal.code_acc', $jurnal->code_acc, true);
+        $exDate = explode('-', $jurnal->date_posting);
+        $criteria->condition = 'AccJurnal.date_posting >="' . date('Y-m-d', strtotime($exDate[0])) . '" AND AccJurnal.date_posting <="' . date('Y-m-d', strtotime($exDate[1])) . '"';
+
+        $model = AccJurnalDet::model()->findAll($criteria);
+
+        $a = explode('-',$jurnal->date_posting);
 
         return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
                             'model' => $model,
-                            'start' => $start,
-                            'end' => $end,
+                            'start' => $a[0],
+                            'end' => $a[1],
                                 ), true)
         );
     }

@@ -65,8 +65,12 @@ echo $form->dateRangeRow(
 
     function submitForm() {
         var condition = $("#search-acc-cash-in-form").serialize();
-        alert(condition);
-        window.open("<?php echo url('accCashIn/generateExcel') ?>?"+condition);
+        var date = $("#AccCashIn_date_posting").val();
+        if (date != "") {
+            window.open("<?php echo url('accCashIn/generateExcel') ?>?" + condition);
+        }else{
+            alert("Rentang Tgl Posting tidak boleh kosong!");
+        }
     }
 </script>
 

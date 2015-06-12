@@ -67,12 +67,12 @@ echo $form->dateRangeRow(
         });
     });
     function submitForm() {
-//        alert('test');
-        var data = $("#AccCashOut_date_posting").val();
-        if (data != "") {
-            window.open("<?php echo url('accCashOut/generateExcel') ?>?date=" + data);
-        } else {
-            alert('isikan range tanggal terlebih dahulu!');
+        var condition = $("#search-acc-cash-out-form").serialize();
+        var date = $("#AccCashOut_date_posting").val();
+        if (date != "") {
+            window.open("<?php echo url('accCashOut/generateExcel') ?>?" + condition);
+        }else{
+            alert("Rentang Tgl Posting tidak boleh kosong!");
         }
     }
 

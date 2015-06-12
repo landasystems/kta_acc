@@ -89,7 +89,7 @@ class AccCashIn extends CActiveRecord {
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search() {
+    public function search($export = false) {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
 
@@ -104,7 +104,7 @@ class AccCashIn extends CActiveRecord {
         if (!empty($this->acc_coa_id))
             $criteria->compare('acc_coa_id', $this->acc_coa_id);
         $criteria->compare('description', $this->description, true);
-        $criteria->compare('total', $this->total);
+//        $criteria->compare('total', $this->total);
 
         if (user()->roles_id == -1) {
 //            do nothing
@@ -116,11 +116,15 @@ class AccCashIn extends CActiveRecord {
         } else {
             $criteria->compare('acc_coa_id', 0);
         }
-
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-            'sort' => array('defaultOrder' => 'id DESC')
-        ));
+        if ($export == false) {
+            $data = new CActiveDataProvider($this, array(
+                'criteria' => $criteria,
+                'sort' => array('defaultOrder' => 'id DESC')
+            ));
+        } else {
+            $data = AccCashIn::model()->findAll($criteria);
+        }
+        return $data;
     }
 
     /**

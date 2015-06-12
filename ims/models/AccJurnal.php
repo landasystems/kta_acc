@@ -89,7 +89,7 @@ class AccJurnal extends CActiveRecord {
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search() {
+    public function search($export=false) {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
@@ -101,13 +101,18 @@ class AccJurnal extends CActiveRecord {
             $criteria->condition = 'date_posting >="'.date('Y-m-d', strtotime($exDate[0])).'" AND date_posting <="'.date('Y-m-d', strtotime($exDate[1])).'"';
         }
         $criteria->compare('description', $this->description, true);
-        $criteria->compare('total_debet', $this->total_debet);
-        $criteria->compare('total_credit', $this->total_credit);
-
-        return new CActiveDataProvider($this, array(
-            'criteria' => $criteria,
-            'sort' => array('defaultOrder' => 'id DESC')
-        ));
+//        $criteria->compare('total_debet', $this->total_debet);
+//        $criteria->compare('total_credit', $this->total_credit);
+        
+        if ($export == false) {
+            $data = new CActiveDataProvider($this, array(
+                'criteria' => $criteria,
+                'sort' => array('defaultOrder' => 'id DESC')
+            ));
+        } else {
+            $data = AccJurnal::model()->findAll($criteria);
+        }
+        return $data;
     }
 
     /**

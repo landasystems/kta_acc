@@ -555,18 +555,14 @@ class AccCashInController extends Controller {
     }
 
     public function actionGenerateExcel() {
-//        $criteria = new CDbCriteria();
-//        $model = new AccCashIn('search');
-//        $model->unsetAttributes();  // clear any default values
-//        if (isset($_GET['AccCashIn'])) {
-//            $model->attributes = $_GET['AccCashIn'];
-//        }
-//        $model = AccCashIn::model()->findAll();
-
+        $model = new AccCashIn;
+        $model->attributes = $_GET['AccCashIn'];
+        $data = $model->search(true);
+        $a = explode('-', $model->date_posting);
         return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
-//                            'model' => $model,
-//                            'start' => $start,
-//                            'end' => $end,
+                            'model' => $data,
+                            'start' => $a[0],
+                            'end' => $a[1],
                                 ), true)
         );
     }

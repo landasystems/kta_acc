@@ -44,12 +44,12 @@ echo $form->dateRangeRow(
     });
 
     function submitForm() {
-//        alert('test');
-        var data = $("#AccJurnal_date_posting").val();
-        if (data != "") {
-            window.open("<?php echo url('accJurnal/generateExcel') ?>?date=" + data);
+        var condition = $("#search-acc-jurnal-form").serialize();
+        var date = $("#AccJurnal_date_posting").val();
+        if (date != "") {
+            window.open("<?php echo url('accJurnal/generateExcel') ?>?" + condition);
         } else {
-            alert('isikan range tanggal terlebih dahulu!');
+            alert("Rentang Tgl Posting tidak boleh kosong!");
         }
     }
 </script>
