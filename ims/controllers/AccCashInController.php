@@ -561,14 +561,14 @@ class AccCashInController extends Controller {
 //        if (isset($_GET['AccCashIn'])) {
 //            $model->attributes = $_GET['AccCashIn'];
 //        }
-////        $model = AccCashIn::model()->findAll();
-//
-//        return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
-////                            'model' => $model,
-////                            'start' => $start,
-////                            'end' => $end,
-//                                ), true)
-//        );
+//        $model = AccCashIn::model()->findAll();
+
+        return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
+//                            'model' => $model,
+//                            'start' => $start,
+//                            'end' => $end,
+                                ), true)
+        );
     }
 
 }
