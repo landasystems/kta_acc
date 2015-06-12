@@ -4,20 +4,15 @@ Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-    'name' => 'Inventory Management Systems',
+    'name' => 'Accounting Management Systems',
     'language' => 'en',
     // preloading 'log' component
     'preload' => array('log', 'bootstrap'),
     // autoloading model and component classes
     'import' => array(
         'application.models.*',
-//        'application.components.*',
         'common.models.*',
         'common.components.*',
-//        'application.modules.rights.*',
-//        'application.modules.rights.components.*',
-//        'application.modules.rights.components.dataproviders.*',
-//        'common.modules.rights.*',
         'common.extensions.*',
         'common.extensions.image.helpers.*',
     ),
@@ -25,12 +20,6 @@ return array(
         'xupload' => 'common.extensions.xupload'
     ),
     'modules' => array(
-//        $this->layout = Yii::app()->themeManager->basePath . '/spr/views/layouts/main';
-//        'rights' => array(
-//            'superuserName'=>'Super User',
-//            'appLayout' => 'common.themes.backend.spr.views.layouts.main',
-//            'debug' => true,
-//        ),
         'landa',
         'gii' => array(
             'class' => 'system.gii.GiiModule',
@@ -78,15 +67,6 @@ return array(
             'loginUrl' => array('/site/login'),
             'allowAutoLogin' => true,
         ),
-//        'authManager' => array(
-//            'class' => 'RDbAuthManager',
-////            'connectionID' => 'db',
-//            'itemTable' => 'acca_rights_authitem',
-//            'itemChildTable' => 'acca_rights_authitem_child',
-//            'assignmentTable' => 'acca_rights_auth_assignment',
-//            'rightsTable' => 'acca_rights',
-//            'defaultRoles' => array('Guest'),
-//        ),
 //        // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',
@@ -112,7 +92,7 @@ return array(
                 ),
                 array(
                     'class' => 'CFileLogRoute',
-                    'levels' => 'error, warning, info',
+                    'levels' => 'error, warning',
 //                    'filter' => 'CLogFilter',
                 ),
             // uncomment the following to show log messages on web pages
@@ -143,21 +123,15 @@ return array(
             //'class'=>'system.caching.CMemCache',
             'class' => 'system.caching.CFileCache'
         ),
-//        'clientScript' => array(
-//            'coreScriptPosition' => CClientScript::POS_END,
-//        ),
     ),
-    // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
-//    'params'=>require(dirname(__FILE__).'/params.php'),
+    
     'params' => array(
         'appVersion'=>'v.1',
         'client'=>$client,
         'clientName'=>$clientName,
         'id' => '1',
         'urlImg' => $rootUrl . 'images/',
-        'pathImg' => (isset($pathImg)) ? $pathImg : $root . 'ims/www/' . $client . '/images/',
-//        'pathImg' => $root . 'ims/www/'.$client.'/images/',
+        'pathImg' => $root . 'ims/www/'.$client.'/images/',
         'menu' => $menu,
     ),
 );

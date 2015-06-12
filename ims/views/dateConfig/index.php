@@ -30,7 +30,6 @@ $this->endWidget();
     ));
     ?>
 </div>
-<h1>Date Configs</h1>
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
         'id' => 'date-config-grid',
@@ -58,25 +57,25 @@ $this->widget('bootstrap.widgets.TbGridView', array(
             ),
             array(
                 'name' => 'cash_in',
-                'header' => 'Cash In',
+                'header' => 'Kas Masuk',
                 'value' => '$data->cash_in',
                 'htmlOptions' => array('style' => 'text-align:center'),
             ),
             array(
                 'name' => 'cash_out',
-                'header' => 'Cash Out',
+                'header' => 'Kas Keluar',
                 'value' => '$data->cash_out',
                 'htmlOptions' => array('style' => 'text-align:center'),
             ),
             array(
                 'name' => 'bk_in',
-                'header' => 'Bk In',
+                'header' => 'Bank Masuk',
                 'value' => '$data->bk_in',
                 'htmlOptions' => array('style' => 'text-align:center'),
             ),
             array(
                 'name' => 'bk_out',
-                'header' => 'Bk Out',
+                'header' => 'Bank Keluar',
                 'value' => '$data->bk_out',
                 'htmlOptions' => array('style' => 'text-align:center'),
             ),

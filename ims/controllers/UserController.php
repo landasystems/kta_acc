@@ -100,7 +100,6 @@ class UserController extends Controller {
             $model->scenario = 'notAllow';
 
         if (isset($_POST['User'])) {
-
             if (!empty($_POST['User']['roles'])) {
                 $model->scenario = 'allow';
                 if (isset($listRoles[$_POST['User']['roles']])) {

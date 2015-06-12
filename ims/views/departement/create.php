@@ -6,8 +6,6 @@ $this->breadcrumbs=array(
 
 ?>
 
-<h1>Create Departement</h1>
-<hr/>
 <?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
