@@ -14,7 +14,7 @@
 class Auth extends CActiveRecord {
 
     /**
-     * @return string the associated database table name
+     * @return string tmohe associated database table name
      */
     public function tableName() {
         return '{{auth}}';
