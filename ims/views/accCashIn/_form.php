@@ -121,7 +121,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class='insertNew'>
                             <td style="text-align: center">
                                 <input type="hidden" name="subledgerid" value="" class="inVoiceDet">
                                 <?php
@@ -150,6 +150,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                            $("#account").select2("focus");
                                                             $(".newRow").find(".selectDua").select2();
                                                             $(".newRow").removeClass("newRow");
+                                                            $(".insertNew").find(".inVoiceDet").val("0");
+                                                            $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Select Sub-Ledger</a>");
                                                            
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn AddNewRow')
                                 );

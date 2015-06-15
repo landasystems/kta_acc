@@ -66,7 +66,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr class='insertNew'>
                             <td style="text-align: center">
                                 <input type="hidden" name="subledgerid" value="" class="inVoiceDet">
                                 <?php
@@ -118,7 +118,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                 $("#account").select2("focus");
                                                 $(".newRow").find(".selectDua").select2();
                                                 $(".newRow").removeClass("newRow");
-                                            
+                                                $(".insertNew").find(".inVoiceDet").val("0");
+                                                $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Select Sub-Ledger</a>");
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn')
                                 );
                                 ?>
@@ -257,7 +258,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 }
                                 echo '</select>';
                                 echo '</td>
-                                        <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:'.$display.'" class="btn showModal">Select Sub-Ledger</a></td>
+                                        <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
                                         <td><input type="text" name="description[]" id="description[]" value="' . $val->description . '"/></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:95%"  onkeyup="calculateMin()" class="angka totalDeb" name="valdebet[]" id="valdebet[]" class="totalDeb" value="' . $debet . '" ' . $sttDebet . '/></div></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:75px;" name="valcredit[]" id="valcredit[]" class="angka totalCre" value="' . $credit . '" ' . $sttCredit . '/></div></td>
