@@ -232,6 +232,7 @@ class AccCashInController extends Controller {
                         $debet = array();
                         $sDesc = '';
                         $valSub = array();
+//                        logs(count($_POST['AccCashInDet']['amount']));
                         for ($i = 0; $i < count($_POST['AccCashInDet']['acc_coa_id']); $i++) {
                             if (isset($_POST['nameAccount'][$i])) {
                                 $ar = 0;
@@ -482,20 +483,20 @@ class AccCashInController extends Controller {
 
     public function actionAddRow() {
         $acca = AccCoa::model()->findByPk($_POST['account']);
+        $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
         $mInvoce = InvoiceDet::model()->findByPk($subId);
-        $code = (!empty($mInvoce->code)) ? $mInvoce->code : "-";
+        $invoiceName = (!empty($mInvoce->code) && !empty($mInvoce->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $mInvoce->User->name : '';
         if ($acca->type != "general") {
-            if (
-                    isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
+            if (isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
 
                 if ($acca->type_sub_ledger == "ar")
                     $account = User::model()->findByPk($_POST['accountName']);
 
-                if ($acca->type_sub_ledger == "ap")
+                else if ($acca->type_sub_ledger == "ap")
                     $account = User::model()->findByPk($_POST['accountName']);
 
-                if ($acca->type_sub_ledger == "as")
+                else if ($acca->type_sub_ledger == "as")
                     $account = Product::model()->findByPk($_POST['accountName']);
 
                 $name = $account->name;
@@ -515,13 +516,18 @@ class AccCashInController extends Controller {
                     </tr>
                     <tr>
                         <td style="text-align:center">
-                            <input type="hidden" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]" value="' . $acca->id . '"/>
                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
-                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" value="' . $subId . '"/>
+                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $subId . '"/>
                             <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span> 
-                        </td>
-                        <td>' . $acca->code . ' - ' . $acca->name . '</td>
-                        <td>[ ' . $code . ' ]' . $name . '</td>
+                        </td>';
+            echo '<td><select class="selectDua subLedger" style="width:100%" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]">';
+            foreach ($data as $key => $val) {
+                $value = ($key == $_POST['account']) ? 'selected="selected"' : '';
+                echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
+            }
+            echo '<option value="0">Pilih</option>';
+            echo '</select></td>
+                        <td style="text-align:center" class="subLedgerField"> ' . $invoiceName . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
                         <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]"  value="' . $_POST['costDescription'] . '" style="width:95%;"/></td>
                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['credit'] . '"/></div></td>
                     </tr>';

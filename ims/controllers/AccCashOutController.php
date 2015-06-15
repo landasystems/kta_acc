@@ -422,19 +422,20 @@ class AccCashOutController extends Controller {
 
     public function actionAddRow() {
         $acca = AccCoa::model()->findByPk($_POST['account']);
+        $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
         $mInvoce = InvoiceDet::model()->findByPk($subId);
-        $code = (!empty($mInvoce->code)) ? $mInvoce->code : "-";
+        $invoiceName = (!empty($mInvoce->code) && !empty($mInvoce->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $mInvoce->User->name : '';
         if ($acca->type != "general") {
             if (isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
 
                 if ($acca->type_sub_ledger == "ar")
                     $account = User::model()->findByPk($_POST['accountName']);
 
-                if ($acca->type_sub_ledger == "ap")
+                else if ($acca->type_sub_ledger == "ap")
                     $account = User::model()->findByPk($_POST['accountName']);
 
-                if ($acca->type_sub_ledger == "as")
+                else if ($acca->type_sub_ledger == "as")
                     $account = Product::model()->findByPk($_POST['accountName']);
 
                 $name = $account->name;
@@ -453,13 +454,18 @@ class AccCashOutController extends Controller {
                 </tr>
                 <tr>
                     <td style="text-align:center">
-                        <input type="hidden" name="AccCashOutDet[acc_coa_id][]" id="AccCashOutDet[acc_coa_id][]" value="' . $acca->id . '"/>
                         <input type="hidden" class="nameAccount" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
-                        <input type="hidden" class="inVoiceDet" name="inVoiceDet[]" id="inVoiceDet[]" value="' . $subId . '"/>
+                        <input type="hidden" class="inVoiceDet" name="inVoiceDet[]" class="inVoiceDet" id="inVoiceDet[]" value="' . $subId . '"/>
                         <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span> 
-                    </td>
-                    <td>' . $acca->code . ' - ' . $acca->name . '</td>
-                    <td>[ ' . $code . ' ]' . $name . '</td>
+                    </td>';
+            echo '<td><select class="selectDua subLedger" style="width:100%" name="AccCashOutDet[acc_coa_id][]" id="AccCashOutDet[acc_coa_id][]">';
+            foreach ($data as $key => $val) {
+                $value = ($key == $_POST['account']) ? 'selected="selected"' : '';
+                echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
+            }
+            echo '<option value="0">Pilih</option>';
+            echo '</select></td>
+                    <td style="text-align:center" class="subLedgerField">'.$invoiceName. '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
                     <td><input type="text" name="AccCashOutDet[description][]" id="AccCashOutDet[description][]"  value="' . $_POST['costDescription'] . '" style="width:95%;"/></td>
                     <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashOutDet[amount][]" id="AccCashOutDet[amount][]" class="angka totalDet" value="' . $_POST['debit'] . '"/></div></td>
                 </tr>';

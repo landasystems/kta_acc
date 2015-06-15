@@ -68,6 +68,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     <tbody>
                         <tr>
                             <td style="text-align: center">
+                                <input type="hidden" name="subledgerid" value="" class="inVoiceDet">
                                 <?php
                                 echo CHtml::ajaxLink(
                                         $text = '<i class="icon-plus-sign"></i>', $url = url('AccJurnal/addRow'), $ajaxOptions = array(
@@ -114,7 +115,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                 $("#debit").attr("readonly", false);
                                                 $("#credit").attr("readonly", false);
                                                 removeSub();
-                                                $("#showModal").attr("style","display:none");
+                                                $(this)
+                                                $(".showModal").attr("style","display:none");
                                             
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn')
                                 );
@@ -135,34 +137,20 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                         'id' => 'account',
                                         'style' => 'width:100%;'
                                     ), 'events' => array('change' => 'js: function() {
-                                                     $.ajax({
-                                                        url : "' . url('accCoa/retAccount') . '",
-                                                        type : "POST",
-                                                        data :  { ledger :  $(this).val()},
-                                                        success : function(data){
-                                                                $("#s2id_accountName").select2("data", "0")
-                                                                $("#accountName").html(data);
-                                                                if(data != ""){
-                                                                        $("#showModal").attr("style","display:");
-                                                                    } else {
-                                                                        $("#showModal").attr("style","display:none");
-                                                                    }
-                                                                }
-                                                     });
+                                                     var elements = $(this).parent().parent().find(".showModal");
+                                                    retAccount($(this).val(),elements);
                                      }')
                                 ));
                                 ?>
                             </td>
-                            <td id="subLedgers" style="text-align: center">
+                            <td class="subLedgerField" style="text-align: center">
                                 <?php
                                 $this->widget(
                                         'bootstrap.widgets.TbButton', array(
                                     'label' => 'Select Sub-Ledger',
-                                    'id' => 'showModal',
                                     'htmlOptions' => array(
-                                        'data-toggle' => 'modal',
-                                        'data-target' => '#modalSub',
-                                        'style' => 'display:none'
+                                        'style' => 'display:none',
+                                        'class' => 'showModal',
                                     ),
                                         )
                                 );
@@ -198,7 +186,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             foreach ($detailJurnal as $val) {
                                 $invoice = (!empty($val->invoice_det_id)) ? $val->invoice_det_id : 0;
                                 $code = (!empty($val->InvoiceDet->code)) ? $val->InvoiceDet->code : "-";
-                                
+
                                 if (isset($val->AccCoa->name)) {
                                     $accCoaName = $val->AccCoa->code . ' - ' . $val->AccCoa->name;
                                 } else {
@@ -233,7 +221,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 } else {
                                     $credit = $val->credit;
                                 }
-
+                                $invoiceName = (!empty($val->InvoiceDet->code) && !empty($val->InvoiceDet->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $val->InvoiceDet->code . ']' . $val->InvoiceDet->User->name : '';
+                                $disp = ($val->AccCoa->type_sub_ledger == 'ar' || $val->AccCoa->type_sub_ledger == 'as' || $val->AccCoa->type_sub_ledger == 'ap') ? true : false;
+                                $display = (empty($invoiceName) && $disp) ? '' : 'none';
                                 $no++;
                                 $sttCredit = "";
                                 $sttDebet = "";
@@ -254,13 +244,19 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="hidden" name="acc_coa_id[]" id="acc_coa_id[]" value="' . $val->AccCoa->id . '"/>
                                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
-                                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" value="' . $invoice . '"/>
+                                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $invoice . '"/>
                                             <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span> 
-                                        </td>
-                                        <td>' . $accCoaName . '</td>
-                                        <td>['.$code .' ]'. $name . '</td>
+                                        <td>';
+                                echo '<select class="selectDua subLedger" style="width:100%" name="acc_coa_id[]" id="acc_coa_id[]">';
+
+                                foreach ($data as $key => $val2) {
+                                    $value = ($key == $val->acc_coa_id) ? 'selected="selected"' : '';
+                                    echo '<option ' . $value . ' value="' . $key . '">' . $val2 . '</option>';
+                                }
+                                echo '</select>';
+                                echo '</td>
+                                        <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:'.$display.'" class="btn showModal">Select Sub-Ledger</a></td>
                                         <td><input type="text" name="description[]" id="description[]" value="' . $val->description . '"/></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:95%"  onkeyup="calculateMin()" class="angka totalDeb" name="valdebet[]" id="valdebet[]" class="totalDeb" value="' . $debet . '" ' . $sttDebet . '/></div></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:75px;" name="valcredit[]" id="valcredit[]" class="angka totalCre" value="' . $credit . '" ' . $sttCredit . '/></div></td>
@@ -311,12 +307,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <input type="hidden" name="acc_coa_id[]" id="acc_coa_id[]" value="' . $_POST['acc_coa_id'][$i] . '"/>
                                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
-                                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" value="' . $_POST['inVoiceDet'][$i] . '"/>
+                                            <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $_POST['inVoiceDet'][$i] . '"/>
                                             <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span> 
-                                        </td>
-                                        <td>' . $accCoa->code . ' - ' . $accCoa->name . '</td>
+                                        </td>';
+
+                                echo '<td><select class="selectDua subLedger" style="width:100%" name="acc_coa_id[]" id="acc_coa_id[]">';
+                                foreach ($data as $key => $val2) {
+                                    $value = ($key == $_POST['acc_coa_id'][$i]) ? 'selected="selected"' : '';
+                                    echo '<option ' . $value . ' value="' . $key . '">' . $val2 . '</option>';
+                                }
+                                echo '<option value="0">Pilih</option>';
+                                echo '</select></td>
                                         <td>' . $name . '</td>
                                         <td><input type="text" name="description[]" id="description[]" value="' . $_POST['description'][$i] . '"/></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:75px;"  onkeyup="calculateMin()" class="angka totalDeb" name="valdebet[]" id="valdebet[]" class="totalDeb" value="' . $_POST['valdebet'][$i] . '"/></div></td>
@@ -374,43 +376,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 <h4>Select Subledger</h4>
             </div>
 
-            <div class="modal-body">
-                <div class="well">
-                    Supplier / Customer's Name : 
-                    <?php
-                    $data = array(0 => t('choose', 'global'));
-                    $this->widget('bootstrap.widgets.TbSelect2', array(
-                        'asDropDownList' => TRUE,
-                        'data' => $data,
-                        'name' => 'accountName',
-                        'options' => array(
-                            "placeholder" => t('choose', 'global'),
-                            "allowClear" => true,
-                        ),
-                        'htmlOptions' => array(
-                            'id' => 'accountName',
-                            'style' => 'width:100%;'
-                        ),
-                    ));
-                    ?>
-                </div>
-                <div class="well">
-                    Supplier / Customer's Invoices Description: 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th style="text-align: center;width:10%;">Code</th>
-                                <th style="text-align: center">Keterangan</th>
-                                <th style="text-align: center;width:20%">Nilai</th>
-                                <th style="text-align: center;width:20%">Balance</th>
-                                <th style="text-align: center;width:10%">#</th>
-                            </tr>
-                        </thead>
-                        <tbody id="detail">
-
-                        </tbody>
-                    </table>
-                </div>
+            <div class="modal-body isiModal">
             </div>
 
             <div class="modal-footer">
@@ -546,19 +512,25 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         var acc = $(this).attr("account");
         var code = $(this).attr("code");
         /*var subledger = $("#subLedgers").html();*/
-        var dell = '<a class="btn btn-mini" onclick="removeSub();"><i class=" icon-remove-circle"></i></a>';
-        var ids = '<input type="hidden" id="subledgerid" name="subledgerid" value="' + id + '">';
+        var dell = '<a class="btn btn-mini removeSub";"><i class=" icon-remove-circle"></i></a>';
 
-        $("#subLedgers").html(ids + dell + '[ ' + code + ' ]' + acc);
+        $(".appeared").find(".subLedgerField").html(dell + '[ ' + code + ' ]' + acc);
+        $(".appeared").find(".inVoiceDet").val(id);
         $("#modalSub").modal("hide");
+        $(".appeared").removeClass('appeared');
     });
 
-    function removeSub() {
-        $("#subLedgers").html('<a data-toggle="modal" data-target="#modalSub" style="display:" class="btn" id="showModal">Select Sub-Ledger</a>');
+    function removeSub(elements) {
+        $(elements).html('<a style="display:" class="btn showModal">Select Sub-Ledger</a>');
     }
+    $("body").on("click", ".removeSub", function () {
+        var elements = $(this).parent();
+        removeSub(elements);
+    });
     $("body").on("change", "#accountName", function () {
         selectInvoice();
     });
+
     function selectInvoice() {
         var id = $("#accountName").val();
         $.ajax({
@@ -580,7 +552,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if (amount != 0 || amount != "" || code != "") {
             $.ajax({
                 type: 'post',
-                data: {code: code, description: description, user_id: user_id, amount: amount, type : type,term_date : term_date},
+                data: {code: code, description: description, user_id: user_id, amount: amount, type: type, term_date: term_date},
                 url: "<?php echo url('accCoa/newInvoice'); ?>",
                 success: function (data) {
                     if (data == 1) {
@@ -592,5 +564,45 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             alert("code dan/atau nilai belum di inputkan!");
         }
     });
-    
+    $(document).ready(function () {
+        selectDua();
+    });
+
+    function selectDua() {
+        $(".selectDua").select2();
+    }
+
+    function retAccount(id, elements) {
+        $.ajax({
+            url: "<?php echo url('accCoa/retAccount') ?>",
+            type: "POST",
+            data: {ledger: id},
+            success: function (data) {
+                obj = JSON.parse(data);
+                $(".isiModal").html(obj.render);
+                if (obj.tampil) {
+                    elements.attr('style', 'display:');
+                } else {
+                    elements.attr('style', 'display:none');
+                }
+            }
+        });
+    }
+
+    $("body").on("change", ".subLedger", function () {
+        var id = $(this).val();
+        var elements = $(this).parent().parent().find(".showModal");
+        retAccount(id, elements);
+    });
+    $("body").on("click", ".showModal", function () {
+        var id = $(this).parent().parent().find("select.subLedger").val();
+        var elements = $(this);
+        retAccount(id, elements);
+        $(this).parent().parent().addClass("appeared");
+        $("#modalSub").modal("show");
+    });
+    $("#modalSub").on('hidden', function () {
+        $(".appeared").removeClass('appeared');
+    });
+
 </script>

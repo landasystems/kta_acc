@@ -317,22 +317,24 @@ class AccCoaController extends Controller {
         }
     }
 
-    public function actionretAccount() {
+    public function actionRetAccount() {
+        $isi = array();
         $model = AccCoa::model()->findByPk($_POST['ledger']);
         $ledger = $model->type_sub_ledger;
-        $select2 = "";
+        $array = array();
         if ($ledger == "ar") {
             $array = User::model()->listUsers('customer');
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         } else if ($ledger == "ap") {
             $array = User::model()->listUsers('supplier');
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         } else if ($ledger == "as") {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         }
 
-        echo $select2;
+        $isi['tampil'] = (!empty($ledger)) ? true : false;
+        $isi['render'] = $this->renderPartial('/invoiceDet/_searchInvoice', array(
+            'array' => $array
+                ), true);
+        echo json_encode($isi);
     }
 
     public function actionImportExcel() {
