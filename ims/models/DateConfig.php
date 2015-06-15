@@ -26,10 +26,10 @@ class DateConfig extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('year, cash_in, cash_out, jurnal', 'numerical', 'integerOnly' => true),
+            array('year, cash_in, cash_out, bk_in, bk_out, jurnal', 'numerical', 'integerOnly' => true),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id, year, cash_in, cash_out, jurnal', 'safe', 'on' => 'search'),
+            array('id, year, cash_in, cash_out, bk_in, bk_out, jurnal', 'safe', 'on' => 'search'),
         );
     }
 
@@ -80,6 +80,8 @@ class DateConfig extends CActiveRecord {
         $criteria->compare('year', $this->year);
         $criteria->compare('cash_in', $this->cash_in);
         $criteria->compare('cash_out', $this->cash_out);
+        $criteria->compare('bk_in', $this->bk_in);
+        $criteria->compare('bk_out', $this->bk_out);
         $criteria->compare('jurnal', $this->jurnal);
 
         return new CActiveDataProvider($this, array(

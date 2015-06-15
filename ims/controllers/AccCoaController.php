@@ -317,22 +317,24 @@ class AccCoaController extends Controller {
         }
     }
 
-    public function actionretAccount() {
+    public function actionRetAccount() {
+        $isi = array();
         $model = AccCoa::model()->findByPk($_POST['ledger']);
         $ledger = $model->type_sub_ledger;
-        $select2 = "";
+        $array = array();
         if ($ledger == "ar") {
             $array = User::model()->listUsers('customer');
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         } else if ($ledger == "ap") {
             $array = User::model()->listUsers('supplier');
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         } else if ($ledger == "as") {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
-            $select2 = CHtml::dropdownlist('select_name', '<selected value>', array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name'));
         }
 
-        echo $select2;
+        $isi['tampil'] = (!empty($ledger)) ? true : false;
+        $isi['render'] = $this->renderPartial('/invoiceDet/_searchInvoice', array(
+            'array' => $array
+                ), true);
+        echo json_encode($isi);
     }
 
     public function actionImportExcel() {
@@ -585,7 +587,7 @@ class AccCoaController extends Controller {
                 . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
                 . '<td>'
                 . '<a class="btn">'
-                . '<div class="ambil" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
+                . '<div class="ambil" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
                 . '<i class="minia-icon-checked">Pilih</i>'
                 . '</div>'
                 . '</a>'

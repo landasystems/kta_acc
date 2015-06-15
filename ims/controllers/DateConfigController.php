@@ -121,38 +121,37 @@ class DateConfigController extends Controller {
     public function actionIndex() {
         $criteria = new CDbCriteria();
         $model = new DateConfig('search');
-        $model->unsetAttributes(); 
-        
-        if(isset($_GET['DateConfig'])){
+        $model->unsetAttributes();
+
+        if (isset($_GET['DateConfig'])) {
             $model->attributes = $_GET['DateConfig'];
 
             if (!empty($model->id))
                 $criteria->addCondition('id = "' . $model->id . '"');
-            
+
             if (!empty($model->year))
                 $criteria->addCondition('code = "' . $model->year . '"');
-            
+
             if (!empty($model->cash_in))
                 $criteria->addCondition('code = "' . $model->cash_in . '"');
-            
+
             if (!empty($model->cash_out))
                 $criteria->addCondition('code = "' . $model->cash_out . '"');
-            
+
             if (!empty($model->bk_in))
                 $criteria->addCondition('code = "' . $model->bk_in . '"');
-            
+
             if (!empty($model->bk_out))
                 $criteria->addCondition('code = "' . $model->bk_out . '"');
-            
+
             if (!empty($model->jurnal))
                 $criteria->addCondition('code = "' . $model->jurnal . '"');
-            
+
             if (!empty($model->cash_in_jkt))
                 $criteria->addCondition('code = "' . $model->cash_in_jkt . '"');
-            
+
             if (!empty($model->cash_out_jkt))
                 $criteria->addCondition('code = "' . $model->cash_out_jkt . '"');
-            
         }
         $this->render('index', array(
             'model' => $model,
