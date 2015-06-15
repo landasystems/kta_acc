@@ -587,7 +587,7 @@ class AccCoaController extends Controller {
                 . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
                 . '<td>'
                 . '<a class="btn">'
-                . '<div class="ambil" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
+                . '<div class="ambil" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
                 . '<i class="minia-icon-checked">Pilih</i>'
                 . '</div>'
                 . '</a>'

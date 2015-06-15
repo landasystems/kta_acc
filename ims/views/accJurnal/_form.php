@@ -525,6 +525,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         $(elements).html('<a style="display:" class="btn showModal">Select Sub-Ledger</a>');
     }
     $("body").on("click", ".removeSub", function () {
+        $(this).parent().parent().find(".inVoiceDet").val(0);
         var elements = $(this).parent();
         removeSub(elements);
     });

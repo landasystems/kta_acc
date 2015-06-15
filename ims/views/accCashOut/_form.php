@@ -592,6 +592,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     $("body").on("click", ".ambil", function () {
         var id = $(this).attr("det_id");
         var userId = $(this).attr("user_id");
+        var nilai = $(this).attr("nilai");
         var acc = $(this).attr("account");
         var code = $(this).attr("code");
         /*var subledger = $("#subLedgers").html();*/
@@ -599,6 +600,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         $(".appeared").find(".subLedgerField").html(dell + '[ ' + code + ' ]' + acc);
         $(".appeared").find(".inVoiceDet").val(id);
+        $(".appeared").find(".totalDet").val(nilai);
         $("#modalSub").modal("hide");
         $(".appeared").removeClass('appeared');
     });
@@ -607,6 +609,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         $(elements).html('<a style="display:" class="btn showModal">Select Sub-Ledger</a>');
     }
     $("body").on("click", ".removeSub", function () {
+        $(this).parent().parent().find(".inVoiceDet").val(0);
         var elements = $(this).parent();
         removeSub(elements);
     });
