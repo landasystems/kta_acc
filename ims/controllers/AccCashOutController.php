@@ -452,7 +452,7 @@ class AccCashOutController extends Controller {
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+                <tr class="newRow">
                     <td style="text-align:center">
                         <input type="hidden" class="nameAccount" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
                         <input type="hidden" class="inVoiceDet" name="inVoiceDet[]" class="inVoiceDet" id="inVoiceDet[]" value="' . $subId . '"/>

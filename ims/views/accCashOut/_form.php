@@ -151,7 +151,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                          });
     
                                                          $("#account").select2("focus");
-                                                          selectDua();
+                                                         $(".newRow").find(".selectDua").select2();
+                                                            $(".newRow").removeClass("newRow");
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn')
                                 );
                                 ?>
@@ -269,7 +270,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 }
                                 echo '</select>';
                                 echo '</td>
-                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:'.$display.'" class="btn showModal">Select Sub-Ledger</a></td>
+                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
                                             <td><input type="text" name="AccCashOutDet[description][]" id="AccCashOutDet[description][]" style="width:95%" value="' . $viewCashOutDet->description . '"/></td>
                                             <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashOutDet[amount][]" id="AccCashOutDet[amount][]" class="angka totalDet" value="' . $amount . '"/></div></td>
                                         </tr>';
@@ -500,7 +501,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         </div>
 
         <div class="modal-body isiModal">
-            
+
         </div>
 
         <div class="modal-footer">

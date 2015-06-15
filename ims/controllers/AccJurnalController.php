@@ -632,7 +632,7 @@ class AccJurnalController extends Controller {
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr>
+                    <tr class="newRow">
                         <td style="text-align:center">
                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/> 
                             <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $subId . '"/> 

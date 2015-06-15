@@ -115,8 +115,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                 $("#debit").attr("readonly", false);
                                                 $("#credit").attr("readonly", false);
                                                 removeSub();
-                                                $(this)
-                                                $(".showModal").attr("style","display:none");
+                                                $("#account").select2("focus");
+                                                $(".newRow").find(".selectDua").select2();
+                                                $(".newRow").removeClass("newRow");
                                             
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn')
                                 );

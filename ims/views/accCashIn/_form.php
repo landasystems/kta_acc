@@ -147,14 +147,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                            $(this).parent().parent().parent().remove();
 //                                                           calculateMin();
                                                            });
+                                                           $("#account").select2("focus");
+                                                            $(".newRow").find(".selectDua").select2();
+                                                            $(".newRow").removeClass("newRow");
                                                            
-                                                           
-                                                            $("#account").select2("focus");
-                                                            var elements = $(this).parent().parent().find(".subLedgerField");
-                                                            elements.html("<a style=\"display:\" class=\"btn showModal\">Select Sub-Ledger</a>");
-                                                            selectDua();
-                                                           
-                                        }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn')
+                                        }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn AddNewRow')
                                 );
                                 ?>
                             </td>

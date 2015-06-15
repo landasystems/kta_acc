@@ -482,6 +482,8 @@ class AccCashInController extends Controller {
     }
 
     public function actionAddRow() {
+        Yii::app()->clientScript->reset();
+        Yii::app()->clientScript->corePackages = array();
         $acca = AccCoa::model()->findByPk($_POST['account']);
         $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
@@ -514,7 +516,7 @@ class AccCashInController extends Controller {
                         <td></td>
                         <td></td>
                     </tr>
-                    <tr>
+                    <tr class="newRow">
                         <td style="text-align:center">
                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
                             <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $subId . '"/>
