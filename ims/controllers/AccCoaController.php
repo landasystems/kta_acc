@@ -619,7 +619,7 @@ class AccCoaController extends Controller {
             $model->description = $_POST['description'];
             $model->payment = $_POST['amount'];
             $model->type = $_POST['type'];
-            $model->term_date = $_POST['term_date'];
+            $model->term_date = date('Y-m-d');
             $model->is_new_invoice = 1;
             if ($model->save()) {
                 echo 1;

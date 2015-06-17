@@ -116,9 +116,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         });
         $('#total_charge').val(total);
     }
-//    $("body").on("load",function(){
-//        hitung();
-//    });
     
     $("body").on('click', ".addRow", function () {
         var aa = $(this).parent().parent().parent().parent().find(".addRows");
@@ -134,13 +131,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             url: "<?php echo url('user/addRow'); ?>",
             success: function (data) {
                 aa.replaceWith(data);
-//                hitung();
                 $(".addRows").val("");
                 $(".description").val("");
                 $(".codes").val("");
                 $(".dateCoa").val("");
                 $(".terms").val("");
-                $(".payment").val("");
+                $(".payment").val("0");
                 $(".sup_id").val("");
                 $(".kosong").remove();
                 hitung();

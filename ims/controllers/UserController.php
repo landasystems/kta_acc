@@ -747,7 +747,7 @@ class UserController extends Controller {
             . '<td style="text-align:center">
                 <div class="input-prepend">
                     <span class="add-on">Rp.</span>
-                    <input type="text" class="angka charge" name="payment[]" value="' . $_POST['payment'] . '">
+                    <input type="text" class="angka charge nilai" name="payment[]" value="' . $_POST['payment'] . '">
                 </div>
             </td>'
             . '<td>'
