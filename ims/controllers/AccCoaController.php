@@ -592,7 +592,7 @@ class AccCoaController extends Controller {
                 . '</div>'
                 . '</a>'
                 . '<a class="btn btn-danger" style="width:70%">'
-                . '<div class="delInvoice"  det_id="' . $b->id . '">'
+                . '<div class="delInvoice" det_id="' . $b->id . '">'
                 . '<i class="minia-icon-trashcan icon-white"> Hapus</i>'
                 . '</div>'
                 . '</a>'
@@ -631,5 +631,4 @@ class AccCoaController extends Controller {
             }
         }
     }
-
 }

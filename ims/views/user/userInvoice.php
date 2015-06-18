@@ -150,7 +150,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         if (id == "") {
             $(this).parent().parent().remove();
         } else {
-            var answer = confirm("Are you sure want to delete this Invoice? If you do that, all of approved transaction related with this invoce won't deleted!")
+            var answer = confirm("Are you sure want to delete this Invoice? If you do that, all of approved transaction related with this invoce won't deleted!");
             if (answer) {
                 $.ajax({
                     type: 'POST',
