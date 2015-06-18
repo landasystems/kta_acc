@@ -98,7 +98,7 @@ class AccCashOut extends CActiveRecord {
         $criteria->compare('code_acc', $this->code_acc, true);
         if (!empty($this->date_posting)) {
             $exDate = explode('-', $this->date_posting);
-            $criteria->condition = 'date_posting >="' . date('Y-m-d', strtotime($exDate[0])) . '" AND date_posting <="' . date('Y-m-d', strtotime($exDate[1])) . '"';
+            $criteria->addCondition('date_posting >="'.date('Y-m-d', strtotime($exDate[0])).'" AND date_posting <="'.date('Y-m-d', strtotime($exDate[1])).'"');
         }
         if (!empty($this->acc_coa_id))
             $criteria->compare('acc_coa_id', $this->acc_coa_id);
