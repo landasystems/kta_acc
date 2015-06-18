@@ -40,4 +40,8 @@
     $(document).ready(function () {
         $("#accountName").select2();
     });
+    
+    $("body").on("click",".delInvoice", function(){
+        alert($(this).attr("det_id"));
+    });
 </script>
