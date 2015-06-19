@@ -1,8 +1,5 @@
 <?php
-$this->setPageTitle('Acc Coas');
-$this->breadcrumbs = array(
-    'Acc Coas',
-);
+$this->setPageTitle('Daftar Perkiraan');
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
