@@ -1,3 +1,8 @@
+<style>
+    input, .select2-container, .input-prepend{
+        margin:0 !important;
+    }
+</style>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
@@ -16,20 +21,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         )
     ));
     ?>
-    <div class="box gradient invoice">
-
+    <div class="box invoice">
         <div class="title clearfix">
-
             <h4 class="left">
                 <span class="number"><?php echo (isset($model->code_acc)) ? '#' . $model->code_acc : ''; ?></span>
-                <span class="data gray"><?php echo (isset($model->date_posting)) ? date('d-M-Y', strtotime($model->date_posting)) : ''; ?></span>
+                <br><span class="data gray"><?php echo (isset($model->date_posting)) ? date('d-M-Y', strtotime($model->date_posting)) : ''; ?></span>
             </h4>
-            <div class="invoice-info">
-                <span class="number"></span>
-                <span class="data gray"></span>
-                <div class="clearfix"></div>
-            </div>
-
         </div>
         <div class="content">
             <?php
@@ -60,9 +57,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             }
             ?>
             <fieldset>
-                <legend>
-                    <p class="note">Fields dengan <span class="required">*</span> harus di isi.</p>
-                </legend>
                 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error')); ?>
                 <div class="row" style="margin-left: 0px;">
                     <table width="100%">
@@ -71,7 +65,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <td width="50%"><label for="AccCashIn_accCoa">Masuk Ke</label>
                                 <?php
                                 $accessCoa = AccCoa::model()->accessCoa();
-                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'nestedname');
+                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'name');
                                 $this->widget('bootstrap.widgets.TbSelect2', array(
                                     'asDropDownList' => TRUE,
                                     'data' => $data,
@@ -83,7 +77,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     ),
                                     'htmlOptions' => array(
                                         'id' => 'AccCashIn_account',
-                                        'style' => 'width:250px;',
+                                        'style' => 'width:100%;',
                                         'onChange' => 'checkSelected();'
                                     ),
                                 ));
@@ -109,359 +103,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </tr>
                     </table>
                 </div>
-                <h4>Detail Dana</h4>
-                <table class="responsive table table-bordered">
-                    <thead>
-                        <tr>
-                            <th width="20">#</th>
-                            <th width="250">Kode Rekening</th>
-                            <th width="150">Sub Ledger</th>
-                            <th width="300">Keterangan</th>
-                            <th style="width:5%">Kredit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class='insertNew'>
-                            <td style="text-align: center">
-                                <input type="hidden" name="subledgerid" value="" class="inVoiceDet">
-                                <?php
-                                echo CHtml::ajaxLink(
-                                        $text = '<i class="icon-plus-sign"></i>', $url = url('AccCashIn/addRow'), $ajaxOptions = array(
-                                    'type' => 'POST',
-                                    'success' => 'function(data){
-                                                           calculate();
-                                                           $("#addRow").replaceWith(data);     
-                                                           clear();
-                                                           
-                                                            $(".totalDet").on("keyup", function() {
-                                                            var subTotal=0;
-                                                            $(".totalDet").each(function() {
-                                                               subTotal += parseInt($(this).val());
-                                                            });
-                                                            var selisih = parseInt($("#totalDebit").val()) - parseInt(subTotal);
-                                                            $("#difference").val(selisih);
-                                                            $("#AccCashIn_total").val(subTotal);
-                                                            });
-                                                           
-                                                           $(".delRow").on("click", function() {
-                                                           $(this).parent().parent().parent().remove();
-//                                                           calculateMin();
-                                                           });
-                                                           $("#account").select2("focus");
-                                                            $(".newRow").find(".selectDua").select2();
-                                                            $(".newRow").removeClass("newRow");
-                                                            $(".insertNew").find(".inVoiceDet").val("0");
-                                                            $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Select Sub-Ledger</a>");
-                                                           
-                                        }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn AddNewRow')
-                                );
-                                ?>
-                            </td>
-                            <td>
-                                <?php
-                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
-//                                logs($data);
-                                $this->widget('bootstrap.widgets.TbSelect2', array(
-                                    'asDropDownList' => TRUE,
-                                    'data' => $data,
-                                    'name' => 'account',
-                                    'options' => array(
-                                        "placeholder" => t('choose', 'global'),
-                                        "allowClear" => true,
-                                    ),
-                                    'htmlOptions' => array(
-                                        'id' => 'account',
-                                        'style' => 'width:100%;',
-                                        'class' => 'subLedger'
-                                    ), 'events' => array('change' => 'js: function() {
-                                        var elements = $(this).parent().parent().find(".showModal");
-                                                    checkSelected();
-                                                    retAccount($(this).val(),elements);
-                                                     
-                                     }')
-                                ));
-                                ?>
-                            </td>
-                            <td  class="subLedgerField" style="text-align: center">
-                                <?php
-                                $this->widget(
-                                        'bootstrap.widgets.TbButton', array(
-                                    'label' => 'Select Sub-Ledger',
-                                    'htmlOptions' => array(
-//                                        'data-toggle' => 'modal',
-//                                        'data-target' => '#modalSub',
-                                        'style' => 'display:none',
-                                        'class' => 'showModal',
-                                    ),
-                                        )
-                                );
-                                ?>
-                            </td>
-                            <td><?php echo CHtml::textfield('costDescription', '', array('style' => 'width:95%;', 'maxlength' => 255)); ?></td>
-                            <td>
-                                <div class="input-prepend">
-                                    <span class="add-on">Rp.</span>
-                                    <?php echo CHtml::textField('credit', '0', array('class' => 'angka', 'value' => 0, 'maxlength' => 60, 'prepend' => 'Rp',)); ?>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr id="addRow" style="display:none">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <?php
-                        $invoiceName = '';
-                        if ($model->isNewRecord == false and ! isset($_POST['AccCashInDet'])) {
-                            $i = 0;
-                            $value = '';
-                            foreach ($cashInDet as $viewCashInDet) {
-                                $invoice = (!empty($viewCashInDet->invoice_det_id)) ? $viewCashInDet->invoice_det_id : 0;
-                                $code = (!empty($viewCashInDet->InvoiceDet->code)) ? $viewCashInDet->InvoiceDet->code : "-";
 
-                                if ($viewCashInDet->AccCoa !== NULL) {
-                                    $accCoaName = $viewCashInDet->AccCoa->code . ' - ' . $viewCashInDet->AccCoa->name;
-                                } else {
-                                    $accCoaName = ' - ';
-                                }
-
-                                if (!empty($viewCashInDet->ar_id)) {
-                                    $account = User::model()->findByPk($viewCashInDet->ar_id);
-                                    $name = $account->name;
-                                    $id = $account->id;
-                                } else if (!empty($viewCashInDet->ap_id)) {
-                                    $account = User::model()->findByPk($viewCashInDet->ap_id);
-                                    $name = $account->name;
-                                    $id = $account->id;
-                                } else if (!empty($viewCashInDet->as_id)) {
-                                    $account = Product::model()->findByPk($viewCashInDet->as_id);
-                                    $name = $account->name;
-                                    $id = $account->id;
-                                } else {
-                                    $name = "-";
-                                    $id = "0";
-                                }
-                                $invoiceName = (!empty($viewCashInDet->InvoiceDet->code) && !empty($viewCashInDet->InvoiceDet->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $viewCashInDet->InvoiceDet->code . ']' . $viewCashInDet->InvoiceDet->User->name : '';
-                                if (isset($_POST['AccCashInDet'])) {
-                                    $amount = $_POST['AccCashInDet']['amount'][$i];
-                                } else {
-                                    $amount = $viewCashInDet->amount;
-                                }
-                                $disp = ($viewCashInDet->AccCoa->type_sub_ledger == 'ar' || $viewCashInDet->AccCoa->type_sub_ledger == 'as' || $viewCashInDet->AccCoa->type_sub_ledger == 'ap') ? true : false;
-                                $display = (empty($invoiceName) && $disp) ? '' : 'none';
-                                $i++;
-
-                                echo '  <tr>
-                                            <td style="text-align:center">
-                                                <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
-                                                <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]"  class="inVoiceDet" value="' . $invoice . '"/>
-                                                <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span>
-                                            </td>
-                                            <td>';
-                                echo '<select class="selectDua subLedger" style="width:100%" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]">';
-
-                                foreach ($data as $key => $val) {
-                                    $value = ($key == $viewCashInDet->acc_coa_id) ? 'selected="selected"' : '';
-                                    echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
-                                }
-                                echo '</select>';
-                                echo '</td>
-                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:'.$display.'" class="btn showModal">Select Sub-Ledger</a></td>
-                                            <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $viewCashInDet->description . '"/></td>
-                                            <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $amount . '"/></div></td>
-                                        </tr>';
-                            }
-                        } if (isset($_POST['AccCashInDet'])) {
-                            for ($i = 0; $i < count($_POST['AccCashInDet']['acc_coa_id']); $i++) {
-                                $accCoa = AccCoa::model()->find(array('condition' => 'id=' . $_POST['AccCashInDet']['acc_coa_id'][$i]));
-                                
-                                if (!empty($_POST['nameAccount'][$i])) {
-                                    $account = (object) array('name' => '', 'id' => '');
-                                    if ($accCoa->type_sub_ledger == "ar")
-                                        $account = User::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                    if ($accCoa->type_sub_ledger == "ap")
-                                        $account = User::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                    if ($accCoa->type_sub_ledger == "as")
-                                        $account = Product::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                    $name = $account->name;
-                                    $id = $account->id;
-                                } else {
-                                    $name = "-";
-                                    $id = "0";
-                                }
-
-                                echo '  <tr>
-                                            <td style="text-align:center">
-                                                <input type="hidden" name="nameAccount[]" id="nameAccount[]" class="nameAccount" value="' . $id . '"/>
-                                                <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $_POST['inVoiceDet'][$i] . '"/>
-                                                <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span>
-                                            </td>';
-
-                                echo '<td><select class="selectDua subLedger" style="width:100%" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]">';
-                                foreach ($data as $key => $val) {
-                                    $value = ($key == $_POST['AccCashInDet']['acc_coa_id'][$i]) ? 'selected="selected"' : '';
-                                    echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
-                                }
-                                echo '<option value="0">Pilih</option>';
-                                echo '</select></td>
-                                            <td style="text-align:center" class="subLedgerField">' . $name . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
-                                            <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $_POST['AccCashInDet']['description'][$i] . '"/></td>
-                                            <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['AccCashInDet']['amount'][$i] . '"/></div></td>
-                                        </tr>';
-                            }
-                        }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4" valign="middle" align="center"><b>Total Kredit</b></td>
-                            <td><?php
-                                if (isset($_POST['AccCashIn']['total'])) {
-                                    $total = $_POST['AccCashIn']['total'];
-                                } else {
-                                    $total = $model->total;
-                                }
-                                echo $form->textFieldRow($model, 'total', array('class' => 'angka', 'readonly' => true, 'maxlength' => 60, 'value' => $total, 'prepend' => 'Rp.', 'label' => false));
-                                ?>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" valign="middle" align="center"><b>Selisih</b></td>
-                            <td>
-                                <?php
-                                if (isset($_POST['AccCashInDet'])) {
-                                    $diff = $_POST['totalDebit'] - $_POST['AccCashIn']['total'];
-                                } else {
-                                    $diff = 0;
-                                }
-                                ?>
-                                <div class="input-prepend">
-                                    <span class="add-on">Rp.</span>
-                                    <?php echo CHtml::textField('difference', $diff, array('class' => 'angka', 'value' => 0, 'maxlength' => 60, 'prepend' => 'Rp', 'readonly' => true, 'id' => 'difference')); ?>
-                                </div>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <div class = "form-actions">
-                    <?php
-                    $act = (isset($_GET['act'])) ? $_GET['act'] : '';
-                    if ($model->isNewRecord || ($act != "approve" && empty($model->date_posting))) {
-                        $this->widget('bootstrap.widgets.TbButton', array(
-                            'buttonType' => 'submit',
-                            'type' => 'primary',
-                            'icon' => 'ok white',
-                            'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
-                        ));
-
-                        $this->widget('bootstrap.widgets.TbButton', array(
-                            'buttonType' => 'reset',
-                            'icon' => 'remove',
-                            'label' => 'Reset',
-                        ));
-                    } else {
-                        $this->beginWidget(
-                                'bootstrap.widgets.TbModal', array('id' => 'myModal', 'htmlOptions' => array('style' => 'width:450px;left:60%;'))
-                        );
-                        ?>
-                        <div class="modal-header">
-                            <a class="close" data-dismiss="modal">&times;</a>
-                            <h4>Persetujuan</h4>
-                        </div>
-                        <div class="modal-body" align="left">
-                            <table>
-                                <tr>
-                                    <th>
-                                        <label for="Date_Post">Tanggal Posting</label>
-                                    </th>
-                                    <th>
-                                <div class="input-prepend">
-                                    <span class="add-on"><i class="icon-calendar"></i></span>
-                                    <?php
-                                    if ($siteConfig->date_system != "0000-00-00") {
-                                        $dateSystem = $siteConfig->date_system;
-                                    } else {
-                                        $dateSystem = date("Y-m-d");
-                                    }
-
-                                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                        'name' => 'date_post',
-                                        'value' => (empty($model->date_posting)) ? date("Y-m-d") : $model->date_posting,
-                                        'options' => array(
-                                            'minDate' => $dateSystem,
-                                            'showAnim' => 'fold',
-                                            'changeMonth' => 'true',
-                                            'changeYear' => 'true',
-                                            'dateFormat' => 'yy-mm-dd'
-                                        ),
-                                        'htmlOptions' => array(
-                                            'style' => 'height:20px;',
-                                            'class' => 'span2',
-                                        ),
-                                    ));
-                                    ?>
-                                </div>
-                                </th>
-
-                                </tr>
-                                <?php
-                                if ($siteConfig->autopostnumber == 0) {
-                                    ?>
-                                    <tr>
-                                        <th>
-                                            <label>No Posting </label>
-                                        </th>
-                                        <th>
-                                            <?php
-                                            echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
-                                            ?>
-                                        </th>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-                            </table>
-                        </div>
-
-                        <div class="modal-footer">
-                            <?php
-                            $this->widget('bootstrap.widgets.TbButton', array(
-                                'buttonType' => 'submit',
-                                'type' => 'primary',
-                                'icon' => 'ok white',
-                                'label' => $model->isNewRecord ? 'Approve' : 'Simpan',
-                            ));
-                            ?>
-                            <?php
-                            $this->widget(
-                                    'bootstrap.widgets.TbButton', array(
-                                'label' => 'Close',
-                                'url' => '#',
-                                'htmlOptions' => array('data-dismiss' => 'modal'),
-                                    )
-                            );
-                            ?>
-                        </div>
-                        <?php
-                        $this->endWidget();
-                        $this->widget(
-                                'bootstrap.widgets.TbButton', array(
-                            'label' => 'Simpan',
-                            'type' => 'primary',
-                            'icon' => 'ok white',
-                            'htmlOptions' => array(
-                                'data-toggle' => 'modal',
-                                'data-target' => '#myModal',
-                            ),
-                                )
-                        );
-                    }
-                    ?>
-                </div>
             </fieldset>
             <?php
             $this->beginWidget(
@@ -488,6 +130,362 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
             <?php $this->endWidget(); ?>
         </div>
+    </div>
+
+    <div class="box invoice">
+        <div class="title clearfix">
+            <h4 class="left">
+                Detail Dana
+            </h4>
+        </div>
+        <div class="content" style="padding: 0 !important">
+            <table class="responsive table table-striped">
+                <thead>
+                    <tr>
+                        <th width="20">#</th>
+                        <th width="250">Kode Rekening</th>
+                        <th width="150">Sub Ledger</th>
+                        <th width="300">Keterangan</th>
+                        <th style="width:5%">Kredit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class='insertNew'>
+                        <td style="text-align: center">
+                            <input type="hidden" name="subledgerid" value="" class="inVoiceDet">
+                            <?php
+                            echo CHtml::ajaxLink(
+                                    $text = '<i class="icon-plus-sign"></i>', $url = url('AccCashIn/addRow'), $ajaxOptions = array(
+                                'type' => 'POST',
+                                'success' => 'function(data){
+                                                           calculate();
+                                                           $("#addRow").replaceWith(data);     
+                                                           clear();
+                                                           
+                                                            $(".totalDet").on("keyup", function() {
+                                                            var subTotal=0;
+                                                            $(".totalDet").each(function() {
+                                                               subTotal += parseInt($(this).val());
+                                                            });
+                                                            var selisih = parseInt($("#totalDebit").val()) - parseInt(subTotal);
+                                                            $("#difference").val(selisih);
+                                                            $("#AccCashIn_total").val(subTotal);
+                                                            });
+                                                           
+                                                           $(".delRow").on("click", function() {
+                                                           $(this).parent().parent().parent().remove();
+//                                                           calculateMin();
+                                                           });
+                                                           $("#account").select2("focus");
+                                                            $(".newRow").find(".selectDua").select2();
+                                                            $(".newRow").removeClass("newRow");
+                                                            $(".insertNew").find(".inVoiceDet").val("0");
+                                                            $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Select Sub-Ledger</a>");
+                                                           
+                                        }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn AddNewRow')
+                            );
+                            ?>
+                        </td>
+                        <td>
+                            <?php
+                            $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+//                                logs($data);
+                            $this->widget('bootstrap.widgets.TbSelect2', array(
+                                'asDropDownList' => TRUE,
+                                'data' => $data,
+                                'name' => 'account',
+                                'options' => array(
+                                    "placeholder" => t('choose', 'global'),
+                                    "allowClear" => true,
+                                ),
+                                'htmlOptions' => array(
+                                    'id' => 'account',
+                                    'style' => 'width:100%;',
+                                    'class' => 'subLedger'
+                                ), 'events' => array('change' => 'js: function() {
+                                        var elements = $(this).parent().parent().find(".showModal");
+                                                    checkSelected();
+                                                    retAccount($(this).val(),elements);
+                                                     
+                                     }')
+                            ));
+                            ?>
+                        </td>
+                        <td  class="subLedgerField" style="text-align: center">
+                            <?php
+                            $this->widget(
+                                    'bootstrap.widgets.TbButton', array(
+                                'label' => 'Select Sub-Ledger',
+                                'htmlOptions' => array(
+//                                        'data-toggle' => 'modal',
+//                                        'data-target' => '#modalSub',
+                                    'style' => 'display:none',
+                                    'class' => 'showModal',
+                                ),
+                                    )
+                            );
+                            ?>
+                        </td>
+                        <td><?php echo CHtml::textfield('costDescription', '', array('style' => 'width:95%;', 'maxlength' => 255)); ?></td>
+                        <td>
+                            <div class="input-prepend">
+                                <span class="add-on">Rp.</span>
+                                <?php echo CHtml::textField('credit', '0', array('class' => 'angka', 'value' => 0, 'maxlength' => 60, 'prepend' => 'Rp',)); ?>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr id="addRow" style="display:none">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <?php
+                    $invoiceName = '';
+                    if ($model->isNewRecord == false and ! isset($_POST['AccCashInDet'])) {
+                        $i = 0;
+                        $value = '';
+                        foreach ($cashInDet as $viewCashInDet) {
+                            $invoice = (!empty($viewCashInDet->invoice_det_id)) ? $viewCashInDet->invoice_det_id : 0;
+                            $code = (!empty($viewCashInDet->InvoiceDet->code)) ? $viewCashInDet->InvoiceDet->code : "-";
+
+                            if ($viewCashInDet->AccCoa !== NULL) {
+                                $accCoaName = $viewCashInDet->AccCoa->code . ' - ' . $viewCashInDet->AccCoa->name;
+                            } else {
+                                $accCoaName = ' - ';
+                            }
+
+                            if (!empty($viewCashInDet->ar_id)) {
+                                $account = User::model()->findByPk($viewCashInDet->ar_id);
+                                $name = $account->name;
+                                $id = $account->id;
+                            } else if (!empty($viewCashInDet->ap_id)) {
+                                $account = User::model()->findByPk($viewCashInDet->ap_id);
+                                $name = $account->name;
+                                $id = $account->id;
+                            } else if (!empty($viewCashInDet->as_id)) {
+                                $account = Product::model()->findByPk($viewCashInDet->as_id);
+                                $name = $account->name;
+                                $id = $account->id;
+                            } else {
+                                $name = "-";
+                                $id = "0";
+                            }
+                            $invoiceName = (!empty($viewCashInDet->InvoiceDet->code) && !empty($viewCashInDet->InvoiceDet->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $viewCashInDet->InvoiceDet->code . ']' . $viewCashInDet->InvoiceDet->User->name : '';
+                            if (isset($_POST['AccCashInDet'])) {
+                                $amount = $_POST['AccCashInDet']['amount'][$i];
+                            } else {
+                                $amount = $viewCashInDet->amount;
+                            }
+                            $disp = ($viewCashInDet->AccCoa->type_sub_ledger == 'ar' || $viewCashInDet->AccCoa->type_sub_ledger == 'as' || $viewCashInDet->AccCoa->type_sub_ledger == 'ap') ? true : false;
+                            $display = (empty($invoiceName) && $disp) ? '' : 'none';
+                            $i++;
+
+                            echo '  <tr>
+                                            <td style="text-align:center">
+                                                <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
+                                                <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]"  class="inVoiceDet" value="' . $invoice . '"/>
+                                                <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span>
+                                            </td>
+                                            <td>';
+                            echo '<select class="selectDua subLedger" style="width:100%" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]">';
+
+                            foreach ($data as $key => $val) {
+                                $value = ($key == $viewCashInDet->acc_coa_id) ? 'selected="selected"' : '';
+                                echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
+                            }
+                            echo '</select>';
+                            echo '</td>
+                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
+                                            <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $viewCashInDet->description . '"/></td>
+                                            <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $amount . '"/></div></td>
+                                        </tr>';
+                        }
+                    } if (isset($_POST['AccCashInDet'])) {
+                        for ($i = 0; $i < count($_POST['AccCashInDet']['acc_coa_id']); $i++) {
+                            $accCoa = AccCoa::model()->find(array('condition' => 'id=' . $_POST['AccCashInDet']['acc_coa_id'][$i]));
+
+                            if (!empty($_POST['nameAccount'][$i])) {
+                                $account = (object) array('name' => '', 'id' => '');
+                                if ($accCoa->type_sub_ledger == "ar")
+                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
+
+                                if ($accCoa->type_sub_ledger == "ap")
+                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
+
+                                if ($accCoa->type_sub_ledger == "as")
+                                    $account = Product::model()->findByPk($_POST['nameAccount'][$i]);
+
+                                $name = $account->name;
+                                $id = $account->id;
+                            } else {
+                                $name = "-";
+                                $id = "0";
+                            }
+
+                            echo '  <tr>
+                                            <td style="text-align:center">
+                                                <input type="hidden" name="nameAccount[]" id="nameAccount[]" class="nameAccount" value="' . $id . '"/>
+                                                <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $_POST['inVoiceDet'][$i] . '"/>
+                                                <span class="btn"><i class="delRow icon-remove-circle" style="cursor:all-scroll;"></i></span>
+                                            </td>';
+
+                            echo '<td><select class="selectDua subLedger" style="width:100%" name="AccCashInDet[acc_coa_id][]" id="AccCashInDet[acc_coa_id][]">';
+                            foreach ($data as $key => $val) {
+                                $value = ($key == $_POST['AccCashInDet']['acc_coa_id'][$i]) ? 'selected="selected"' : '';
+                                echo '<option ' . $value . ' value="' . $key . '">' . $val . '</option>';
+                            }
+                            echo '<option value="0">Pilih</option>';
+                            echo '</select></td>
+                                            <td style="text-align:center" class="subLedgerField">' . $name . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
+                                            <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $_POST['AccCashInDet']['description'][$i] . '"/></td>
+                                            <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['AccCashInDet']['amount'][$i] . '"/></div></td>
+                                        </tr>';
+                        }
+                    }
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" valign="middle" align="center"><b>Total Kredit</b></td>
+                        <td><?php
+                            if (isset($_POST['AccCashIn']['total'])) {
+                                $total = $_POST['AccCashIn']['total'];
+                            } else {
+                                $total = $model->total;
+                            }
+                            echo $form->textFieldRow($model, 'total', array('class' => 'angka', 'readonly' => true, 'maxlength' => 60, 'value' => $total, 'prepend' => 'Rp.', 'label' => false));
+                            ?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" valign="middle" align="center"><b>Selisih</b></td>
+                        <td>
+                            <?php
+                            if (isset($_POST['AccCashInDet'])) {
+                                $diff = $_POST['totalDebit'] - $_POST['AccCashIn']['total'];
+                            } else {
+                                $diff = 0;
+                            }
+                            ?>
+                            <div class="input-prepend">
+                                <span class="add-on">Rp.</span>
+                                <?php echo CHtml::textField('difference', $diff, array('class' => 'angka', 'value' => 0, 'maxlength' => 60, 'prepend' => 'Rp', 'readonly' => true, 'id' => 'difference')); ?>
+                            </div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <div class = "form-actions">
+        <?php
+        $act = (isset($_GET['act'])) ? $_GET['act'] : '';
+        if ($model->isNewRecord || ($act != "approve" && empty($model->date_posting))) {
+            $this->widget('bootstrap.widgets.TbButton', array(
+                'buttonType' => 'submit',
+                'type' => 'primary',
+                'icon' => 'ok white',
+                'label' => 'Simpan Perubahan',
+            ));
+        } else {
+            $this->beginWidget(
+                    'bootstrap.widgets.TbModal', array('id' => 'myModal', 'htmlOptions' => array('style' => 'width:450px;left:60%;'))
+            );
+            ?>
+            <div class="modal-header">
+                <a class="close" data-dismiss="modal">&times;</a>
+                <h4>Persetujuan</h4>
+            </div>
+            <div class="modal-body" align="left">
+                <table>
+                    <tr>
+                        <th>
+                            <label for="Date_Post">Tanggal Posting</label>
+                        </th>
+                        <th>
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-calendar"></i></span>
+                        <?php
+                        if ($siteConfig->date_system != "0000-00-00") {
+                            $dateSystem = $siteConfig->date_system;
+                        } else {
+                            $dateSystem = date("Y-m-d");
+                        }
+
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => 'date_post',
+                            'value' => (empty($model->date_posting)) ? date("Y-m-d") : $model->date_posting,
+                            'options' => array(
+                                'minDate' => $dateSystem,
+                                'showAnim' => 'fold',
+                                'changeMonth' => 'true',
+                                'changeYear' => 'true',
+                                'dateFormat' => 'yy-mm-dd'
+                            ),
+                            'htmlOptions' => array(
+                                'style' => 'height:20px;',
+                                'class' => 'span2',
+                            ),
+                        ));
+                        ?>
+                    </div>
+                    </th>
+
+                    </tr>
+                    <?php
+                    if ($siteConfig->autopostnumber == 0) {
+                        ?>
+                        <tr>
+                            <th>
+                                <label>No Posting </label>
+                            </th>
+                            <th>
+                                <?php
+                                echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
+                                ?>
+                            </th>
+                        </tr>
+                        <?php
+                    }
+                    ?>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <?php
+                $this->widget('bootstrap.widgets.TbButton', array(
+                    'buttonType' => 'submit',
+                    'type' => 'primary',
+                    'icon' => 'ok white',
+                    'label' => $model->isNewRecord ? 'Approve' : 'Simpan',
+                ));
+                ?>
+                <?php
+                $this->widget(
+                        'bootstrap.widgets.TbButton', array(
+                    'label' => 'Close',
+                    'url' => '#',
+                    'htmlOptions' => array('data-dismiss' => 'modal'),
+                        )
+                );
+                ?>
+            </div>
+            <?php
+            $this->endWidget();
+            $this->widget(
+                    'bootstrap.widgets.TbButton', array(
+                'label' => 'Simpan',
+                'type' => 'primary',
+                'icon' => 'ok white',
+                'htmlOptions' => array(
+                    'data-toggle' => 'modal',
+                    'data-target' => '#myModal',
+                ),
+                    )
+            );
+        }
+        ?>
     </div>
 
     <?php $this->endWidget(); ?>
@@ -614,13 +612,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     $("#modalSub").on('hidden', function () {
         $(".appeared").removeClass('appeared');
     });
-    
-    $("#yw5").on("click",function(){
-       if($("#difference").val() == 0){
-           return true;
-       }else{
-           alert("Total Debet dan Kredit Harus Sama!!");
-           return false;
-       }
+
+    $("#yw5").on("click", function () {
+        if ($("#difference").val() == 0) {
+            return true;
+        } else {
+            alert("Total Debet dan Kredit Harus Sama!!");
+            return false;
+        }
     });
 </script>

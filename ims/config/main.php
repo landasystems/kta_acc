@@ -1,4 +1,5 @@
 <?php
+
 Yii::setPathOfAlias('', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 
@@ -22,7 +23,7 @@ return array(
             'class' => 'system.gii.GiiModule',
             'password' => 'landak',
             // If removed, Gii defaults to localhost only. Edit carefully to taste.
-            'ipFilters' => array('127.0.0.1', '::1', 'localhost','192.168.1.41'),
+            'ipFilters' => array('127.0.0.1', '::1', 'localhost', '192.168.1.41'),
             'generatorPaths' => array(
                 'common.extensions.giiplus'  //Ajax Crud template path
             ),
@@ -87,6 +88,8 @@ return array(
             'class' => 'common.extensions.bootstrap.components.Bootstrap',
             'responsiveCss' => true,
             'fontAwesomeCss' => true,
+            'enableBootboxJS' => false,
+            'enableNotifierJS' => false,
         ),
         'image' => array(
             'class' => 'common.extensions.image.CImageComponent',
@@ -104,14 +107,13 @@ return array(
             'class' => 'system.caching.CFileCache'
         ),
     ),
-    
     'params' => array(
-        'appVersion'=>'v.1',
-        'client'=>$client,
-        'clientName'=>$clientName,
+        'appVersion' => 'v.1',
+        'client' => $client,
+        'clientName' => $clientName,
         'id' => '1',
         'urlImg' => $rootUrl . 'images/',
-        'pathImg' => $root . 'ims/www/'.$client.'/images/',
+        'pathImg' => $root . 'ims/www/' . $client . '/images/',
         'menu' => $menu,
     ),
 );

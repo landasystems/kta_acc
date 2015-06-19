@@ -10,60 +10,60 @@ class ReportController extends Controller {
 //            'rights', 
 //        );
 //    }
-    public function filters() {
-        return array(
-            'accessControl', // perform access control for CRUD operations
-        );
-    }
+//    public function filters() {
+//        return array(
+//            'accessControl', // perform access control for CRUD operations
+//        );
+//    }
 
-    public function accessRules() {
-        return array(
-            array('allow', // r
-                'actions' => array('stockCard'),
-                'expression' => 'app()->controller->isValidAccess("Report_StockCard","r")'
-            ),
-            array('allow', // r
-                'actions' => array('buy'),
-                'expression' => 'app()->controller->isValidAccess("Report_Buy","r")'
-            ),
-            array('allow', // r
-                'actions' => array('buyRetur'),
-                'expression' => 'app()->controller->isValidAccess("Report_BuyRetur","r")'
-            ),
-            array('allow', // r
-                'actions' => array('sell'),
-                'expression' => 'app()->controller->isValidAccess("Report_Sell","r")'
-            ),
-            array('allow', // r
-                'actions' => array('sellRetur'),
-                'expression' => 'app()->controller->isValidAccess("Report_SellRetur","r")'
-            ),
-            array('allow', // r
-                'actions' => array('stockItem'),
-                'expression' => 'app()->controller->isValidAccess("Report_StockItem","r")'
-            ),
-            array('allow', // r
-                'actions' => array('salaryisPaid'),
-                'expression' => 'app()->controller->isValidAccess("Report_Salary","r")'
-            ),
-            array('allow', // r
-                'actions' => array('salaryUnpaid'),
-                'expression' => 'app()->controller->isValidAccess("Report_SalaryUnpaid","r")'
-            ),
-            array('allow', // r
-                'actions' => array('productionLoss'),
-                'expression' => 'app()->controller->isValidAccess("Report_ProductionLoss","r")'
-            ),
-            array('allow', // u
-                'actions' => array('index', 'update'),
-                'expression' => 'app()->controller->isValidAccess(1,"u")'
-            ),
-            array('allow', // d
-                'actions' => array('index', 'delete'),
-                'expression' => 'app()->controller->isValidAccess(1,"d")'
-            )
-        );
-    }
+//    public function accessRules() {
+//        return array(
+//            array('allow', // r
+//                'actions' => array('stockCard'),
+//                'expression' => 'app()->controller->isValidAccess("Report_StockCard","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('buy'),
+//                'expression' => 'app()->controller->isValidAccess("Report_Buy","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('buyRetur'),
+//                'expression' => 'app()->controller->isValidAccess("Report_BuyRetur","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('sell'),
+//                'expression' => 'app()->controller->isValidAccess("Report_Sell","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('sellRetur'),
+//                'expression' => 'app()->controller->isValidAccess("Report_SellRetur","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('stockItem'),
+//                'expression' => 'app()->controller->isValidAccess("Report_StockItem","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('salaryisPaid'),
+//                'expression' => 'app()->controller->isValidAccess("Report_Salary","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('salaryUnpaid'),
+//                'expression' => 'app()->controller->isValidAccess("Report_SalaryUnpaid","r")'
+//            ),
+//            array('allow', // r
+//                'actions' => array('productionLoss'),
+//                'expression' => 'app()->controller->isValidAccess("Report_ProductionLoss","r")'
+//            ),
+//            array('allow', // u
+//                'actions' => array('index', 'update'),
+//                'expression' => 'app()->controller->isValidAccess(1,"u")'
+//            ),
+//            array('allow', // d
+//                'actions' => array('index', 'delete'),
+//                'expression' => 'app()->controller->isValidAccess(1,"d")'
+//            )
+//        );
+//    }
 
     public function actionStockCard() {
 //        $modelClassroom = new Classroom;
