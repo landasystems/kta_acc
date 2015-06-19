@@ -37,8 +37,7 @@
                     <div class="container-fluid">
                         <a class="brand" href="<?php echo url('dashboard') ?>">
                             <?php
-                            $siteConfig = SiteConfig::model()->listSiteConfig();
-                            echo $siteConfig->client_name;
+                            echo param('clientName');
                             ?>
                         </a>
                         <div class="nav-no-collapse">
