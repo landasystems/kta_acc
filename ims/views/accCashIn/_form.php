@@ -65,7 +65,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <td width="50%"><label for="AccCashIn_accCoa">Masuk Ke</label>
                                 <?php
                                 $accessCoa = AccCoa::model()->accessCoa();
-                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'name');
+                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'fullName');
                                 $this->widget('bootstrap.widgets.TbSelect2', array(
                                     'asDropDownList' => TRUE,
                                     'data' => $data,

@@ -170,6 +170,14 @@ class AccCoa extends CActiveRecord {
 
         return $results;
     }
+    public function getFullName() {
+        $results = $this->code . ' - ' . $this->name;
+
+        if ($this->type == 'general')
+            $results = '<b>' . $results . '</b>';
+
+        return $results;
+    }
 
     public function getUrl() {
         return url('category/' . $this->id . '/' . $this->alias);
