@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Edit Acc Jurnals | ID : ' . $model->id);
+$this->setPageTitle('Jurnal | Kode : ' . $model->code);
 $this->breadcrumbs = array(
     'Acc Jurnals' => array('index'),
     $model->id => array('view', 'id' => $model->id),

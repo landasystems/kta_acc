@@ -6,12 +6,9 @@ return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Accounting Management Systems',
     'language' => 'en',
-    // preloading 'log' component
     'preload' => array('log', 'bootstrap'),
-    // autoloading model and component classes
     'import' => array(
         'application.models.*',
-        'common.models.*',
         'common.components.*',
         'common.extensions.*',
         'common.extensions.image.helpers.*',
@@ -42,17 +39,6 @@ return array(
             'charset' => 'utf8',
             'enableProfiling' => true,
             'enableParamLogging' => true
-        ),
-        'db2' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=landa_acca',
-            'emulatePrepare' => true,
-            'username' => $dbUser,
-            'password' => $dbPwd,
-            'tablePrefix' => 'intern_',
-            'charset' => 'utf8',
-            'enableProfiling' => true,
-            'enableParamLogging' => true,
-            'class' => 'CDbConnection'          // DO NOT FORGET THIS!
         ),
         'landa' => array(
             'class' => 'LandaCore',
@@ -95,12 +81,6 @@ return array(
                     'levels' => 'error, warning',
 //                    'filter' => 'CLogFilter',
                 ),
-            // uncomment the following to show log messages on web pages
-            /*
-              array(
-              'class'=>'CWebLogRoute',
-              ),
-             */
             ),
         ),
         'bootstrap' => array(

@@ -1,88 +1,99 @@
 <?php
-/* @var $this SiteController */
-/* @var $model LoginForm */
-/* @var $form CActiveForm  */
-
 $this->pageTitle = Yii::app()->name . ' - Login';
-$this->breadcrumbs = array(
-    'Login',
-);
 ?>
+
+<style>
+    .newLogin{
+        left: 50%;
+        top: 50%;
+        width: 300px;
+        height: auto;
+        position: absolute;
+        margin-top: -200px;
+        margin-left: -150px;
+        padding: 0px 20px;
+        border: 3px solid forestgreen;
+        box-shadow: 1px 1px 1px 1px #ccc;
+        border-radius: 2px;
+        background: white;
+        border-radius: 20px;
+    }
+
+    .newLogin .form-actions {
+        border-radius: 0 0 20px 20px;
+    }
+</style>
 
 
 <?php
 $form = $this->beginWidget('CActiveForm', array(
     'id' => 'login-form',
-    'enableClientValidation' => true,
+//    'enableClientValidation' => true,
     'clientOptions' => array(
         'validateOnSubmit' => true,
+        'type' => 'horizontal',
     ),
         ));
 ?>
 
+
 <div class="container-fluid">
+    <div class="newLogin">        
+        <form class="form-horizontal" action="dashboard.html" />
+        <center>
+            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo bt() ?>/images/logo.png" />
+            <h3 style="margin:5px 0 0 0">
+                <?php
+                echo param('clientName');
+                ?>
+            </h3>
+            <span class="green" style="font-weight: bold;">Accounting Management Sytems</span>
+        </center>
+        <hr style="margin:10px 0px 20px 0px">
 
-    <div id="header">
-
-        <div class="row-fluid">
-
-            <div class="navbar">
-                <div class="navbar-inner">
-                    <div class="container">
-                        <a class="brand" href="#"><?php echo param('clientName') ?> <span class="slogan"><?php echo param('appVersion') ?></span></a>
+        <div class="form-row row-fluid">   
+            <div class="span12"> 
+                <div class="form-row row-fluid">
+                    <div class="span12">            
+                        <div class="row-fluid">
+                            <div class="span4">Username</div>
+                            <div class="span8">
+                                <?php echo $form->textField($model, 'username', array('class' => 'span12')); ?>
+                                <span class="red"><?php echo $form->error($model, 'username'); ?></span>
+                            </div>                   
+                        </div>
                     </div>
-                </div><!-- /navbar-inner -->
-            </div><!-- /navbar -->
-
-
-        </div><!-- End .row-fluid -->
-
-    </div><!-- End #header -->
-
-</div><!-- End .container-fluid -->    
-
-<div class="container-fluid">
-
-    <div class="loginContainer">
-        <form class="form-horizontal" action="dashboard.html" id="loginForm" />
-        <div class="form-row row-fluid">
-            <div class="span12">
-                <div class="row-fluid">
-                    <label class="form-label span12" for="username">
-                        Username:
-                        <span class="icon16 icomoon-icon-user-2 right gray marginR10"></span>
-                    </label>
-                   
-                    <?php echo $form->textField($model, 'username', array('class'=>'span12')); ?>
-                    <?php echo $form->error($model, 'username'); ?>
-<!--                    <input class="span12" id="username" type="text" name="username" value="Administrator" />-->
                 </div>
-            </div>
+
+
+                <div class="form-row row-fluid">
+                    <div class="span12">
+                        <div class="row-fluid">
+                            <div class="span4">Password</div>
+                            <div class="span8">
+                                <?php echo $form->passwordField($model, 'password', array('class' => 'span12')); ?>
+                                <span class="red"><?php echo $form->error($model, 'password'); ?></span>    
+                            </div>             
+                        </div>                
+                    </div>
+                </div>
+            </div>  
+
         </div>
 
-        <div class="form-row row-fluid">
-            <div class="span12">
-                <div class="row-fluid">
-                    <label class="form-label span12" for="password">
-                        Password:
-                    </label>
-                    <?php echo $form->passwordField($model, 'password' , array('class'=>'span12')); ?>
-                    <?php echo $form->error($model, 'password'); ?>
-                </div>
-            </div>
-        </div>
+
         <div class="form-row row-fluid">                       
             <div class="span12">
                 <div class="row-fluid">
-                    <div class="form-actions">
-                        <div class="span12 controls">
-                            <?php echo $form->checkBox($model, 'rememberMe', array('class'=>'left', 'style'=>'width:20px')); ?> Keep me login in
-                            <button type="submit" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter white"></span> Login</button>
+                    <div class="form-actions" style="margin:0px -20px">
+                        <div class="span12 controls" style="padding:0px 0px 0px 5px">
+                            <?php echo $form->checkBox($model, 'rememberMe', array('class' => 'left', 'style' => 'width:20px')); ?> Keep me login
+                            <button type="submit" style="background:forestgreen" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter"></span> Login</button>
                         </div>
                     </div>
                 </div>
             </div> 
-        </div>
+        </div> 
 
         </form>
     </div>

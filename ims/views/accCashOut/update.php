@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Acc Cash Outs | ID : ' . $model->id);
+$this->setPageTitle('Kas Keluar | No Transaksi : ' . $model->code);
 $this->breadcrumbs = array(
     'Acc Cash Outs' => array('index'),
     $model->id => array('view', 'id' => $model->id),
