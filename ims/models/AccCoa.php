@@ -66,8 +66,8 @@ class AccCoa extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'code' => 'Kode Rekening',
-            'name' => 'Nama Rekening',
+            'code' => 'Kode Perkiraan',
+            'name' => 'Nama Perkiraan',
             'description' => 'Description',
             'created_user_id' => 'Created User',
             'modified' => 'Modified',

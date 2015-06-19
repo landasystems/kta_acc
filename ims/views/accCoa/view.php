@@ -1,9 +1,5 @@
 <?php
-$this->setPageTitle('Lihat Acc Coas | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Acc Coas' => array('index'),
-    $model->name,
-);
+$this->setPageTitle('Lihat Perkiraan | : ' . $model->name);
 ?>
 
 <?php
@@ -29,17 +25,8 @@ $this->endWidget();
     $this->widget('bootstrap.widgets.TbDetailView', array(
         'data' => $model,
         'attributes' => array(
-            'id',
             'name',
             'description',
-            'created_user_id',
-            'modified',
-            'created',
-            'level',
-            'lft',
-            'rgt',
-            'root',
-            'parent_id',
         ),
     ));
     ?>

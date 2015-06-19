@@ -32,7 +32,7 @@
             </div>
             <div class="content">
                 <div class="control-group">
-                    <label class="control-label">Parent Category</label>
+                    <label class="control-label">Induk Perkiraan</label>
                     <div class="controls">
                         <?php
                         $data = array('0' => 'root') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
