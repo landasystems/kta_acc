@@ -520,6 +520,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         $(".appeared").find(".totalDet").val(nilai);
         $("#modalSub").modal("hide");
         $(".appeared").removeClass('appeared');
+        calculate();
+        calculateMin();
     });
 
     function removeSub(elements) {

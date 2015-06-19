@@ -525,6 +525,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         $(".appeared").find(".inVoiceDet").val(id);
         $("#modalSub").modal("hide");
         $(".appeared").removeClass('appeared');
+        calculate();
+        calculateMin();
     });
 
     function removeSub(elements) {
