@@ -585,10 +585,15 @@ class AccCoaController extends Controller {
                 . '<td>' . $b->description . '</td>'
                 . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
                 . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
-                . '<td>'
-                . '<a class="btn">'
+                . '<td style="width:20%; text-align:center">'
+                . '<a class="btn" style="width:70%">'
                 . '<div class="ambil" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
-                . '<i class="minia-icon-checked">Pilih</i>'
+                . '<i class="minia-icon-checked"> &nbsp;Pilih</i>'
+                . '</div>'
+                . '</a>'
+                . '<a class="btn btn-danger" style="width:70%">'
+                . '<div class="delInvoice" det_id="' . $b->id . '">'
+                . '<i class="minia-icon-trashcan icon-white"> Hapus</i>'
                 . '</div>'
                 . '</a>'
                 . '</td>'
@@ -619,12 +624,11 @@ class AccCoaController extends Controller {
             $model->description = $_POST['description'];
             $model->payment = $_POST['amount'];
             $model->type = $_POST['type'];
-            $model->term_date = $_POST['term_date'];
+            $model->term_date = date('Y-m-d');
             $model->is_new_invoice = 1;
             if ($model->save()) {
                 echo 1;
             }
         }
     }
-
 }

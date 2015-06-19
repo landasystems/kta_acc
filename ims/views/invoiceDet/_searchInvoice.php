@@ -40,4 +40,23 @@
     $(document).ready(function () {
         $("#accountName").select2();
     });
+
+    $("body").on("click", ".delInvoice", function () {
+        var id = $(this).attr("det_id");
+        var answer = confirm("Are you sure want to delete this Invoice? If you do that, all of approved transaction related with this invoce won't deleted!");
+        if (answer) {
+            $.ajax({
+                type: 'POST',
+                data: {id: id},
+                url: "<?php echo url('invoiceDet/dellInv'); ?>",
+                success: function (data) {
+                    alert(data);
+                    selectInvoice();
+                },
+                error : function(){
+                    alert("Terjadi Kesalahan!");
+                }
+            });
+        }
+    });
 </script>

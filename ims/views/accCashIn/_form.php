@@ -171,7 +171,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     ),
                                     'htmlOptions' => array(
                                         'id' => 'account',
-                                        'style' => 'width:100%;'
+                                        'style' => 'width:100%;',
+                                        'class' => 'subLedger'
                                     ), 'events' => array('change' => 'js: function() {
                                         var elements = $(this).parent().parent().find(".showModal");
                                                     checkSelected();
@@ -610,5 +611,14 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     });
     $("#modalSub").on('hidden', function () {
         $(".appeared").removeClass('appeared');
+    });
+    
+    $("#yw5").on("click",function(){
+       if($("#difference").val() == 0){
+           return true;
+       }else{
+           alert("Total Debet dan Kredit Harus Sama!!");
+           return false;
+       }
     });
 </script>

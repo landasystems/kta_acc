@@ -137,7 +137,8 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     ),
                                     'htmlOptions' => array(
                                         'id' => 'account',
-                                        'style' => 'width:100%;'
+                                        'style' => 'width:100%;',
+                                        'class' => 'subLedger'
                                     ), 'events' => array('change' => 'js: function() {
                                                      var elements = $(this).parent().parent().find(".showModal");
                                                     retAccount($(this).val(),elements);
@@ -508,6 +509,10 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 </div>
 <script type="text/javascript">
+    $("body").on("click", ".delRow", function () {
+        $(this).parent().parent().parent().remove();
+        calculateMin();
+    });
     $("body").on("click", ".ambil", function () {
         var id = $(this).attr("det_id");
         var userId = $(this).attr("user_id");
@@ -607,5 +612,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     $("#modalSub").on('hidden', function () {
         $(".appeared").removeClass('appeared');
     });
-
+    
+    $("#yw5").on("click",function(){
+       if($("#total_debet").val() == $("#total_credit").val()){
+           return true;
+       }else{
+           alert("Total Debet dan Kredit Harus Sama!!");
+           return false;
+       }
+    });
 </script>
