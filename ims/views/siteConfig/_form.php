@@ -20,12 +20,12 @@
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#site">Site</a></li>
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format Invoice<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Format Print Out<b class="caret"></b></a>
                 <ul class="dropdown-menu">
 
-                    <li><a style="padding: 5px 2px" href="#reportCashIn">Report Cash In</a></li>
-                    <li><a style="padding: 5px 2px" href="#reportCashOut">Report Cash Out</a></li>
-                    <li><a style="padding: 5px 2px" href="#reportJurnal">Report Jurnal</a></li>
+                    <li><a style="padding: 5px 2px" href="#reportCashIn">Kas Masuk</a></li>
+                    <li><a style="padding: 5px 2px" href="#reportCashOut">Kas Keluar</a></li>
+                    <li><a style="padding: 5px 2px" href="#reportJurnal">Jurnal</a></li>
                 </ul>
             </li>   
         </ul>
@@ -64,324 +64,99 @@
 
 
             </div>
-            <?php
-            if (in_array('inventory', param('menu'))) {
-                ?>
-                <div class="tab-pane" id="sellOrder">      
-                    <h3>Layout Invoice Sell Order</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_sell_order', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>      
 
-                    <div class="well">
-
-                        <ul>
-                            <li>Design INVOICE sell order. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice SELL ORDER</li>
-                            <li><b>{name}</b> : Mengembalikan nama customer</li>
-                            <li><b>{city}</b> : Mengembalikan kota customer</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi customer</li>
-                            <li><b>{address}</b> : Mengembalikan alamat customer</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone customer</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dijual</li>        
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>  
-                </div>            
-                <div class="tab-pane" id="sell">    
-                    <h3>Layout Invoice Sell</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_sell', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE sell. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice SELL</li>
-                            <li><b>{name}</b> : Mengembalikan nama customer</li>
-                            <li><b>{city}</b> : Mengembalikan kota customer</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi customer</li>
-                            <li><b>{address}</b> : Mengembalikan alamat customer</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone customer</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dijual</li>      
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>  
-                </div>            
-                <div class="tab-pane" id="sellRetur">   
-                    <h3>Layout Invoice Sell Retur</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_sell_retur', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE sell retur. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice SELL RETUR</li>
-                            <li><b>{name}</b> : Mengembalikan nama customer</li>
-                            <li><b>{city}</b> : Mengembalikan kota customer</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi customer</li>
-                            <li><b>{address}</b> : Mengembalikan alamat customer</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone customer</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dijual</li>  
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>                 
-                </div>            
-                <div class="tab-pane" id="buyOrder">     
-                    <h3>Layout Invoice Buy Order</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_buy_order', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE buy order. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice BUY ORDER</li>
-                            <li><b>{name}</b> : Mengembalikan nama supplier</li>
-                            <li><b>{city}</b> : Mengembalikan kota supplier</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi supplier</li>
-                            <li><b>{address}</b> : Mengembalikan alamat supplier</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone supplier</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dibeli</li>   
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>                
-                </div>            
-                <div class="tab-pane" id="buy">    
-                    <h3>Layout Invoice Buy</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_buy', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE buy. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice BUY</li>
-                            <li><b>{name}</b> : Mengembalikan nama supplier</li>
-                            <li><b>{city}</b> : Mengembalikan kota supplier</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi supplier</li>
-                            <li><b>{address}</b> : Mengembalikan alamat supplier</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone supplier</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dibeli</li>        
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>                
-                </div>            
-                <div class="tab-pane" id="buyRetur">   
-                    <h3>Layout Invoice Buy Retur</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_buy_retur', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE buy retur. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice BUY RETUR</li>
-                            <li><b>{name}</b> : Mengembalikan nama supplier</li>
-                            <li><b>{city}</b> : Mengembalikan kota supplier</li>
-                            <li><b>{province}</b> : Mengembalikan provinsi supplier</li>
-                            <li><b>{address}</b> : Mengembalikan alamat supplier</li>
-                            <li><b>{phone}</b> : Mengembalikan nomor telephone supplier</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk yang dibeli</li>                        
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>                
-                </div>            
-                <div class="tab-pane" id="in">   
-                    <h3>Layout Invoice IN</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_in', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE PRODUCT IN. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice IN</li>
-                            <li><b>{departement}</b> : Mengembalikan nama departement</li>
-                            <li><b>{type}</b> : Mengembalikan type IN</li>
-                            <li><b>{desc}</b> : Mengembalikan deskripsi</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk masuk</li>
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>                                               
-                        </ul>
-                    </div>                
-                </div>            
-                <div class="tab-pane" id="out">   
-                    <h3>Layout Invoice PRODUCT OUT</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_out', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design INVOICE OUT. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{invoice}</b>  : Mengembalikan nomer invoice OUT</li>
-                            <li><b>{departement}</b> : Mengembalikan nama departement</li>
-                            <li><b>{type}</b> : Mengembalikan type OUT</li>
-                            <li><b>{desc}</b> : Mengembalikan deskripsi</li>                        
-                            <li><b>{listproduct}</b> : Mengembalikan daftar produk keluar</li> 
-                            <li><b>{date}</b> : Mengembalikan tanggal saat ini</li>
-                        </ul>
-                    </div>                
-                </div>
+            <div class="tab-pane" id="reportCashIn">   
+                <h3>Layout Report Kas Masuk</h3><hr>
                 <?php
-            }
-            if (in_array('accounting', param('menu'))) {
-                ?>
-                <div class="tab-pane" id="reportCashIn">   
-                    <h3>Layout Report Cash In</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_cash_in', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design Report Cash In. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{cash_in}</b>  : Mengembalikan nomor transaksi</li>
-                            <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>  
-                            <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
-                            <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
-                            <li><b>{account}</b> : Mengembalikan account kas/bank</li> 
-                            <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li> 
-                            <li><b>{managerName}</b> : Mengembalikan nama manager</li>
-                            <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
-                            <li><b>{adminName}</b> : Mengembalikan nama admin</li>
-                            <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
-                            <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
-                            <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
-                        </ul>
-                    </div>                
-                </div>
-                <div class="tab-pane" id="reportCashOut">   
-                    <h3>Layout Report Cash Cash Out</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_cash_out', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design Report Cash Out. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{cash_out}</b>  : Mengembalikan nomor transaksi</li>
-                            <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>  
-                            <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
-                            <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
-                            <li><b>{account}</b> : Mengembalikan account kas/bank</li>  
-                            <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li> 
-                            <li><b>{managerName}</b> : Mengembalikan nama manager</li>
-                            <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
-                            <li><b>{adminName}</b> : Mengembalikan nama admin</li>
-                            <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
-                            <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
-                            <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
-                        </ul>
-                    </div>                
-                </div>
-                <div class="tab-pane" id="reportJurnal">   
-                    <h3>Layout Report Jurnal</h3><hr>
-                    <?php
-                    echo $form->ckEditorRow(
-                            $model, 'report_jurnal', array(
-                        'options' => array(
-                            'fullpage' => 'js:true',
-                            'resize_maxWidth' => '1007',
-                            'resize_minWidth' => '320'
-                        ), 'label' => false,
-                            )
-                    );
-                    ?>  
-                    <div class="well">
-                        <ul>
-                            <li>Design Report Jurnal. Gunakan format berikut untuk men-generate sebuah field.</li>
-                            <li><b>{jurnal}</b>  : Mengembalikan nomor transaksi</li>
-                            <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>   
-                            <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
-                            <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
-                            <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li>
-                            <li><b>{managerName}</b> : Mengembalikan nama manager</li>
-                            <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
-                            <li><b>{adminName}</b> : Mengembalikan nama admin</li>
-                            <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
-                            <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
-                            <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
-                        </ul>
-                    </div>                
-                </div>
+                echo $form->ckEditorRow(
+                        $model, 'report_cash_in', array(
+                    'options' => array(
+                        'fullpage' => 'js:true',
+                        'resize_maxWidth' => '1007',
+                        'resize_minWidth' => '320'
+                    ), 'label' => false,
+                        )
+                );
+                ?>  
+                <div class="well">
+                    <ul>
+                        <li>Design Report Cash In. Gunakan format berikut untuk men-generate sebuah field.</li>
+                        <li><b>{cash_in}</b>  : Mengembalikan nomor transaksi</li>
+                        <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>  
+                        <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
+                        <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
+                        <li><b>{account}</b> : Mengembalikan account kas/bank</li> 
+                        <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li> 
+                        <li><b>{managerName}</b> : Mengembalikan nama manager</li>
+                        <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
+                        <li><b>{adminName}</b> : Mengembalikan nama admin</li>
+                        <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
+                        <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
+                        <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
+                    </ul>
+                </div>                
+            </div>
+            <div class="tab-pane" id="reportCashOut">   
+                <h3>Kas Keluar</h3><hr>
                 <?php
-            }
-            ?>
-
-
+                echo $form->ckEditorRow(
+                        $model, 'report_cash_out', array(
+                    'options' => array(
+                        'fullpage' => 'js:true',
+                        'resize_maxWidth' => '1007',
+                        'resize_minWidth' => '320'
+                    ), 'label' => false,
+                        )
+                );
+                ?>  
+                <div class="well">
+                    <ul>
+                        <li>Design Report Cash Out. Gunakan format berikut untuk men-generate sebuah field.</li>
+                        <li><b>{cash_out}</b>  : Mengembalikan nomor transaksi</li>
+                        <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>  
+                        <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
+                        <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
+                        <li><b>{account}</b> : Mengembalikan account kas/bank</li>  
+                        <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li> 
+                        <li><b>{managerName}</b> : Mengembalikan nama manager</li>
+                        <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
+                        <li><b>{adminName}</b> : Mengembalikan nama admin</li>
+                        <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
+                        <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
+                        <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
+                    </ul>
+                </div>                
+            </div>
+            <div class="tab-pane" id="reportJurnal">   
+                <h3>Jurnal</h3><hr>
+                <?php
+                echo $form->ckEditorRow(
+                        $model, 'report_jurnal', array(
+                    'options' => array(
+                        'fullpage' => 'js:true',
+                        'resize_maxWidth' => '1007',
+                        'resize_minWidth' => '320'
+                    ), 'label' => false,
+                        )
+                );
+                ?>  
+                <div class="well">
+                    <ul>
+                        <li>Design Report Jurnal. Gunakan format berikut untuk men-generate sebuah field.</li>
+                        <li><b>{jurnal}</b>  : Mengembalikan nomor transaksi</li>
+                        <li><b>{date}</b> : Mengembalikan tanggal transaksi</li>   
+                        <li><b>{no_approval}</b>  : Mengembalikan nomor approve</li>
+                        <li><b>{date_approval}</b>  : Mengembalikan tanggal approve</li>
+                        <li><b>{detail_cash}</b> : Mengembalikan daftar transaksi</li>
+                        <li><b>{managerName}</b> : Mengembalikan nama manager</li>
+                        <li><b>{managerApprove}</b> : Mengembalikan tanggal acc oleh manager</li>
+                        <li><b>{adminName}</b> : Mengembalikan nama admin</li>
+                        <li><b>{adminApprove}</b> : Mengembalikan tanggal acc oleh admin</li>
+                        <li><b>{tellerName}</b> : Mengembalikan nama kasir</li>
+                        <li><b>{tellerApprove}</b> : Mengembalikan tanggal input oleh kasir</li>
+                    </ul>
+                </div>                
+            </div>
 
         </div>
 

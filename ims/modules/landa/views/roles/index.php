@@ -1,8 +1,7 @@
 <?php
-
-$this->setPageTitle('Group '. $type);
+$this->setPageTitle('Group ' . $type);
 $this->breadcrumbs = array(
-    'Group '.$type,
+    'Group ' . $type,
 );
 
 Yii::app()->clientScript->registerScript('search', "
