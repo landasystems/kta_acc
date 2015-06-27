@@ -47,7 +47,7 @@ class AccJurnalController extends Controller {
     public function actionView($id) {
         cs()->registerCss('', '@page { size:22cm 14cm;margin: 0.4cm;}');
 
-        $detailJurnal = AccJurnalDet::model()->findAll(array('condition' => 'acc_jurnal_id=' . $id));
+        $detailJurnal = AccJurnalDet::model()->findAll(array('order'=>'id','condition' => 'acc_jurnal_id=' . $id));
         $approveDetail = AccApproval::model()->findAll(array('condition' => 'acc_jurnal_id= ' . $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
@@ -171,7 +171,7 @@ class AccJurnalController extends Controller {
         $this->cssJs();
         $accCoaSub = array();
         $jurnal = $this->loadModel($id);
-        $detailJurnal = AccJurnalDet::model()->findAll(array('condition' => 'acc_jurnal_id=' . $jurnal->id));
+        $detailJurnal = AccJurnalDet::model()->findAll(array('order'=>'id','condition' => 'acc_jurnal_id=' . $jurnal->id));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';

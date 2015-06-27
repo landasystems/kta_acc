@@ -285,9 +285,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             echo '</select>';
                             echo '</td>
                                         <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
-                                        <td><input type="text" name="description[]" id="description[]" value="' . $val->description . '"/></td>
+                                        <td><input type="text" style="width:95%"  name="description[]" id="description[]" value="' . $val->description . '"/></td>
                                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:95%"  onkeyup="calculateMin()" class="angka totalDeb" name="valdebet[]" id="valdebet[]" class="totalDeb" value="' . $debet . '" ' . $sttDebet . '/></div></td>
-                                        <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:75px;" name="valcredit[]" id="valcredit[]" class="angka totalCre" value="' . $credit . '" ' . $sttCredit . '/></div></td>
+                                        <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" style="width:95px;" name="valcredit[]" id="valcredit[]" class="angka totalCre" value="' . $credit . '" ' . $sttCredit . '/></div></td>
                                      </tr>';
                         }
                     } if (isset($_POST['AccJurnal'])) {

@@ -49,7 +49,7 @@ class AccCashInController extends Controller {
 
         $cashInDetail = AccCashInDet::model()->findAll(array(
             'condition' => 'acc_cash_in_id= ' . $id,
-            'order' => 'id DESC'
+            'order' => 'id'
         ));
         $approveDetail = AccApproval::model()->findAll(array(
             'condition' => 'acc_cash_in_id= ' . $id,
@@ -174,7 +174,7 @@ class AccCashInController extends Controller {
         $this->cssJs();
         $accCoaSub = array();
         $cashin = $this->loadModel($id);
-        $cashInDetail = AccCashInDet::model()->findAll(array('condition' => 'acc_cash_in_id= ' . $cashin->id));
+        $cashInDetail = AccCashInDet::model()->findAll(array('order'=>'id','condition' => 'acc_cash_in_id= ' . $cashin->id));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';

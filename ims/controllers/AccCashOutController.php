@@ -52,7 +52,7 @@ class AccCashOutController extends Controller {
 
         $cashOutDetail = AccCashOutDet::model()->findAll(array(
             'condition' => 'acc_cash_out_id= ' . $id,
-            'order' => 'id DESC'
+            'order' => 'id'
         ));
         $approveDetail = AccApproval::model()->findAll(array(
             'condition' => 'acc_cash_out_id= ' . $id,
@@ -170,7 +170,7 @@ class AccCashOutController extends Controller {
 //        $this->cssJs();
         $accCoaSub = array();
         $cashout = $this->loadModel($id);
-        $cashOutDetail = AccCashOutDet::model()->findAll(array('condition' => 'acc_cash_out_id= ' . $cashout->id));
+        $cashOutDetail = AccCashOutDet::model()->findAll(array('order'=>'id','condition' => 'acc_cash_out_id= ' . $cashout->id));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';
