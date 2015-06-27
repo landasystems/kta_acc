@@ -10,9 +10,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 <?php
-$this->setPageTitle('Rekap Kartu Hutang Report');
+$this->setPageTitle('Rekap Kartu Hutang');
 $this->breadcrumbs = array(
-    'Rekap Kartu Hutang Report',
+    'Rekap Kartu Hutang',
 );
 ?>
 <script>

@@ -66,8 +66,8 @@ class AccCoa extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'code' => 'Kode Rekening',
-            'name' => 'Nama Rekening',
+            'code' => 'Kode Perkiraan',
+            'name' => 'Nama Perkiraan',
             'description' => 'Description',
             'created_user_id' => 'Created User',
             'modified' => 'Modified',
@@ -164,6 +164,14 @@ class AccCoa extends CActiveRecord {
 
     public function getNestedName() {
         $results = ($this->level == 1) ? $this->code . ' - ' . $this->name : str_repeat("|--", $this->level - 1) . $this->code . ' - ' . $this->name;
+
+        if ($this->type == 'general')
+            $results = '<b>' . $results . '</b>';
+
+        return $results;
+    }
+    public function getFullName() {
+        $results = $this->code . ' - ' . $this->name;
 
         if ($this->type == 'general')
             $results = '<b>' . $results . '</b>';

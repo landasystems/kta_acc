@@ -75,7 +75,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'Total',
             'header' => 'Total',
-            'value' => 'landa()->rp($data->total,false,2)',
+            'value' => 'landa()->rp($data->total,false)',
             'htmlOptions' => array('style' => 'text-align:right'),
         ),
         array(

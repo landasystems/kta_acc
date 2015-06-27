@@ -10,10 +10,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 <?php
-$this->setPageTitle('Rekap Kartu Piutang Report');
-$this->breadcrumbs = array(
-    'Rekap Kartu Piutang Report',
-);
+$this->setPageTitle('Rekap Kartu Piutang');
 ?>
 <script>
     function hide() {

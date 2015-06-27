@@ -10,10 +10,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         ));
 ?>
 <?php
-$this->setPageTitle('Neraca Saldo Report');
-$this->breadcrumbs = array(
-    'Neraca Saldo Report',
-);
+$this->setPageTitle('Neraca Saldo');
 ?>
 <script>
     function hide() {

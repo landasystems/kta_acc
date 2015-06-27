@@ -1,10 +1,6 @@
 <?php
 
-$this->setPageTitle('Tambah Acc Coas');
-$this->breadcrumbs = array(
-    'Acc Coas' => array('index'),
-    'Create',
-);
+$this->setPageTitle('Tambah Daftar Perkiraan');
 ?>
 
 <?php

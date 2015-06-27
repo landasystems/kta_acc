@@ -1,10 +1,6 @@
 <?php
 $siteConfig = SiteConfig::model()->findByPk(param('id'));
-$this->setPageTitle('Lihat Acc Jurnal | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Acc Cash Ins' => array('index'),
-    $model->id,
-);
+$this->setPageTitle('Lihat Jurnal | : ' . $model->code);
 ?>
 
 <?php

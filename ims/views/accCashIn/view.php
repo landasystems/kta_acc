@@ -1,10 +1,6 @@
 <?php
 $siteConfig = SiteConfig::model()->findByPk(param('id'));
-$this->setPageTitle('Lihat Acc Cash Ins | ID : ' . $model->id);
-$this->breadcrumbs = array(
-    'Acc Cash Ins' => array('index'),
-    $model->id,
-);
+$this->setPageTitle('Lihat Kas Masuk | : ' . $model->code);
 ?>
 
 <?php

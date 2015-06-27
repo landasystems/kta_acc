@@ -12,7 +12,7 @@ $this->pageTitle = Yii::app()->name . ' - Login';
         margin-top: -200px;
         margin-left: -150px;
         padding: 0px 20px;
-        border: 3px solid forestgreen;
+        border: 3px solid crimson;
         box-shadow: 1px 1px 1px 1px #ccc;
         border-radius: 2px;
         background: white;
@@ -47,7 +47,7 @@ $form = $this->beginWidget('CActiveForm', array(
                 echo param('clientName');
                 ?>
             </h3>
-            <span class="green" style="font-weight: bold;">Accounting Management Sytems</span>
+            <span style="color:crimson;font-weight: bold;">Accounting Management Sytems</span>
         </center>
         <hr style="margin:10px 0px 20px 0px">
 
@@ -88,7 +88,7 @@ $form = $this->beginWidget('CActiveForm', array(
                     <div class="form-actions" style="margin:0px -20px">
                         <div class="span12 controls" style="padding:0px 0px 0px 5px">
                             <?php echo $form->checkBox($model, 'rememberMe', array('class' => 'left', 'style' => 'width:20px')); ?> Keep me login
-                            <button type="submit" style="background:forestgreen" class="btn btn-info right" id="loginBtn"><span class="icon16 icomoon-icon-enter"></span> Login</button>
+                            <button type="submit" class="btn right" id="loginBtn"><span class="icon16 icomoon-icon-enter"></span> Login</button>
                         </div>
                     </div>
                 </div>
