@@ -49,7 +49,7 @@ class AccCashInController extends Controller {
 
         $cashInDetail = AccCashInDet::model()->findAll(array(
             'condition' => 'acc_cash_in_id= ' . $id,
-            'order' => 'id DESC'
+            'order' => 'id ASC'
         ));
         $approveDetail = AccApproval::model()->findAll(array(
             'condition' => 'acc_cash_in_id= ' . $id,
@@ -174,7 +174,7 @@ class AccCashInController extends Controller {
         $this->cssJs();
         $accCoaSub = array();
         $cashin = $this->loadModel($id);
-        $cashInDetail = AccCashInDet::model()->findAll(array('condition' => 'acc_cash_in_id= ' . $cashin->id));
+        $cashInDetail = AccCashInDet::model()->findAll(array('condition' => 'acc_cash_in_id= ' . $cashin->id,'order' => 'id ASC'));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';
@@ -508,15 +508,7 @@ class AccCashInController extends Controller {
                 $id = "";
             }
 
-            echo '<tr id="addRow" style="display:none">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr class="newRow">
+            echo '<tr class="newRow">
                         <td style="text-align:center">
                             <input type="hidden" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
                             <input type="hidden" name="inVoiceDet[]" id="inVoiceDet[]" class="inVoiceDet" value="' . $subId . '"/>
@@ -532,6 +524,14 @@ class AccCashInController extends Controller {
                         <td style="text-align:center" class="subLedgerField"> ' . $invoiceName . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
                         <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]"  value="' . $_POST['costDescription'] . '" style="width:95%;"/></td>
                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['credit'] . '"/></div></td>
+                    </tr>
+                    <tr id="addRow" style="display:none">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>';
         }
     }

@@ -52,7 +52,7 @@ class AccCashOutController extends Controller {
 
         $cashOutDetail = AccCashOutDet::model()->findAll(array(
             'condition' => 'acc_cash_out_id= ' . $id,
-            'order' => 'id DESC'
+            'order' => 'id ASC'
         ));
         $approveDetail = AccApproval::model()->findAll(array(
             'condition' => 'acc_cash_out_id= ' . $id,
@@ -170,7 +170,7 @@ class AccCashOutController extends Controller {
 //        $this->cssJs();
         $accCoaSub = array();
         $cashout = $this->loadModel($id);
-        $cashOutDetail = AccCashOutDet::model()->findAll(array('condition' => 'acc_cash_out_id= ' . $cashout->id));
+        $cashOutDetail = AccCashOutDet::model()->findAll(array('condition' => 'acc_cash_out_id= ' . $cashout->id,'order' => 'id ASC'));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';
@@ -444,14 +444,7 @@ class AccCashOutController extends Controller {
                 $name = "-";
                 $id = "";
             }
-            echo '<tr id="addRow" style="display:none">
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            echo '
                 <tr class="newRow">
                     <td style="text-align:center">
                         <input type="hidden" class="nameAccount" name="nameAccount[]" id="nameAccount[]" value="' . $id . '"/>
@@ -468,6 +461,14 @@ class AccCashOutController extends Controller {
                     <td style="text-align:center" class="subLedgerField">'.$invoiceName. '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
                     <td><input type="text" name="AccCashOutDet[description][]" id="AccCashOutDet[description][]"  value="' . $_POST['costDescription'] . '" style="width:95%;"/></td>
                     <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashOutDet[amount][]" id="AccCashOutDet[amount][]" class="angka totalDet" value="' . $_POST['debit'] . '"/></div></td>
+                </tr>
+                <tr id="addRow" style="display:none">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>';
         }
     }
