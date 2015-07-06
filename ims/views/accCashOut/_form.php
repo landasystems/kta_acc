@@ -673,7 +673,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             success: function (data) {
                 obj = JSON.parse(data);
                 $(".isiModal").html(obj.render);
-                if (obj.tampil) {
+                if (obj.tampil == true) {
                     elements.attr('style', 'display:');
                 } else {
                     elements.attr('style', 'display:none');
