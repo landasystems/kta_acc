@@ -14,4 +14,5 @@ $config_index = array('theme' => 'spr'); // change this line for configuration
 $config = CMap::mergeArray($config_index, $config_app);
 
 Yii::createWebApplication($config)->run();
+logs('$this->themeFolder()->config()->run()');
 ?>
