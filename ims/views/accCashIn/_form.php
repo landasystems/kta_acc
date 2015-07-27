@@ -234,12 +234,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             </div>
                         </td>
                     </tr>
-                    <tr id="addRow" style="display:none">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                     <?php
                     $invoiceName = '';
                     if ($model->isNewRecord == false and ! isset($_POST['AccCashInDet'])) {
@@ -344,6 +338,12 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         }
                     }
                     ?>
+                    <tr id="addRow" style="display:none">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                 </tbody>
                 <tfoot>
                     <tr>

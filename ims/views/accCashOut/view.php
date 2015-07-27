@@ -131,15 +131,15 @@ $this->endWidget();
                                 $accCoaName = '-';
                             }
 
-                            if (!empty($viewCashOutDet->ar_id)) {
-                                $account = User::model()->findByPk($viewCashOutDet->ar_id);
-                                $name = $account->name;
-                            } else if (!empty($viewCashOutDet->ap_id)) {
-                                $account = User::model()->findByPk($viewCashOutDet->ap_id);
-                                $name = $account->name;
-                            } else if (!empty($viewCashOutDet->as_id)) {
-                                $account = Product::model()->findByPk($viewCashOutDet->as_id);
-                                $name = $account->name;
+                            if (!empty($viewCashOutDet->invoice_det_id)) {
+//                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
+                                $name = '['.$viewCashOutDet->InvoiceDet->code.'] '.$viewCashOutDet->InvoiceDet->User->name;
+//                            } else if (!empty($viewCashOutDet->ap_id)) {
+//                                $account = User::model()->findByPk($viewCashOutDet->ap_id);
+//                                $name = $account->name;
+//                            } else if (!empty($viewCashOutDet->as_id)) {
+//                                $account = Product::model()->findByPk($viewCashOutDet->as_id);
+//                                $name = $account->name;
                             } else {
                                 $name = "-";
                             }
@@ -159,17 +159,17 @@ $this->endWidget();
                         <tr>
                             <td colspan="4" valign="middle" align="center"><b>Total Debit</b></td>
                             <td><?php
-                                echo landa()->rp($model->total, true, 2)
-                                ?>
+                        echo landa()->rp($model->total, true, 2)
+                        ?>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
                 <br>
-                <?php
-                $siteConfig = SiteConfig::model()->findByPk(param('id'));
-                if ($siteConfig->is_approval == "yes") {
-                    ?>
+<?php
+$siteConfig = SiteConfig::model()->findByPk(param('id'));
+if ($siteConfig->is_approval == "yes") {
+    ?>
                     <table class="responsive table table-bordered">
                         <thead>
                             <tr>
@@ -183,55 +183,55 @@ $this->endWidget();
                                 <td> <center><br><br>
                             <b><?php echo $model->User->name ?></b> 
                             <br>
-                            <?php echo date('d M Y', strtotime($model->created)); ?><br>
+    <?php echo date('d M Y', strtotime($model->created)); ?><br>
                             <?php echo date('H:i:s', strtotime($model->created)); ?><br><br></center>
                         </td>
                         <td>
-                            <?php
-                            $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
-                            $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
-                            if ($adminStatus != 'confirm' and landa()->checkAccess('AccApprovalAdmin', 'r')) {
-                                ?>
+    <?php
+    $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
+    $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
+    if ($adminStatus != 'confirm' and landa()->checkAccess('AccApprovalAdmin', 'r')) {
+        ?>
                                 <label for="adminDescription">Keterangan</label>
                                 <textarea style="width:90%;margin:10px;"  name="adminDescription" id="adminDescription"></textarea>
                                 <div align="center"><?php echo CHtml::radioButtonList('adminStatus', '', array('pending' => 'Pending', 'reject' => 'Reject', 'confirm' => 'Confirm'), array('separator' => '')); ?></div>
-                                <?php
-                            } else {
-                                ?>
+        <?php
+    } else {
+        ?>
                             <center><br><br>
                                 <b><?php echo (isset($model->AccAdmin->User->name) ? $model->AccAdmin->User->name : '') ?></b> 
                                 <br>
-                                <?php echo (isset($model->AccAdmin->created) ? date('d M Y', strtotime($model->AccAdmin->created)) : ''); ?><br>
+        <?php echo (isset($model->AccAdmin->created) ? date('d M Y', strtotime($model->AccAdmin->created)) : ''); ?><br>
                                 <?php echo (isset($model->AccAdmin->created) ? date('H:i:s', strtotime($model->AccAdmin->created)) : ''); ?><br><br></center>
-                            <?php
-                        }
-                        ?>
+                                <?php
+                            }
+                            ?>
                         </td>
                         <td>
-                            <?php
-                            if ($adminStatus == 'confirm' and $managerStatus != 'confirm' and landa()->checkAccess('AccApproval', 'r')) {
-                                ?>
+    <?php
+    if ($adminStatus == 'confirm' and $managerStatus != 'confirm' and landa()->checkAccess('AccApproval', 'r')) {
+        ?>
                                 <label for="managerDescription">Keterangan</label>
                                 <textarea style="width:90%;margin:10px;"  name="managerDescription" id="managerDescription"></textarea>
                                 <div align="center"><?php echo CHtml::radioButtonList('managerStatus', $managerStatus, array('pending' => 'Pending', 'reject' => 'Reject', 'confirm' => 'Confirm'), array('separator' => '')); ?></div>
-                                <?php
-                            } else if ($managerStatus == "confirm") {
-                                ?>
+        <?php
+    } else if ($managerStatus == "confirm") {
+        ?>
                             <center><br><br>
                                 <b><?php echo (isset($model->AccManager->User->name) ? $model->AccManager->User->name : '') ?></b> 
                                 <br>
-                                <?php echo (isset($model->AccManager->created) ? date('d M Y', strtotime($model->AccManager->created)) : ''); ?><br>
+        <?php echo (isset($model->AccManager->created) ? date('d M Y', strtotime($model->AccManager->created)) : ''); ?><br>
                                 <?php echo (isset($model->AccManager->created) ? date('H:i:s', strtotime($model->AccManager->created)) : ''); ?><br><br></center>
-                            <?php
-                        }
-                        ?>
+                                <?php
+                            }
+                            ?>
                         </td>
                         </tr>
                         </tfoot>
                     </table>
-                    <?php
-                }
-                ?>
+    <?php
+}
+?>
                 <?php
                 if ($siteConfig->is_approval != "no") {
                     ?>
@@ -248,37 +248,37 @@ $this->endWidget();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php
-                            $no = 1;
-                            foreach ($approveDetail as $val) {
-                                if ($val->status == "open") {
-                                    $stt = '<span class="label">Open</span>';
-                                } elseif ($val->status == "pending") {
-                                    $stt = '<span class="label label-info">Pending</span>';
-                                } elseif ($val->status == "reject") {
-                                    $stt = '<span class="label label-important">Reject</span>';
-                                } elseif ($val->status == "confirm") {
-                                    $stt = '<span class="label label-success">Confirm</span>';
-                                }
-                                echo '  <tr>
+    <?php
+    $no = 1;
+    foreach ($approveDetail as $val) {
+        if ($val->status == "open") {
+            $stt = '<span class="label">Open</span>';
+        } elseif ($val->status == "pending") {
+            $stt = '<span class="label label-info">Pending</span>';
+        } elseif ($val->status == "reject") {
+            $stt = '<span class="label label-important">Reject</span>';
+        } elseif ($val->status == "confirm") {
+            $stt = '<span class="label label-success">Confirm</span>';
+        }
+        echo '  <tr>
                                         <td>' . $no . '</td>
                                         <td>' . date('d M Y H:i:s', strtotime($val->created)) . '</td>
                                         <td>' . $stt . '</td>
                                         <td>' . $val->description . '</td>
                                         <td>' . $val->User->name . '</td>
                                     </tr>';
-                                $no++;
-                            }
-                            ?>
+        $no++;
+    }
+    ?>
                         </tbody>
                     </table
-                    <?php
-                }
-                ?>
+    <?php
+}
+?>
             </fieldset>
         </div>
     </div>
-    <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 </div>
 
 <hr/>
@@ -294,111 +294,110 @@ $this->endWidget();
     }
 </style>
 <div id="printableArea" style="width: 100%;display:none">
-    <?php
-    $no = 1;
-    $jmlCash = count($cashOutDet);
-    $jmlTable = (int) count($cashOutDet) / 8;
-    if ($jmlCash <= 8) {
-        $batas = 8;
-    } else {
-        $batas = 8;
-    }
-    $jumlahRp = 0;
-    $indeks = 0;
-    for ($a = 0; $a < $jmlTable; $a++) {
-        $detailCash = '<table class="tbPrint">
+<?php
+$no = 1;
+$jmlCash = count($cashOutDet);
+$jmlTable = (int) count($cashOutDet) / 8;
+if ($jmlCash <= 8) {
+    $batas = 8;
+} else {
+    $batas = 8;
+}
+$jumlahRp = 0;
+$indeks = 0;
+for ($a = 0; $a < $jmlTable; $a++) {
+    $detailCash = '<table class="tbPrint">
                                             <tr>
                                                 <th class="print" width="50" style="text-align:center">No.</th>
                                                 <th class="print" width="130" style="text-align:center">Perkiraan </th>
                                                 <th class="print" style="text-align:center">Keterangan </th>
                                                 <th class="print" width="200" style="text-align:center">Jumlah </th>
                                             </tr>';
-        if ($a > 0) {
-            $detailCash .= '<tr>                        
+    if ($a > 0) {
+        $detailCash .= '<tr>                        
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>                                            
                                                  <td class="print" style="border-bottom:none;border-top:none">Lanjutan</td>
-                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp,false) . '</td>    
+                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp, false) . '</td>    
                                             </tr>';
-        }
-        for ($i = 0; $i < $batas; $i++) {
-            $viewCashOutDet = $cashOutDet;
-            if (!empty($viewCashOutDet[$indeks])) {
-                if ($viewCashOutDet[$indeks]->AccCoa !== NULL) {
-                    $accCoaName = $viewCashOutDet[$i]->AccCoa->code;
-                } else {
-                    $accCoaName = '-';
-                }
-                $detailCash .= '
+    }
+    for ($i = 0; $i < $batas; $i++) {
+        $viewCashOutDet = $cashOutDet;
+        if (!empty($viewCashOutDet[$indeks])) {
+            if ($viewCashOutDet[$indeks]->AccCoa !== NULL) {
+                $accCoaName = $viewCashOutDet[$i]->AccCoa->code;
+            } else {
+                $accCoaName = '-';
+            }
+            $detailCash .= '
                                             <tr>                        
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $no . '</td>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>                                            
                                                  <td class="print" style="border-bottom:none;border-top:none">' . $viewCashOutDet[$indeks]->description . '</td>
                                                  <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($viewCashOutDet[$indeks]->amount, false) . '</td>    
                                             </tr>';
-                $jumlahRp += $viewCashOutDet[$indeks]->amount;
-            } else {
-                $detailCash .= '
+            $jumlahRp += $viewCashOutDet[$indeks]->amount;
+        } else {
+            $detailCash .= '
                                             <tr>                        
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
                                             </tr>';
-            }
-            $no++;
-            $indeks++;
-          
         }
+        $no++;
+        $indeks++;
+    }
 
-        $detailCash .= '<tr>  
+    $detailCash .= '<tr>  
                         <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
                         <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
                     </tr>
                     </table>';
 
-        $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
-        $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
+    $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
+    $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
 
-        $adminName = (isset($model->AccAdmin->User->name) and $adminStatus == "confirm") ? $model->AccAdmin->User->name : '';
-        $adminDate = (isset($model->AccAdmin->created) and $adminStatus == "confirm") ? date('d M Y', strtotime($model->AccAdmin->created)) : '';
+    $adminName = (isset($model->AccAdmin->User->name) and $adminStatus == "confirm") ? $model->AccAdmin->User->name : '';
+    $adminDate = (isset($model->AccAdmin->created) and $adminStatus == "confirm") ? date('d M Y', strtotime($model->AccAdmin->created)) : '';
 
-        $managerName = (isset($model->AccManager->User->name) and $managerStatus == "confirm") ? $model->AccManager->User->name : '';
-        $managerDate = (isset($model->AccManager->created) and $managerStatus == "confirm") ? date('d M Y', strtotime($model->AccManager->created)) : '';
+    $managerName = (isset($model->AccManager->User->name) and $managerStatus == "confirm") ? $model->AccManager->User->name : '';
+    $managerDate = (isset($model->AccManager->created) and $managerStatus == "confirm") ? date('d M Y', strtotime($model->AccManager->created)) : '';
 
-        $dateApprove = ".........";
-        $noApprove = ".........";
-        if (!empty($model->code_acc))
-            $noApprove = $model->code_acc;
+    $dateApprove = ".........";
+    $noApprove = ".........";
+    if (!empty($model->code_acc))
+        $noApprove = $model->code_acc;
 
-        if (!empty($datePost))
-            $dateApprove = date('d M Y', strtotime($datePost));
+    if (!empty($datePost))
+        $dateApprove = date('d M Y', strtotime($datePost));
 
-        $accCoaName = (isset($model->AccCoa->name)) ? $model->AccCoa->name : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+    $accCoaName = (isset($model->AccCoa->name)) ? $model->AccCoa->name : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
-        $content = $siteConfig->report_cash_out;
-        $content = str_replace('{account}', $accCoaName, $content);
-        $content = str_replace('{cash_out}', $model->code, $content);
-        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
-        $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', $model->User->name, $content);
-        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
-        $content = str_replace('{adminName}', $adminName, $content);
-        $content = str_replace('{adminApprove}', $adminDate, $content);
-        $content = str_replace('{managerName}', $managerName, $content);
-        $content = str_replace('{managerApprove}', $managerDate, $content);
-        $content = str_replace("{no_approval}", $noApprove, $content);
-        $content = str_replace("{date_approval}", $dateApprove, $content);
-        $content = str_replace("{description_to}", $model->description_to, $content);
-        $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
-        
-        //jika ada halaman berikutnya print br 3, agar pas cucok em
-        if (($a +1 ) < $jmlTable)
-            $content .= '<br/><br/><br/><br/><br/>';
-        
-        echo $content;
-    }
-    ?>
+    $content = $siteConfig->report_cash_out;
+    $content = str_replace('{account}', $accCoaName, $content);
+    $content = str_replace('{cash_out}', $model->code, $content);
+    $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
+    $content = str_replace('{detail_cash}', $detailCash, $content);
+    $content = str_replace('{tellerName}', $model->User->name, $content);
+    $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
+    $content = str_replace('{adminName}', $adminName, $content);
+    $content = str_replace('{adminApprove}', $adminDate, $content);
+    $content = str_replace('{managerName}', $managerName, $content);
+    $content = str_replace('{managerApprove}', $managerDate, $content);
+    $content = str_replace("{no_approval}", $noApprove, $content);
+    $content = str_replace("{date_approval}", $dateApprove, $content);
+    $content = str_replace("{description_to}", $model->description_to, $content);
+    $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
+
+    //jika ada halaman berikutnya print br 3, agar pas cucok em
+    if (($a + 1 ) < $jmlTable)
+        $content .= '<br/><br/><br/><br/><br/>';
+
+    echo $content;
+}
+?>
 </div>
 <script type="text/javascript">
     function printDiv(divName)

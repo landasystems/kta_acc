@@ -129,17 +129,8 @@ $this->endWidget();
                                 $accCoaName = '-';
                             }
 
-                            if (!empty($viewCashInDet->ar_id)) {
-                                $account = User::model()->findByPk($viewCashInDet->ar_id);
-                                $name = $account->name;
-                            } else if (!empty($viewCashInDet->ap_id)) {
-                                $account = User::model()->findByPk($viewCashInDet->ap_id);
-                                $name = $account->name;
-                            } else if (!empty($viewCashInDet->as_id)) {
-                                $account = Product::model()->findByPk($viewCashInDet->as_id);
-                                $name = $account->name;
-                            } else {
-                                $name = "-";
+                            if (!empty($viewCashInDet->invoice_det_id)) {
+                                $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $viewCashInDet->InvoiceDet->User->name;
                             }
 
                             echo '  <tr>
@@ -379,11 +370,11 @@ $this->endWidget();
         $content = str_replace("{date_approval}", $dateApprove, $content);
         $content = str_replace("{description_to}", $model->description_to, $content);
         $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
-        
+
         //jika ada halaman berikutnya print br 3, agar pas cucok em
-        if (($a +1 ) < $jmlTable)
+        if (($a + 1 ) < $jmlTable)
             $content .= '<br/><br/><br/><br/><br/>';
-        
+
         echo $content;
     }
     ?>

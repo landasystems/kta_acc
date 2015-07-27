@@ -240,13 +240,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             </div>
                         </td>
                     </tr>
-                    <tr id="addRow" style="display:none">
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
                     <?php
                     $invoiceName = '';
                     if ($model->isNewRecord == false and ! isset($_POST['AccCashOutDet'])) {
@@ -351,6 +344,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         }
                     }
                     ?>
+                    <tr id="addRow" style="display:none">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     <tr id="deletedRow" style="display:none">
                         <td></td>
                         <td></td>
@@ -673,7 +673,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             success: function (data) {
                 obj = JSON.parse(data);
                 $(".isiModal").html(obj.render);
-                if (obj.tampil) {
+                if (obj.tampil == true) {
                     elements.attr('style', 'display:');
                 } else {
                     elements.attr('style', 'display:none');

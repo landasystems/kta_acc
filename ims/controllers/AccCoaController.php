@@ -330,7 +330,7 @@ class AccCoaController extends Controller {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
         }
 
-        $isi['tampil'] = (!empty($ledger)) ? true : false;
+        $isi['tampil'] = ($ledger == 'ar' || $ledger == 'as' || $ledger == 'ap') ? true : false;
         $isi['render'] = $this->renderPartial('/invoiceDet/_searchInvoice', array(
             'array' => $array
                 ), true);
