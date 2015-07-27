@@ -17,7 +17,7 @@
                 <th colspan="2" width="5%"><p align="center">Date</p></th>
         <th width="25%"><p align="center">Description</p></th>
         <th width="5%"><p align="center">Reff</p></th>
-        <th width="5%"><p align="center">Invoice Code</p></th>
+        <th width="5%"><p align="center">Invoice</p></th>
         <th width="20%"><p align="center">Debet</p></th>
         <th  width="20%"><p align="center">Credit</p></th>
         <th width="20%"><p align="center">Saldo</p></th>

@@ -83,7 +83,7 @@ if (isset($_POST['yt0'])) {
     $a = explode('-', $_POST['AccCoaDet']['created']);
     $start = date('Y/m/d', strtotime($a[0]));
     $end = date('Y/m/d', strtotime($a[1]));
-    $accCoaDet = AccCoaDet::model()->findAll(array('condition' => 'reff_type<>"balance" AND (date_coa>="' . $start . '" and date_coa<="' . $end . '")', 'order' => 'date_coa,id'));
+    $accCoaDet = AccCoaDet::model()->findAll(array('condition' => 'reff_type<>"balance" AND reff_type<>"invoice" AND (date_coa>="' . $start . '" and date_coa<="' . $end . '")', 'order' => 'date_coa,id'));
 
     $this->renderPartial('_jurnalUmumResult', array('a' => $a, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end));
 }

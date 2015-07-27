@@ -2,18 +2,18 @@
 <table class="responsive table table-bordered">
     <thead>
         <tr>
-            <th width="5%" style="max-width:10%">Code Invoice</th>
-            <th width="20%">Tgl. Awal</th>
-            <th width="20%">Tgl. Jatuh Tempo</th>
-            <th width="70%" style="max-width:75%">Keterangan</th>
+            <th width="20%" style="max-width:10%">Invoice</th>
+            <th width="10%">Tgl. Tagihan</th>
+            <th width="10%">Tgl. Jatuh Tempo</th>
+            <th width="55%">Keterangan</th>
             <th>Total</th>
             <th width="5%">#</th>
         </tr>
     </thead>
     <tbody>
         <tr style="display:<?php echo ($ambil || isset($_POST['yt0'])) ? '' : 'none'; ?>">
-            <td width="5%">
-                <input type="text" class="codes span1" value="">
+            <td>
+                <input type="text" class="codes" style="width:98%;">
             </td>
             <td style="text-align: center">
                 <?php
@@ -53,7 +53,7 @@
                 ));
                 ?>
             <td>
-                <input type="text" class="span4 description" value="">
+                <input type="text" class="description" style="width:98%;">
             </td>
             <td style="text-align:center">
                 <div class="input-prepend">
@@ -80,13 +80,13 @@
                 $coaId = (!empty($coaDet->id)) ? $coaDet->id : '';
                 $coaDate = (!empty($coaDet->date_coa)) ? $coaDet->date_coa : '';
                 echo '<tr>';
-                echo '<td><input type="text" class="code span1" name="code[]" value="' . $res->code . '"></td>';
+                echo '<td><input type="text" class="code" name="code[]" value="' . $res->code . '" style="width:98%;"></td>';
                 echo '<td><input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $coaDate . '"></td>';
                 echo '<td><input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $res->term_date . '"></td>';
-                echo '<td><input type="text" class="span4" name="description[]" value="' . $res->description . '"></td>';
+                echo '<td><input type="text" name="description[]" value="' . $res->description . '" style="width:98%;"></td>';
                 echo '<td><div class="input-prepend">
                                 <span class="add-on">Rp.</span>
-                                <input class="angka nilai" style="width:75px;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
+                                <input class="angka nilai" style="width:98%;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
                 echo '<td>
                             <span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>
                             <input type="hidden" class="user" name="user_id[]" value="' . $res->user_id . '">

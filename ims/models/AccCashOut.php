@@ -109,6 +109,7 @@ class AccCashOut extends CActiveRecord {
 //            do nothing
         } elseif (isset(user()->roles['accesskb'])) {
             $idData = user()->roles['accesskb']->crud;
+            trace($idData);
             $sWhere = json_decode($idData);
             $sWhere[] = 0;
             $criteria->addInCondition('acc_coa_id', $sWhere);

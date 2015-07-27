@@ -703,6 +703,7 @@ class UserController extends Controller {
                     } else {
                         $coaDet = AccCoaDet::model()->findByPk($_POST['id_coaDet'][$i]);
                     }
+                    $coaDet->description = $payment->description;
                     $coaDet->reff_type = "invoice";
                     if ($payment->is_new_invoice == 1) {
                         $coaDet->credit = 0;

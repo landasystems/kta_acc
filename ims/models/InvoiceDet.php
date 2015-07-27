@@ -29,7 +29,7 @@ class InvoiceDet extends CActiveRecord {
         return array(
             array('user_id, id', 'numerical', 'integerOnly' => true),
             array('payment, charge', 'numerical'),
-            array('description, code', 'length', 'max' => 45),
+            array('description, code', 'length', 'max' => 255),
             array('type', 'length', 'max' => 15),
 //            array('code', 'unique'),
             array('term_date, charge, is_new_invoice, code, description', 'safe'),

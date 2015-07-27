@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Acc Coas | ID : '. $model->id);
+$this->setPageTitle('Edit Perkiraan | ID : '. $model->id);
 $this->breadcrumbs=array(
 	'Acc Coas'=>array('index'),
 	$model->name=>array('view','id'=>$model->id),
