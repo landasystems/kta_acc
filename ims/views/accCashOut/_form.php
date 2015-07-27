@@ -600,7 +600,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         $(".appeared").find(".subLedgerField").html(dell + '[ ' + code + ' ]' + acc);
         $(".appeared").find(".inVoiceDet").val(id);
-        $(".appeared").find(".totalDet").val(nilai);
+//        $(".appeared").find(".totalDet").val(nilai);
         $("#modalSub").modal("hide");
         $(".appeared").removeClass('appeared');
         calculate();
