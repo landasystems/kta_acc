@@ -31,7 +31,7 @@ class DepartementController extends Controller {
                 'expression' => 'app()->controller->isValidAccess("Departement","u")'
             ),
             array('allow', // d
-                'actions' => array( 'delete'),
+                'actions' => array('delete'),
                 'expression' => 'app()->controller->isValidAccess("Departement","d")'
             )
         );
@@ -42,9 +42,13 @@ class DepartementController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
+        cs()->registerScript('read', '
+                    $("form input, form textarea, form select").each(function(){
+                    $(this).prop("disabled", true);
+                });');
+        $_GET['v'] = true;
+        $this->actionUpdate($id);
+        
     }
 
     /**
@@ -53,18 +57,24 @@ class DepartementController extends Controller {
      */
     public function actionCreate() {
         $model = new Departement;
-
+        $format = new AccFormatting();
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Departement'])) {
             $model->attributes = $_POST['Departement'];
-            if ($model->save())
+            if ($model->save()) {
+                $format = new AccFormatting();
+                $format->attributes = $_POST['AccFormatting'];
+                $format->departement_id = $model->id;
+                $format->save();
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('create', array(
             'model' => $model,
+            'format' => $format,
         ));
     }
 
@@ -75,18 +85,23 @@ class DepartementController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-
+        $format = AccFormatting::model()->findByAttributes(array('departement_id' => $id));
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
         if (isset($_POST['Departement'])) {
             $model->attributes = $_POST['Departement'];
-            if ($model->save())
+            if ($model->save()) {
+                $format = AccFormatting::model()->findByAttributes(array('departement_id' => $id));
+                $format->attributes = $_POST['AccFormatting'];
+                $format->save();
                 $this->redirect(array('view', 'id' => $model->id));
+            }
         }
 
         $this->render('update', array(
             'model' => $model,
+            'format' => $format,
         ));
     }
 
@@ -98,13 +113,15 @@ class DepartementController extends Controller {
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
-            $this->loadModel($id)->delete();
+            $model = $this->loadModel($id);
+            $delFormat = AccFormatting::model()->deleteAll(array('condition'=>'departement_id='.$id));
+            $delDateConf = DateConfig::model()->deleteAll(array('condition'=>'departement_id='.$id));
+            $model->delete();
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
                 $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-        }
-        else
+        } else
             throw new CHttpException(400, 'Invalid request. Please do not repeat this request again.');
     }
 
@@ -193,4 +210,5 @@ class DepartementController extends Controller {
             Yii::app()->end();
         }
     }
+
 }

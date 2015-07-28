@@ -146,7 +146,7 @@ class Auth extends CActiveRecord {
                 )),
             array('visible' => (landa()->checkAccess('DateConfig', 'r') || landa()->checkAccess('accFormatting', 'r')), 'label' => '<span class="icon16 wpzoom-settings"></span>Tools', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('DateConfig', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Auto Number', 'url' => array('dateConfig/index'), 'auth_id' => 'DateConfig'),
-                    array('visible' => landa()->checkAccess('accFormatting', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Account Formatting', 'url' => array('accFormatting/index'), 'auth_id' => 'accFormatting'),
+//                    array('visible' => landa()->checkAccess('accFormatting', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Account Formatting', 'url' => array('accFormatting/index'), 'auth_id' => 'accFormatting'),
                 )),
         );
     }

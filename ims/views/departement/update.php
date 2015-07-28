@@ -25,4 +25,4 @@ $this->widget('bootstrap.widgets.TbMenu', array(
 $this->endWidget();
 ?>
 
-<?php echo $this->renderPartial('_form',array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form',array('model'=>$model,'format' => $format)); ?>
