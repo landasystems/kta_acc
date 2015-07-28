@@ -96,6 +96,10 @@
                                 <li><a href="<?php echo bu() ?>/site/logout"><span class="icon16 icomoon-icon-exit"></span> Logout</a></li>
                             </ul>
                         </div><!-- /.nav-collapse -->
+                        <!--Responsive navigation button-->  
+                        <div class="resBtn">
+                            <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
+                        </div>
                     </div>
                 </div><!-- /navbar-inner -->
             </div><!-- /navbar --> 
@@ -103,14 +107,6 @@
 
         <div id="wrapper">
 
-            <!--Responsive navigation button-->  
-            <div class="resBtn">
-                <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
-            </div>
-
-            <!--Sidebar collapse button-->  
-
-            <!--Sidebar background-->
             <div id="sidebarbg"></div>
             <!--Sidebar content-->
             <div id="sidebar">
