@@ -1,9 +1,4 @@
 <?php
-/* @var $this DateConfigController */
-/* @var $model DateConfig */
-/* @var $form CActiveForm */
-?>
-<?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
