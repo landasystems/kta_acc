@@ -122,11 +122,6 @@
                                     $model, 'phone', array('prepend' => '+62')
                             );
                             ?>
-                            <?php
-                            echo $form->textAreaRow(
-                                    $model, 'description', array('class' => 'span4', 'rows' => 2)
-                            );
-                            ?>
 
                             <div class="control-group ">
                                 <?php

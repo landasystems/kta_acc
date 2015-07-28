@@ -1,6 +1,6 @@
 <table width="100%">
     <tr>
-        <td  style="text-align: center" colspan="4"><h2>DAFTAR AKUN PT. TUGASANDA</h2></td>
+        <td  style="text-align: center" colspan="4"><h2>Daftar Akun</h2></td>
     </tr>
     <tr>
         <td style="text-align: center" colspan="4">

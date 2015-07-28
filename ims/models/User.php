@@ -17,12 +17,12 @@ class User extends CActiveRecord {
         // will receive user inputs.
         return array(
             array('name, city_id, roles_id', 'required'),
-            array(' city_id, created_user_id, departement_id', 'numerical', 'integerOnly' => true),
+            array('city_id, departement_id', 'numerical', 'integerOnly' => true),
             array('username, phone', 'length', 'max' => 20),
             array('', 'length', 'max' => 100),
-            array('password, name,description, address', 'length', 'max' => 255),
+            array('password, name, address', 'length', 'max' => 255),
             array('code', 'length', 'max' => 25),
-            array('modified, enabled', 'safe'),
+            array('enabled', 'safe'),
             array('username, email', 'unique', 'message' => '{attribute} : {value} already exists!', 'on' => 'allow'),
             array('email', 'email', 'on' => 'allow'),
             array('username, email', 'required', 'on' => 'allow'),

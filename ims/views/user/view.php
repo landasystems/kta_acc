@@ -174,16 +174,7 @@ $this->endWidget();
 
                         </td>
 
-                    </tr>  
-
-
-                    <tr class="inventory">
-                        <td style="text-align: left" class="span2" colspan="6">
-                            <?php echo '<i>"' . $model->description . '"</i>'; ?>
-                        </td>
-
-
-                    </tr>                     
+                    </tr>                    
                 </table>                                           
             </td>
 
