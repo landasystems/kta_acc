@@ -9,7 +9,6 @@ $this->widget('bootstrap.widgets.TbMenu', array(
         //array('label'=>'Pencarian', 'icon'=>'icon-search', 'url'=>'#', 'linkOptions'=>array('class'=>'search-button')),
         array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
 )));
-$this->endWidget();
 ?>
 <div class='printableArea'>
 
