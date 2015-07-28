@@ -10,18 +10,18 @@ $siteConfig = SiteConfig::model()->listSiteConfig();
                 <div class="content" style="display: block;">
                     <?php
                     $coadet = cmd('
-                            SELECT DATE_FORMAT(acca_acc_coa_det.date_coa,"%d %M %Y") as dateMonth,
-                            SUM(acca_acc_coa_det.debet) as debet,
-                            SUM(acca_acc_coa_det.credit) as ss
-                            FROM acca_acc_coa_det,acca_acc_coa
-                            WHERE acca_acc_coa_det.acc_coa_id = acca_acc_coa.id
-                            AND acca_acc_coa_det.date_coa <= now() 
-                            AND acca_acc_coa_det.date_coa >= now() - INTERVAL 7 DAY
-                            AND ((acca_acc_coa.type_sub_ledger = "ks")
-                            OR (acca_acc_coa.type_sub_ledger = "bk"))
-                            GROUP BY YEAR(acca_acc_coa_det.date_coa),
-                            MONTH(acca_acc_coa_det.date_coa),
-                            DAY(acca_acc_coa_det.date_coa) ORDER BY acca_acc_coa_det.date_coa ASC')->queryAll();
+                            SELECT DATE_FORMAT(acc_coa_det.date_coa,"%d %M %Y") as dateMonth,
+                            SUM(acc_coa_det.debet) as debet,
+                            SUM(acc_coa_det.credit) as ss
+                            FROM acc_coa_det,acc_coa
+                            WHERE acc_coa_det.acc_coa_id = acc_coa.id
+                            AND acc_coa_det.date_coa <= now() 
+                            AND acc_coa_det.date_coa >= now() - INTERVAL 7 DAY
+                            AND ((acc_coa.type_sub_ledger = "ks")
+                            OR (acc_coa.type_sub_ledger = "bk"))
+                            GROUP BY YEAR(acc_coa_det.date_coa),
+                            MONTH(acc_coa_det.date_coa),
+                            DAY(acc_coa_det.date_coa) ORDER BY acc_coa_det.date_coa ASC')->queryAll();
 
                     $result = array();
                     $credit = array();
