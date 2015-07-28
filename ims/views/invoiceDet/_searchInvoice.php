@@ -24,7 +24,7 @@
         <thead>
             <tr>
                 <th style="text-align: center;width:10%;">Code</th>
-                <th style="text-align: center">Keterangan</th>
+                <th style="text-align: center;width:40%">Keterangan</th>
                 <th style="text-align: center;width:20%">Nilai</th>
                 <th style="text-align: center;width:20%">Balance</th>
                 <th style="text-align: center;width:10%">#</th>

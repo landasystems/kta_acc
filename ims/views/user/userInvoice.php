@@ -140,6 +140,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 $(".sup_id").val("");
                 $(".kosong").remove();
                 hitung();
+                $( ".dateStart" ).datepicker();
+                $( ".term" ).datepicker();
             }
         });
     });
