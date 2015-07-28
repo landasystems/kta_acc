@@ -79,7 +79,7 @@
                     <label class="control-label">Type Sub Ledger</label>
                     <div class="controls">
                         <?php
-                        echo CHtml::dropDownList('AccCoa[type_sub_ledger]', 5, AccCoa::model()->typeSub(), array('class' => 'span3', 'empty' => t('choose', 'global'), 'options' => array($model->type_sub_ledger => array('selected' => true))));
+                        echo CHtml::dropDownList('AccCoa[type_sub_ledger]', 5, AccCoa::model()->typeSub(), array('class' => 'span3', 'empty' => 'Pilih', 'options' => array($model->type_sub_ledger => array('selected' => true))));
                         ?>
                     </div>
                 </div>

@@ -71,14 +71,14 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 <?php
                                 $accessCoa = AccCoa::model()->accessCoa();
 
-                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'fullName');
+                                $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'fullName');
                                 $this->widget('bootstrap.widgets.TbSelect2', array(
                                     'asDropDownList' => TRUE,
                                     'data' => $data,
                                     'name' => 'AccCashOut[accCoa]',
                                     'value' => (isset($accCoa) ? $accCoa : ''),
                                     'options' => array(
-                                        "placeholder" => t('choose', 'global'),
+                                        "placeholder" => 'Pilih',
                                         "allowClear" => true,
                                     ),
                                     'htmlOptions' => array(
@@ -190,13 +190,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                         </td>
                         <td>
                             <?php
-                            $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+                            $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
                             $this->widget('bootstrap.widgets.TbSelect2', array(
                                 'asDropDownList' => TRUE,
                                 'data' => $data,
                                 'name' => 'account',
                                 'options' => array(
-                                    "placeholder" => t('choose', 'global'),
+                                    "placeholder" => 'Pilih',
                                     "allowClear" => true,
                                 ),
                                 'htmlOptions' => array(

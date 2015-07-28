@@ -1,35 +1,10 @@
 <?php
-/* @var $this DateConfigController */
-/* @var $dataProvider CActiveDataProvider */
 
-$this->setPageTitle('Auto Number Configuration Setting');
+$this->setPageTitle('Auto Number Setting');
 $this->breadcrumbs = array(
     'Auto Number Configuration Setting',
 );
-
-$this->beginWidget('zii.widgets.CPortlet', array(
-    'htmlOptions' => array(
-        'class' => ''
-    )
-));
-$this->widget('bootstrap.widgets.TbMenu', array(
-    'type' => 'pills',
-    'items' => array(
-        array('visible' => landa()->checkAccess('DateConfig', 'r'), 'label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
-        array('label' => 'Pencarian', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
-//        array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
-//        array('label' => 'Export ke Excel', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
-    ),
-));
-$this->endWidget();
 ?>
-<div class="search-form" style="display:none">
-    <?php
-    $this->renderPartial('_search', array(
-        'model' => $model,
-    ));
-    ?>
-</div>
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
         'id' => 'date-config-grid',
@@ -37,12 +12,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'type' => 'striped bordered condensed',
         'template' => '{summary}{pager}{items}{pager}',
         'columns' => array(
-//            array(
-//                'name' => 'id',
-//                'header' => 'Id',
-//                'value' => '$data->id',
-//                'htmlOptions' => array('style' => 'text-align:center;width:5%'),
-//            ),
             array(
                 'name' => 'year',
                 'header' => 'Tahun',

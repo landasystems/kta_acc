@@ -3,29 +3,16 @@
     <head>
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="en" />
-        <meta name="author" content="Landa - Profesional Website Development" />
-        <meta name="application-name" content="Application Default" />
+        <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
         <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
-
-        <!-- Mobile Specific Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <?php
         landa()->loginRequired();
         $cs = Yii::app()->getClientScript();
         $cs->registerCoreScript('jquery');
-        $cs->registerCssFile(bt() . '/css/icons.css');
-        $cs->registerCssFile(bt() . '/css/main.css');
+        $cs->registerCssFile(bt() . '/css/main.min.css');
         ?>     
-
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/apple-touch-icon-144-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/apple-touch-icon-114-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/apple-touch-icon-72-precomposed.png" />
-        <link rel="apple-touch-icon-precomposed" href="images/apple-touch-icon-57-precomposed.png" />
-
         <script type="text/javascript">
-            //adding load class to body and hide page
             document.documentElement.className += 'loadstate';
         </script>
     </head>

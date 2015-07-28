@@ -15,7 +15,7 @@
                     <div class="controls">
                         <?php
                         echo CHtml::dropDownList('province_id', 0, CHtml::listData(Province::model()->findAll(), 'id', 'name'), array(
-                            'empty' => t('choose', 'global'),
+                            'empty' => 'Pilih',
                             'ajax' => array(
                                 'type' => 'POST',
                                 'url' => CController::createUrl('landa/city/dynacities'),
@@ -29,7 +29,7 @@
             </div>
             
             <div class="span4" style="padding-left: 90px;">
-                <?php echo $form->dropDownListRow($model, 'roles_id', CHtml::listData(User::model()->roles(), 'id', 'name'), array('class' => 'span4','empty' => t('choose', 'global'),)); ?>
+                <?php echo $form->dropDownListRow($model, 'roles_id', CHtml::listData(User::model()->roles(), 'id', 'name'), array('class' => 'span4','empty' => 'Pilih',)); ?>
                 <?php echo $form->textFieldRow($model,'email',array('class'=>'span4','maxlength'=>100)); ?>
                 <?php
                     echo $form->textFieldRow(

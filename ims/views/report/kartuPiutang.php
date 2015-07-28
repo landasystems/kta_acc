@@ -31,14 +31,14 @@ $this->breadcrumbs = array(
                 <label class="control-label">Nama Customer</label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData(User::model()->listUsers('customer'), 'id', 'name');
+                    $data = array(0 => 'Pilih') + CHtml::listData(User::model()->listUsers('customer'), 'id', 'name');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value' => (isset($_POST['listUser']) ? $_POST['listUser'] : ''),
                         'name' => 'listUser',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '50%',
                         ),

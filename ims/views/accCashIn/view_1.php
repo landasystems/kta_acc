@@ -66,14 +66,14 @@ $this->endWidget();
                             <td width="50%"><?php echo $form->textFieldRow($model, 'code', array('class' => 'span3', 'maxlength' => 255, 'value' => $model->code, 'disabled' => true)); ?></td>
                             <td width="50%"><label for="AccCashIn_code">Masuk dari</label>
                                 <?php
-                                $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => 'type_sub_ledger="ks" OR type_sub_ledger="bk"', 'order' => 'root, lft')), 'id', 'nestedname');
+                                $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('condition' => 'type_sub_ledger="ks" OR type_sub_ledger="bk"', 'order' => 'root, lft')), 'id', 'nestedname');
                                 $this->widget('bootstrap.widgets.TbSelect2', array(
                                     'asDropDownList' => TRUE,
                                     'data' => $data,
                                     'name' => 'AccCashIn[accCoa]',
                                     'value' => (isset($model->acc_coa_id) ? $model->acc_coa_id : ''),
                                     'options' => array(
-                                        "placeholder" => t('choose', 'global'),
+                                        "placeholder" => 'Pilih',
                                         "allowClear" => true,
                                     ),
                                     'htmlOptions' => array(

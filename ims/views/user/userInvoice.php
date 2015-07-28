@@ -50,14 +50,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 <label class="control-label">Pilih Nama <?php echo ucwords($_GET['type']); ?></label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData($header, 'id', 'name');
+                    $data = array(0 => 'Pilih') + CHtml::listData($header, 'id', 'name');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value' => (isset($_POST['supplier_list']) ? $_POST['supplier_list'] : ''),
                         'name' => 'supplier_list',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '50%',
                         ),

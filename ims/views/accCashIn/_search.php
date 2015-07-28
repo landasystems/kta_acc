@@ -11,14 +11,14 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 Masuk Ke <br>
 <?php
 $accessCoa = AccCoa::model()->accessCoa();
-$data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'nestedname');
+$data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'nestedname');
 $this->widget('bootstrap.widgets.TbSelect2', array(
     'asDropDownList' => TRUE,
     'data' => $data,
     'name' => 'AccCashIn[acc_coa_id]',
 //    'value' => (isset($accCoa) ? $accCoa : ''),
     'options' => array(
-        "placeholder" => t('choose', 'global'),
+        "placeholder" => 'Pilih',
         "allowClear" => true,
     ),
     'htmlOptions' => array(

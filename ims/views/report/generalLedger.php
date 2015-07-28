@@ -24,19 +24,19 @@ $this->breadcrumbs = array(
 <div class="well">
     <div class="row-fluid">
         <div class="span11">
-            <?php // echo $form->dropDownListRow($accCoa, 'id', CHtml::listData(Acc_coa::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => t('choose', 'global')));  ?>      
+            <?php // echo $form->dropDownListRow($accCoa, 'id', CHtml::listData(Acc_coa::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => 'Pilih'));  ?>      
             <div class="control-group ">
                 <label class="control-label">Nama Akun</label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+                    $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value' => (isset($_POST['accacoa']) ? $_POST['accacoa'] : ''),
                         'name' => 'accacoa',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '50%',
                         ),
@@ -51,14 +51,14 @@ $this->breadcrumbs = array(
                 <label class="control-label">Pada</label>
                 <div class="controls">
                     <?php
-//                    $data2 = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+//                    $data2 = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value' => (isset($_POST['pada']) ? $_POST['pada'] : ''),
                         'name' => 'pada',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '50%',
                         ),

@@ -30,7 +30,7 @@
                 <?php
                 $mDepartement = Departement::model()->findAll(array());
                 echo $form->dropDownListRow($model, 'departement_id', CHtml::listData($mDepartement, 'id', 'name'), array(
-                    'empty' => t('choose', 'global'),
+                    'empty' => 'Pilih',
                     'class' => 'span3'
                 ));
                 ?>

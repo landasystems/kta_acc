@@ -1,13 +1,13 @@
 <div class="well">
     Supplier / Customer's Name : 
     <?php
-    $data = array(0 => t('choose', 'global')) + CHtml::listData($array, 'id', 'name');
+    $data = array(0 => 'Pilih') + CHtml::listData($array, 'id', 'name');
     $this->widget('bootstrap.widgets.TbSelect2', array(
         'asDropDownList' => TRUE,
         'data' => $data,
         'name' => 'accountName',
         'options' => array(
-            "placeholder" => t('choose', 'global'),
+            "placeholder" => 'Pilih',
             "allowClear" => true,
         ),
         'htmlOptions' => array(

@@ -22,20 +22,20 @@ $this->breadcrumbs = array(
 <div class="well">
     <div class="row-fluid">
         <div class="span6">
-            <?php echo $form->dropDownListRow($mProductStockCard, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span6', 'empty' => t('choose', 'global'))); ?>
+            <?php echo $form->dropDownListRow($mProductStockCard, 'departement_id', CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span6', 'empty' => 'Pilih')); ?>
 
             <div class="control-group ">
                 <label class="control-label">Product</label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData(Product::model()->findAll(), 'id', 'codename');
+                    $data = array(0 => 'Pilih') + CHtml::listData(Product::model()->findAll(), 'id', 'codename');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value'=> (isset($_POST['product_id']) ? $_POST['product_id'] : ''),
                         'name' => 'product_id',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '100%',
                         ),

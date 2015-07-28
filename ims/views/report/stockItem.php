@@ -25,7 +25,7 @@ $this->breadcrumbs = array(
             <div class="control-group ">
                 <label class="control-label">Departement</label>
                 <div class="controls">
-                    <?php echo CHtml::dropDownList('departement_id', (isset($_POST['departement_id']) ? $_POST['departement_id'] : ''), CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span3', 'empty' => t('choose', 'global'))); ?>
+                    <?php echo CHtml::dropDownList('departement_id', (isset($_POST['departement_id']) ? $_POST['departement_id'] : ''), CHtml::listData(Departement::model()->findAll(), 'id', 'name'), array('class' => 'span3', 'empty' => 'Pilih')); ?>
                 </div>
             </div>
 
@@ -33,14 +33,14 @@ $this->breadcrumbs = array(
                 <label class="control-label">Product Category</label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => t('choose', 'global')) + CHtml::listData(ProductCategory::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+                    $data = array(0 => 'Pilih') + CHtml::listData(ProductCategory::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,
                         'value' => (isset($_POST['product_category_id']) ? $_POST['product_category_id'] : ''),
                         'name' => 'product_category_id',
                         'options' => array(
-                            "placeholder" => t('choose', 'global'),
+                            "placeholder" => 'Pilih',
                             "allowClear" => true,
                             'width' => '100%',
                         ),

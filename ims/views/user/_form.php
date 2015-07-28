@@ -36,7 +36,7 @@
                             $array = Roles::model()->listRole($type);
                             if (!empty($array)) {
                                 echo CHtml::dropDownList('User[roles_id]', $model->roles_id, CHtml::listData($array, 'id', 'name'), array(
-                                    'empty' => t('choose', 'global'),
+                                    'empty' => 'Pilih',
                                 ));
                             } else {
                                 echo'Data is empty please insert data group' . $type . '.';
@@ -104,7 +104,7 @@
                                 <?php
                                 $mDepartement = Departement::model()->findAll(array());
                                 echo $form->dropDownListRow($model, 'departement_id', CHtml::listData($mDepartement, 'id', 'name'), array(
-                                    'empty' => t('choose', 'global'),
+                                    'empty' => 'Pilih',
                                 ));
                                 ?>
                             <?php } ?>
@@ -135,7 +135,7 @@
                                 <div class="controls">
                                     <?php
                                     echo CHtml::dropDownList('province_id', $model->City->province_id, CHtml::listData(Province::model()->findAll(), 'id', 'name'), array(
-                                        'empty' => t('choose', 'global'),
+                                        'empty' => 'Pilih',
                                         'ajax' => array(
                                             'type' => 'POST',
                                             'url' => CController::createUrl('landa/city/dynacities'),

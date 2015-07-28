@@ -6,7 +6,6 @@ Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Accounting Management Systems',
-    'language' => 'en',
     'preload' => array('log', 'bootstrap'),
     'import' => array(
         'application.models.*',

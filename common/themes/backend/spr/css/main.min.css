@@ -1289,7 +1289,6 @@ select {
     background: #88bbc8;
 }
 .resBtn {
-    margin-top: 15px;
     z-index: 1000;
     display: none;
 }
@@ -2942,10 +2941,11 @@ form input.valid {
         display: none;
     }
     .resBtn {
+        margin-top: 15px;
         display: block;
     }
     .navbar .nav {
-        margin-left: 90px;
+        
     }
     #sidebar {
         width: 100%;
@@ -3122,8 +3122,7 @@ form input.valid {
         margin-left: 50px;
     }
     .resBtn {
-        top: 59px;
-        left: 10px;
+        margin-top: 0px;
     }
     #wrapper {
         padding-top: 44px;

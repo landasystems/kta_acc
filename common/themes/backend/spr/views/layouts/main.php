@@ -4,33 +4,24 @@
     <head>
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="author" content="Landa - Profesional Website Development" />
-        <meta name="application-name" content="Application Default" />
+        <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
         <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
-
-        <!-- Mobile Specific Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
         <?php
         landa()->loginRequired();
         $cs = Yii::app()->getClientScript();
         $cs->registerCoreScript('jquery');
         $cs->registerCssFile(bt() . '/css/main.min.css');
         ?>     
-
         <script type="text/javascript">
-            //adding load class to body and hide page
             document.documentElement.className += 'loadstate';
         </script>
     </head>
     <body>
         <img src="<?php echo bt("images/loaders/horizontal/004.gif") ?>" id="loader" />
-        <!-- loading animation -->
         <div id="qLoverlay"></div>
         <div id="qLbar"></div>
-
         <div id="header">
-
             <div class="navbar">
                 <div class="navbar-inner">
                     <div class="container-fluid">
@@ -68,26 +59,21 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </div><!-- /.nav-collapse -->
+                        </div>
                         <div class="resBtn pull-right">
                             <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
                         </div>
                     </div>
-                </div><!-- /navbar-inner -->
-            </div><!-- /navbar --> 
-        </div><!-- End #header -->
-
+                </div>
+            </div>
+        </div>
         <div id="wrapper">
-
             <div id="sidebarbg"></div>
-            <!--Sidebar content-->
             <div id="sidebar">
                 <div class="sidenav">
-
                     <div class="sidebar-widget" style="margin: -1px 0 0 0;">
                         <h5 class="title" style="margin-bottom:0">Navigation</h5>
-                    </div><!-- End .sidenav-widget -->
-
+                    </div>
                     <div class="mainnav">
                         <?php
                         $this->widget('zii.widgets.CMenu', array(
@@ -96,7 +82,6 @@
                         ));
                         ?>
                     </div>
-
                     <div class="sidebar-widget">
                         <h5 class="title">Server Information</h5>
                         <div class="content">
@@ -114,31 +99,21 @@
                             </table>
                         </div>
                     </div>
-                </div><!-- End sidenav -->
-
-
-            </div><!-- End #sidebar -->
-
-
-
-            <!--Body content-->
+                </div>
+            </div>
             <div id="content" class="clearfix">
-                <div class="contentwrapper"><!--Content wrapper-->
+                <div class="contentwrapper">
                     <div class="heading">
                         <h3><?php echo CHtml::encode($this->pageTitle); ?></h3>                    
-
-                    </div><!-- End .heading-->
+                    </div>
                     <div class="clearfix"></div>
-                    <!-- Build page from here: -->
                     <?php echo $content; ?>
-                    <!-- End Build page -->
-                </div><!-- End contentwrapper -->
+                </div>
                 <div id="footer" class="span12">
                     <?php echo app()->name . ' ' . param('appVersion') ?>  ©  2015 All Rights Reserved. 
                 </div>
             </div>
-            <!-- End #content -->
-        </div><!-- End #wrapper -->
+        </div>
         <a href="#" class="collapseBtn" class="tipR" title="Hide/Show sidebar">
             <div class="landaMin img-polaroid">
                 <i class="icon-arrow-left"></i>
