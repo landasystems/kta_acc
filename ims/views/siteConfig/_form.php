@@ -29,7 +29,6 @@
 
         <div class="tab-content">
             <div class="tab-pane active" id="site">
-                <?php echo $form->textFieldRow($model, 'client_name', array('class' => 'span5', 'maxlength' => 255)); ?>
                 <?php echo $form->fileFieldRow($model, 'client_logo', array('class' => 'span5')); ?>
                 <div class="control-group ">
                     <label class="control-label">Tgl Mulai Applikasi</label>
@@ -165,13 +164,6 @@
                 'type' => 'primary',
                 'icon' => 'ok white',
                 'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
-            ));
-            ?>
-            <?php
-            $this->widget('bootstrap.widgets.TbButton', array(
-                'buttonType' => 'reset',
-                'icon' => 'remove',
-                'label' => 'Reset',
             ));
             ?>
         </div>

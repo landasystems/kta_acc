@@ -22,7 +22,6 @@ echo $form->dateRangeRow(
             'onclick' => 'submitForm()'
     )));
     ?>
-    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType' => 'button', 'icon' => 'icon-remove-sign white', 'label' => 'Reset', 'htmlOptions' => array('class' => 'btnreset'))); ?>
 </div>
 
 <?php $this->endWidget(); ?>
