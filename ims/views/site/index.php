@@ -104,7 +104,7 @@ $siteConfig = SiteConfig::model()->listSiteConfig();
 
                     <h4>
                         <span class="icon16 silk-icon-office"></span>
-                        <span><?php echo $siteConfig->client_name ?></span>
+                        <span><?php echo param('clientName'); ?></span>
                     </h4>
                 </div>
                 <div class="content">

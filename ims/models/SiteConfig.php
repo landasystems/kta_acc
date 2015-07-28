@@ -43,15 +43,11 @@ class SiteConfig extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('', 'numerical', 'integerOnly' => true),
-            array('client_name, client_logo,', 'length', 'max' => 255),
-            array('method, format_buy,format_buy_order,format_buy_retur,format_sell,format_sell_order,format_sell_retur,format_in,format_out,format_opname', 'length', 'max' => 45),
-            // The following rule is used by search().
+            array(' client_logo,', 'length', 'max' => 255),
             // Please remove those attributes that should not be searched.
-            array('roles_customer', 'safe'),
             array('id, client_name', 'safe', 'on' => 'search'),
             array('client_logo', 'unsafe'),
-            array('report_sell_order,report_sell,report_sell_retur,report_buy_order,report_buy,report_buy_retur,report_in,report_out,report_cash_out,report_cash_in,report_jurnal,date_system,autonumber,autopostnumber', 'safe'),
+            array('report_cash_out,report_cash_in,report_jurnal,date_system', 'safe'),
         );
     }
 
