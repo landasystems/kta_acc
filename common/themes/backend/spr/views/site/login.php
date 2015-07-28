@@ -41,13 +41,13 @@ $form = $this->beginWidget('CActiveForm', array(
     <div class="newLogin">        
         <form class="form-horizontal" action="dashboard.html" />
         <center>
-            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo bt() ?>/images/logo.png" />
+            <img style="height: 75px;margin: 10px 5px 0 0px;" src="<?php echo bu() ?>/images/logo.png" />
             <h3 style="margin:5px 0 0 0">
                 <?php
                 echo param('clientName');
                 ?>
             </h3>
-            <span style="color:crimson;font-weight: bold;">Accounting Management Sytems</span>
+            <span style="color:crimson;font-weight: bold;"><?php echo app()->name; ?></span>
         </center>
         <hr style="margin:10px 0px 20px 0px">
 
