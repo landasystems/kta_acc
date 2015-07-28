@@ -1,12 +1,4 @@
 <?php
-/* @var $this AccFormattingController */
-/* @var $dataProvider CActiveDataProvider */
-
-$this->breadcrumbs=array(
-	'Acc Formattings',
-);
-?>
-<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''
@@ -47,7 +39,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         array(
             'name' => 'departement_id',
             'type' => 'raw',
-            'value' => '$data->Departement->name',
+            'value' => '(isset($data->Departement->name)) ? $data->Departement->name : ""',
             'htmlOptions' => array('style' => 'width: 20%;text-align:Left'),
         ),
         array(
