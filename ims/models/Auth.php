@@ -104,13 +104,13 @@ class Auth extends CActiveRecord {
         return parent::model($className);
     }
 
-    public function modules($arg = NULL) {
+    public function modules() {
 
         return array(
             array('visible' => landa()->checkAccess('Dashboard', 'r'), 'label' => '<span class="icon16 icomoon-icon-screen"></span>Dashboard', 'url' => array('/dashboard'), 'auth_id' => 'Dashboard'),
-            array('visible' => landa()->checkAccess('GroupSupplier', 'r') || landa()->checkAccess('userInvoice', 'r') || landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 wpzoom-user-2"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update', 'id' => param('id'))),
-                    array('visible' => in_array('inventory', param('menu')) || in_array('accounting', param('menu')), 'label' => '<span class="icon16 minia-icon-office"></span>Unit Kerja', 'url' => array('/departement')),
+            array('visible' => user()->isSuperUser, 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+                    array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update/1')),
+                    array('label' => '<span class="icon16 minia-icon-office"></span>Unit Kerja', 'url' => array('/departement')),
                     array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/landa/roles')),
                 ),
             ),
@@ -128,9 +128,9 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('AccJurnal', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Jurnal', 'url' => array('/accJurnal'), 'auth_id' => 'AccJurnal'),
                     array('visible' => landa()->checkAccess('BeginningBalance', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Saldo Awal', 'url' => array('/accCoa/beginningbalance'), 'auth_id' => 'BeginningBalance'),
                 )),
-            array('visible' => (landa()->checkAccess('AccCashIn', 'r') || landa()->checkAccess('AccCashOut', 'r')), 'label' => '<span class="icon16 icomoon-icon-clipboard-2"></span>Transaksi Uang', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('AccCashIn', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Masuk', 'url' => array('/accCashIn'), 'auth_id' => 'AccCashIn'),
-                    array('visible' => landa()->checkAccess('AccCashOut', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Keluar', 'url' => array('/accCashOut'), 'auth_id' => 'AccCashOut'),
+            array('visible' => (landa()->checkAccess('AccCashIn', 'r') || landa()->checkAccess('AccCashOut', 'r')), 'label' => '<span class="icon16 icomoon-icon-clipboard-2"></span>Transaksi', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+                    array('visible' => landa()->checkAccess('AccCashIn', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Uang Masuk', 'url' => array('/accCashIn'), 'auth_id' => 'AccCashIn'),
+                    array('visible' => landa()->checkAccess('AccCashOut', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Uang Keluar', 'url' => array('/accCashOut'), 'auth_id' => 'AccCashOut'),
                 )),
             array('visible' => (landa()->checkAccess('Report_Jurnal', 'r') || landa()->checkAccess('Report_Kasharian', 'r') || landa()->checkAccess('Report_Generalledger', 'r') || landa()->checkAccess('Report_NeracaSaldo', 'r')), 'label' => '<span class="icon16 cut-icon-printer-2"></span>Laporan', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array(landa()->checkAccess('Report_Jurnal', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Jurnal', 'url' => array('/report/jurnalUmum'), 'auth_id' => 'Report_Jurnal'),

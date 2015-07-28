@@ -4,7 +4,6 @@
     <head>
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="language" content="en" />
         <meta name="author" content="Landa - Profesional Website Development" />
         <meta name="application-name" content="Application Default" />
         <link rel="shortcut icon" href="<?php echo bt() ?>/images/favicon.ico" />
@@ -41,32 +40,6 @@
                             ?>
                         </a>
                         <div class="nav-no-collapse">
-
-                            <ul class="nav">
-                                <?php if (user()->isSuperUser) { ?>
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <span class="icon16 icomoon-icon-cog"></span> Settings
-                                            <b class="caret"></b>
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li class="menu">
-                                                <?php
-                                                $this->widget('zii.widgets.CMenu', array(
-                                                    'items' => array(
-                                                        array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update', 'id' => param('id'))),
-                                                        array('visible' => in_array('inventory', param('menu')) || in_array('accounting', param('menu')), 'label' => '<span class="icon16 minia-icon-office"></span>Unit Kerja', 'url' => array('/departement')),
-                                                        array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/landa/roles')),
-                                                    ),
-                                                    'encodeLabel' => false,
-                                                ));
-                                                ?>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                <?php } ?>
-                            </ul>
-
                             <ul class="nav pull-right usernav">
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
@@ -86,7 +59,7 @@
                                             $this->widget('zii.widgets.CMenu', array(
                                                 'items' => array(
                                                     array('label' => '<span class="icon16 icomoon-icon-user-3"></span>Edit profile', 'url' => url('user/updateProfile') . '?type=' . $type),
-                                                    array('label' => '<span class="icon16 icomoon-icon-exit"></span> Logout', 'url' => bu().'/site/logout'),
+                                                    array('label' => '<span class="icon16 icomoon-icon-exit"></span> Logout', 'url' => bu() . '/site/logout'),
                                                 ),
                                                 'encodeLabel' => false,
                                             ));
@@ -96,8 +69,7 @@
                                 </li>
                             </ul>
                         </div><!-- /.nav-collapse -->
-                        <!--Responsive navigation button-->  
-                        <div class="resBtn">
+                        <div class="resBtn pull-right">
                             <a href="#"><span class="icon16 minia-icon-list-3"></span></a>
                         </div>
                     </div>
