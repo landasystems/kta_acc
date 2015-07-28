@@ -1,9 +1,3 @@
-<?php
-/* @var $this DateConfigController */
-/* @var $model DateConfig */
-/* @var $form CActiveForm */
-?>
-
 <div class="wide form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(

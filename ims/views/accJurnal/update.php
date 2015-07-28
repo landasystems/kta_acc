@@ -1,15 +1,6 @@
 <?php
 
 $this->setPageTitle('Jurnal | Kode : ' . $model->code);
-$this->breadcrumbs = array(
-    'Acc Jurnals' => array('index'),
-    $model->id => array('view', 'id' => $model->id),
-    'Update',
-);
-?>
-
-<?php
-
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

@@ -1,14 +1,5 @@
 <?php
-$this->setPageTitle('Edit Perkiraan | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Acc Coas'=>array('index'),
-	$model->name=>array('view','id'=>$model->id),
-	'Update',
-);
-
-?>
-
-<?php 
+$this->setPageTitle('Edit Perkiraan | Kode : '. $model->code);
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''

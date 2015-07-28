@@ -1,10 +1,6 @@
 <?php
 
 $this->setPageTitle('Tambah Daftar Perkiraan');
-?>
-
-<?php
-
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

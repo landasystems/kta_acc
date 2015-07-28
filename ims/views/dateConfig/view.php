@@ -1,12 +1,4 @@
 <?php
-/* @var $this DateConfigController */
-/* @var $model DateConfig */
-
-$this->breadcrumbs=array(
-	'Date Configs'=>array('index'),
-	$model->id,
-);
-
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

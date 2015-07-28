@@ -1,13 +1,5 @@
 <?php
 $this->setPageTitle('Lihat Perkiraan | : ' . $model->name);
-?>
-
-<?php
-$this->beginWidget('zii.widgets.CPortlet', array(
-    'htmlOptions' => array(
-        'class' => ''
-    )
-));
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(

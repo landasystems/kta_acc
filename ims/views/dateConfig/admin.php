@@ -1,12 +1,4 @@
 <?php
-/* @var $this DateConfigController */
-/* @var $model DateConfig */
-
-$this->breadcrumbs=array(
-	'Date Configs'=>array('index'),
-	'Manage',
-);
-
 $this->menu=array(
 	array('label'=>'List DateConfig', 'url'=>array('index')),
 	array('label'=>'Create DateConfig', 'url'=>array('create')),

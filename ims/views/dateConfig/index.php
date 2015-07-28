@@ -1,11 +1,6 @@
 <?php
 
 $this->setPageTitle('Auto Number Setting');
-$this->breadcrumbs = array(
-    'Auto Number Configuration Setting',
-);
-?>
-<?php
 $this->widget('bootstrap.widgets.TbGridView', array(
         'id' => 'date-config-grid',
         'dataProvider' => $model->search(),

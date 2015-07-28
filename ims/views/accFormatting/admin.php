@@ -1,12 +1,4 @@
 <?php
-/* @var $this AccFormattingController */
-/* @var $model AccFormatting */
-
-$this->breadcrumbs=array(
-	'Acc Formattings'=>array('index'),
-	'Manage',
-);
-
 $this->menu=array(
 	array('label'=>'List AccFormatting', 'url'=>array('index')),
 	array('label'=>'Create AccFormatting', 'url'=>array('create')),
