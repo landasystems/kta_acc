@@ -1,5 +1,3 @@
-
-
 <?php
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'download-grid',

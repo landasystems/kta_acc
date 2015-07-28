@@ -1,11 +1,3 @@
-<?php
-$this->breadcrumbs=array(
-	'Departements'=>array('index'),
-	'Create',
-);
-
-?>
-
 <?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(

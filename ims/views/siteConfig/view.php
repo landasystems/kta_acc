@@ -1,9 +1,5 @@
 <?php
-$this->setPageTitle('Lihat Site Config | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Site Config'=>array('index'),
-	$model->id,
-);
+$this->setPageTitle('Lihat Site Config');
 ?>
 
 <?php 

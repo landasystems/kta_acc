@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Tambah '.$type);
-$this->breadcrumbs=array(
-	'Users'=>array('index'),
-	'Create'.$type,
-);
 ?>
 
 <?php 

@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle(ucfirst($type));
-$this->breadcrumbs = array(
-    ucfirst($type),
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
     $('.search-form').slideToggle('fast');

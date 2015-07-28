@@ -1,14 +1,5 @@
 <?php
-$this->setPageTitle('Edit Site Config | ID : '. $model->id);
-$this->breadcrumbs=array(
-	'Site Configs'=>array('index'),
-	$model->id=>array('view','id'=>$model->id),
-	'Update',
-);
-
-?>
-
-<?php 
+$this->setPageTitle('Edit Site Config');
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''
