@@ -1,8 +1,5 @@
 <?php
 $this->setPageTitle('Edit Site Config');
-?>
-
-<?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''

@@ -11,9 +11,6 @@
     ));
     ?>
     <fieldset>
-        <legend>
-            <p class="note">Fields dengan <span class="required">*</span> harus di isi.</p>
-        </legend>
 
         <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
 

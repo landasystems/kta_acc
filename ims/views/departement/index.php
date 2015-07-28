@@ -1,8 +1,4 @@
 <?php
-$this->breadcrumbs=array(
-	'Master Unit Kerja',
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
     $('.search-form').slideToggle('fast');

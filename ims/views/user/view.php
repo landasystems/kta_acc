@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Lihat | ' . $model->name);
+$this->setPageTitle('Lihat | Nama: ' . $model->name);
 ?>
 
 <?php

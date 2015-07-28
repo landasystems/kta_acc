@@ -10,9 +10,6 @@ if ($type == 'supplier') {
 }
 
 $this->setPageTitle($title);
-$this->breadcrumbs = array(
-    $title,
-);
 ?>
 <?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
