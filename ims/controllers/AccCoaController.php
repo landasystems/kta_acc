@@ -574,9 +574,9 @@ class AccCoaController extends Controller {
             $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
             echo '<tr><th><input type="text" name="code_invoice" style="width:85%" id="code_invoice"></th>';
             echo '<th><input style="width:95%" type="text" name="invoice_description" id="invoice_description"></th>';
-            echo '<th><input type="text" class="angka" id="invoice_amount" value="0"></th>';
+            echo '<th><input style="max-width:90% !important" type="text" class="angka" id="invoice_amount" value="0"></th>';
             echo '<th><input type="hidden" id="type_invoice" value="' . $account->Roles->type . '"></th>';
-            echo '<td style="text-align:center"><a href="#" style="height:15px;width:61%" class="addNewInvoice btn"><i class="icon-plus"></i></a></td></tr>';
+            echo '<td style="text-align:center"><a title="Tambah" rel="tooltip" href="#" class="addNewInvoice btn btn-mini">&nbsp;<i class=" brocco-icon-plus"></i></a></td></tr>';
             foreach ($balance as $b) {
                 $charge = AccCoaDet::model()->balanceInvoice($b->id); //filter no date
                 $payment = (!empty($b->payment) ? $b->payment : 0);
@@ -586,14 +586,14 @@ class AccCoaController extends Controller {
                 . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
                 . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
                 . '<td style="width:20%; text-align:center">'
-                . '<a class="btn" style="width:70%">'
+                . '<a class="btn btn-mini" title="Pilih" rel="tooltip">'
                 . '<div class="ambil" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
-                . '<i class="minia-icon-checked"> &nbsp;Pilih</i>'
+                . '&nbsp;<i class="minia-icon-checked"> </i>'
                 . '</div>'
-                . '</a>'
-                . '<a class="btn btn-danger" style="width:70%">'
+                . '</a> '
+                . '<a class="btn btn-mini btn-danger" title="Hapus" rel="tooltip">'
                 . '<div class="delInvoice" det_id="' . $b->id . '">'
-                . '<i class="minia-icon-trashcan icon-white"> Hapus</i>'
+                . '&nbsp;<i class="minia-icon-trashcan icon-white"> </i>'
                 . '</div>'
                 . '</a>'
                 . '</td>'

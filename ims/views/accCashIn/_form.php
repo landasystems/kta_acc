@@ -110,7 +110,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     'bootstrap.widgets.TbModal', array(
                 'id' => 'modalSub',
                 'htmlOptions' => array(
-                    'style' => 'width:700px'
+                    'style' => 'width:1000px;margin-left:-500px;'
                 )
                     )
             );

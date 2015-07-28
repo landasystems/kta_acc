@@ -122,6 +122,7 @@ $this->endWidget();
                     <tbody>
                         <?php
                         $no = 1;
+                        $name = '';
                         foreach ($cashInDet as $viewCashInDet) {
                             if ($viewCashInDet->AccCoa !== NULL) {
                                 $accCoaName = $viewCashInDet->AccCoa->code . ' - ' . $viewCashInDet->AccCoa->name;

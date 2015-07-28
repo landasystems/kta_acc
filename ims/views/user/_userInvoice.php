@@ -13,7 +13,7 @@
     <tbody>
         <tr style="display:<?php echo ($ambil || isset($_POST['yt0'])) ? '' : 'none'; ?>">
             <td>
-                <input type="text" class="codes" style="width:98%;">
+                <input type="text" class="codes" style="width:94%;">
             </td>
             <td style="text-align: center">
                 <?php
@@ -29,7 +29,7 @@
                     'htmlOptions' => array(
                         'id' => 'dateCoa',
                         'class' => 'dateCoa datepicker',
-                        'style' => 'width:95%'
+                        'style' => 'width:89%'
                     ),
                 ));
                 ?>
@@ -48,7 +48,7 @@
                     'htmlOptions' => array(
                         'id' => 'terms',
                         'class' => 'terms datepicker',
-                        'style' => 'width:95%'
+                        'style' => 'width:89%'
                     ),
                 ));
                 ?>
@@ -63,7 +63,7 @@
             </td>
             <td style="text-align:center">
                 <a class="btn"><div class="addRow"><i class="icon-plus-sign"></i></div></a>
-                <input type="hidden" class="angka sup_id" value="107">
+                <!--<input type="hidden" class="angka sup_id" value="107">-->
             </td>
         </tr>
         <?php
@@ -79,10 +79,11 @@
                 ));
                 $coaId = (!empty($coaDet->id)) ? $coaDet->id : '';
                 $coaDate = (!empty($coaDet->date_coa)) ? $coaDet->date_coa : '';
+                $termDate = (!empty($res->term_date)) ? $res->term_date : '';
                 echo '<tr>';
                 echo '<td><input type="text" class="code" name="code[]" value="' . $res->code . '" style="width:98%;"></td>';
-                echo '<td><input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $coaDate . '"></td>';
-                echo '<td><input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $res->term_date . '"></td>';
+                echo '<td><input type="text" class="dateStart" style="width:95%" name="date_coa[]" value="' . $coaDate . '"></td>';
+                echo '<td><input type="text" class="term" style="width:95%" name="term_date[]" value="' . $termDate . '"></td>';
                 echo '<td><input type="text" name="description[]" value="' . $res->description . '" style="width:98%;"></td>';
                 echo '<td><div class="input-prepend">
                                 <span class="add-on">Rp.</span>

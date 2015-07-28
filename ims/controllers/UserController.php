@@ -734,16 +734,16 @@ class UserController extends Controller {
         if (!empty($_POST['code'])) {
             echo '<tr>'
             . '<td>'
-            . '<input type="text" class="code span1" name="code[]" value="' . $_POST['code'] . '">'
+            . '<input type="text" class="code" style="width:94%" name="code[]" value="' . $_POST['code'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" readonly="readonly" class="dateStart" style="width:95%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
+            . '<input type="text" class="dateStart" style="width:90%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" readonly="readonly" class="term" style="width:95%" name="term_date[]" value="' . $_POST['terms'] . '">'
+            . '<input type="text" class="term" style="width:90%" name="term_date[]" value="' . $_POST['terms'] . '">'
             . '</td>'
             . '<td>'
-            . '<input type="text" class=" span4" name="description[]" value="' . $_POST['desc'] . '">'
+            . '<input type="text" style="width:98%" name="description[]" value="' . $_POST['desc'] . '">'
             . '</td>'
             . '<td style="text-align:center">
                 <div class="input-prepend">
