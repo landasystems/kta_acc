@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Kas Keluar');
-$this->breadcrumbs = array(
-    'Kas Keluar',
-);
-
 Yii::app()->clientScript->registerScript('search', "
         $('.search-button').click(function(){
             $('.search-form').slideToggle('fast');

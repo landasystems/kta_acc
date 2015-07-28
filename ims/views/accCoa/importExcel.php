@@ -1,12 +1,6 @@
 <div class="form">
     <?php
     $this->setPageTitle('Import From Excel');
-    $this->breadcrumbs = array(
-        'Acc Coas' => array('index'),
-        'Import from Excel',
-    );
-    ?>
-    <?php
     $this->beginWidget('zii.widgets.CPortlet', array(
         'htmlOptions' => array(
             'class' => ''

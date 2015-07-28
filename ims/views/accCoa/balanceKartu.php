@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Saldo Awal Kartu');
-$this->breadcrumbs = array(
-    'Saldo Awal Kartu',
-);
-?>
-<?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }

@@ -1,8 +1,3 @@
-<?php
-/* @var $this AccFormattingController */
-/* @var $model AccFormatting */
-/* @var $form CActiveForm */
-?>
 <ul class="nav nav-tabs" id="myTab">
     <li class="active"><a href="#site">Account Formatting</a></li>     
 </ul>

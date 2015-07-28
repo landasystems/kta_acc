@@ -1,9 +1,4 @@
 <?php
-$this->breadcrumbs=array(
-	'Acc Coas'=>array('index'),
-	'Manage',
-);
-
 $this->menu=array(
 	array('label'=>'List AccCoa','url'=>array('index')),
 	array('label'=>'Create AccCoa','url'=>array('create')),

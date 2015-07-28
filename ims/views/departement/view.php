@@ -1,10 +1,3 @@
-<?php
-$this->breadcrumbs=array(
-	'Departements'=>array('index'),
-	$model->name,
-);
-?>
-
 <h1>View Departement #<?php echo $model->id; ?></h1>
 <hr />
 <?php 

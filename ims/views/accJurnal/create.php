@@ -1,13 +1,5 @@
 <?php
 $this->setPageTitle('Tambah Jurnal');
-$this->breadcrumbs=array(
-	'Jurnal'=>array('index'),
-	'Tambah',
-);
-
-?>
-
-<?php 
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''

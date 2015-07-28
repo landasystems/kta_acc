@@ -1,13 +1,5 @@
 <?php
 $this->setPageTitle('Kas Masuk | No Transaksi : ' . $model->code);
-$this->breadcrumbs = array(
-    'Acc Cash Ins' => array('index'),
-    $model->id => array('view', 'id' => $model->id),
-    'Update',
-);
-?>
-
-<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

@@ -1,9 +1,6 @@
 <?php
 $siteConfig = SiteConfig::model()->findByPk(param('id'));
 $this->setPageTitle('Lihat Kas Masuk | : ' . $model->code);
-?>
-
-<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

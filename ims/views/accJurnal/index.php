@@ -1,9 +1,5 @@
 <?php
 $this->setPageTitle('Jurnal/ Jurnal Memorial');
-$this->breadcrumbs = array(
-    'Acc Jurnals',
-);
-
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
     $('.search-form').slideToggle('fast');

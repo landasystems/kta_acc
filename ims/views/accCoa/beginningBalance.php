@@ -1,10 +1,5 @@
 <?php
 $this->setPageTitle('Beginning Balance');
-$this->breadcrumbs = array(
-    'Beginning Balance',
-);
-?>
-<?php
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }

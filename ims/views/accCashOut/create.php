@@ -1,14 +1,5 @@
 <?php
 $this->setPageTitle('Tambah Kas Keluar');
-$this->breadcrumbs=array(
-	'Kas Keluar'=>array('index'),
-	'Tambah',
-);
-
-?>
-
-<?php
-
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''
