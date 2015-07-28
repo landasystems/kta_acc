@@ -8,7 +8,6 @@ $(window).resize(function() {
     }
 
     var size = "Window size is:" + $(window).width();
-    /*console.log(size)*/
 });
 
 // document ready function
@@ -67,24 +66,7 @@ $(document).ready(function() {
 
     //remove current class if have
     mainNavCurrent.removeClass('current');
-    //set the seleceted menu element
-//    if ($.cookie("newCurrentMenu")) {
-//        mainNavLinkAll.each(function(index) {
-//            if ($(this).attr('href') == $.cookie("newCurrentMenu")) {
-//                //set new current class
-//                $(this).addClass('current');
-//
-//                ulElem = $(this).closest('ul');
-//                if (ulElem.hasClass('sub')) {
-//                    //its a part of sub menu need to expand this menu
-//                    aElem = ulElem.prev('a.hasUl').addClass('drop');
-//                    ulElem.addClass('expand');
-//                }
-//                //destroy cookie	
-//                $.cookie("newCurrentMenu", null);
-//            }
-//        });
-//    }
+   
     var path = window.location.pathname;
     path = path.replace(/\/$/, "");
     path = decodeURIComponent(path);

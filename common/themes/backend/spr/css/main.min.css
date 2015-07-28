@@ -441,7 +441,7 @@ body, p {
     border-bottom: 1px solid #c4c4c4;
 }
 .table thead th {
-    background: url(../images/patterns/7.png);
+    background-color:gainsboro;
 }
 .table-bordered {
     border-color: #c4c4c4;

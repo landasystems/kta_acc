@@ -63,7 +63,6 @@ class UserIdentity extends CUserIdentity {
             $this->setState('roles_id', $record->roles_id);
             $this->setState('departement_id',(isset($record->departement_id)) ? $record->departement_id : '');
             $this->setState('roles_name', $sRolesName);
-            $this->setState('saldo', (isset($record->saldo)) ? $record->saldo : 0);
             $this->setState('avatar_img', landa()->urlImg('avatar/', $record->avatar_img, $this->_id));
 
             //save the auth session
