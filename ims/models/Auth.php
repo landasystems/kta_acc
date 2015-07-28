@@ -108,6 +108,12 @@ class Auth extends CActiveRecord {
 
         return array(
             array('visible' => landa()->checkAccess('Dashboard', 'r'), 'label' => '<span class="icon16 icomoon-icon-screen"></span>Dashboard', 'url' => array('/dashboard'), 'auth_id' => 'Dashboard'),
+            array('visible' => landa()->checkAccess('GroupSupplier', 'r') || landa()->checkAccess('userInvoice', 'r') || landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 wpzoom-user-2"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+                    array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update', 'id' => param('id'))),
+                    array('visible' => in_array('inventory', param('menu')) || in_array('accounting', param('menu')), 'label' => '<span class="icon16 minia-icon-office"></span>Unit Kerja', 'url' => array('/departement')),
+                    array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/landa/roles')),
+                ),
+            ),
             array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16 icomoon-icon-user-3"></span>User', 'url' => array('/user'), 'auth_id' => 'User'),
             array('visible' => landa()->checkAccess('GroupSupplier', 'r') || landa()->checkAccess('userInvoice', 'r') || landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 wpzoom-user-2"></span>Supplier', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Supplier', 'url' => array('/user/supplier'), 'auth_id' => 'Supplier'),
@@ -126,13 +132,13 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('AccCashIn', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Masuk', 'url' => array('/accCashIn'), 'auth_id' => 'AccCashIn'),
                     array('visible' => landa()->checkAccess('AccCashOut', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Keluar', 'url' => array('/accCashOut'), 'auth_id' => 'AccCashOut'),
                 )),
-            array('visible'=>(landa()->checkAccess('Report_Jurnal', 'r') || landa()->checkAccess('Report_Kasharian', 'r') || landa()->checkAccess('Report_Generalledger', 'r') || landa()->checkAccess('Report_NeracaSaldo', 'r')),'label' => '<span class="icon16 cut-icon-printer-2"></span>Laporan', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+            array('visible' => (landa()->checkAccess('Report_Jurnal', 'r') || landa()->checkAccess('Report_Kasharian', 'r') || landa()->checkAccess('Report_Generalledger', 'r') || landa()->checkAccess('Report_NeracaSaldo', 'r')), 'label' => '<span class="icon16 cut-icon-printer-2"></span>Laporan', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array(landa()->checkAccess('Report_Jurnal', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Jurnal', 'url' => array('/report/jurnalUmum'), 'auth_id' => 'Report_Jurnal'),
                     array(landa()->checkAccess('Report_Kasharian', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Kas Harian', 'url' => array('/report/kasHarian'), 'auth_id' => 'Report_Kasharian'),
                     array(landa()->checkAccess('Report_Generalledger', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Buku Besar', 'url' => array('/report/generalLedger'), 'auth_id' => 'Report_Generalledger'),
                     array(landa()->checkAccess('Report_NeracaSaldo', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Neraca Saldo', 'url' => array('/report/neracaSaldo'), 'auth_id' => 'Report_NeracaSaldo'),
                 )),
-            array('visible'=>(landa()->checkAccess('kartuPiutang', 'r') || landa()->checkAccess('RekapPiutang', 'r') || landa()->checkAccess('kartuHutang', 'r') || landa()->checkAccess('RekapHutang', 'r')),'label' => '<span class="icon16 cut-icon-printer-2"></span>Buku Pembantu', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+            array('visible' => (landa()->checkAccess('kartuPiutang', 'r') || landa()->checkAccess('RekapPiutang', 'r') || landa()->checkAccess('kartuHutang', 'r') || landa()->checkAccess('RekapHutang', 'r')), 'label' => '<span class="icon16 cut-icon-printer-2"></span>Buku Pembantu', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('kartuPiutang', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Kartu Piutang', 'url' => array('/report/kartuPiutang'), 'auth_id' => 'kartuPiutang'),
                     array('visible' => landa()->checkAccess('RekapPiutang', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Rekap Kartu Piutang', 'url' => array('/report/RekapPiutang'), 'auth_id' => 'RekapPiutang'),
                     array('visible' => landa()->checkAccess('kartuHutang', 'r'), 'label' => '<span class="icon16 entypo-icon-book"></span>Kartu Hutang', 'url' => array('/report/kartuHutang'), 'auth_id' => 'kartuHutang'),
