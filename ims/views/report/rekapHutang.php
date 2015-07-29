@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
                     $mCoaSub, 'created', array(
                 'prepend' => '<i class="icon-calendar"></i>',
                 'options' => array('callback' => 'js:function(start, end){console.log(start.toString("MMMM d, yyyy") + " - " + end.toString("MMMM d, yyyy"));}'),
-                'value' => (isset($_POST['AccCoaSub']['created'])) ? $_POST['AccCoaSub']['created'] : ''
+                'value' => (isset($_POST['AccCoaDet']['created'])) ? $_POST['AccCoaDet']['created'] : ''
                     )
             );
             ?>    
@@ -47,7 +47,7 @@ $this->breadcrumbs = array(
         ));
         ?>
         <?php
-        if (isset($_POST['AccCoaSub']['created'])) {
+        if (isset($_POST['AccCoaDet']['created'])) {
             $this->widget(
                     'bootstrap.widgets.TbButtonGroup', array(
                 'buttons' => array(
@@ -55,7 +55,7 @@ $this->breadcrumbs = array(
                         'label' => 'Report',
                         'icon' => 'print',
                         'items' => array(
-                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelRekapHutang?created=' . str_replace("", "-", $_POST['AccCoaSub']['created']))),
+                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelRekapHutang?created=' . str_replace("", "-", $_POST['AccCoaDet']['created']))),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
                         )
                     ),
@@ -71,10 +71,10 @@ $this->breadcrumbs = array(
     <?php $this->endWidget(); ?>
 </div>
 <?php
-if (isset($_POST['yt0'])) {
+if (isset($_POST['AccCoaDet']['created'])) {
 
-    if (!empty($_POST['AccCoaSub']['created'])) {
-        $a = explode('-', $_POST['AccCoaSub']['created']);
+    if (!empty($_POST['AccCoaDet']['created'])) {
+        $a = explode('-', $_POST['AccCoaDet']['created']);
         $start = date('Y-m-d', strtotime($a[0]));
         $end = date('Y-m-d', strtotime($a[1]));
         $supplier = User::model()->listUsers('supplier');
