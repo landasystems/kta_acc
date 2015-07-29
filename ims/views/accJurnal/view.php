@@ -63,7 +63,7 @@ $this->endWidget();
                     <?php echo $form->datepickerRow($model, 'date_trans', array('class' => 'span2', 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>', 'disabled' => true, 'options' => array('todayBtn' => true, 'todayHighlight' => true, 'startDate' => date('j/m/Y'), 'format' => 'yyyy/m/d'))); ?>
 
                     <?php
-                    if ($siteConfig->is_approval == "manual") {
+//                    if ($siteConfig->is_approval == "manual") {
                         $date = AccCoaDet::model()->find(array('condition' => 'reff_type="jurnal" and reff_id= ' . $model->id));
                         if (isset($date)) {
                             $datePost = $date->date_coa;
@@ -93,9 +93,6 @@ $this->endWidget();
                             ));
                             ?>
                         </div>
-                        <?php
-                    }
-                    ?>
                     <?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?>
                 </div>
 
@@ -157,115 +154,7 @@ $this->endWidget();
                     </tfoot>
                 </table>
                 <br>
-                <?php
-                $siteConfig = SiteConfig::model()->findByPk(param('id'));
-                if ($siteConfig->is_approval == "no") {
-                    ?>
-                    <table class="responsive table table-bordered">
-                        <thead>
-                            <tr>
-                                <th width="30%"><center>Dibuat Oleh</center></th>
-                        <th><center>Diperiksa Oleh</center></th>
-                        <th width="30%"><center>Disetujui Oleh</center></th>
-                        </tr>
-                        </thead>
-                        <tfoot>
-                            <tr height="100">
-                                <td> <center><br><br>
-                            <b><?php echo $model->User->name ?></b> 
-                            <br>
-                            <?php echo date('d M Y', strtotime($model->created)); ?><br>
-                            <?php echo date('H:i:s', strtotime($model->created)); ?><br><br></center>
-                        </td>
-                        <td>
-                            <?php
-                            $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
-                            $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
-                            if ($adminStatus != 'confirm' and landa()->checkAccess('AccApprovalAdmin', 'r')) {
-                                ?>
-                                <label for="adminDescription">Keterangan</label>
-                                <textarea style="width:90%;margin:10px;"  name="adminDescription" id="adminDescription"></textarea>
-                                <div align="center"><?php echo CHtml::radioButtonList('adminStatus', '', array('pending' => 'Pending', 'reject' => 'Reject', 'confirm' => 'Confirm'), array('separator' => '')); ?></div>
-                                <?php
-                            } else {
-                                ?>
-                            <center><br><br>
-                                <b><?php echo (isset($model->AccAdmin->User->name) ? $model->AccAdmin->User->name : '') ?></b> 
-                                <br>
-                                <?php echo (isset($model->AccAdmin->created) ? date('d M Y', strtotime($model->AccAdmin->created)) : ''); ?><br>
-                                <?php echo (isset($model->AccAdmin->created) ? date('H:i:s', strtotime($model->AccAdmin->created)) : ''); ?><br><br></center>
-                            <?php
-                        }
-                        ?>
-                        </td>
-                        <td>
-                            <?php
-                            if ($adminStatus == 'confirm' and $managerStatus != 'confirm' and landa()->checkAccess('AccApproval', 'r')) {
-                                ?>
-                                <label for="managerDescription">Keterangan</label>
-                                <textarea style="width:90%;margin:10px;"  name="managerDescription" id="managerDescription"></textarea>
-                                <div align="center"><?php echo CHtml::radioButtonList('managerStatus', $managerStatus, array('pending' => 'Pending', 'reject' => 'Reject', 'confirm' => 'Confirm'), array('separator' => '')); ?></div>
-                                <?php
-                            } else if ($managerStatus == "confirm") {
-                                ?>
-                            <center><br><br>
-                                <b><?php echo (isset($model->AccManager->User->name) ? $model->AccManager->User->name : '') ?></b> 
-                                <br>
-                                <?php echo (isset($model->AccManager->created) ? date('d M Y', strtotime($model->AccManager->created)) : ''); ?><br>
-                                <?php echo (isset($model->AccManager->created) ? date('H:i:s', strtotime($model->AccManager->created)) : ''); ?><br><br></center>
-                            <?php
-                        }
-                        ?>
-                        </td>
-                        </tr>
-                        </tfoot>
-                    </table>
-                    <?php
-                }
-                ?>
-                <?php
-                if ($siteConfig->is_approval != "no") {
-                    ?>
-                    <br>
-                    <h4>History</h4>
-                    <table class="responsive table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
-                                <th>Keterangan</th>
-                                <th>User</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $no = 1;
-                            foreach ($approveDetail as $val) {
-                                if ($val->status == "open") {
-                                    $stt = '<span class="label">Open</span>';
-                                } elseif ($val->status == "pending") {
-                                    $stt = '<span class="label label-info">Pending</span>';
-                                } elseif ($val->status == "reject") {
-                                    $stt = '<span class="label label-important">Reject</span>';
-                                } elseif ($val->status == "confirm") {
-                                    $stt = '<span class="label label-success">Confirm</span>';
-                                }
-                                echo '  <tr>
-                                        <td>' . $no . '</td>
-                                        <td>' . date('d M Y H:i:s', strtotime($val->created)) . '</td>
-                                        <td>' . $stt . '</td>
-                                        <td>' . $val->description . '</td>
-                                        <td>' . $val->User->name . '</td>
-                                    </tr>';
-                                $no++;
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                    <?php
-                }
-                ?>
+                
             </fieldset>
         </div>
     </div>

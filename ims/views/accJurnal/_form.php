@@ -445,7 +445,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                     </tr>
                     <?php
-                    if ($siteConfig->autopostnumber == 0) {
+//                    if ($siteConfig->autopostnumber == 0) {
                         ?>
                         <tr>
                             <th>
@@ -458,7 +458,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             </th>
                         </tr>
                         <?php
-                    }
+//                    }
                     ?>
                 </table>
             </div>

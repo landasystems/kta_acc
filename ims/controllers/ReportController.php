@@ -476,7 +476,7 @@ class ReportController extends Controller {
                 table.tbPrint td, table.tbPrint th{
                     border: solid #000 2px;
             }');
-        $mCoaSub = new AccCoaSub();
+        $mCoaSub = new AccCoaDet();
         $this->render('rekapPiutang', array('mCoaSub' => $mCoaSub));
     }
 
@@ -488,7 +488,7 @@ class ReportController extends Controller {
                 table.tbPrint td, table.tbPrint th{
                     border: solid #000 2px;
             }');
-        $mCoaSub = new AccCoaSub();
+        $mCoaSub = new AccCoaDet();
         $this->render('rekapHutang', array('mCoaSub' => $mCoaSub));
     }
 
@@ -499,7 +499,7 @@ class ReportController extends Controller {
                 table.tbPrint td, table.tbPrint th{
                     border: solid #000 2px;
             }');
-        $mCoaSub = new AccCoaSub();
+        $mCoaSub = new AccCoaDet();
         $this->render('rekapStock', array('mCoaSub' => $mCoaSub));
     }
 

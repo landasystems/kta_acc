@@ -40,7 +40,6 @@
                     $credit = 0;
                     foreach ($accCoa as $b) {
                         $balance = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime($start)), $b->id, false);
-//                $SaldoAkhir = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime($end)), $b->id);
                         $total = AccCoaDet::model()->totalSaldo($start, $end, $b->id);
                         $SaldoAkhir = $balance + $total->sumDebet - $total->sumCredit;
                         if ($total->sumDebet != 0 || $total->sumCredit != 0 || $balance != 0) {

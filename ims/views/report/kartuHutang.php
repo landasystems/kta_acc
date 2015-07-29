@@ -94,7 +94,7 @@ $this->breadcrumbs = array(
 </div>
 
 <?php
-if (isset($_POST['yt0'])) {
+if (isset($_POST['AccCoaDet']['created'])) {
 
     if (!empty($_POST['AccCoaDet']['created'])) {
         $a = explode('-', $_POST['AccCoaDet']['created']);
