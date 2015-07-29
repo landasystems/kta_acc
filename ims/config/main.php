@@ -1,11 +1,11 @@
 <?php
-
 Yii::setPathOfAlias('', $root);
 Yii::setPathOfAlias('common', $root . DIRECTORY_SEPARATOR . 'common');
 
 return array(
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Accounting Management Systems',
+    'theme' => 'themes',
     'preload' => array('log', 'bootstrap'),
     'import' => array(
         'application.models.*',
@@ -13,22 +13,17 @@ return array(
         'common.extensions.*',
         'common.extensions.image.helpers.*',
     ),
-    'aliases' => array(
-        'xupload' => 'common.extensions.xupload'
-    ),
     'modules' => array(
         'landa',
         'gii' => array(
             'class' => 'system.gii.GiiModule',
             'password' => 'landak',
-            // If removed, Gii defaults to localhost only. Edit carefully to taste.
             'ipFilters' => array('127.0.0.1', '::1', 'localhost', '192.168.1.41'),
             'generatorPaths' => array(
-                'common.extensions.giiplus'  //Ajax Crud template path
+                'common.extensions.giiplus'  
             ),
         ),
     ),
-    // application components
     'components' => array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=' . $db,
@@ -47,9 +42,6 @@ return array(
             'basePath' => $root . 'common/messages/',
         ),
         'user' => array(
-            // enable cookie-based authentication
-//            'class' => 'RWebUser',
-            // enable cookie-based authentication
             'loginUrl' => array('/site/login'),
             'allowAutoLogin' => true,
         ),
@@ -66,7 +58,6 @@ return array(
             'urlSuffix' => '.html',
         ),
         'errorHandler' => array(
-            // use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(
@@ -79,7 +70,6 @@ return array(
                 array(
                     'class' => 'CFileLogRoute',
                     'levels' => 'error, warning',
-//                    'filter' => 'CLogFilter',
                 ),
             ),
         ),
@@ -92,17 +82,14 @@ return array(
         ),
         'image' => array(
             'class' => 'common.extensions.image.CImageComponent',
-            // GD or ImageMagick
             'driver' => 'GD',
-            // ImageMagick setup path
             'params' => array('directory' => '/opt/local/bin'),
         ),
         'themeManager' => array(
-            'basePath' => $root . 'common/themes/backend/',
-            'baseUrl' => $themesUrl . 'backend/', //this is the important part, setup a subdomain just for your common dir
+            'basePath' => $root . 'common/',
+            'baseUrl' => $themesUrl, 
         ),
         'cache' => array(
-            //'class'=>'system.caching.CMemCache',
             'class' => 'system.caching.CFileCache'
         ),
     ),
@@ -113,7 +100,6 @@ return array(
         'id' => '1',
         'urlImg' => $rootUrl . 'images/',
         'pathImg' => $root . 'ims/www/' . $client . '/images/',
-        'menu' => $menu,
     ),
 );
 ?>

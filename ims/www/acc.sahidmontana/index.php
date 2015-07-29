@@ -10,8 +10,5 @@ require_once(dirname(__FILE__) . '/../../../common/globals.php');
 require_once(dirname(__FILE__).'/../../../common/lib/yii/yii.php');
 
 $config_app=require(dirname(__FILE__).'/../../config/main.php'); // change this line for configuration
-$config_index = array('theme' => 'spr'); // change this line for configuration
-$config = CMap::mergeArray($config_index, $config_app);
-
-Yii::createWebApplication($config)->run();
+Yii::createWebApplication($config_app)->run();
 ?>

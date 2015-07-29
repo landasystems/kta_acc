@@ -29,6 +29,8 @@
                 });
             });
         </script>
-
+        <?php
+        $cs->registerScriptFile(bt() . '/js/main.js', CClientScript::POS_END);
+        ?>
     </body>
 </html>
