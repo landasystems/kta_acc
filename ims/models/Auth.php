@@ -116,12 +116,12 @@ class Auth extends CActiveRecord {
             ),
             array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16 icomoon-icon-user-3"></span>User', 'url' => array('/user'), 'auth_id' => 'User'),
             array('visible' => landa()->checkAccess('GroupSupplier', 'r') || landa()->checkAccess('userInvoice', 'r') || landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 wpzoom-user-2"></span>Supplier', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Supplier', 'url' => array('/user/supplier'), 'auth_id' => 'Supplier'),
-                    array('visible' => landa()->checkAccess('userInvoice', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Supplier Payment', 'url' => array('/user/userInvoice', 'type' => 'supplier'), 'auth_id' => 'userInvoice'),
+                    array('visible' => landa()->checkAccess('Supplier', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Supplier', 'url' => array('/supplier'), 'auth_id' => 'Supplier'),
+                    array('visible' => landa()->checkAccess('userInvoice', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Supplier Payment', 'url' => array('/supplier/payment'), 'auth_id' => 'userInvoice'),
                 )),
             array('visible' => landa()->checkAccess('Customer', 'r') || landa()->checkAccess('Customer', 'r'), 'label' => '<span class="icon16 wpzoom-user-2"></span>Customer', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('label' => '<span class="icon16 iconic-icon-pen"></span>Customer', 'url' => array('/user/customer'), 'auth_id' => 'Customer'),
-                    array('label' => '<span class="icon16 iconic-icon-pen"></span>Customer Invoice', 'url' => array('/user/userInvoice', 'type' => 'customer'), 'auth_id' => 'Customer'),
+                    array('label' => '<span class="icon16 iconic-icon-pen"></span>Customer', 'url' => array('/customer'), 'auth_id' => 'Customer'),
+                    array('label' => '<span class="icon16 iconic-icon-pen"></span>Customer Invoice', 'url' => array('/customer/receivable'), 'auth_id' => 'Customer'),
                 )),
             array('visible' => (landa()->checkAccess('AccCoa', 'r') || landa()->checkAccess('AccJurnal', 'r') || landa()->checkAccess('BeginningBalance', 'r') || landa()->checkAccess('BeginningBalanceKartu', 'r')), 'label' => '<span class="icon16 silk-icon-checklist"></span>Accounting', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('AccCoa', 'r'), 'label' => '<span class="icon16 iconic-icon-pen"></span>Daftar Perkiraan', 'url' => array('/accCoa'), 'auth_id' => 'AccCoa'),
