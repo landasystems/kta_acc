@@ -141,15 +141,15 @@ class AccCashInController extends Controller {
                         $debet[] = (object) array("id" => $model->id, "acc_coa_id" => $model->acc_coa_id, "date_trans" => $model->date_trans, "description" => $model->description, "total" => $model->total, "code" => $model->code, "reff_type" => "cash_in");
 
                         $siteConfig = SiteConfig::model()->findByPk(param('id'));
-                        if ($siteConfig->is_approval == "no") {
-//                            AccCoa::model()->transLedger(array(), $valSub);
-                            AccCoa::model()->trans($debet, $credit);
-                        } else {
+//                        if ($siteConfig->is_approval == "no") {
+////                            AccCoa::model()->transLedger(array(), $valSub);
+//                            AccCoa::model()->trans($debet, $credit);
+//                        } else {
                             $status = new AccApproval;
                             $status->status = "open";
                             $status->acc_cash_in_id = $model->id;
                             $status->save();
-                        }
+//                        }
                         $berhasil = true;
                         $this->redirect(array('view', 'id' => $model->id, 'berhasil' => $berhasil));
                     }
@@ -213,7 +213,7 @@ class AccCashInController extends Controller {
                             $cashin->code_acc = $_POST['codeAcc'];
 
                         if ($act == 'approve' && empty($_POST['codeAcc'])) { //hanya waktu action approve generate code acc
-                            $format = json_decode($siteConfig->autonumber);
+//                            $format = json_decode($siteConfig->autonumber);
                             if ($cashin->AccCoa->type_sub_ledger == 'ks') {
                                 DateConfig::model()->addYear($_POST['date_post'], 'cash_in');
                                 $cashin->code_acc = SiteConfig::model()->formatting('cashinks_acc', False, '', '', $_POST['date_post']);

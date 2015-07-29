@@ -136,15 +136,15 @@ class AccCashOutController extends Controller {
                         $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $model->acc_coa_id, "date_trans" => $model->date_trans, "description" => $model->description, "total" => $model->total, "code" => $model->code, "reff_type" => "cash_out");
 
                         $siteConfig = SiteConfig::model()->findByPk(param('id'));
-                        if ($siteConfig->is_approval == "no" or ( isset($data) and $siteConfig->is_approval == "manual")) {
-                            AccCoa::model()->trans($debet, $credit);
-//                            AccCoa::model()->transLedger($valSub, array());
-                        } else {
+//                        if ($siteConfig->is_approval == "no" or ( isset($data) and $siteConfig->is_approval == "manual")) {
+//                            AccCoa::model()->trans($debet, $credit);
+////                            AccCoa::model()->transLedger($valSub, array());
+//                        } else {
                             $status = new AccApproval;
                             $status->status = "open";
                             $status->acc_cash_out_id = $model->id;
                             $status->save();
-                        }
+//                        }
                         $berhasil = true;
                         $this->redirect(array('view', 'id' => $model->id, 'berhasil' => $berhasil));
                     }

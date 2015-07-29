@@ -129,24 +129,24 @@ class AccJurnalController extends Controller {
 //                            }
 
                             if ($_POST['valdebet'][$i] != 0) {
-                                $debet[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->debet, "code" => $model->code, "reff_type" => "jurnal");
+                                $debet[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->debet, "code" => $model->code, "reff_type" => "jurnal",'invoice_det_id' => $jurnalDet->invoice_det_id);
 //                                $subDebet[] = (object) array("id" => $model->id, "acc_coa_id" => $_POST['acc_coa_id'][$i], "date_trans" => $model->date_trans, "description" => $_POST['description'][$i], "debet" => $_POST['valdebet'][$i], "code" => $model->code, "reff_type" => "jurnal", "ar" => $ar, "as" => $as, "ap" => $ap);
                             } else {
-                                $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->credit, "code" => $model->code, "reff_type" => "jurnal");
+                                $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->credit, "code" => $model->code, "reff_type" => "jurnal",'invoice_det_id' => $jurnalDet->invoice_det_id);
 //                                $subCrediCt[] = (object) array("id" => $model->id, "acc_coa_id" => $_POST['acc_coa_id'][$i], "date_trans" => $model->date_trans, "description" => $_POST['description'][$i], "credit" => $_POST['valcredit'][$i], "code" => $model->code, "reff_type" => "jurnal", "ar" => $ar, "as" => $as, "ap" => $ap);
                             }
                         }
 
                         $siteConfig = SiteConfig::model()->findByPk(param('id'));
-                        if ($siteConfig->is_approval == "no") {
-                            AccCoa::model()->trans($debet, $credit);
+//                        if ($siteConfig->is_approval == "no") {
+//                            AccCoa::model()->trans($debet, $credit);
 //                            AccCoa::model()->transLedger($subDebet, $subCredit);
-                        } else {
+//                        } else {
                             $status = new AccApproval;
                             $status->status = "open";
                             $status->acc_jurnal_id = $model->id;
                             $status->save();
-                        }
+//                        }
                         $this->redirect(array('view', 'id' => $model->id));
                     } else {
                         Yii::app()->user->setFlash('error', '<strong>Error! </strong>No account added.');
@@ -214,13 +214,13 @@ class AccJurnalController extends Controller {
                         $jurnal->code_acc = $_POST['codeAcc'];
 
                     if ($act == 'approve' && empty($_POST['codeAcc'])) { //hanya waktu action approve generate code acc
-                        $format = json_decode($siteConfig->autonumber);
+//                        $format = json_decode($siteConfig->autonumber);
                         DateConfig::model()->addYear($_POST['date_post'], 'jurnal');
                         $jurnal->code_acc = SiteConfig::model()->formatting('jurnal_acc', False, '', '', $_POST['date_post']);
 //                        $format->jurnal++;
                         //tambah autonumber
-                        $siteConfig->autonumber = json_encode($format);
-                        $siteConfig->save();
+//                        $siteConfig->autonumber = json_encode($format);
+//                        $siteConfig->save();
                     }
                     $jurnal->save();
 
