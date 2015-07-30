@@ -57,11 +57,11 @@ class Supplier extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'code' => 'Code',
-            'name' => 'Name',
-            'city_id' => 'City',
-            'address' => 'Address',
-            'phone' => 'Phone',
+            'code' => 'Kode',
+            'name' => 'Nama',
+            'city_id' => 'Kota',
+            'address' => 'Alamat',
+            'phone' => 'No Telp',
             'email' => 'Email',
         );
     }

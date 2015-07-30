@@ -42,9 +42,12 @@ class CustomerController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
+        cs()->registerScript('read', '
+                    $("form input, form textarea, form select").each(function(){
+                    $(this).prop("disabled", true);
+                });');
+        $_GET['v'] = true;
+        $this->actionUpdate($id);
     }
 
     /**
@@ -218,6 +221,88 @@ class CustomerController extends Controller {
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'customer-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
+        }
+    }
+
+    public function actionReceivable() {
+        $header = Customer::model()->findAll(array(
+            'order' => 't.name',
+        ));
+        $alert = false;
+        if (isset($_POST['code'])) {
+            for ($i = 0; $i < count($_POST['code']); $i++) {
+                if (empty($_POST['id'][$i])) {
+                    $payment = new InvoiceDet();
+                } else {
+                    $payment = InvoiceDet::model()->findByPk($_POST['id'][$i]);
+                }
+                $payment->code = $_POST['code'][$i];
+                $payment->description = $_POST['description'][$i];
+                $payment->user_id = $_POST['user_id'][$i];
+                $payment->payment = $_POST['payment'][$i];
+                $payment->type = 'customer';
+                $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
+                if ($payment->save()) {
+                    if (empty($_POST['id_coaDet'][$i])) {
+                        $coaDet = new AccCoaDet();
+                    } else {
+                        $coaDet = AccCoaDet::model()->findByPk($_POST['id_coaDet'][$i]);
+                    }
+                    $coaDet->description = $payment->description;
+                    $coaDet->reff_type = "invoice";
+                    if ($payment->is_new_invoice == 1) {
+                        $coaDet->credit = 0;
+                        $coaDet->debet = 0;
+                    } else {
+                        $coaDet->debet = $_POST['payment'][$i];
+                    }
+                    $coaDet->invoice_det_id = $payment->id;
+                    $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
+                    $coaDet->save();
+                }
+                $alert = true;
+            }
+        }
+        $this->render('receivable', array(
+            'header' => $header,
+            'alert' => $alert
+        ));
+    }
+
+    public function actionAddRow() {
+        if (!empty($_POST['code'])) {
+            echo '<tr>'
+            . '<td>'
+            . '<input type="text" class="code" style="width:94%" name="code[]" value="' . $_POST['code'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" class="dateStart" style="width:90%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" class="term" style="width:90%" name="term_date[]" value="' . $_POST['terms'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" style="width:98%" name="description[]" value="' . $_POST['desc'] . '">'
+            . '</td>'
+            . '<td style="text-align:center">
+                <div class="input-prepend">
+                    <span class="add-on">Rp.</span>
+                    <input type="text" class="angka charge nilai" name="payment[]" value="' . $_POST['payment'] . '">
+                </div>
+            </td>'
+            . '<td>'
+            . '<span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>'
+            . '<input type="hidden" class="user" name="user_id[]" value="' . $_POST['sup_id'] . '">'
+            . '<input type="hidden" class="id_invoice" name="id[]" value="">'
+            . '<input type="hidden" class="id_coaDet" name="id_coaDet[]" value="">'
+            . '</td>'
+            . '</tr>'
+            . '<tr class="addRows" style="display:none;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>';
         }
     }
 

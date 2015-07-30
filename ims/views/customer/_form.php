@@ -24,34 +24,6 @@
 
                 <table>
                     <tr>
-                        <td width="200">
-
-                            <?php
-//                          $imgs = '';
-                            $cc = '';
-                            if ($model->isNewRecord) {
-                                $img = Yii::app()->landa->urlImg('', '', '');
-                            } else {
-                                $img = Yii::app()->landa->urlImg('avatar/', $model->avatar_img, $_GET['id']);
-                                $del = '<div class="btn-group photo-det-btn">';
-                                $imgs = param('urlImg') . '350x350-noimage.jpg';
-                                $cc = CHtml::ajaxLink(
-                                                '<i class="icon-trash">Remove Photo</i>', url('user/removephoto', array('id' => $model->id)), array(
-                                            'type' => 'POST',
-                                            'success' => 'function( data )
-                                                    {
-                                                           $("#my_image").attr("src","' . $imgs . '");
-                                                           $("#yt0").fadeOut();
-                                                    }'), array('class' => 'btn btn-large btn-block btn-primary', 'style' => 'width: 360px;font-size: 15px;')
-                                        )
-                                        . '</div>';
-                            }
-                            echo '<img width="230" src="' . $img['medium'] . '" alt="" class="image img-polaroid" id="my_image"  /> ';
-                            echo $cc;
-                            ?>
-                            <br><br><div style="margin-left: -90px;"> <?php echo $form->fileFieldRow($model, 'avatar_img', array('class' => 'span3')); ?></div>
-
-                        </td>
                         <td style="vertical-align: top;">
                             <br/> 
                             <h3>Profile Information</h3>
