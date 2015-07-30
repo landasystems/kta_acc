@@ -199,7 +199,6 @@ class SupplierController extends Controller {
                 $payment->payment = $_POST['payment'][$i];
                 $payment->type = 'supplier';
                 $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
-//                $payment->save();
                 if ($payment->save()) {
                     if (empty($_POST['id_coaDet'][$i])) {
                         $coaDet = new AccCoaDet();
@@ -212,18 +211,12 @@ class SupplierController extends Controller {
                         $coaDet->credit = 0;
                         $coaDet->debet = 0;
                     } else {
-                        if ($_GET['type'] == "customer") {
-                            $coaDet->debet = $_POST['payment'][$i];
-                        } else {
-                            $coaDet->credit = $_POST['payment'][$i];
-                        }
+                        $coaDet->credit = $_POST['payment'][$i];
                     }
                     $coaDet->invoice_det_id = $payment->id;
                     $coaDet->date_coa = date('Y-m-d', strtotime($_POST['date_coa'][$i]));
                     $coaDet->save();
-//                    logs($coaDet->getErrors());
                 }
-//                logs($payment->getErrors());
                 $alert = true;
             }
         }
@@ -231,6 +224,43 @@ class SupplierController extends Controller {
             'header' => $header,
             'alert' => $alert
         ));
+    }
+
+    public function actionAddRow() {
+        if (!empty($_POST['code'])) {
+            echo '<tr>'
+            . '<td>'
+            . '<input type="text" class="code" style="width:94%" name="code[]" value="' . $_POST['code'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" class="dateStart" style="width:90%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" class="term" style="width:90%" name="term_date[]" value="' . $_POST['terms'] . '">'
+            . '</td>'
+            . '<td>'
+            . '<input type="text" style="width:98%" name="description[]" value="' . $_POST['desc'] . '">'
+            . '</td>'
+            . '<td style="text-align:center">
+                <div class="input-prepend">
+                    <span class="add-on">Rp.</span>
+                    <input type="text" class="angka charge nilai" name="payment[]" value="' . $_POST['payment'] . '">
+                </div>
+            </td>'
+            . '<td>'
+            . '<span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>'
+            . '<input type="hidden" class="user" name="user_id[]" value="' . $_POST['sup_id'] . '">'
+            . '<input type="hidden" class="id_invoice" name="id[]" value="">'
+            . '<input type="hidden" class="id_coaDet" name="id_coaDet[]" value="">'
+            . '</td>'
+            . '</tr>'
+            . '<tr class="addRows" style="display:none;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>';
+        }
     }
 
 }

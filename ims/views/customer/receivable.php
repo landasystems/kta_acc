@@ -1,6 +1,6 @@
 <?php
 
-$this->setPageTitle('Supplier Payment');
+$this->setPageTitle('Customer Invoice');
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
@@ -20,7 +20,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
         <legend>
             <p class="note">
-                <span class="required">*</span> Berikut adalah daftar <?php
+                <span class="required">*</span> Berikut adalah daftar Piutang<?php
 //                echo $title . ' ';
                 Yii::app()->name;
                 echo param('clientName');
@@ -66,7 +66,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 $balance= '';
             }
 //            $alert = false;
-            $this->renderPartial('_payment', array(
+            $this->renderPartial('_receivable', array(
 //                'sTot' => $sTot,
                 'userInvoice' => $userInvoice,
                 'ambil' => false,
