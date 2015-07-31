@@ -111,7 +111,7 @@ class Auth extends CActiveRecord {
             array('visible' => user()->isSuperUser, 'label' => '<span class="icon16 icomoon-icon-cog"></span>Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('label' => '<span class="icon16 iconic-icon-new-window"></span>Site config', 'url' => array('/siteConfig/update/1')),
                     array('label' => '<span class="icon16 minia-icon-office"></span>Unit Kerja', 'url' => array('/departement')),
-                    array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/landa/roles')),
+                    array('label' => '<span class="icon16 entypo-icon-users"></span>Access', 'url' => array('/roles')),
                 ),
             ),
             array('visible' => landa()->checkAccess('User', 'r'), 'label' => '<span class="icon16 icomoon-icon-user-3"></span>User', 'url' => array('/user'), 'auth_id' => 'User'),

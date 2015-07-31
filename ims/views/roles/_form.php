@@ -18,19 +18,8 @@
         <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
 
         <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 255)); ?>
-        <?php
-        echo $form->toggleButtonRow($model, 'is_allow_login', array(
-            'onChange' => '
-                            if($("#Roles_is_allow_login").prop("checked")){
-                            $(".elek").show();
-                            }else{
-                            $(".elek").hide();
-                            }'
-        ));
-        $class = ($model->is_allow_login == 1) ? 'block' : 'none';
-        ?>
 
-        <div class="well elek" style="display:<?php echo $class ?>;">
+        <div class="well elek">
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#module" data-toggle="tab">Module</a></li>
                 <li><a href="#extended" data-toggle="tab">Extended</a></li>
@@ -119,13 +108,6 @@
                 'type' => 'primary',
                 'icon' => 'ok white',
                 'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
-            ));
-            ?>
-            <?php
-            $this->widget('bootstrap.widgets.TbButton', array(
-                'buttonType' => 'reset',
-                'icon' => 'remove',
-                'label' => 'Reset',
             ));
             ?>
         </div>
