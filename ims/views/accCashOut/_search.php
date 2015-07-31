@@ -51,20 +51,6 @@ echo $form->dateRangeRow(
 <?php $this->endWidget(); ?>
 
 <script type="text/javascript">
-    jQuery(function ($) {
-        $(".btnreset").click(function () {
-            $(":input", "#search-acc-cash-out-form").each(function () {
-                var type = this.type;
-                var tag = this.tagName.toLowerCase(); // normalize case
-                if (type == "text" || type == "password" || tag == "textarea")
-                    this.value = "";
-                else if (type == "checkbox" || type == "radio")
-                    this.checked = false;
-                else if (tag == "select")
-                    this.selectedIndex = "";
-            });
-        });
-    });
     function submitForm() {
         var condition = $("#search-acc-cash-out-form").serialize();
         var date = $("#AccCashOut_date_posting").val();
@@ -74,6 +60,5 @@ echo $form->dateRangeRow(
             alert("Rentang Tgl Posting tidak boleh kosong!");
         }
     }
-
 </script>
 

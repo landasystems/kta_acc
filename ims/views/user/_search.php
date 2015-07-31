@@ -51,16 +51,4 @@
 $cs->registerCoreScript('jquery');
 $cs->registerCoreScript('jquery.ui');
 $cs->registerCssFile(Yii::app()->request->baseUrl.'/css/bootstrap/jquery-ui.css');
-?>	
-   <script>
-	$(".btnreset").click(function(){
-		$(":input","#search-User-form").each(function() {
-		var type = this.type;
-		var tag = this.tagName.toLowerCase(); // normalize case
-		if (type == "text" || type == "password" || tag == "textarea") this.value = "";
-		else if (type == "checkbox" || type == "radio") this.checked = false;
-		else if (tag == "select") this.selectedIndex = "";
-	  });
-	});
-   </script>
-
+?>

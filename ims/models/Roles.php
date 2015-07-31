@@ -45,7 +45,7 @@ class Roles extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Grup Hak Akses',
             'is_allow_login' => 'Is Allow Login',
         );
     }
@@ -62,24 +62,12 @@ class Roles extends CActiveRecord {
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search($type = 'user') {
+    public function search() {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
-
-        $criteria->compare('id', $this->id);
         $criteria->compare('name', $this->name, true);
-        $criteria->compare('is_allow_login', $this->is_allow_login);
 
-        if ($type == 'customer') {
-            $criteria->compare('type', 'customer');
-        } elseif ($type == 'user') {
-            $criteria->compare('is_allow_login', '1', true);
-        } elseif ($type == 'supplier') {
-            $criteria->compare('type', 'supplier');
-        } else {
-            $criteria->compare('is_allow_login', '1', true);
-        }
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));

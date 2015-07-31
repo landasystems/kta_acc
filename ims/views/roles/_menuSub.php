@@ -31,19 +31,19 @@ foreach ($arrMenu as $arr) {
             }
             //-------------end of checkbox--------------------
 
-            if (isset($mAuth[$arr['auth_id']]->crud)) {
-                $arrAuth = json_decode($mAuth[$arr['auth_id']]->crud, true);
+            if (isset($arr['crud'])) {
+                $arrAuth = $arr['crud'];
                 $r = (isset($arrAuth['r']) && $arrAuth['r'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[r]', $rValue) : '';
                 $c = (isset($arrAuth['c']) && $arrAuth['c'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[c]', $cValue) : '';
                 $u = (isset($arrAuth['u']) && $arrAuth['u'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[u]', $uValue) : '';
                 $d = (isset($arrAuth['d']) && $arrAuth['d'] == 1) ? CHtml::CheckBox($arr['auth_id'] . '[d]', $dValue) : '';
-
+                
                 echo '<tr>
                                     <td><input type="hidden" name="auth_id[]" value="' . $arr['auth_id'] . '"/>' . $space. $arr['label'] . '</td>
-                                    <td>' . $r . '</td>
-                                    <td>' . $c . '</td>
-                                    <td>' . $u . '</td>
-                                    <td>' . $d . '</td>
+                                    <td style="text-align:center">' . $r . '</td>
+                                    <td style="text-align:center">' . $c . '</td>
+                                    <td style="text-align:center">' . $u . '</td>
+                                    <td style="text-align:center">' . $d . '</td>
                                 </tr>';
             }else{
                 echo '<tr>
@@ -58,7 +58,7 @@ foreach ($arrMenu as $arr) {
 
 
         if (isset($arr['items'])) {
-            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth, 'mAuth' => $mAuth, 'model' => $model, 'space'=>$space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
+            $this->renderPartial('_menuSub', array('arrMenu' => $arr['items'], 'mRolesAuth' => $mRolesAuth,'model' => $model, 'space'=>$space . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
         }
     }
 }
