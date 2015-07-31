@@ -34,7 +34,7 @@ class RolesController extends Controller {
                 $(this).prop("disabled", true);
             });');
         $_GET['v'] = true;
-        $this->render('view', array(
+        $this->render('update', array(
             'model' => $this->loadModel($id),
         ));
     }
@@ -45,7 +45,7 @@ class RolesController extends Controller {
             $model->attributes = $_POST['Roles'];
             if ($model->save()) {
                 $this->saveRolesAuth($model->id);
-                $this->redirect(array('view', 'id' => $model->id, 'type' => $type));
+                $this->redirect(array('view', 'id' => $model->id));
             }
         }
 

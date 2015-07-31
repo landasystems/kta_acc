@@ -11,9 +11,6 @@
     ));
     ?>
     <fieldset>
-        <legend>
-            <p class="note">Fields dengan <span class="required">*</span> harus di isi.</p>
-        </legend>
 
         <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
 
@@ -22,7 +19,7 @@
         <div class="well elek">
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#module" data-toggle="tab">Module</a></li>
-                <li><a href="#extended" data-toggle="tab">Extended</a></li>
+                <li><a href="#extended" data-toggle="tab">Akses Perkiraan</a></li>
             </ul>
 
             <div class="tab-content">
@@ -31,7 +28,7 @@
                         <thead> 
                             <tr>
                                 <th></th>
-                                <th>Read</th>
+                                <th>Access (Read/ View)</th>
                                 <th>Create</th>
                                 <th>Update</th>
                                 <th>Delete</th>
@@ -40,14 +37,12 @@
                         <tbody>
                             <?php
                             $arrMenu = Auth::model()->modules();
-                            $mAuth = Auth::model()->findAll(array('index' => 'id', 'select' => 'id,crud'));
-
                             if ($model->isNewRecord == false) {
                                 $mRolesAuth = RolesAuth::model()->findAll(array('condition' => 'roles_id=' . $model->id, 'select' => 'id,auth_id,crud', 'index' => 'auth_id'));
                             } else {
                                 $mRolesAuth = array();
                             }
-                            $this->renderPartial('_menuSub', array('arrMenu' => $arrMenu, 'mRolesAuth' => $mRolesAuth, 'mAuth' => $mAuth, 'model' => $model, 'space' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
+                            $this->renderPartial('_menuSub', array('arrMenu' => $arrMenu, 'mRolesAuth' => $mRolesAuth, 'model' => $model, 'space' => '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'));
                             ?>
                         </tbody>
                     </table>
@@ -107,6 +102,7 @@
                 'buttonType' => 'submit',
                 'type' => 'primary',
                 'icon' => 'ok white',
+                'visible' => !isset($_GET['v']),
                 'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
             ));
             ?>

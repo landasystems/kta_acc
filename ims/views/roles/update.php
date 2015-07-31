@@ -1,9 +1,6 @@
 <?php
-$this->setPageTitle('Edit Hak Akses | '. $model->name);
+$this->setPageTitle('Hak Akses | '. $model->name);
 
-?>
-
-<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
         'class' => ''

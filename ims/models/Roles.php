@@ -45,7 +45,7 @@ class Roles extends CActiveRecord {
     public function attributeLabels() {
         return array(
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Grup Hak Akses',
             'is_allow_login' => 'Is Allow Login',
         );
     }
