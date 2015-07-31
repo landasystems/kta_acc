@@ -31,7 +31,7 @@ $this->breadcrumbs = array(
                 <label class="control-label">Nama Customer</label>
                 <div class="controls">
                     <?php
-                    $data = array(0 => 'Pilih') + CHtml::listData(User::model()->listUsers('customer'), 'id', 'name');
+                    $data = array(0 => 'Pilih') + CHtml::listData(Customer::model()->findAll(), 'id', 'name');
                     $this->widget('bootstrap.widgets.TbSelect2', array(
                         'asDropDownList' => TRUE,
                         'data' => $data,

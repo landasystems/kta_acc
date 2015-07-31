@@ -77,7 +77,7 @@ if (isset($_POST['AccCoaDet']['created'])) {
         $a = explode('-', $_POST['AccCoaDet']['created']);
         $start = date('Y-m-d', strtotime($a[0]));
         $end = date('Y-m-d', strtotime($a[1]));
-        $supplier = User::model()->listUsers('supplier');
+        $supplier = Supplier::model()->findAll();
 
         $this->renderPartial('_rekapHutangResult', array(
             'a' => $a,
