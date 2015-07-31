@@ -47,7 +47,7 @@ class AccJurnalController extends Controller {
     public function actionView($id) {
         cs()->registerCss('', '@page { size:22cm 14cm;margin: 0.4cm;}');
 
-        $detailJurnal = AccJurnalDet::model()->findAll(array('order'=>'id','condition' => 'acc_jurnal_id=' . $id));
+        $detailJurnal = AccJurnalDet::model()->findAll(array('order' => 'id', 'condition' => 'acc_jurnal_id=' . $id));
         $approveDetail = AccApproval::model()->findAll(array('condition' => 'acc_jurnal_id= ' . $id));
         $this->render('view', array(
             'model' => $this->loadModel($id),
@@ -129,10 +129,10 @@ class AccJurnalController extends Controller {
 //                            }
 
                             if ($_POST['valdebet'][$i] != 0) {
-                                $debet[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->debet, "code" => $model->code, "reff_type" => "jurnal",'invoice_det_id' => $jurnalDet->invoice_det_id);
+                                $debet[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->debet, "code" => $model->code, "reff_type" => "jurnal", 'invoice_det_id' => $jurnalDet->invoice_det_id);
 //                                $subDebet[] = (object) array("id" => $model->id, "acc_coa_id" => $_POST['acc_coa_id'][$i], "date_trans" => $model->date_trans, "description" => $_POST['description'][$i], "debet" => $_POST['valdebet'][$i], "code" => $model->code, "reff_type" => "jurnal", "ar" => $ar, "as" => $as, "ap" => $ap);
                             } else {
-                                $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->credit, "code" => $model->code, "reff_type" => "jurnal",'invoice_det_id' => $jurnalDet->invoice_det_id);
+                                $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $jurnalDet->acc_coa_id, "date_trans" => $model->date_trans, "description" => $jurnalDet->description, "total" => $jurnalDet->credit, "code" => $model->code, "reff_type" => "jurnal", 'invoice_det_id' => $jurnalDet->invoice_det_id);
 //                                $subCrediCt[] = (object) array("id" => $model->id, "acc_coa_id" => $_POST['acc_coa_id'][$i], "date_trans" => $model->date_trans, "description" => $_POST['description'][$i], "credit" => $_POST['valcredit'][$i], "code" => $model->code, "reff_type" => "jurnal", "ar" => $ar, "as" => $as, "ap" => $ap);
                             }
                         }
@@ -142,10 +142,10 @@ class AccJurnalController extends Controller {
 //                            AccCoa::model()->trans($debet, $credit);
 //                            AccCoa::model()->transLedger($subDebet, $subCredit);
 //                        } else {
-                            $status = new AccApproval;
-                            $status->status = "open";
-                            $status->acc_jurnal_id = $model->id;
-                            $status->save();
+                        $status = new AccApproval;
+                        $status->status = "open";
+                        $status->acc_jurnal_id = $model->id;
+                        $status->save();
 //                        }
                         $this->redirect(array('view', 'id' => $model->id));
                     } else {
@@ -171,7 +171,7 @@ class AccJurnalController extends Controller {
         $this->cssJs();
         $accCoaSub = array();
         $jurnal = $this->loadModel($id);
-        $detailJurnal = AccJurnalDet::model()->findAll(array('order'=>'id','condition' => 'acc_jurnal_id=' . $jurnal->id));
+        $detailJurnal = AccJurnalDet::model()->findAll(array('order' => 'id', 'condition' => 'acc_jurnal_id=' . $jurnal->id));
 
         // load model approve
         $act = (isset($_GET['act'])) ? $_GET['act'] : '';
@@ -386,62 +386,6 @@ class AccJurnalController extends Controller {
 
         if (isset($_GET['AccJurnal'])) {
             $model->attributes = $_GET['AccJurnal'];
-
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-
-            if (!empty($model->date_trans))
-                $criteria->addCondition('date_trans = "' . $model->date_trans . '"');
-
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-
-            if (!empty($model->total_debet))
-                $criteria->addCondition('total_debet = "' . $model->total_debet . '"');
-
-
-
-            if (!empty($model->total_credit))
-                $criteria->addCondition('total_credit = "' . $model->total_credit . '"');
-
-
-            if (
-                    !empty($model->acc_admin_user_id))
-                $criteria->addCondition('acc_admin_user_id = "' . $model->acc_admin_user_id . '"');
-
-
-
-            if (!empty($model->acc_user_id))
-                $criteria->addCondition('acc_user_id = "' . $model->acc_user_id . '"');
-
-
-
-            if (!empty($model->created))
-                $criteria->addCondition('created = "' . $model->created . '"');
-
-
-            if
-            (!empty($model->created_user_id))
-                $criteria->addCondition('created_user_id = "' . $model->created_user_id . '"');
-
-
-
-            if (!empty($model->modified))
-                $criteria->addCondition('modified = "' . $model->modified . '"');
         }
 
         $this->render('index', array(
@@ -599,20 +543,24 @@ class AccJurnalController extends Controller {
         $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
         $mInvoce = InvoiceDet::model()->findByPk($subId);
-        $invoiceName = (!empty($mInvoce->code) && !empty($mInvoce->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $mInvoce->User->name : '';
+        if(!empty($mInvoce)){
+            if($mInvoce->type== "supplier"){
+                $name = (!empty($mInvoce->Supplier->name)) ? $mInvoce->Supplier->name : '';
+            }elseif($mInvoce->type == "customer"){
+                $name = (!empty($mInvoce->Customer->name) ? $mInvoce->Customer->name : '');
+            }
+        }
+        $invoiceName = (!empty($mInvoce->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $name : '';
         if ($acca->type != "general") {
             if (isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
 
-                if (
-                        $acca->type_sub_ledger == "ar")
-                    $account = User::model()->findByPk($_POST['accountName']);
+                if ($acca->type_sub_ledger == "ar")
+                    $account = Customer::model()->findByPk($_POST['accountName']);
 
-                if (
-                        $acca->type_sub_ledger == "ap")
-                    $account = User::model()->findByPk($_POST['accountName']);
+                if ($acca->type_sub_ledger == "ap")
+                    $account = Supplier::model()->findByPk($_POST['accountName']);
 
-                if (
-                        $acca->type_sub_ledger == "as")
+                if ($acca->type_sub_ledger == "as")
                     $account = Product::model()->findByPk($_POST['accountName']);
 
                 $name = $account->name;
@@ -703,7 +651,7 @@ class AccJurnalController extends Controller {
 
         $model = AccJurnalDet::model()->findAll($criteria);
 
-        $a = explode('-',$jurnal->date_posting);
+        $a = explode('-', $jurnal->date_posting);
 
         return Yii::app()->request->sendFile('excelReport.xls', $this->renderPartial('excelReport', array(
                             'model' => $model,

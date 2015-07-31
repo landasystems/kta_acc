@@ -119,7 +119,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 'bootstrap.widgets.TbModal', array(
             'id' => 'modalSub',
             'htmlOptions' => array(
-                'style' => 'width:700px'
+                'style' => 'width:1000px;margin-left:-500px;'
             )
                 )
         );
@@ -244,6 +244,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     $invoiceName = '';
                     if ($model->isNewRecord == false and ! isset($_POST['AccCashOutDet'])) {
                         $i = 0;
+                        $name = '';
                         foreach ($cashOutDet as $viewCashOutDet) {
                             $invoice = (!empty($viewCashOutDet->invoice_det_id)) ? $viewCashOutDet->invoice_det_id : 0;
                             $code = (!empty($viewCashOutDet->InvoiceDet->code)) ? $viewCashOutDet->InvoiceDet->code : "-";
@@ -254,24 +255,20 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 $accCoaName = ' - ';
                             }
 
-                            if (!empty($viewCashOutDet->ar_id)) {
-                                $account = User::model()->findByPk($viewCashOutDet->ar_id);
-                                $name = $account->name;
-                                $id = $account->id;
-                            } else if (!empty($viewCashOutDet->ap_id)) {
-                                $account = User::model()->findByPk($viewCashOutDet->ap_id);
-                                $name = $account->name;
-                                $id = $account->id;
-                            } else if (!empty($viewCashOutDet->as_id)) {
-                                $account = Product::model()->findByPk($viewCashOutDet->as_id);
-                                $name = $account->name;
-                                $id = $account->id;
+                            if (!empty($viewCashOutDet->invoice_det_id)) {
+//                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
+                                if ($viewCashOutDet->InvoiceDet->type == "customer") {
+                                    $name = $viewCashOutDet->InvoiceDet->Customer->name;
+                                    $id = $viewCashOutDet->InvoiceDet->user_id;
+                                } elseif ($viewCashOutDet->InvoiceDet->type == "supplier") {
+                                    $name = $viewCashOutDet->InvoiceDet->Supplier->name;
+                                    $id = $viewCashOutDet->InvoiceDet->user_id;
+                                }
                             } else {
-                                $account = (object) array('id' => '', 'name' => '');
                                 $name = "-";
-                                $id = "0";
+                                $id = 0;
                             }
-                            $invoiceName = (!empty($viewCashOutDet->InvoiceDet->code) && !empty($viewCashOutDet->InvoiceDet->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $viewCashOutDet->InvoiceDet->code . ']' . $viewCashOutDet->InvoiceDet->User->name : '';
+                            $invoiceName = (!empty($viewCashOutDet->InvoiceDet->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $viewCashOutDet->InvoiceDet->code . ']' . $name : '';
                             if (isset($_POST['AccCashOutDet'])) {
                                 $amount = $_POST['AccCashOutDet']['amount'][$i];
                             } else {
@@ -305,22 +302,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             $accCoa = AccCoa::model()->find(array('condition' => 'id=' . $_POST['AccCashOutDet']['acc_coa_id'][$i]));
                             $name = $accCoa->name;
                             $id = $accCoa->id;
-                            if (!empty($_POST['nameAccount'][$i])) {
-
-                                if ($accCoa->type_sub_ledger == "ar")
-                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                if ($accCoa->type_sub_ledger == "ap")
-                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                if ($accCoa->type_sub_ledger == "as")
-                                    $account = Product::model()->findByPk($_POST['nameAccount'][$i]);
-
-                                $name = $account->name;
-                                $id = $account->id;
+                            if (!empty($viewCashOutDet->invoice_det_id)) {
+//                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
+                                if ($viewCashOutDet->InvoiceDet->type == "customer") {
+                                    $name = $viewCashOutDet->InvoiceDet->Customer->name;
+                                    $id = $viewCashOutDet->InvoiceDet->user_id;
+                                } elseif ($viewCashOutDet->InvoiceDet->type == "supplier") {
+                                    $name = $viewCashOutDet->InvoiceDet->Supplier->name;
+                                    $id = $viewCashOutDet->InvoiceDet->user_id;
+                                }
                             } else {
                                 $name = "-";
-                                $id = "";
+                                $id = 0;
                             }
 
                             echo '  <tr>
@@ -454,18 +447,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     </tr>
                     <?php
 //                    if ($siteConfig->autopostnumber == 0) {
-                        ?>
-                        <tr>
-                            <th>
-                                <label>No Posting </label>
-                            </th>
-                            <th>
-                                <?php
-                                echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
-                                ?>
-                            </th>
-                        </tr>
-                        <?php
+                    ?>
+                    <tr>
+                        <th>
+                            <label>No Posting </label>
+                        </th>
+                        <th>
+                            <?php
+                            echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
+                            ?>
+                        </th>
+                    </tr>
+                    <?php
 //                    }
                     ?>
                 </table>
@@ -563,7 +556,6 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         return rupiah.split("", rupiah.length - 1).reverse().join("");
     }
 
-
     function clear() {
         $("#debit").val("0");
         $("#costDescription").val("");
@@ -577,6 +569,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             e.preventDefault();
         }
     });
+
     function checkSelected() {
         var val1 = $("#AccCashIn_account").val();
         var val2 = $("#account").val();
@@ -589,6 +582,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             //do nothing
         }
     }
+
     $("body").on("click", ".ambil", function () {
         var id = $(this).attr("det_id");
         var userId = $(this).attr("user_id");
@@ -620,10 +614,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     });
     function selectInvoice() {
         var id = $("#accountName").val();
+        var type = $("#type_account").val();
         $.ajax({
             type: 'POST',
             url: "<?php echo url('accCoa/selectInvoice') ?>",
-            data: {id: id},
+            data: {id: id, type: type},
             success: function (data) {
                 $("#detail").html(data);
             }
@@ -673,6 +668,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             success: function (data) {
                 obj = JSON.parse(data);
                 $(".isiModal").html(obj.render);
+                $("#type_account").val(obj.type);
                 if (obj.tampil == true) {
                     elements.attr('style', 'display:');
                 } else {

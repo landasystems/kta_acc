@@ -322,18 +322,23 @@ class AccCoaController extends Controller {
         $model = AccCoa::model()->findByPk($_POST['ledger']);
         $ledger = $model->type_sub_ledger;
         $array = array();
+        $type = '';
         if ($ledger == "ar") {
-            $array = User::model()->listUsers('customer');
+            $type = 'customer';
+            $array = Customer::model()->findAll();
         } else if ($ledger == "ap") {
-            $array = User::model()->listUsers('supplier');
+            $array = Supplier::model()->findAll();
+            $type = 'supplier';
         } else if ($ledger == "as") {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
+            $type = 'stock';
         }
 
         $isi['tampil'] = ($ledger == 'ar' || $ledger == 'as' || $ledger == 'ap') ? true : false;
         $isi['render'] = $this->renderPartial('/invoiceDet/_searchInvoice', array(
             'array' => $array
                 ), true);
+        $isi['type'] = $type;
         echo json_encode($isi);
     }
 
@@ -343,11 +348,9 @@ class AccCoaController extends Controller {
         if (isset($_POST['AccCoa'])) {
             $file = CUploadedFile::getInstance($model, 'filee');
             if (is_object($file)) { //jika filenya valid
-//                trace('aaa');
                 $file->saveAs('images/file/' . $file->name);
                 $data = new Spreadsheet_Excel_Reader('images/file/' . $file->name);
 
-//                trace($data);
                 $id = array();
                 $nama = array();
                 for ($j = 2; $j <= $data->sheets[0]['numRows']; $j++) {
@@ -569,13 +572,19 @@ class AccCoaController extends Controller {
     }
 
     public function actionSelectInvoice() {
-        if (isset($_POST['id'])) {
-            $account = User::model()->findByPk($_POST['id']);
-            $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
+        if (isset($_POST['id']) && !empty($_POST['type'])) {
+            $type = $_POST['type'];
+            if($type == 'customer'){
+                $account = Customer::model()->findByPk($_POST['id']);
+            }elseif($type == 'supplier'){
+                $account = Supplier::model()->findByPk($_POST['id']);
+            }
+            
+            $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id'],'type' => $type));
             echo '<tr><th><input type="text" name="code_invoice" style="width:85%" id="code_invoice"></th>';
             echo '<th><input style="width:95%" type="text" name="invoice_description" id="invoice_description"></th>';
             echo '<th><input style="max-width:90% !important" type="text" class="angka" id="invoice_amount" value="0"></th>';
-            echo '<th><input type="hidden" id="type_invoice" value="' . $account->Roles->type . '"></th>';
+            echo '<th><input type="hidden" id="type_invoice" value="' . $type . '"></th>';
             echo '<td style="text-align:center"><a title="Tambah" rel="tooltip" href="#" class="addNewInvoice btn btn-mini">&nbsp;<i class=" brocco-icon-plus"></i></a></td></tr>';
             foreach ($balance as $b) {
                 $charge = AccCoaDet::model()->balanceInvoice($b->id); //filter no date

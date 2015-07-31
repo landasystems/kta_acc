@@ -133,13 +133,11 @@ $this->endWidget();
 
                             if (!empty($viewCashOutDet->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $viewCashOutDet->InvoiceDet->User->name;
-//                            } else if (!empty($viewCashOutDet->ap_id)) {
-//                                $account = User::model()->findByPk($viewCashOutDet->ap_id);
-//                                $name = $account->name;
-//                            } else if (!empty($viewCashOutDet->as_id)) {
-//                                $account = Product::model()->findByPk($viewCashOutDet->as_id);
-//                                $name = $account->name;
+                                if($viewCashOutDet->InvoiceDet->type=="customer"){
+                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $viewCashOutDet->InvoiceDet->Customer->name;
+                                }elseif($viewCashOutDet->InvoiceDet->type=="supplier"){
+                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $viewCashOutDet->InvoiceDet->Supplier->name;
+                                }
                             } else {
                                 $name = "-";
                             }
