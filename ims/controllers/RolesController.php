@@ -5,69 +5,37 @@ class RolesController extends Controller {
     public $breadcrumbs;
     public $layout = '//layouts/main';
 
-//    public function filters() {
-//        return array(
-//            'accessControl', // perform access control for CRUD operations
-//        );
-//    }
-
-    public function accessRules() {
-//        return array(
-//            array('allow', // c
-//                'actions' => array('create'),
-//                'expression' => 'app()->controller->isValidAccess("GroupUser","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCLient","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupGuest","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupSupplier","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupEmplyoment","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupContact","c")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCustomer","c")'
-//            ),
-//            array('allow', // r
-//                'actions' => array('index', 'view'),
-//                'expression' => 'app()->controller->isValidAccess("GroupUser","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCLient","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupGuest","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupSupplier","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupEmplyoment","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupContact","r")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCustomer","r")'
-//            ),
-//            array('allow', // u
-//                'actions' => array('update'),
-//                'expression' => 'app()->controller->isValidAccess("GroupUser","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCLient","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupGuest","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupSupplier","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupEmplyoment","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupContact","u")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCustomer","u")'
-//            ),
-//            array('allow', // d
-//                'actions' => array('delete'),
-//                'expression' => 'app()->controller->isValidAccess("GroupUser","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCLient","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupGuest","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupSupplier","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupEmplyoment","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupContact","d")',
-//                'expression' => 'app()->controller->isValidAccess("GroupCustomer","d")'
-//            )
-//        );
+    public function filters() {
+        return array(
+            'accessControl', // perform access control for CRUD operations
+        );
     }
 
-    /**
-     * Displays a particular model.
-     * @param integer $id the ID of the model to be displayed
-     */
-    public function actionView($id) {
+    public function accessRules() {
+        return array(
+            array('allow', // c
+                'actions' => array('create'),
+            ),
+            array('allow', // r
+                'actions' => array('index', 'view'),
+            ),
+            array('allow', // u
+                'actions' => array('update'),
+            ),
+            array('allow', // d
+                'actions' => array('delete'),
+            )
+        );
+    }
 
-        cs()->registerScript('', '$("#roles-form input").prop("disabled", true);');
-        $type = $_GET['type'];
-        cs()->registerScript('', '$("#roles-form input").prop("disabled", true);');
+    public function actionView($id) {
+        cs()->registerScript('read', '
+            $("form input, form textarea, form select").each(function(){
+                $(this).prop("disabled", true);
+            });');
+        $_GET['v'] = true;
         $this->render('view', array(
             'model' => $this->loadModel($id),
-            'type' => $type,
         ));
     }
 
@@ -95,7 +63,7 @@ class RolesController extends Controller {
                 RolesAuth::model()->deleteAll(array('condition' => 'roles_id=' . $model->id));
                 $this->saveRolesAuth($model->id);
 
-                $this->redirect(array('view', 'id' => $model->id, 'type' => $type));
+                $this->redirect(array('view', 'id' => $model->id));
             }
         }
 

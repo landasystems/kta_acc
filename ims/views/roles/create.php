@@ -1,32 +1,21 @@
 <?php
-$this->setPageTitle('Tambah Roles');
-$this->breadcrumbs=array(
-	'Roles'=>array($type),
-	'Create',
-);
-
+$this->setPageTitle('Tambah Hak Akses');
 ?>
 
-<?php 
-if(isset($type)){
-    $sType = $type;
-}else{
-    $sType='';
-}
+<?php
 $this->beginWidget('zii.widgets.CPortlet', array(
-	'htmlOptions'=>array(
-		'class'=>''
-	)
+    'htmlOptions' => array(
+        'class' => ''
+    )
 ));
 $this->widget('bootstrap.widgets.TbMenu', array(
-	'type'=>'pills',
-	'items'=>array(
-		array('label'=>'Tambah', 'icon'=>'icon-plus', 'url'=>Yii::app()->controller->createUrl('create'),'active'=>true, 'linkOptions'=>array()),
-                array('label'=>'Daftar', 'icon'=>'icon-th-list', 'url'=>Yii::app()->controller->createUrl($sType), 'linkOptions'=>array()),
-	),
+    'type' => 'pills',
+    'items' => array(
+        array('visible' => landa()->checkAccess('Roles', 'v'), 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
+    ),
 ));
 $this->endWidget();
-
 ?>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
