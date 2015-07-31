@@ -47,6 +47,8 @@ class InvoiceDet extends CActiveRecord {
         // class name for the relations automatically generated below.
         return array(
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
+            'Customer' => array(self::BELONGS_TO, 'Customer', 'user_id'),
+            'Supplier' => array(self::BELONGS_TO, 'Supplier', 'user_id'),
         );
     }
 

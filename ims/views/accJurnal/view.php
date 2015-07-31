@@ -119,15 +119,12 @@ $this->endWidget();
                                 $accCoaName = '-';
                             }
 
-                            if (!empty($val->ar_id)) {
-                                $account = User::model()->findByPk($val->ar_id);
-                                $name = $account->name;
-                            } else if (!empty($val->ap_id)) {
-                                $account = User::model()->findByPk($val->ap_id);
-                                $name = $account->name;
-                            } else if (!empty($val->as_id)) {
-                                $account = Product::model()->findByPk($val->as_id);
-                                $name = $account->name;
+                            if (!empty($val->invoice_det_id)) {
+                                if($val->InvoiceDet->type=="customer"){
+                                    $name = '[' . $val->InvoiceDet->code . '] ' . $val->InvoiceDet->Customer->name;
+                                }elseif($val->InvoiceDet->type=="supplier"){
+                                    $name = '[' . $val->InvoiceDet->code . '] ' . $val->InvoiceDet->Supplier->name;
+                                }
                             } else {
                                 $name = "-";
                             }

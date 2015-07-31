@@ -128,7 +128,11 @@ $this->endWidget();
                             }
 
                             if (!empty($viewCashInDet->invoice_det_id)) {
-                                $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $viewCashInDet->InvoiceDet->User->name;
+                                if($viewCashInDet->InvoiceDet->type=="customer"){
+                                    $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $viewCashInDet->InvoiceDet->Customer->name;
+                                }elseif($viewCashInDet->InvoiceDet->type=="supplier"){
+                                    $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $viewCashInDet->InvoiceDet->Supplier->name;
+                                }
                             }
 
                             echo '  <tr>

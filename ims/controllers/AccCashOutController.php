@@ -422,24 +422,29 @@ class AccCashOutController extends Controller {
 
     public function actionAddRow() {
         $isSubledger = false;
+        $name = '';
         $acca = AccCoa::model()->findByPk($_POST['account']);
         $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
         $mInvoce = InvoiceDet::model()->findByPk($subId);
-        $invoiceName = (!empty($mInvoce->code) && !empty($mInvoce->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $mInvoce->User->name : '';
+        if(!empty($mInvoce)){
+            if($mInvoce->type== "supplier"){
+                $name = (!empty($mInvoce->Supplier->name)) ? $mInvoce->Supplier->name : '';
+            }elseif($mInvoce->type == "customer"){
+                $name = (!empty($mInvoce->Customer->name) ? $mInvoce->Customer->name : '');
+            }
+        }
+        $invoiceName = (!empty($mInvoce->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $name : '';
         $isDisplay = '';
         $sub = false;
         if ($acca->type != "general") {
             if (isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
 
                 if ($acca->type_sub_ledger == "ar") {
-                    $account = User::model()->findByPk($_POST['accountName']);
+                    $account = Customer::model()->findByPk($_POST['accountName']);
                     $isSubledger = true;
                 } else if ($acca->type_sub_ledger == "ap") {
-                    $account = User::model()->findByPk($_POST['accountName']);
-                    $isSubledger = true;
-                } else if ($acca->type_sub_ledger == "as") {
-                    $account = Product::model()->findByPk($_POST['accountName']);
+                    $account = Supplier::model()->findByPk($_POST['accountName']);
                     $isSubledger = true;
                 }
                 $name = $account->name;

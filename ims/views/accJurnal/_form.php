@@ -52,7 +52,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     'bootstrap.widgets.TbModal', array(
                 'id' => 'modalSub',
                 'htmlOptions' => array(
-                    'style' => 'width:700px'
+                    'style' => 'width:1000px;margin-left:-500px;'
                 )
                     )
             );
@@ -221,21 +221,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 $accCoaName = ' - ';
                             }
 
-                            if (!empty($val->ar_id)) {
-                                $account = User::model()->findByPk($val->ar_id);
-                                $name = $account->name;
-                                $id = $account->id;
-                            } else if (!empty($val->ap_id)) {
-                                $account = User::model()->findByPk($val->ap_id);
-                                $name = $account->name;
-                                $id = $account->id;
-                            } else if (!empty($val->as_id)) {
-                                $account = Product::model()->findByPk($val->as_id);
-                                $name = $account->name;
-                                $id = $account->id;
+                            if (!empty($val->invoice_det_id)) {
+//                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
+                                if ($val->InvoiceDet->type == "customer") {
+                                    $name = $val->InvoiceDet->Customer->name;
+                                    $id = $val->InvoiceDet->user_id;
+                                } elseif ($val->InvoiceDet->type == "supplier") {
+                                    $name = $val->InvoiceDet->Supplier->name;
+                                    $id = $val->InvoiceDet->user_id;
+                                }
                             } else {
-                                $name = "-";
-                                $id = "0";
+                                $name = "";
+                                $id = 0;
                             }
 
                             if (isset($_POST['valdebet'])) {
@@ -249,7 +246,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             } else {
                                 $credit = $val->credit;
                             }
-                            $invoiceName = (!empty($val->InvoiceDet->code) && !empty($val->InvoiceDet->User->name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $val->InvoiceDet->code . ']' . $val->InvoiceDet->User->name : '';
+                            $invoiceName = (!empty($val->InvoiceDet->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $val->InvoiceDet->code . ']' . $name : '';
                             $disp = ($val->AccCoa->type_sub_ledger == 'ar' || $val->AccCoa->type_sub_ledger == 'as' || $val->AccCoa->type_sub_ledger == 'ap') ? true : false;
                             $display = (empty($invoiceName) && $disp) ? '' : 'none';
                             $no++;
@@ -298,10 +295,10 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             if ($_POST['nameAccount'][$i] != 0) {
                                 $account = (object) array('name' => '', 'id' => '');
                                 if ($accCoa->type_sub_ledger == "ar")
-                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
+                                    $account = Customer::model()->findByPk($_POST['nameAccount'][$i]);
 
                                 if ($accCoa->type_sub_ledger == "ap")
-                                    $account = User::model()->findByPk($_POST['nameAccount'][$i]);
+                                    $account = Supplier::model()->findByPk($_POST['nameAccount'][$i]);
 
                                 if ($accCoa->type_sub_ledger == "as")
                                     $account = Product::model()->findByPk($_POST['nameAccount'][$i]);
@@ -446,18 +443,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     </tr>
                     <?php
 //                    if ($siteConfig->autopostnumber == 0) {
-                        ?>
-                        <tr>
-                            <th>
-                                <label>No Posting</label>
-                            </th>
-                            <th>
-                                <?php
-                                echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
-                                ?>
-                            </th>
-                        </tr>
-                        <?php
+                    ?>
+                    <tr>
+                        <th>
+                            <label>No Posting</label>
+                        </th>
+                        <th>
+                            <?php
+                            echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
+                            ?>
+                        </th>
+                    </tr>
+                    <?php
 //                    }
                     ?>
                 </table>
@@ -504,11 +501,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 </div>
 <script type="text/javascript">
     $("body").on("click", ".delRow", function () {
-    $(this).parent().parent().parent().remove();
+        $(this).parent().parent().parent().remove();
         calculateMin();
     });
-        $("body").on("click", ".ambil", function () {
-    var id = $(this).attr("det_id");
+    $("body").on("click", ".ambil", function () {
+        var id = $(this).attr("det_id");
         var userId = $(this).attr("user_id");
         var acc = $(this).attr("account");
         var code = $(this).attr("code");
@@ -523,95 +520,98 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         calculateMin();
     });
 
-        function removeSub(elements) {
+    function removeSub(elements) {
         $(elements).html('<a style="display:" class="btn showModal">Select Sub-Ledger</a>');
     }
     $("body").on("click", ".removeSub", function () {
-        $(this).parent().parent().find(".inVoiceDet").val(0);         var elements = $(this).parent();
+        $(this).parent().parent().find(".inVoiceDet").val(0);
+        var elements = $(this).parent();
         removeSub(elements);
     });
     $("body").on("change", "#accountName", function () {
-    selectInvoice();
+        selectInvoice();
     });
-        function selectInvoice() {
-    var id = $("#accountName").val();
+    function selectInvoice() {
+        var id = $("#accountName").val();
+        var type = $("#type_account").val();
         $.ajax({
-        type: 'POST',
+            type: 'POST',
             url: "<?php echo url('accCoa/selectInvoice') ?>",
-                        data: {id: id},
-                        success: function (data) {
-                        $("#detail").html(data);
-                            }         });
+            data: {id: id, type: type},
+            success: function (data) {
+                $("#detail").html(data);
+            }});
     }
-                    $("body").on("click", ".addNewInvoice", function () {
-                var code = $("#code_invoice").val();
-                    var user_id = $("#accountName").val();
-                    var type = $("#type_invoice").val();
-                    var term_date = $("#AccJurnal_date_trans").val();
-                    var description = $("#invoice_description").val();
-                    var amount = parseInt($("#invoice_amount").val());
-                    if (amount != 0 || amount != "" || code != "") {
-                    $.ajax({
+    $("body").on("click", ".addNewInvoice", function () {
+        var code = $("#code_invoice").val();
+        var user_id = $("#accountName").val();
+        var type = $("#type_invoice").val();
+        var term_date = $("#AccJurnal_date_trans").val();
+        var description = $("#invoice_description").val();
+        var amount = parseInt($("#invoice_amount").val());
+        if (amount != 0 || amount != "" || code != "") {
+            $.ajax({
                 type: 'post',
-                            data: {code: code, description: description, user_id: user_id, amount: amount, type: type, term_date: term_date},
+                data: {code: code, description: description, user_id: user_id, amount: amount, type: type, term_date: term_date},
                 url: "<?php echo url('accCoa/newInvoice'); ?>",
-                                success: function (data) {
-                                if (data == 1) {
-                                    selectInvoice();
+                success: function (data) {
+                    if (data == 1) {
+                        selectInvoice();
                     }
-                                        }
+                }
             });
-                                    } else {
-                        alert("code dan/atau nilai belum di inputkan!");
-                            }
+        } else {
+            alert("code dan/atau nilai belum di inputkan!");
+        }
     });
     $(document).ready(function () {
-                    selectDua();
-                    });
+        selectDua();
+    });
 
     function selectDua() {
-                    $(".selectDua").select2();
-                    }
+        $(".selectDua").select2();
+    }
 
-                        function retAccount(id, elements) {
+    function retAccount(id, elements) {
         $.ajax({
-                    url: "<?php echo url('accCoa/retAccount') ?>",
-                                type: "POST",
+            url: "<?php echo url('accCoa/retAccount') ?>",
+            type: "POST",
             data: {ledger: id},
-                                success: function (data) {
-                                obj = JSON.parse(data);
-                                    $(".isiModal").html(obj.render);
-                                    if (obj.tampil) {
-                                    elements.attr('style', 'display:');
-                                        } else {
-                                    elements.attr('style', 'display:none');
-                                        }
+            success: function (data) {
+                obj = JSON.parse(data);
+                $(".isiModal").html(obj.render);
+                $("#type_account").val(obj.type);
+                if (obj.tampil) {
+                    elements.attr('style', 'display:');
+                } else {
+                    elements.attr('style', 'display:none');
+                }
             }
         });
     }
 
-                            $("body").on("change", ".subLedger", function () {
-                        var id = $(this).val();
-                            var elements = $(this).parent().parent().find(".showModal");
+    $("body").on("change", ".subLedger", function () {
+        var id = $(this).val();
+        var elements = $(this).parent().parent().find(".showModal");
         retAccount(id, elements);
     });
-                            $("body").on("click", ".showModal", function () {
-                            var id = $(this).parent().parent().find("select.subLedger").val();
+    $("body").on("click", ".showModal", function () {
+        var id = $(this).parent().parent().find("select.subLedger").val();
         var elements = $(this);
-                            retAccount(id, elements);
-                            $(this).parent().parent().addClass("appeared");
-                            $("#modalSub").modal("show");
+        retAccount(id, elements);
+        $(this).parent().parent().addClass("appeared");
+        $("#modalSub").modal("show");
     });
-                            $("#modalSub").on('hidden', function () {
-                        $(".appeared").removeClass('appeared');
+    $("#modalSub").on('hidden', function () {
+        $(".appeared").removeClass('appeared');
     });
 
-                            $("#yw5").on("click", function () {
-                            if ($("#total_debet").val() == $("#total_credit").val()) {
+    $("#yw5").on("click", function () {
+        if ($("#total_debet").val() == $("#total_credit").val()) {
             return true;
         } else {
-                            alert("Total Debet dan Kredit Harus Sama!!");
-                                return false;
+            alert("Total Debet dan Kredit Harus Sama!!");
+            return false;
         }
     });
 </script>
