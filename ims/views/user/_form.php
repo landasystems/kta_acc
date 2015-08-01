@@ -17,42 +17,34 @@
 
         <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12')); ?>
         <div class="clearfix"></div>
-
-        <?php if ($_GET['type'] == "user") { ?>
-            <div class="box">
-                <div class="title">
-                    <h4>
-                        <?php
-                        echo 'Group <span class="required">*</span> :    ';
-                        if ($model->id == User()->id) { //if same id, cannot change role it self
-                            $listRoles = Roles::model()->listRoles();
-                            if (User()->roles_id == -1) {
-                                echo 'Super User';
-                            } elseif (isset($listRoles[User()->roles_id])) {
-                                echo $listRoles[User()->roles_id]['name'];
-                            }
-                        } else {
-
-                            $array = Roles::model()->listRole($type);
-                            if (!empty($array)) {
-                                echo CHtml::dropDownList('User[roles_id]', $model->roles_id, CHtml::listData($array, 'id', 'name'), array(
-                                    'empty' => 'Pilih',
-                                ));
-                            } else {
-                                echo'Data is empty please insert data group' . $type . '.';
-                            }
+        <div class="box">
+            <div class="title">
+                <h4>
+                    <?php
+                    echo 'Group Akses <span class="required">*</span> :    ';
+                    if ($model->id == User()->id) { //if same id, cannot change role it self
+                        $listRoles = Roles::model()->findAll(array('index' => 'id', 'order' => 'name'));
+                        if (User()->roles_id == -1) {
+                            echo 'Super User';
+                        } elseif (isset($listRoles[User()->roles_id])) {
+                            echo $listRoles[User()->roles_id]['name'];
                         }
-                        ?>  
-                    </h4>
-                </div>
+                    } else {
+
+                        $array = Roles::model()->findAll(array('index' => 'id', 'order' => 'name'));
+                        if (!empty($array)) {
+                            echo CHtml::dropDownList('User[roles_id]', $model->roles_id, CHtml::listData($array, 'id', 'name'), array(
+                                'empty' => 'Pilih',
+                            ));
+                        } else {
+                            echo'Data is empty please insert data group';
+                        }
+                    }
+                    ?>  
+                </h4>
             </div>
-            <?php
-        } elseif ($_GET['type'] == "supplier") {
-            echo '<input type="hidden" value="9" name="User[roles_id]"/>';
-        } elseif ($_GET['type'] == "customer") {
-            echo '<input type="hidden" value="10" name="User[roles_id]"/>';
-        }
-        ?>
+        </div>
+
 
         <ul class="nav nav-tabs" id="myTab">
             <li class="active"><a href="#personal">Personal</a></li>
@@ -92,22 +84,20 @@
 
                         </td>
                         <td style="vertical-align: top;">                                
-                            <?php if ($_GET['type'] == 'user') { ?>
-                                <h3>Login Information</h3>
-                                <hr/>
-                                <?php echo $form->textFieldRow($model, 'username', array('class' => 'span5', 'maxlength' => 20)); ?>
+                            <h3>Login Information</h3>
+                            <hr/>
+                            <?php echo $form->textFieldRow($model, 'username', array('class' => 'span5', 'maxlength' => 20)); ?>
 
-                                <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 100)); ?>
+                            <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 100)); ?>
 
-                                <?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span3', 'maxlength' => 255, 'hint' => 'Fill the password, to change',)); ?>
+                            <?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span3', 'maxlength' => 255, 'hint' => 'Fill the password, to change',)); ?>
 
-                                <?php
-                                $mDepartement = Departement::model()->findAll(array());
-                                echo $form->dropDownListRow($model, 'departement_id', CHtml::listData($mDepartement, 'id', 'name'), array(
-                                    'empty' => 'Pilih',
-                                ));
-                                ?>
-                            <?php } ?>
+                            <?php
+                            $mDepartement = Departement::model()->findAll(array());
+                            echo $form->dropDownListRow($model, 'departement_id', CHtml::listData($mDepartement, 'id', 'name'), array(
+                                'empty' => 'Pilih',
+                            ));
+                            ?>
 
                             <br/> 
                             <h3>Profile Information</h3>
@@ -156,12 +146,14 @@
 
 <div class="form-actions">
     <?php
-    $this->widget('bootstrap.widgets.TbButton', array(
-        'buttonType' => 'submit',
-        'type' => 'primary',
-        'icon' => 'ok white',
-        'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
-    ));
+    if (!isset($_GET['v'])) {
+        $this->widget('bootstrap.widgets.TbButton', array(
+            'buttonType' => 'submit',
+            'type' => 'primary',
+            'icon' => 'ok white',
+            'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
+        ));
+    }
     ?>
 </div>
 </fieldset>

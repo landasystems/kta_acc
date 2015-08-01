@@ -83,28 +83,6 @@ class Roles extends CActiveRecord {
         return parent::model($className);
     }
 
-    public function listRoles() {
-        if (!app()->session['listRoles']) {
-            $result = array();
-            $roles = $this->findAll(array('index' => 'id'));
-            app()->session['listRoles'] = $roles;
-        }
-
-        return app()->session['listRoles'];
-    }
-
-    public function listRole($type = '') {
-        $sResult = "";
-        $siteConfig = SiteConfig::model()->listSiteConfig();
-        if ($type == 'supplier') {
-            $sResult = Roles::model()->findAll(array('condition' => 'type="supplier"'));
-        } elseif ($type == 'customer') {
-            $sResult = Roles::model()->findAll(array('condition' => 'type="customer"'));
-        } elseif ($type == 'user') {
-            $sResult = Roles::model()->findAll(array('condition' => 'is_allow_login=1'));
-        }
-        return $sResult;
-    }
 
     public function getStatus() {
         $status = ($this->is_allow_login == 0) ? "<span class=\"label label-important\">No</span>" :

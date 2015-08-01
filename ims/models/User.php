@@ -19,14 +19,11 @@ class User extends CActiveRecord {
             array('name, city_id, roles_id', 'required'),
             array('city_id, departement_id', 'numerical', 'integerOnly' => true),
             array('username, phone', 'length', 'max' => 20),
-            array('', 'length', 'max' => 100),
             array('password, name, address', 'length', 'max' => 255),
             array('code', 'length', 'max' => 25),
             array('enabled', 'safe'),
-            array('username, email', 'unique', 'message' => '{attribute} : {value} already exists!', 'on' => 'allow'),
-            array('email', 'email', 'on' => 'allow'),
-            array('username, email', 'required', 'on' => 'allow'),
-            array('username, email', 'safe', 'message' => '{attribute} : {value} already exists!', 'on' => 'notAllow'),
+            array('username, email', 'unique', 'message' => '{attribute} : {value} already exists!'),
+            array('username, email', 'required'),
             array('id, username, email, password, code, name, city_id, address, phone, created, created_user_id, modified,description', 'safe', 'on' => 'search'),
             array('avatar_img', 'unsafe'),
         );
@@ -48,7 +45,7 @@ class User extends CActiveRecord {
             'created' => 'Created',
             'created_user_id' => 'Created Userid',
             'modified' => 'Modified',
-            'departement_id' => 'Departement Id',
+            'departement_id' => 'Departement',
         );
     }
 
