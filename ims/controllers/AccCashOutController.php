@@ -371,17 +371,17 @@ class AccCashOutController extends Controller {
     public function actionIndex() {
         $model = new AccCashOut('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset(user()->roles['accesskb'])) {
+        $sWhere = '';
+        if (!empty(user()->roles['accesskb'])) {
             $idData = user()->roles['accesskb']->crud;
             $sWhere = json_decode($idData);
-//            echo $sWhere;
         } else {
             $sWhere = '';
         }
+        
         if (isset($_GET['AccCashOut'])) {
             $model->attributes = $_GET['AccCashOut'];
         }
-
 
         $this->render('index', array(
             'model' => $model,
