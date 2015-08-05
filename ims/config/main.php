@@ -13,17 +13,6 @@ return array(
         'common.extensions.*',
         'common.extensions.image.helpers.*',
     ),
-    'modules' => array(
-        'landa',
-        'gii' => array(
-            'class' => 'system.gii.GiiModule',
-            'password' => 'landak',
-            'ipFilters' => array('127.0.0.1', '::1', 'localhost', '192.168.1.41'),
-            'generatorPaths' => array(
-                'common.extensions.giiplus'  
-            ),
-        ),
-    ),
     'components' => array(
         'db' => array(
             'connectionString' => 'mysql:host=localhost;dbname=' . $db,
