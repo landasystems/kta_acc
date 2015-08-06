@@ -135,7 +135,7 @@ class AccCashOutController extends Controller {
 
                         $credit[] = (object) array("id" => $model->id, "acc_coa_id" => $model->acc_coa_id, "date_trans" => $model->date_trans, "description" => $model->description, "total" => $model->total, "code" => $model->code, "reff_type" => "cash_out");
 
-                        $siteConfig = SiteConfig::model()->findByPk(param('id'));
+                        $siteConfig = SiteConfig::model()->findByPk(1);
 //                        if ($siteConfig->is_approval == "no" or ( isset($data) and $siteConfig->is_approval == "manual")) {
 //                            AccCoa::model()->trans($debet, $credit);
 ////                            AccCoa::model()->transLedger($valSub, array());
@@ -178,7 +178,7 @@ class AccCashOutController extends Controller {
         $admin = array();
         $manager = array();
         $getModel = array();
-//        $siteConfig = SiteConfig::model()->findByPk(param('id'));
+//        $siteConfig = SiteConfig::model()->findByPk(1);
         $cekApprove = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_out" and reff_id=' . $id));
 
         //cek apakah data sudah diapprove

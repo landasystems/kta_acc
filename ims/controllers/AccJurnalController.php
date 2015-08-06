@@ -137,7 +137,7 @@ class AccJurnalController extends Controller {
                             }
                         }
 
-                        $siteConfig = SiteConfig::model()->findByPk(param('id'));
+                        $siteConfig = SiteConfig::model()->findByPk(1);
 //                        if ($siteConfig->is_approval == "no") {
 //                            AccCoa::model()->trans($debet, $credit);
 //                            AccCoa::model()->transLedger($subDebet, $subCredit);
@@ -181,7 +181,7 @@ class AccJurnalController extends Controller {
         $admin = array();
         $manager = array();
         $getModel = array();
-        $siteConfig = SiteConfig::model()->findByPk(param('id'));
+        $siteConfig = SiteConfig::model()->findByPk(1);
         $cekApprove = AccCoaDet::model()->find(array('condition' => 'reff_type="jurnal" and reff_id=' . $id));
 
         //cek apakah data sudah diapprove

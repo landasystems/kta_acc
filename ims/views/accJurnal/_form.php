@@ -10,7 +10,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 ?>
 <div class="form">
     <?php
-    $siteConfig = SiteConfig::model()->findByPk(param('id'));
+    $siteConfig = SiteConfig::model()->findByPk(1);
     $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         'id' => 'acc-jurnal-form',
         'enableAjaxValidation' => false,

@@ -1,6 +1,6 @@
 
 <?php
-$siteConfig = SiteConfig::model()->findByPk(param('id'));
+$siteConfig = SiteConfig::model()->findByPk(1);
 $this->setPageTitle('Lihat Kas Keluar | : ' . $model->code);
 ?>
 

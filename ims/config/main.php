@@ -27,14 +27,10 @@ return array(
         'landa' => array(
             'class' => 'LandaCore',
         ),
-        'messages' => array(
-            'basePath' => $root . 'common/messages/',
-        ),
         'user' => array(
             'loginUrl' => array('/site/login'),
             'allowAutoLogin' => true,
         ),
-//        // uncomment the following to enable URLs in path-format
         'urlManager' => array(
             'urlFormat' => 'path',
             'showScriptName' => false,
@@ -76,7 +72,6 @@ return array(
         ),
         'themeManager' => array(
             'basePath' => $root . 'common/',
-            'baseUrl' => $themesUrl, 
         ),
         'cache' => array(
             'class' => 'system.caching.CFileCache'
@@ -86,8 +81,6 @@ return array(
         'appVersion' => 'v.1',
         'client' => $client,
         'clientName' => $clientName,
-        'id' => '1',
-        'urlImg' => $rootUrl . 'images/',
         'pathImg' => $root . 'ims/www/' . $client . '/images/',
     ),
 );
