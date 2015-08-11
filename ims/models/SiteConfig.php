@@ -118,20 +118,11 @@ class SiteConfig extends CActiveRecord {
 //    }
 
     public function listSiteConfig() {
-
-//        return SiteConfig::model()->findByPk(param('id'));
-//        trace ($this->cache['listSiteConfig']);
-
-        if (empty(Yii::app()->session['site'])) {
-//            trace('bb');
-            Yii::app()->session['site'] = $this->findByPk(param('id'));
-        }
-//        trace ($this->cache['listSiteConfig']);
-        return Yii::app()->session['site'];
+        return $this->findByPk(1);
     }
 
     public function formatting($type, $x = true, $prefix = '', $param = '', $date = null) {
-        $siteConfig = SiteConfig::model()->findByPk(param('id'));
+        $siteConfig = SiteConfig::model()->findByPk(1);
         $format = DateConfig::model()->find(array('condition'=>'year="'.date('Y',  strtotime($date)).'" and departement_id='.User()->departement_id));
         $formating = AccFormatting::model()->findByAttributes(array('departement_id' => User()->departement_id));
 //        logs(User()->departement_id);

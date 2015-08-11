@@ -3,7 +3,7 @@
 if (isset($_GET['v'])) {
     $this->setPageTitle('Lihat Supplier : ' . $model->code);
 } else {
-    $this->setPageTitle('Edit Supplier : ' . $model->code);
+    $this->setPageTitle('Supplier : ' . $model->code);
 }
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(

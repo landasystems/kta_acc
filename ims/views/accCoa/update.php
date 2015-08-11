@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Edit Perkiraan | Kode : '. $model->code);
+$this->setPageTitle('Perkiraan | Kode : '. $model->code);
 $this->beginWidget('zii.widgets.CPortlet', array(
 	'htmlOptions'=>array(
 		'class'=>''
