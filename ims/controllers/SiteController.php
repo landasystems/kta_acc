@@ -38,11 +38,16 @@ class SiteController extends Controller {
         $this->render('themes/icons');
     }
 
-    /**
-     * This is the action to handle external exceptions.
-     */
     public function actionError() {
-        $this->layout = 'blank';
+        $this->layout = 'blankHeader';
+        cs()->registerScript('error', '
+                $(".errorContainer").hide();
+                $(".errorContainer").fadeIn(1000).animate({
+                    "top": "50%", "margin-top": +($(".errorContainer").height() / -2 - 30)
+                }, {duration: 750, queue: false}, function () {
+                    // Animation complete.
+                });
+            ');
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
