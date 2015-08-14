@@ -262,5 +262,19 @@ class SupplierController extends Controller {
                                 </tr>';
         }
     }
+    public function actionInvoiceDetail() {
+        $userInvoice = AccCoaDet::model()->findAll(array(
+            'with' => array('InvoiceDet'),
+            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"'
+        ));
+        $ambil = ($_POST['id'] == 0) ? false : true;
+        $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
+        echo $this->renderPartial('_payment', array(
+            'userInvoice' => $userInvoice,
+            'ambil' => $ambil,
+            'alert' => false,
+            'balance' => $balance
+                ), true);
+    }
 
 }
