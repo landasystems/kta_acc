@@ -15,7 +15,6 @@ class ReportController extends Controller {
 //            'accessControl', // perform access control for CRUD operations
 //        );
 //    }
-
 //    public function accessRules() {
 //        return array(
 //            array('allow', // r
@@ -276,20 +275,39 @@ class ReportController extends Controller {
         $a = explode('-', $_GET['created']);
         $start = date('Y/m/d', strtotime($a[0]));
         $end = date('Y/m/d', strtotime($a[1])) . " 23:59:59";
-        $id = str_replace(".html", "", $_GET['id']);
+        $pada = str_replace(".html", "", $_GET['pada']);
         $checked = true;
+        $id = $_GET['id'];
 
         $acc = AccCoa::model()->findByPk($id);
         if ($acc->type == "detail") {
-            $accCoaDet = AccCoaDet::model()->findAll(array('order' => 'date_coa , id', 'condition' => '(date_coa >="' . $start . '" and date_coa <="' . $end . '") and acc_coa_id =' . $id));
-            $beginingBalance = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime('-1 day', strtotime($start))), $id);
-            Yii::app()->request->sendFile('GeneralLedger-' . date('dmY') . '.xls', $this->renderPartial('_generalLedgerDetail', array('acc' => $acc, 'beginingBalance' => $beginingBalance, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end,'checked' => $checked),true));
+            $lawan = '';
+            $accCoaDet = AccCoaDet::model()->findAll(array('order' => 'date_coa , code', 'condition' => '(date_coa >="' . $start . '" and date_coa <="' . $end . '") and acc_coa_id =' . $id));
+            if (!empty($pada)) {
+                $detPada = array();
+                foreach ($accCoaDet as $val) {
+                    $det = AccCoaDet::model()->findAll(array('order' => 'date_coa , code', 'condition' => '(date_coa >="' . $start . '" and date_coa <="' . $end . '") and acc_coa_id =' . $pada . ' and code = "' . $val->code . '"'));
+                    if (!empty($det)) {
+                        foreach ($det as $valPada) {
+                            $detPada[] = $valPada;
+                        }
+                    }
+                }
+                $accCoaDet = $detPada;
+            }
+            $beginingBalance = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime($start)), $id, FALSE);
+//            $this->renderPartial('_generalLedgerDetail', array('start' => $start, 'pada' => $pada, 'end' => $end, 'acc' => $acc, 'beginingBalance' => $beginingBalance, 'accCoaDet' => $accCoaDet, 'start' => $start, 'checked' => $checked));
+
+
+//            $accCoaDet = AccCoaDet::model()->findAll(array('order' => 'date_coa , id', 'condition' => '(date_coa >="' . $start . '" and date_coa <="' . $end . '") and acc_coa_id =' . $id));
+//            $beginingBalance = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime('-1 day', strtotime($start))), $id);
+            Yii::app()->request->sendFile('GeneralLedger-' . date('dmY') . '.xls', $this->renderPartial('_generalLedgerDetail', array('acc' => $acc, 'pada' => $pada,'beginingBalance' => $beginingBalance, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end, 'checked' => $checked), true));
         } else {
             $children = $acc->descendants()->findAll();
             foreach ($children as $val) {
                 $accCoaDet = AccCoaDet::model()->findAll(array('order' => 'date_coa , id', 'condition' => '(date_coa >="' . $start . '" and date_coa <="' . $end . '") and acc_coa_id =' . $val->id));
                 $beginingBalance = AccCoaDet::model()->beginingBalance(date('Y-m-d', strtotime('-1 day', strtotime($start))), $id);
-                Yii::app()->request->sendFile('GeneralLedger-' . date('dmY') . '.xls', $this->renderPartial('_generalLedgerDetail', array('acc' => $val, 'beginingBalance' => $beginingBalance, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end,'checked' => $checked),true));
+                Yii::app()->request->sendFile('GeneralLedger-' . date('dmY') . '.xls', $this->renderPartial('_generalLedgerDetail', array('acc' => $val, 'beginingBalance' => $beginingBalance, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end, 'checked' => $checked), true));
             }
         }
     }
@@ -433,8 +451,8 @@ class ReportController extends Controller {
 //        logs($_GET);
         $cash = str_replace(".html", "", $_GET['cash']);
 
-        $cashout = AccCashOut::model()->findAll(array('condition' => 'date_posting ="' . $akhir . '" AND acc_coa_id="' . $cash . '" AND acc_approval_id is not NULL','order'=>'code_acc'));
-        $cashin = AccCashIn::model()->findAll(array('condition' => 'date_posting ="' . $akhir . '" AND acc_coa_id="' . $cash . '" AND acc_approval_id is not NULL','order'=>'code_acc'));
+        $cashout = AccCashOut::model()->findAll(array('condition' => 'date_posting ="' . $akhir . '" AND acc_coa_id="' . $cash . '" AND acc_approval_id is not NULL', 'order' => 'code_acc'));
+        $cashin = AccCashIn::model()->findAll(array('condition' => 'date_posting ="' . $akhir . '" AND acc_coa_id="' . $cash . '" AND acc_approval_id is not NULL', 'order' => 'code_acc'));
 
         $idk = array();
         foreach ($cashout as $ua) {
@@ -449,7 +467,7 @@ class ReportController extends Controller {
         }
         $idd = (empty($idd)) ? array(0 => 0) : $idd;
         $cashindet = AccCashInDet::model()->findAll(array('condition' => 'acc_cash_in_id IN (' . implode(',', $idd) . ')', 'with' => 'AccCashIn', 'order' => 'AccCashIn.code_acc'));
-        app()->request->sendFile('KasHarian-' . date('dmY') . '.xls', $this->renderPartial('_kasHarianDetail', array('prefix'=>'-','idd' => $idd, 'idk' => $idk, 'cashout' => $cashout, 'cashin' => $cashin, 'a' => $a, 'akhir' => $akhir, 'cash' => $cash, 'cashindet' => $cashindet, 'cashoutdet' => $cashoutdet),true));
+        app()->request->sendFile('KasHarian-' . date('dmY') . '.xls', $this->renderPartial('_kasHarianDetail', array('prefix' => '-', 'idd' => $idd, 'idk' => $idk, 'cashout' => $cashout, 'cashin' => $cashin, 'a' => $a, 'akhir' => $akhir, 'cash' => $cash, 'cashindet' => $cashindet, 'cashoutdet' => $cashoutdet), true));
     }
 
     public function actionGenerateExcelNeraca() {
@@ -520,9 +538,9 @@ class ReportController extends Controller {
                         ), true)
         );
     }
-    
+
     public function cssTable() {
-        cs()->registerCss('','
+        cs()->registerCss('', '
             thead{display:table-header-group;}
                 ');
     }
