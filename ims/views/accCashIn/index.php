@@ -23,8 +23,8 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => landa()->checkAccess('AccCashIn', 'c'), 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
-        array('visible' => landa()->checkAccess('AccCashIn', 'r'), 'label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
+        array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Pencarian & Eksport Excel', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
     ),
 ));
@@ -104,7 +104,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 ),
                 'update' => array(
                     'label' => 'Edit',
-                    'visible' => 'landa()->checkAccess(\'AccCashIn\', \'u\')',
                     'url' => 'Yii::app()->createUrl("accCashIn/update", array("id"=>$data->id,"act" => "edit"))',
                     'options' => array(
                         'class' => 'btn btn-small update'

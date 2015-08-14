@@ -23,11 +23,9 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => landa()->checkAccess('AccCashOut', 'c'), 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
-        array('visible' => landa()->checkAccess('AccCashOut', 'r'), 'label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
+        array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Pencarian & Eksport Excel', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
-//        array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
-//        array('label' => 'Export ke Excel', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
     ),
 ));
 $this->endWidget();
@@ -105,7 +103,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 ),
                 'update' => array(
                     'label' => 'Edit',
-                    'visible' => 'landa()->checkAccess(\'AccCashOut\', \'u\')',
                     'url' => 'Yii::app()->createUrl("accCashOut/update", array("id"=>$data->id,"act" => "edit"))',
                     'options' => array(
                         'class' => 'btn btn-small update'
@@ -113,7 +110,6 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 ),
                 'delete' => array(
                     'label' => 'Hapus',
-//                        'visible' => '(!isset($data->AccAdmin->status) or $data->AccAdmin->status != \'confirm\') and (!isset($data->AccManager->status) or $data->AccManager->status != \'confirm\') and landa()->checkAccess(\'AccCashOut\', \'d\')',
                     'options' => array(
                         'class' => 'btn btn-small delete'
                     )

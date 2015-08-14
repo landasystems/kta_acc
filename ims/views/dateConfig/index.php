@@ -61,14 +61,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                     ),
                     'update' => array(
                         'label' => 'Edit',
-//                        'visible' => '(!isset($data->AccAdmin->status) or $data->AccAdmin->status != \'confirm\') and (!isset($data->AccManager->status) or $data->AccManager->status != \'confirm\') and landa()->checkAccess(\'AccCashIn\', \'u\')',
                         'options' => array(
                             'class' => 'btn btn-small update'
                         )
                     ),
                     'delete' => array(
                         'label' => 'Hapus',
-//                        'visible' => '(!isset($data->AccAdmin->status) or $data->AccAdmin->status != \'confirm\') and (!isset($data->AccManager->status) or $data->AccManager->status != \'confirm\') and landa()->checkAccess(\'AccCashIn\', \'d\')',
                         'options' => array(
                             'class' => 'btn btn-small delete'
                         )

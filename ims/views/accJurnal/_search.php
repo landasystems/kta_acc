@@ -35,7 +35,7 @@ echo $form->dateRangeRow(
         if (date != "") {
             window.open("<?php echo url('accJurnal/generateExcel') ?>?" + condition);
         } else {
-            alert("Rentang Tgl Posting tidak boleh kosong!");
+            $.toaster({priority : 'error', message : "Rentang Tgl Posting tidak boleh kosong"});
         }
     }
 </script>

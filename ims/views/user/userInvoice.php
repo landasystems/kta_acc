@@ -94,7 +94,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 <script type="text/javascript">
     $("#supplier_list").on("change", function () {
         var id = $(this).val();
-//        alert(id);
         $.ajax({
             type: 'POST',
             data: {id: id},
@@ -145,7 +144,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     $("body").on('click', '.delInv', function () {
         var id = $(this).parent().find(".id_invoice").val();
         var dell = $(this).parent().parent();
-//        alert(id);
         if (id == "") {
             $(this).parent().parent().remove();
         } else {
@@ -156,7 +154,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     url: "<?php echo url('invoiceDet/dellInv'); ?>",
                     data: {id: id},
                     success: function (data) {
-                        alert(data);
                         dell.remove();
                         hitung();
                     }

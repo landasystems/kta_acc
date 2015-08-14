@@ -133,7 +133,7 @@
         if (jml == 8) {
             return true;
         } else {
-            alert("Account Formatting belum terisi dengan benar~!");
+            $.toaster({priority : 'error', message : "Account Formatting belum terisi dengan benar"});
             return false;
         }
     });
