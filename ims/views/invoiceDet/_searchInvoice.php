@@ -51,11 +51,10 @@
                 data: {id: id},
                 url: "<?php echo url('invoiceDet/dellInv'); ?>",
                 success: function (data) {
-                    alert(data);
                     selectInvoice();
                 },
                 error : function(){
-                    alert("Terjadi Kesalahan!");
+                                $.toaster({priority : 'error', message : "Terjadi Kesalahan"});
                 }
             });
         }

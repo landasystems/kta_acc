@@ -489,15 +489,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 </div>
 <script type="text/javascript">
-    $.toaster({priority : 'error',title : "Information", message : "Room " + nomer + " Selected"});
     function checkSelected() {
         var val1 = $("#AccCashIn_account").val();
         var val2 = $("#account").val();
         var nol = 0;
 
         if (val1 === val2) {
-            
-            alert('debet dan kredit tidak boleh sama!!');
+            $.toaster({priority : 'error', message : "debet dan kredit tidak boleh sama"});
             $("#account").select2('val', nol);
         } else {
             //do nothing
@@ -569,7 +567,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 }
             });
         } else {
-            alert("code dan/atau nilai belum di inputkan!");
+            $.toaster({priority : 'error', message : "code dan/atau nilai belum di inputkan!"});
         }
     });
     $(document).ready(function () {
@@ -618,7 +616,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if ($("#difference").val() == 0) {
             return true;
         } else {
-            alert("Total Debet dan Kredit Harus Sama!!");
+            $.toaster({priority : 'error', message : "Total Debet dan Kredit Harus Sama"});
             return false;
         }
     });
