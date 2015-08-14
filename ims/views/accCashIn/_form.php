@@ -489,12 +489,14 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
 </div>
 <script type="text/javascript">
+    $.toaster({priority : 'error',title : "Information", message : "Room " + nomer + " Selected"});
     function checkSelected() {
         var val1 = $("#AccCashIn_account").val();
         var val2 = $("#account").val();
         var nol = 0;
 
         if (val1 === val2) {
+            
             alert('debet dan kredit tidak boleh sama!!');
             $("#account").select2('val', nol);
         } else {
