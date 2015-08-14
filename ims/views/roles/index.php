@@ -12,7 +12,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => landa()->checkAccess('Roles', 'v'), 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
         array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
     ),
 ));
@@ -20,18 +20,6 @@ $this->endWidget();
 ?>
 
 <?php
-
-$buton = "";
-
-if (landa()->checkAccess('Roles', 'r')) {
-    $buton .= '{view}';
-}
-if (landa()->checkAccess('Roles', 'u')) {
-    $buton .= '{update}';
-}
-if (landa()->checkAccess('Roles', 'd')) {
-    $buton .= '{delete}';
-}
 
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'roles-grid',
@@ -42,7 +30,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'name',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => $buton,
+            'template' => '{view}{update}{delete}',
             'buttons' => array(
                 'view' => array(
                     'label' => 'Lihat',

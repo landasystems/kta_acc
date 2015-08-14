@@ -24,8 +24,8 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => landa()->checkAccess('AccCoa', 'c'), 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
-        array('visible' => landa()->checkAccess('AccCoa', 'r'), 'label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
+        array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create'), 'linkOptions' => array()),
+        array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Pencarian', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
         array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
         array('label' => 'Export ke Excel', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
@@ -48,16 +48,6 @@ $this->endWidget();
 
 
 <?php
-$buton = "";
-if (landa()->checkAccess('AccCoa', 'r')) {
-    $buton .= '{view}';
-}
-if (landa()->checkAccess('AccCoa', 'd')) {
-    $buton .= '{update}';
-}
-if (landa()->checkAccess('AccCoa', 'u')) {
-    $buton .= '{delete}';
-}
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'acc-coa-grid',
     'dataProvider' => $model->search(),
@@ -81,7 +71,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         ),
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => $buton,
+            'template' => '{view}{update}{delete}',
             'buttons' => array(
                 'view' => array(
                     'label' => 'Lihat',
@@ -91,14 +81,12 @@ $this->widget('bootstrap.widgets.TbGridView', array(
                 ),
                 'update' => array(
                     'label' => 'Edit',
-//                    'visible' => '$data->code!="1" && $data->code!="2" && $data->code!="3" && $data->code!="4" && $data->code!="5"',
                     'options' => array(
                         'class' => 'btn btn-small update'
                     )
                 ),
                 'delete' => array(
                     'label' => 'Hapus',
-//                    'visible' => '$data->code!="1" && $data->code!="2" && $data->code!="3" && $data->code!="4" && $data->code!="5"',
                     'options' => array(
                         'class' => 'btn btn-small delete'
                     )

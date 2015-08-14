@@ -3,7 +3,6 @@ $this->setPageTitle('User');
 ?>
 
 <?php
-$visible = landa()->checkAccess('User', 'c');
 
 $this->beginWidget('zii.widgets.CPortlet', array(
     'htmlOptions' => array(
@@ -13,7 +12,7 @@ $this->beginWidget('zii.widgets.CPortlet', array(
 $this->widget('bootstrap.widgets.TbMenu', array(
     'type' => 'pills',
     'items' => array(
-        array('visible' => $visible, 'label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create', array('type' => $type)), 'linkOptions' => array()),
+        array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create', array('type' => $type)), 'linkOptions' => array()),
         array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
         array('label' => 'Export Excel', 'icon' => 'icomoon-icon-file-excel', 'url' => Yii::app()->controller->createUrl('user/generateExcel'), 'linkOptions' => array()),
     ),
@@ -23,17 +22,7 @@ $this->endWidget();
 
 
 <?php
-    $buton = '';
-    if (landa()->checkAccess('User', 'r')) {
-        $buton .= '{view}';
-    }
-    if (landa()->checkAccess('User', 'd')) {
-        $buton .= '{delete}';
-    }
-    if (landa()->checkAccess('User', 'u')) {
-        $buton .= '{update}';
-    }
-
+  
 $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'User-grid',
     'dataProvider' => $model->search(),
@@ -50,7 +39,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
         'name',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
-            'template' => $buton,
+            'template' => '{view}{update}{delete}',
             'buttons' => array(
                 'view' => array(
                     'label' => 'Lihat',
