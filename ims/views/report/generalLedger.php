@@ -102,7 +102,7 @@ $this->breadcrumbs = array(
                         'label' => 'Report',
                         'icon' => 'print',
                         'items' => array(
-                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelGeneralLedger?created=' . str_replace("", "-", $_POST['AccCoaDet']['created'] . '&id=' . $_POST['accacoa'].'&pada='.$_POST['pada']))),
+                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelGeneralLedger?created=' . str_replace("", "-", $_POST['AccCoaDet']['created'] . '&id=' . $_POST['accacoa'] . '&pada=' . $_POST['pada']))),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),
                         ),
                     ),
@@ -127,16 +127,16 @@ if (isset($_POST['AccCoaDet']['created'])) {
         $end = date('Y-m-d', strtotime($a[1]));
         $checked = (isset($_POST['isCompared']));
         $pada = $_POST['pada'];
-        
+
 
 //        $acc_id = AccCoa::model()->findAll(array('condition' => 'parent_id=' . $_POST['accacoa']));
         $this->renderPartial('_generalLedgerResult', array(
             'start' => $start,
             'end' => $end,
-            'id' => $_POST['accacoa'], 
+            'id' => $_POST['accacoa'],
             'checked' => $checked,
             'pada' => $pada
-                 ));
+        ));
     }
 }
 ?>
