@@ -1,5 +1,5 @@
 <?php
-require_once(dirname(__FILE__).'/../../../common/config/karyatugasanda.php'); // change this line for configuration
+require_once(dirname(__FILE__).'/../../../common/config/tabj.php'); // change this line for configuration
 require_once(dirname(__FILE__) . '/../../../common/globals.php');
 require_once(dirname(__FILE__).'/../../../common/lib/yii/yii.php');
 
