@@ -248,7 +248,7 @@ class SupplierController extends Controller {
                 </div>
             </td>'
             . '<td>'
-            . '<span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>'
+            . '<span style="width:12px" class="btn delInv"><i class="icon-trash"></i></span>'
             . '<input type="hidden" class="user" name="user_id[]" value="' . $_POST['sup_id'] . '">'
             . '<input type="hidden" class="id_invoice" name="id[]" value="">'
             . '<input type="hidden" class="id_coaDet" name="id_coaDet[]" value="">'
