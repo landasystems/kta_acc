@@ -84,7 +84,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         $.ajax({
             type: 'POST',
             data: {id: id},
-            url: "<?php echo url('user/invoiceDetail'); ?>",
+            url: "<?php echo url('supplier/invoiceDetail'); ?>",
             success: function (data) {
                 $(".detailInvoice").html(data);
                 $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
