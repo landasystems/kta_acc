@@ -89,7 +89,7 @@
                                 <span class="add-on">Rp.</span>
                                 <input class="angka nilai" style="width:98%;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
                 echo '<td>
-                            <span style="width:12px" class="btn delInv"><i class="cut-icon-trashcan"></i></span>
+                            <span style="width:12px" class="btn delInv"><i class="icon-trash"></i></span>
                             <input type="hidden" class="user" name="user_id[]" value="' . $res->user_id . '">
                             <input type="hidden" class="id_invoice" name="id[]" value="' . $res->id. '">
                             <input type="hidden" class="id_coaDet" name="id_coaDet[]" value="' . $coaId . '">
