@@ -87,5 +87,10 @@ class City extends CActiveRecord {
             'criteria' => $criteria,
         ));
     }
+    
+    public function getFullName() {
+         $province = (isset($this->Province->name))?$this->Province->name.' - ':''; 
+         return ucwords(strtolower($province . $this->name));
+     }
 
 }
