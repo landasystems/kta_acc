@@ -89,6 +89,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 $(".detailInvoice").html(data);
                 $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
                 hitung();
+                $( ".term" ).datepicker();
+                $( ".dateStart" ).datepicker();
             }
         });
     });
