@@ -234,7 +234,7 @@ class AccCoaDet extends CActiveRecord {
 
     public function total($end, $start, $id) {
         $sType = 'user_id=' . $id;
-        $model = $this->with('InvoiceDet')->find(array('select' => 'sum(debet) as sumDebet, sum(credit) as sumCredit', 'condition' => '(date_coa <= "' . $end . '" AND date_coa >= "' . $start . '") AND ' . $sType));
+        $model = $this->with('InvoiceDet')->find(array('select' => 'sum(debet) as sumDebet, sum(credit) as sumCredit', 'condition' => '(date_coa <= "' . $end . '" AND date_coa >= "' . $start . '")  AND ' . $sType));
         if (isset($model))
             $result = $model;
         else
@@ -244,7 +244,7 @@ class AccCoaDet extends CActiveRecord {
     }
 
     public function saldoKartu($start, $id) {
-        $sType = 'user_id=' . $id;
+        $sType = 'InvoiceDet.user_id=' . $id;
         $model = $this->with('InvoiceDet')->find(array(
             'select' => 'sum(debet) as sumDebet, sum(credit) as sumCredit',
             'condition' => $sType . ' AND date_coa <"' . date('Y-m-d', strtotime($start)) . '"',

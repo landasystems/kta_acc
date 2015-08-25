@@ -38,7 +38,7 @@ $this->endWidget();
             <div class="print">
                 <a href="#" onclick="js:printDiv('printableArea');
                         return false;">
-                    <span class="icon24 entypo-icon-printer"></span> 
+                    <span class="icon24 icon-print"></span> 
                 </a>
             </div>
         </div>
