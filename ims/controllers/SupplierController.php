@@ -198,7 +198,9 @@ class SupplierController extends Controller {
                 $payment->user_id = $_POST['user_id'][$i];
                 $payment->payment = $_POST['payment'][$i];
                 $payment->type = 'supplier';
-                $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
+                if(!empty($_POST['term_date'][$i]))
+                    $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
+                
                 if ($payment->save()) {
                     if (empty($_POST['id_coaDet'][$i])) {
                         $coaDet = new AccCoaDet();

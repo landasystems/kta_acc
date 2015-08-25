@@ -19,7 +19,7 @@
         <div class="well elek">
             <ul class="nav nav-tabs" id="myTab">
                 <li class="active"><a href="#module" data-toggle="tab">Module</a></li>
-                <li><a href="#extended" data-toggle="tab">Akses Perkiraan</a></li>
+                <li><a href="#extended" data-toggle="tab">Hak Akses Akun</a></li>
             </ul>
 
             <div class="tab-content">
@@ -48,11 +48,7 @@
                     
                     <table class="table">
                         <tr>
-                            <th colspan="3">Advanced Options</th>
-                        </tr>
-                        <tr>
-                            <td width="40%">Hak Akses Akun</td>
-                            <td width="10%"><b>:</b></td>
+                            <td width="15%">Hak Akses Akun</td>
                             <td>
                                 <?php
                                 $sWhere = '';
@@ -77,7 +73,7 @@
                                     'value' => ($model->isNewRecord == true)? $data : $sWhere,
                                     'options' => array(
                                         'placeholder' => 'Data belum diisi',
-                                        'width' => '60%',
+                                        'width' => '100%',
                                         'tokenSeparators' => array(',', ' ')
                                     ),
                                     'htmlOptions' => array(
