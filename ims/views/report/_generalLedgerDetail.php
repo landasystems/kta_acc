@@ -116,7 +116,6 @@
                         $no = 1;
                         $total = $beginingBalance;
                         //echo tampung
-                        logs($groupLedger);
                         foreach ($groupLedger as $key => $b) {
                             
                             $detCoas = '';
@@ -244,7 +243,7 @@
 
                 </tbody>
                 <tr>
-                    <th colspan="4">Saldo Akhir</th>
+                    <th colspan="5">Saldo Akhir</th>
                     <th style="text-align: right"><?php echo landa()->rp($totald, false, 2) ?></th>
                     <th style="text-align: right"><?php echo landa()->rp($totalk, false, 2) ?></th>
                     <th style="text-align: right"><?php echo landa()->rp($total, false, 2) ?></th>
