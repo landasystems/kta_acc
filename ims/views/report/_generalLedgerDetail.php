@@ -46,6 +46,7 @@
                     <tr>
                         <th colspan="2" width="10%" style="text-align: center">TANGGAL</th>
                         <th width="8%" style="text-align: center">REFF</th>
+                        <th width="8%" style="text-align: center">KODE AKUN</th>
                         <th width="50%" style="text-align: center">URAIAN</th>
                         <th width="10%" style="text-align: center">DEBIT</th>
                         <th width="10%" style="text-align: center">CREDIT</th>
@@ -98,6 +99,7 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td>Saldo Awal</td>
                                 <td></td>
                                 <td></td>
@@ -117,12 +119,18 @@
                         foreach ($groupLedger as $key => $b) {
 
                             if ($a->reff_type == "cash_in") {
+                                
+                                $accCode = (!empty($mCashIn[$b['reff_id']]->AccCoa->code)) ?  $mCashIn[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashIn[$b['reff_id']]->description_to)) ? ' - ' . $mCashIn[$b['reff_id']]->description_to : '';
                                 $dibayar = (!empty($mCashIn[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashIn[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
                             } elseif ($a->reff_type == "cash_out") {
+                                $accCode = (!empty($mCashOut[$b['reff_id']]->AccCoa->code)) ?  $mCashOut[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashOut[$b['reff_id']]->description_to)) ? ' - ' . $mCashOut[$b['reff_id']]->description_to : '';
                                 $dibayar = (!empty($mCashOut[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashOut[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
+                                
+                                
                             } else {
+                                $accCode = '';
                                 $giroAn = '';
                                 $dibayar = '';
                             }
@@ -138,6 +146,7 @@
                             echo '<td style="text-align: center">' . $acDate . '</td>
                             <td style="text-align: center">' . $dCoa . '</td>'; //data tanggal
                             echo '<td>' . $key . '</td>'; //code 
+                            echo '<td style="text-align: center">' . $accCode . '</td>'; //code 
                             echo '<td>' . $sDesc . '</td>'; //
                             echo '<td style="text-align: right">' . landa()->rp($b['debet'],false) . '</td>'; //debet
                             echo '<td style="text-align: right">' . landa()->rp($b['credit'],false) . '</td>'; //credit
@@ -155,12 +164,15 @@
                             $monthYear = date('M Y', strtotime($a->date_coa));
                             $no++;
                             if ($a->reff_type == "cash_in") {
+                                $accCode = (!empty($mCashIn[$a->reff_id]->AccCoa->code)) ? $mCashIn[$a->reff_id]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashIn[$a->reff_id]->description_to)) ? ' - ' . $mCashIn[$a->reff_id]->description_to : '';
                                 $dibayar = (!empty($mCashIn[$a->reff_id]->AccCoa->name)) ? '<br/>(' . $mCashIn[$a->reff_id]->AccCoa->name . $giroAn . ')' : '';
                             } elseif ($a->reff_type == "cash_out") {
+                                $accCode = (!empty($mCashOut[$a->reff_id]->AccCoa->code)) ? $mCashOut[$a->reff_id]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashOut[$a->reff_id]->description_to)) ? ' - ' . $mCashOut[$a->reff_id]->description_to : '';
                                 $dibayar = (!empty($mCashOut[$a->reff_id]->AccCoa->name)) ? '<br/>(' . $mCashOut[$a->reff_id]->AccCoa->name . $giroAn . ')' : '';
                             } else {
+                                $accCode = '';
                                 $giroAn = '';
                                 $dibayar = '';
                             }
@@ -171,6 +183,7 @@
                             //jika record yang pertama, jika bukan balance maka muncul, karena saldo awal yang di atas sudah muncul
                             if ($key == 0 && $a->reff_type != "balance") {
                                 echo'<tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -188,6 +201,7 @@
                             <td style="text-align: center">' . $sDate . '</td>
                             <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
                             <td style="text-align: center">' . $a->code . '</td>
+                            <td style="text-align: center">' . $accCode . '</td>
                             <td>' . $sDesc . '</td>
                             <td name="deb" style="text-align: right"></td>
                             <td name="cred" style="text-align: right"></td>
@@ -198,6 +212,7 @@
                             <td style="text-align: center">' . $sDate . '</td>
                             <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
                             <td style="text-align: center">' . $a->code . '</td>
+                            <td style="text-align: center">' . $accCode . '</td>
                             <td>' . $sDesc . '</td>
                             <td name="deb" style="text-align: right">' . landa()->rp($a->debet, false, 2) . '</td>
                             <td name="cred" style="text-align: right">' . landa()->rp($a->credit, false, 2) . '</td>

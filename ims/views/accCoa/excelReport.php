@@ -26,22 +26,6 @@
                 Deskripsi		</th>
             <th width="80px">
                 Saldo Saat Ini		</th>
-    <!-- 		<th width="80px">
-                created_user_id		</th>
-          <th width="80px">
-                modified		</th>
-          <th width="80px">
-                created		</th>
-          <th width="80px">
-                level		</th>
-          <th width="80px">
-                lft		</th>
-          <th width="80px">
-                rgt		</th>
-          <th width="80px">
-                root		</th>
-          <th width="80px">
-                parent_id		</th>-->
         </tr>
         <?php foreach ($model as $row): ?>
             <tr>
@@ -49,7 +33,7 @@
                     <?php echo $row->id; ?>
                 </td>
                 <td>
-                    <?php echo $row->name; ?>
+                    <?php echo $row->nestedName; ?>
                 </td>
                 <td>
                     <?php echo $row->description; ?>
@@ -57,30 +41,6 @@
                 <td>
                     <?php echo landa()->rp(AccCoaDet::model()->beginingBalance(date("Y-m-d"), $row->id)); ?>
                 </td>
-        <!--       		<td>
-                <?php // echo $row->created_user_id; ?>
-                </td>
-                <td>
-                <?php // echo $row->modified; ?>
-                </td>
-                <td>
-                <?php // echo $row->created; ?>
-                </td>
-                <td>
-                <?php // echo $row->level; ?>
-                </td>
-                <td>
-                <?php // echo $row->lft; ?>
-                </td>
-                <td>
-                <?php // echo $row->rgt; ?>
-                </td>
-                <td>
-                <?php // echo $row->root; ?>
-                </td>
-                <td>
-                <?php // echo $row->parent_id; ?>
-                </td>-->
             </tr>
         <?php endforeach; ?>
     </table>
