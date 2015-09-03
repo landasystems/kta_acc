@@ -1,7 +1,5 @@
 <?php
 
-//$a = explode('-', $_POST['AccCoaDet']['created']);
-//$newdate = strtotime('-1 day', strtotime($start));
 $parent = "";
 $acc = AccCoa::model()->findByPk($id);
 if ($acc->type == "detail") {
