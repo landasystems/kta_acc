@@ -38,7 +38,7 @@
                     <tr>
                         <td style="font-weight: bold;border:none;" width="10%">Nama Rekening</td>
                         <td style="font-weight: bold;border:none;" width="2%">:</td>
-                        <td colspan="2" style="text-align: left; font-weight: bold;border:none;"><?php echo $acc->name; ?>  <?php echo (!empty($kepada)) ? '( Terhadap :'.$kepada->name.')' : '' ?> </td>
+                        <td colspan="2" style="text-align: left; font-weight: bold;border:none;"><?php echo $acc->name; ?>  <?php echo (!empty($kepada)) ? '( Terhadap :' . $kepada->name . ')' : '' ?> </td>
                         <td style="border:none;"></td>
                         <td style="border:none;">Kode Rekening : </td>
                         <td style="text-align: center; font-weight: bold;border:none;"><?php echo $acc->code; ?></td>
@@ -46,7 +46,7 @@
                     <tr>
                         <th colspan="2" width="10%" style="text-align: center">TANGGAL</th>
                         <th width="8%" style="text-align: center">REFF</th>
-                        <th width="8%" style="text-align: center">KODE AKUN</th>
+                        <!--<th width="8%" style="text-align: center">KODE AKUN</th>-->
                         <th width="50%" style="text-align: center">URAIAN</th>
                         <th width="10%" style="text-align: center">DEBIT</th>
                         <th width="10%" style="text-align: center">CREDIT</th>
@@ -78,7 +78,7 @@
                         $mCashIn = AccCashIn::model()->findAll(array(
                             'index' => 'id',
                             'condition' => 'id IN (' . implode(',', $accIn) . ')'
-                            ));
+                        ));
                     }
                     if (empty($accOut)) {
                         $mCashOut = array();
@@ -86,7 +86,7 @@
                         $mCashOut = AccCashOut::model()->findAll(array(
                             'index' => 'id',
                             'condition' => 'id IN (' . implode(',', $accOut) . ')'
-                            ));
+                        ));
                     }
 
                     if ($isGabung) {
@@ -99,7 +99,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td>Saldo Awal</td>
                                 <td></td>
                                 <td></td>
@@ -108,27 +107,26 @@
                             }
 
                             if (isset($groupLedger[$a->code]))
-                                $groupLedger[$a->code] = array('reff_id' => $a->reff_id, 'reff_type' => $a->reff_type, 'description' => $groupLedger[$a->code]['description'] . '<br/>' . $a->description, 'data' => $a->date_coa, 'debet' => $groupLedger[$a->code]['debet'] + $a->debet, 'credit' => $groupLedger[$a->code]['credit'] + $a->credit,'coa_id' => $a->acc_coa_id);
+                                $groupLedger[$a->code] = array('reff_id' => $a->reff_id, 'reff_type' => $a->reff_type, 'description' => $groupLedger[$a->code]['description'] . '<br/>' . $a->description, 'data' => $a->date_coa, 'debet' => $groupLedger[$a->code]['debet'] + $a->debet, 'credit' => $groupLedger[$a->code]['credit'] + $a->credit, 'coa_id' => $a->acc_coa_id);
                             else
-                                $groupLedger[$a->code] = array('reff_id' => $a->reff_id, 'reff_type' => $a->reff_type, 'description' => $a->description, 'data' => $a->date_coa, 'debet' => $a->debet, 'credit' => $a->credit,'coa_id' => $a->acc_coa_id);
+                                $groupLedger[$a->code] = array('reff_id' => $a->reff_id, 'reff_type' => $a->reff_type, 'description' => $a->description, 'data' => $a->date_coa, 'debet' => $a->debet, 'credit' => $a->credit, 'coa_id' => $a->acc_coa_id);
                         }
                         $total = 0;
                         $no = 1;
                         $total = $beginingBalance;
                         //echo tampung
-                        logs($groupLedger);
                         foreach ($groupLedger as $key => $b) {
-                            
+
                             $detCoas = '';
                             $coaCode = AccCoaDet::model()->findAll(array(
-                                'condition' => 'code="'.$key.'" and acc_coa_id <>'.$b['coa_id']
+                                'condition' => 'code="' . $key . '" and acc_coa_id <>' . $b['coa_id']
                             ));
-                            foreach($coaCode as $keys => $val){
-                                $detCoas .= $val->AccCoa->code.'<br>';
+                            foreach ($coaCode as $keys => $val) {
+                                $detCoas .= $val->AccCoa->code . '<br>';
                             }
 
                             if ($a->reff_type == "cash_in") {
-                                
+
 //                                $accCode = (!empty($mCashIn[$b['reff_id']]->AccCoa->code)) ?  $mCashIn[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashIn[$b['reff_id']]->description_to)) ? ' - ' . $mCashIn[$b['reff_id']]->description_to : '';
                                 $dibayar = (!empty($mCashIn[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashIn[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
@@ -136,8 +134,6 @@
 //                                $accCode = (!empty($mCashOut[$b['reff_id']]->AccCoa->code)) ?  $mCashOut[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashOut[$b['reff_id']]->description_to)) ? ' - ' . $mCashOut[$b['reff_id']]->description_to : '';
                                 $dibayar = (!empty($mCashOut[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashOut[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
-                                
-                                
                             } else {
 //                                $accCode = '';
                                 $giroAn = '';
@@ -155,10 +151,10 @@
                             echo '<td style="text-align: center">' . $acDate . '</td>
                             <td style="text-align: center">' . $dCoa . '</td>'; //data tanggal
                             echo '<td>' . $key . '</td>'; //code 
-                            echo '<td style="text-align: center">' . $detCoas . '</td>'; //code 
+//                            echo '<td style="text-align: center">' . $detCoas . '</td>'; //code 
                             echo '<td>' . $sDesc . '</td>'; //
-                            echo '<td style="text-align: right">' . landa()->rp($b['debet'],false) . '</td>'; //debet
-                            echo '<td style="text-align: right">' . landa()->rp($b['credit'],false) . '</td>'; //credit
+                            echo '<td style="text-align: right">' . landa()->rp($b['debet'], false) . '</td>'; //debet
+                            echo '<td style="text-align: right">' . landa()->rp($b['credit'], false) . '</td>'; //credit
                             echo '<td style="text-align: right">' . landa()->rp($total, false, 2) . '</td>'; //total
                             echo '</tr>';
                             $totald += $b['debet'];
@@ -170,10 +166,10 @@
                         foreach ($accCoaDet as $key => $a) {
                             $detCoas = '';
                             $coaCode = AccCoaDet::model()->findAll(array(
-                                'condition' => 'code="'.$a->code.'" AND acc_coa_id <>'.$a->acc_coa_id
+                                'condition' => 'code="' . $a->code . '" AND acc_coa_id <>' . $a->acc_coa_id
                             ));
-                            foreach($coaCode as $keys => $val){
-                                $detCoas .= $val->AccCoa->code.'<br>';
+                            foreach ($coaCode as $keys => $val) {
+                                $detCoas .= $val->AccCoa->code . '<br>';
                             }
 
                             $sDate = ($monthYear == date('M Y', strtotime($a->date_coa)) and $no > 1) ? "" : date('M Y', strtotime($a->date_coa));
@@ -202,7 +198,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td>Saldo Awal</td>
                                 <td></td>
                                 <td></td>
@@ -216,9 +211,9 @@
                                 echo '<tr>
                             <td style="text-align: center">' . $sDate . '</td>
                             <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
-                            <td style="text-align: center">' . $a->code . '</td>
-                            <td style="text-align: center">' . $detCoas . '</td>
-                            <td>' . $sDesc . '</td>
+                            <td style="text-align: center">' . $a->code . '</td>';
+//                                echo '<td style="text-align: center">' . $detCoas . '</td>';
+                                echo '<td>' . $sDesc . '</td>
                             <td name="deb" style="text-align: right"></td>
                             <td name="cred" style="text-align: right"></td>
                             <td name="tdeb" style="text-align: right">' . landa()->rp($total, false, 2) . '</td>
@@ -227,9 +222,9 @@
                                 echo'<tr>
                             <td style="text-align: center">' . $sDate . '</td>
                             <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
-                            <td style="text-align: center">' . $a->code . '</td>
-                            <td style="text-align: center">' . $detCoas . '</td>
-                            <td>' . $sDesc . '</td>
+                            <td style="text-align: center">' . $a->code . '</td>';
+//                                echo '<td style="text-align: center">' . $detCoas . '</td>';
+                                echo '<td>' . $sDesc . '</td>
                             <td name="deb" style="text-align: right">' . landa()->rp($a->debet, false, 2) . '</td>
                             <td name="cred" style="text-align: right">' . landa()->rp($a->credit, false, 2) . '</td>
                             <td name="tdeb" style="text-align: right">' . landa()->rp($total, false, 2) . '</td>

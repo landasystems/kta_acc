@@ -35,31 +35,59 @@
 
                             <?php
                             echo $form->textFieldRow(
-                                    $model, 'phone', array('prepend' => '+62','class' => 'span2')
+                                    $model, 'phone', array('prepend' => '+62', 'class' => 'span2')
                             );
                             ?>
 
                             <div class="control-group ">
                                 <?php
-                                echo CHtml::activeLabel($model, 'province_id', array('class' => 'control-label'));
+                                echo CHtml::activeLabel($model, 'city_id', array('class' => 'control-label'));
                                 ?>
                                 <div class="controls">
                                     <?php
-                                    echo CHtml::dropDownList('province_id', $model->City->province_id, CHtml::listData(Province::model()->findAll(), 'id', 'name'), array(
-                                        'empty' => 'Pilih',
-                                        'ajax' => array(
-                                            'type' => 'POST',
-                                            'url' => CController::createUrl('landa/city/dynacities'),
-                                            'update' => '#Supplier_city_id',
+                                    $city = City::model()->findByPk($model->city_id);
+                                    if (isset($city)) {
+                                        $city_id = $city->id;
+                                        $city_name = $city->name;
+                                    } else {
+                                        $city_id = 0;
+                                        $city_name = '';
+                                    }
+                                    $this->widget(
+                                            'bootstrap.widgets.TbSelect2', array(
+                                        'name' => "Supplier[city_id]",
+                                        'val' => $model->city_id,
+                                        'asDropDownList' => false,
+                                        'options' => array(
+                                            'allowClear' => true,
+                                            'minimumInputLength' => 3,
+                                            'width' => '100%;margin:0px;text-align:left',
+                                            'minimumInputLength' => '3',
+                                            'initSelection' => 'js:function(element, callback) 
+                                                                { 
+                                                                    data = {"id": ' . $city_id . ',"text": "' . $city_name . '"}
+                                                                    callback(data);   
+                                                                }',
+                                            'ajax' => array(
+                                                'url' => Yii::app()->createUrl('city/listajax'),
+                                                'dataType' => 'json',
+                                                'data' => 'js:function(term, page) { 
+                                                       return {
+                                                           q: term 
+                                                       }; 
+                                                   }',
+                                                'results' => 'js:function(data) { 
+                                                       return {
+                                                           results: data
+                                                       };
+                                                   }',
+                                            ),
                                         ),
-                                        'class' => 'span3'
-                                    ));
-                                    ?>  
+                                            )
+                                    );
+                                    ?>
                                 </div>
                             </div>
-
-
-                            <?php echo $form->dropDownListRow($model, 'city_id', CHtml::listData(City::model()->findAll('province_id=:province_id', array(':province_id' => (int) $model->City->province_id)), 'id', 'name'), array('class' => 'span3')); ?>
                             <?php echo $form->textAreaRow($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
 
                         </td>
