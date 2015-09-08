@@ -123,34 +123,6 @@ class SupplierController extends Controller {
 
         if (isset($_GET['Supplier'])) {
             $model->attributes = $_GET['Supplier'];
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
         }
 
         $this->render('index', array(
@@ -193,10 +165,10 @@ class SupplierController extends Controller {
                 } else {
                     $payment = InvoiceDet::model()->findByPk($_POST['id'][$i]);
                 }
-                $payment->code = $_POST['code'][$i];
-                $payment->description = $_POST['description'][$i];
-                $payment->user_id = $_POST['user_id'][$i];
-                $payment->payment = $_POST['payment'][$i];
+                $payment->code = (!empty($_POST['code'][$i])) ? $_POST['code'][$i] : null;
+                $payment->description = (!empty($_POST['description'][$i])) ? $_POST['description'][$i] : null;
+                $payment->user_id = (!empty($_POST['user_id'][$i])) ? $_POST['user_id'][$i] : null;
+                $payment->payment = (!empty($_POST['payment'][$i])) ? $_POST['payment'][$i] : null;
                 $payment->type = 'supplier';
                 if(!empty($_POST['term_date'][$i]))
                     $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));

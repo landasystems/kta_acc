@@ -129,55 +129,6 @@ class CustomerController extends Controller {
 
         if (isset($_GET['Customer'])) {
             $model->attributes = $_GET['Customer'];
-
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->customer_category_id))
-                $criteria->addCondition('customer_category_id = "' . $model->customer_category_id . '"');
-
-
-            if (!empty($model->name))
-                $criteria->addCondition('name = "' . $model->name . '"');
-
-
-            if (!empty($model->address))
-                $criteria->addCondition('address = "' . $model->address . '"');
-
-
-            if (!empty($model->city_id))
-                $criteria->addCondition('city_id = "' . $model->city_id . '"');
-
-
-            if (!empty($model->phone))
-                $criteria->addCondition('phone = "' . $model->phone . '"');
-
-
-            if (!empty($model->fax))
-                $criteria->addCondition('fax = "' . $model->fax . '"');
-
-
-            if (!empty($model->email))
-                $criteria->addCondition('email = "' . $model->email . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->acc_number))
-                $criteria->addCondition('acc_number = "' . $model->acc_number . '"');
-
-
-            if (!empty($model->acc_number_name))
-                $criteria->addCondition('acc_number_name = "' . $model->acc_number_name . '"');
-
-
-            if (!empty($model->acc_bank))
-                $criteria->addCondition('acc_bank = "' . $model->acc_bank . '"');
         }
 //                 $session['Customer_records']=Customer::model()->findAll($criteria); 
 
@@ -241,9 +192,9 @@ class CustomerController extends Controller {
                 $payment->user_id = $_POST['user_id'][$i];
                 $payment->payment = $_POST['payment'][$i];
                 $payment->type = 'customer';
-                if(!empty($_POST['term_date'][$i]))
+                if (!empty($_POST['term_date'][$i]))
                     $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
-                
+
                 if ($payment->save()) {
                     if (empty($_POST['id_coaDet'][$i])) {
                         $coaDet = new AccCoaDet();
