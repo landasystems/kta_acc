@@ -21,22 +21,22 @@ class AccCashInController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("AccCashIn","c")'
-            ),
+//            array('allow', // c
+//                'actions' => array('create'),
+//                'expression' => 'app()->controller->isValidAccess("AccCashIn","c")'
+//            ),
             array('allow', // r
                 'actions' => array('index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("AccCashIn","r")'
             ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("AccCashIn","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("AccCashIn","d")'
-            ),
+//            array('allow', // u
+//                'actions' => array('update'),
+//                'expression' => 'app()->controller->isValidAccess("AccCashIn","u")'
+//            ),
+//            array('allow', // d
+//                'actions' => array('delete'),
+//                'expression' => 'app()->controller->isValidAccess("AccCashIn","d")'
+//            ),
         );
     }
 

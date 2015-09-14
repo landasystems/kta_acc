@@ -21,22 +21,22 @@ class AccCoaController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
-            ),
+//            array('allow', // c
+//                'actions' => array('create'),
+//                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
+//            ),
             array('allow', // r
                 'actions' => array('index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("AccCoa","r")'
             ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
-            )
+//            array('allow', // u
+//                'actions' => array('update'),
+//                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
+//            ),
+//            array('allow', // d
+//                'actions' => array('delete'),
+//                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
+//            )
         );
     }
 
