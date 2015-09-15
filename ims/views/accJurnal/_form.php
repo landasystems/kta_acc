@@ -223,11 +223,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                             if (!empty($val->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                if ($val->InvoiceDet->type == "customer") {
-                                    $name = $val->InvoiceDet->Customer->name;
+                                if (!empty($val->InvoiceDet->id) && $val->InvoiceDet->type == "customer") {
+                                    $name = empty($val->InvoiceDet->Customer->name) ? '-' : $val->InvoiceDet->Customer->name;
                                     $id = $val->InvoiceDet->user_id;
-                                } elseif ($val->InvoiceDet->type == "supplier") {
-                                    $name = $val->InvoiceDet->Supplier->name;
+                                } elseif (!empty($val->InvoiceDet->id) && $val->InvoiceDet->type == "supplier") {
+                                    $name = empty($val->InvoiceDet->Supplier->name) ? '-' : $val->InvoiceDet->Supplier->name;
                                     $id = $val->InvoiceDet->user_id;
                                 }
                             } else {

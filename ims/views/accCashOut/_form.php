@@ -257,11 +257,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
                             if (!empty($viewCashOutDet->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                if ($viewCashOutDet->InvoiceDet->type == "customer") {
-                                    $name = $viewCashOutDet->InvoiceDet->Customer->name;
+                                if (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "customer") {
+                                    $name = empty($viewCashOutDet->InvoiceDet->Customer->name) ? '-' : $viewCashOutDet->InvoiceDet->Customer->name;
                                     $id = $viewCashOutDet->InvoiceDet->user_id;
-                                } elseif ($viewCashOutDet->InvoiceDet->type == "supplier") {
-                                    $name = $viewCashOutDet->InvoiceDet->Supplier->name;
+                                } elseif (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "supplier") {
+                                    $name = empty($viewCashOutDet->InvoiceDet->Supplier->name) ? '-' : $viewCashOutDet->InvoiceDet->Supplier->name;
                                     $id = $viewCashOutDet->InvoiceDet->user_id;
                                 }
                             } else {
@@ -304,11 +304,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             $id = $accCoa->id;
                             if (!empty($viewCashOutDet->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                if ($viewCashOutDet->InvoiceDet->type == "customer") {
-                                    $name = $viewCashOutDet->InvoiceDet->Customer->name;
+                                if (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "customer") {
+                                    $name = empty($viewCashOutDet->InvoiceDet->Customer->name) ? '-' : $viewCashOutDet->InvoiceDet->Customer->name;
                                     $id = $viewCashOutDet->InvoiceDet->user_id;
-                                } elseif ($viewCashOutDet->InvoiceDet->type == "supplier") {
-                                    $name = $viewCashOutDet->InvoiceDet->Supplier->name;
+                                } elseif (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "supplier") {
+                                    $name = empty($viewCashOutDet->InvoiceDet->Supplier->name) ? '-' : $viewCashOutDet->InvoiceDet->Supplier->name;
                                     $id = $viewCashOutDet->InvoiceDet->user_id;
                                 }
                             } else {
