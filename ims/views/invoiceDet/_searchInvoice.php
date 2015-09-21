@@ -20,7 +20,7 @@
 </div>
 <input type="hidden" name="type_account" id="type_account" value="">
 <div class="well">
-    Supplier / Customer's Invoices Description: 
+    Supplier / Customer's Invoices : 
     <table class="table table-bordered">
         <thead>
             <tr>
