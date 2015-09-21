@@ -21,22 +21,22 @@ class AccCoaController extends Controller {
 
     public function accessRules() {
         return array(
-//            array('allow', // c
-//                'actions' => array('create'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
-//            ),
+            array('allow', // c
+                'actions' => array('create'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
+            ),
             array('allow', // r
                 'actions' => array('index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("AccCoa","r")'
             ),
-//            array('allow', // u
-//                'actions' => array('update'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
-//            ),
-//            array('allow', // d
-//                'actions' => array('delete'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
-//            )
+            array('allow', // u
+                'actions' => array('update'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
+            ),
+            array('allow', // d
+                'actions' => array('delete'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
+            )
         );
     }
 
@@ -593,24 +593,22 @@ class AccCoaController extends Controller {
             foreach ($balance as $b) {
                 $charge = AccCoaDet::model()->balanceInvoice($b->id); //filter no date
                 $payment = (!empty($b->payment) ? $b->payment : 0);
-                echo '<tr>'
-                . '<td style="width:10%">' . $b->code . '</td>'
-                . '<td>' . $b->description . '</td>'
-                . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
-                . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
-                . '<td style="width:20%; text-align:center">'
-//                . '<a class="btn">'
-                . '<div class="ambil btn" title="Pilih" rel="tooltip" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
-                . '<i class="icon-check"> </i>'
-                . '</div>'
-//                . '</a> '
-//                . '<a class="">'
-                . '<div title="Hapus" rel="tooltip" class="delInvoice btn btn-danger" det_id="' . $b->id . '">'
-                . '<i class="icon-trash icon-white"> </i>'
-                . '</div>'
-//                . '</a>'
-                . '</td>'
-                . '</tr>';
+                if (!empty($charge)) { //jika belum lunas ditampilkan
+                    echo '<tr>'
+                    . '<td style="width:10%">' . $b->code . '</td>'
+                    . '<td>' . $b->description . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
+                    . '<td style="width:20%; text-align:center">'
+                    . '<div class="ambil btn" title="Pilih" rel="tooltip" nilai="' . $payment . '" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
+                    . '<i class="icon-check"> </i>'
+                    . '</div>'
+                    . '<div title="Hapus" rel="tooltip" class="delInvoice btn btn-danger" det_id="' . $b->id . '">'
+                    . '<i class="icon-trash icon-white"> </i>'
+                    . '</div>'
+                    . '</td>'
+                    . '</tr>';
+                }
             }
         }
     }
