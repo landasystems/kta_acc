@@ -245,6 +245,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     if ($model->isNewRecord == false and ! isset($_POST['AccCashOutDet'])) {
                         $i = 0;
                         $name = '';
+                        $id= 0;
                         foreach ($cashOutDet as $viewCashOutDet) {
                             $invoice = (!empty($viewCashOutDet->invoice_det_id)) ? $viewCashOutDet->invoice_det_id : 0;
                             $code = (!empty($viewCashOutDet->InvoiceDet->code)) ? $viewCashOutDet->InvoiceDet->code : "-";

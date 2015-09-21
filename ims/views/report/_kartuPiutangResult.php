@@ -46,11 +46,15 @@
         $monthYear = "";
         $i = 0;
         $saldo = $balance;
+        $tDebet = 0;
+        $tCredit = 0;
         foreach ($accCoaDet as $a) {
             $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
             $monthYear = date('M Y', strtotime($a->date_coa));
 
             $saldo = $saldo + $a->debet - $a->credit;
+            $tDebet +=  $a->debet;
+            $tCredit +=  $a->credit;
             echo '<tr>
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
@@ -65,7 +69,9 @@
         ?>
         <tfoot>
             <tr>
-                <th colspan="7">Saldo Akhir</th>
+                <th colspan="5">Saldo Akhir</th>
+                <th style="text-align: right;"><?php echo landa()->rp($tDebet, false) . ',-' ?></th>
+                <th style="text-align: right;"><?php echo landa()->rp($tCredit, false) . ',-' ?></th>
                 <th style="text-align: right;"><?php echo landa()->rp($saldo, false) . ',-' ?></th>
             </tr>
         </tfoot>
