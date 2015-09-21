@@ -124,6 +124,7 @@ $this->endWidget();
                     <tbody>
                         <?php
                         $no = 1;
+                        $name = '';
                         foreach ($cashOutDet as $viewCashOutDet) {
                             if ($viewCashOutDet->AccCoa !== NULL) {
                                 $accCoaName = $viewCashOutDet->AccCoa->code . ' - ' . $viewCashOutDet->AccCoa->name;
@@ -133,10 +134,12 @@ $this->endWidget();
 
                             if (!empty($viewCashOutDet->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                if($viewCashOutDet->InvoiceDet->type=="customer"){
-                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $viewCashOutDet->InvoiceDet->Customer->name;
-                                }elseif($viewCashOutDet->InvoiceDet->type=="supplier"){
-                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $viewCashOutDet->InvoiceDet->Supplier->name;
+                                if(!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type=="customer"){
+                                    $customer = empty($viewCashOutDet->InvoiceDet->Customer->name) ? '-' : $viewCashOutDet->InvoiceDet->Customer->name;
+                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $customer;
+                                }elseif(!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type=="supplier"){
+                                    $supplier = empty($viewCashOutDet->InvoiceDet->Supplier->name) ? '-' : $viewCashOutDet->InvoiceDet->Supplier->name;
+                                    $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $supplier;
                                 }
                             } else {
                                 $name = "-";

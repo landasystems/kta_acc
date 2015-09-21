@@ -21,22 +21,22 @@ class AccJurnalController extends Controller {
 
     public function accessRules() {
         return array(
-            array('allow', // c
-                'actions' => array('create'),
-                'expression' => 'app()->controller->isValidAccess("AccJurnal","c")'
-            ),
+//            array('allow', // c
+//                'actions' => array('create'),
+//                'expression' => 'app()->controller->isValidAccess("AccJurnal","c")'
+//            ),
             array('allow', // r
                 'actions' => array('index', 'view'),
-                'expression' => 'app()->controller->isValidAccess                ("AccJurnal","r")'
+                'expression' => 'app()->controller->isValidAccess("AccJurnal","r")'
             ),
-            array('allow', // u
-                'actions' => array('update'),
-                'expression' => 'app()->controller->isValidAccess("AccJurnal","u")'
-            ),
-            array('allow', // d
-                'actions' => array('delete'),
-                'expression' => 'app()->controller->isValidAccess("AccJurnal","d")'
-            )
+//            array('allow', // u
+//                'actions' => array('update'),
+//                'expression' => 'app()->controller->isValidAccess("AccJurnal","u")'
+//            ),
+//            array('allow', // d
+//                'actions' => array('delete'),
+//                'expression' => 'app()->controller->isValidAccess("AccJurnal","d")'
+//            )
         );
     }
 

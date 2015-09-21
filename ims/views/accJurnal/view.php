@@ -120,10 +120,12 @@ $this->endWidget();
                             }
 
                             if (!empty($val->invoice_det_id)) {
-                                if($val->InvoiceDet->type=="customer"){
-                                    $name = '[' . $val->InvoiceDet->code . '] ' . $val->InvoiceDet->Customer->name;
-                                }elseif($val->InvoiceDet->type=="supplier"){
-                                    $name = '[' . $val->InvoiceDet->code . '] ' . $val->InvoiceDet->Supplier->name;
+                                if(!empty($val->InvoiceDet->id) && $val->InvoiceDet->type=="customer"){
+                                    $customer = empty($val->InvoiceDet->Customer->name) ? '-' : $val->InvoiceDet->Customer->name;
+                                    $name = '[' . $val->InvoiceDet->code . '] ' . $customer;
+                                }elseif(!empty($val->InvoiceDet->id) && $val->InvoiceDet->type=="supplier"){
+                                    $supplier = empty($val->InvoiceDet->Supplier->name) ? '-' : $val->InvoiceDet->Supplier->name;
+                                    $name = '[' . $val->InvoiceDet->code . '] ' . $supplier;
                                 }
                             } else {
                                 $name = "-";
