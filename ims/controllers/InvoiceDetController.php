@@ -123,38 +123,6 @@ class InvoiceDetController extends Controller {
 
         if (isset($_GET['InvoiceDet'])) {
             $model->attributes = $_GET['InvoiceDet'];
-
-
-            if (!empty($model->id))
-                $criteria->addCondition('id = "' . $model->id . '"');
-
-
-            if (!empty($model->description))
-                $criteria->addCondition('description = "' . $model->description . '"');
-
-
-            if (!empty($model->user_id))
-                $criteria->addCondition('user_id = "' . $model->user_id . '"');
-
-
-            if (!empty($model->payment))
-                $criteria->addCondition('payment = "' . $model->payment . '"');
-
-
-            if (!empty($model->charge))
-                $criteria->addCondition('charge = "' . $model->charge . '"');
-
-
-            if (!empty($model->type))
-                $criteria->addCondition('type = "' . $model->type . '"');
-
-
-            if (!empty($model->code))
-                $criteria->addCondition('code = "' . $model->code . '"');
-
-
-            if (!empty($model->term_date))
-                $criteria->addCondition('term_date = "' . $model->term_date . '"');
         }
 
         $this->render('index', array(

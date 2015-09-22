@@ -21,22 +21,22 @@ class AccCoaController extends Controller {
 
     public function accessRules() {
         return array(
-//            array('allow', // c
-//                'actions' => array('create'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
-//            ),
+            array('allow', // c
+                'actions' => array('create'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","c")'
+            ),
             array('allow', // r
                 'actions' => array('index', 'view'),
                 'expression' => 'app()->controller->isValidAccess("AccCoa","r")'
             ),
-//            array('allow', // u
-//                'actions' => array('update'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
-//            ),
-//            array('allow', // d
-//                'actions' => array('delete'),
-//                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
-//            )
+            array('allow', // u
+                'actions' => array('update'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","u")'
+            ),
+            array('allow', // d
+                'actions' => array('delete'),
+                'expression' => 'app()->controller->isValidAccess("AccCoa","d")'
+            )
         );
     }
 
@@ -574,13 +574,17 @@ class AccCoaController extends Controller {
     public function actionSelectInvoice() {
         if (isset($_POST['id']) && !empty($_POST['type'])) {
             $type = $_POST['type'];
-            if($type == 'customer'){
+            if ($type == 'customer') {
                 $account = Customer::model()->findByPk($_POST['id']);
-            }elseif($type == 'supplier'){
+            } elseif ($type == 'supplier') {
                 $account = Supplier::model()->findByPk($_POST['id']);
             }
+
+            $balance = InvoiceDet::model()->findAll(array(
+                'condition' => 'user_id='. $_POST['id'] . ' AND type="'. $type . '"',
+                'order' => 'code ASC')
+            );
             
-            $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id'],'type' => $type));
             echo '<tr><th><input type="text" name="code_invoice" style="width:85%" id="code_invoice"></th>';
             echo '<th><input style="width:95%" type="text" name="invoice_description" id="invoice_description"></th>';
             echo '<th><input style="max-width:90% !important" type="text" class="angka" id="invoice_amount" value="0"></th>';
@@ -589,24 +593,22 @@ class AccCoaController extends Controller {
             foreach ($balance as $b) {
                 $charge = AccCoaDet::model()->balanceInvoice($b->id); //filter no date
                 $payment = (!empty($b->payment) ? $b->payment : 0);
-                echo '<tr>'
-                . '<td style="width:10%">' . $b->code . '</td>'
-                . '<td>' . $b->description . '</td>'
-                . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
-                . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
-                . '<td style="width:20%; text-align:center">'
-//                . '<a class="btn">'
-                . '<div class="ambil btn" title="Pilih" rel="tooltip" nilai="'.$payment.'" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
-                . '<i class="icon-check"> </i>'
-                . '</div>'
-//                . '</a> '
-//                . '<a class="">'
-                . '<div title="Hapus" rel="tooltip" class="delInvoice btn btn-danger" det_id="' . $b->id . '">'
-                . '<i class="icon-trash icon-white"> </i>'
-                . '</div>'
-//                . '</a>'
-                . '</td>'
-                . '</tr>';
+                if (!empty($charge)) { //jika belum lunas ditampilkan
+                    echo '<tr>'
+                    . '<td style="width:10%">' . $b->code . '</td>'
+                    . '<td>' . $b->description . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
+                    . '<td style="width:20%; text-align:center">'
+                    . '<div class="ambil btn" title="Pilih" rel="tooltip" nilai="' . $payment . '" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
+                    . '<i class="icon-check"> </i>'
+                    . '</div>'
+                    . '<div title="Hapus" rel="tooltip" class="delInvoice btn btn-danger" det_id="' . $b->id . '">'
+                    . '<i class="icon-trash icon-white"> </i>'
+                    . '</div>'
+                    . '</td>'
+                    . '</tr>';
+                }
             }
         }
     }
@@ -640,9 +642,11 @@ class AccCoaController extends Controller {
             }
         }
     }
-    public function actionGenerateExcel(){
+
+    public function actionGenerateExcel() {
         $model = AccCoa::model()->findAll();
-        Yii::app()->request->sendFile('Excel Daftar Perkiraan - ' . date('dmY') . '.xls', $this->renderPartial('excelReport',array('model'=>$model),true)
+        Yii::app()->request->sendFile('Excel Daftar Perkiraan - ' . date('dmY') . '.xls', $this->renderPartial('excelReport', array('model' => $model), true)
         );
     }
+
 }
