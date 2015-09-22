@@ -561,7 +561,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 }
             });
         } else {
-        $.toaster({priority : 'error', message : "code dan/atau nilai belum di inputkan"});
+            $.toaster({priority: 'error', message: "code dan/atau nilai belum di inputkan"});
         }
     });
     $(document).ready(function () {
@@ -610,7 +610,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if ($("#total_debet").val() == $("#total_credit").val()) {
             return true;
         } else {
-            $.toaster({priority : 'error', message : "Total Debet dan Kredit Harus Sama"});
+            $.toaster({priority: 'error', message: "Total Debet dan Kredit Harus Sama"});
             return false;
         }
     });
