@@ -53,8 +53,8 @@
             $monthYear = date('M Y', strtotime($a->date_coa));
 
             $saldo = $saldo + $a->debet - $a->credit;
-            $tDebet +=  $a->debet;
-            $tCredit +=  $a->credit;
+            $tDebet += $a->debet;
+            $tCredit += $a->credit;
             echo '<tr>
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>

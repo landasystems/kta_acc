@@ -542,15 +542,29 @@ class AccJurnalController extends Controller {
         $acca = AccCoa::model()->findByPk($_POST['account']);
         $data = array(0 => t('choose', 'global')) + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
         $subId = (isset($_POST['subledgerid'])) ? $_POST['subledgerid'] : 0;
+        logs($subId);
         $mInvoce = InvoiceDet::model()->findByPk($subId);
-        if(!empty($mInvoce)){
-            if($mInvoce->type== "supplier"){
+        $invoiceName = '';
+        $display = '';
+        if (!empty($mInvoce)) {
+            if ($mInvoce->type == "supplier") {
                 $name = (!empty($mInvoce->Supplier->name)) ? $mInvoce->Supplier->name : '';
-            }elseif($mInvoce->type == "customer"){
+            } elseif ($mInvoce->type == "customer") {
                 $name = (!empty($mInvoce->Customer->name) ? $mInvoce->Customer->name : '');
             }
         }
-        $invoiceName = (!empty($mInvoce->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $name : '';
+
+        if (!empty($mInvoce->code) && !empty($name)) {
+            $display = 'none';
+            $invoiceName = '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $name;
+        } elseif (empty($mInvoce) && ($acca->type_sub_ledger == 'ap' || $acca->type_sub_ledger == 'as' || $acca->type_sub_ledger == 'ar')) {
+            $invoiceName = '';
+            $display = '';
+        } else {
+            $invoiceName = '';
+            $display = 'none';
+        }
+//        $invoiceName = (!empty($mInvoce->code) && !empty($name)) ? '<a class="btn btn-mini removeSub"><i class=" icon-remove-circle"></i></a>[' . $mInvoce->code . ']' . $name : '';
         if ($acca->type != "general") {
             if (isset($_POST['accountName']) and ! empty($_POST['accountName'])) {
 
@@ -593,7 +607,7 @@ class AccJurnalController extends Controller {
             }
             echo '<option value="0">Pilih</option>';
             echo '</select></td>
-                        <td style="text-align:center" class="subLedgerField"> ' . $invoiceName . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
+                        <td style="text-align:center" class="subLedgerField"> ' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
                         <td><input type="text" class="span4" name="description[]" id="description[]" value="' . $_POST['costDescription'] . '"/> </td>
                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="valdebet[]" id="valdebet[]" onkeyup="calculateMin()" class="angka totalDeb" value="' . $_POST['debit'] . '" ' . $debetDisabled . '/></div></td>
                         <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="valcredit[]" id="valcredit[]" class="angka totalCre" value="' . $_POST['credit'] . '" ' . $creditDisabled . '/></div></td>
