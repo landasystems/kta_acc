@@ -18,22 +18,10 @@ class CustomerController extends Controller {
 
     public function accessRules() {
         return array(
-//            array('allow', // c
-//                'actions' => array('index', 'create'),
-//                'expression' => 'app()->controller->isValidAccess(1,"c")'
-//            ),
             array('allow', // r
-                'actions' => array('index', 'view'),
+                'actions' => array('create','index', 'view','update','delete'),
                 'expression' => 'app()->controller->isValidAccess("Customer","r")'
             ),
-//            array('allow', // u
-//                'actions' => array('index', 'update'),
-//                'expression' => 'app()->controller->isValidAccess(1,"u")'
-//            ),
-//            array('allow', // d
-//                'actions' => array('index', 'delete'),
-//                'expression' => 'app()->controller->isValidAccess(1,"d")'
-//            )
         );
     }
 
