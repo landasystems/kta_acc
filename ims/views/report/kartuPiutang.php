@@ -79,7 +79,7 @@ $this->breadcrumbs = array(
                         'icon' => 'print',
                         'items' => array(
 //                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuPiutang?created=' . str_replace("", "-", $_POST['AccCoaSub']['created'] . '&ar_id=' . $_POST['ar_id'] . '&type=ar'))),
-                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
+                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),
                         )
                     ),
                 ),

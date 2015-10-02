@@ -1,5 +1,17 @@
-<div class='printableArea'>
+<div id='printableArea'>
+    <style type="text/css" media="print">
+        .table td {
+            padding: 0px !important;
+            margin: 0px !important;
 
+        }
+        .table tr{
+            padding : 0px !important;
+            margin : 0px !important;
+        }
+        body {font-size:7.5pt;}
+
+    </style>
     <table width="100%">
         <tr>
             <td></td>
@@ -27,7 +39,7 @@
         </thead>
         <tr>
             <?php
-            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)),$id);
+            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)), $id);
             ?>
             <th></th>
             <th></th>
@@ -49,9 +61,9 @@
             $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
             $monthYear = date('M Y', strtotime($a->date_coa));
 
-            $saldo =  $saldo + $a->debet - $a->credit;
-            $tDebet +=  $a->debet;
-            $tCredit +=  $a->credit;
+            $saldo = $saldo + $a->debet - $a->credit;
+            $tDebet += $a->debet;
+            $tCredit += $a->credit;
             echo '<tr>
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
@@ -75,16 +87,13 @@
     </table>
 </div>
 
-<style type="text/css" media="print">
-    body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:17px}
-    table{width: 100%}
-</style>
+
 <script type="text/javascript">
-    function printDiv()
-    {
-
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
         window.print();
-
+        document.body.innerHTML = originalContents;
     }
 </script>
