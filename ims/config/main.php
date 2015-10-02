@@ -11,7 +11,6 @@ return array(
         'application.models.*',
         'common.components.*',
         'common.extensions.*',
-        'common.extensions.image.helpers.*',
     ),
     'components' => array(
         'db' => array(

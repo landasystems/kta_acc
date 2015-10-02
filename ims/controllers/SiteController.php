@@ -11,7 +11,7 @@ class SiteController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // allow all users to perform 'index' and 'view' actions
-                'actions' => array('error', 'login', 'logout', 'icons'),
+                'actions' => array('error', 'login', 'logout', 'coba'),
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -124,6 +124,10 @@ class SiteController extends Controller {
 
     public function actionProcess() {
         $this->render('process');
+    }
+    
+    public function actionCoba() {
+        $this->render('coba');
     }
     
 }

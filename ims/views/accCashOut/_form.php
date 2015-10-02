@@ -662,11 +662,13 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     }
 
     function retAccount(id, elements) {
+        
         $.ajax({
             url: "<?php echo url('accCoa/retAccount') ?>",
             type: "POST",
             data: {ledger: id},
             success: function (data) {
+//                console.log(data);
                 obj = JSON.parse(data);
                 $(".isiModal").html(obj.render);
                 $("#type_account").val(obj.type);

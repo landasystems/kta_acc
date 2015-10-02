@@ -4,10 +4,12 @@
     <head>
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta content="utf-8" http-equiv="encoding"/>
         <meta name="author" content="Landa Systems - Custom Web & Mobile Apps" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="shortcut icon" href="<?php echo bu('img/favicon.ico') ?>" />
         <link rel="stylesheet" href="<?php echo bu('css/main.min.css') ?>" type="text/css" />
+
         <?php
         landa()->loginRequired();
         cs()->registerCoreScript('jquery');
