@@ -70,24 +70,24 @@ $this->breadcrumbs = array(
         ));
         ?>
         <?php
-//        if (isset($_POST['AccCoaDet']['created'])) {
-//            $this->widget(
-//                    'bootstrap.widgets.TbButtonGroup', array(
-//                'buttons' => array(
-//                    array(
-//                        'label' => 'Report',
-//                        'icon' => 'print',
-//                        'items' => array(
+        if (isset($_POST['AccCoaDet']['created'])) {
+            $this->widget(
+                    'bootstrap.widgets.TbButtonGroup', array(
+                'buttons' => array(
+                    array(
+                        'label' => 'Report',
+                        'icon' => 'print',
+                        'items' => array(
 //                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuPiutang?created=' . str_replace("", "-", $_POST['AccCoaSub']['created'] . '&ar_id=' . $_POST['ar_id'] . '&type=ar'))),
-//                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
-//                        )
-//                    ),
-//                ),
-//                    )
-//            );
-//        } else {
-//            echo'';
-//        }
+                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
+                        )
+                    ),
+                ),
+                    )
+            );
+        } else {
+            echo'';
+        }
         ?>
     </div>
 
