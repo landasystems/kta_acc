@@ -180,7 +180,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                                             $(".newRow").find(".selectDua").select2();
                                                             $(".newRow").removeClass("newRow");
                                                             $(".insertNew").find(".inVoiceDet").val("0");
-                                                            $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Select Sub-Ledger</a>");
+                                                            $(".insertNew").find(".subLedgerField").html("<a style=\"display:none\" class=\"btn showModal\">Sub Ledger</a>");
                                                            
                                         }'), $htmlOptions = array('id' => 'btnAdd', 'class' => 'btn AddNewRow')
                             );
@@ -215,7 +215,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <?php
                             $this->widget(
                                     'bootstrap.widgets.TbButton', array(
-                                'label' => 'Select Sub-Ledger',
+                                'label' => 'Sub Ledger',
                                 'htmlOptions' => array(
 //                                        'data-toggle' => 'modal',
 //                                        'data-target' => '#modalSub',
@@ -287,7 +287,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             }
                             echo '</select>';
                             echo '</td>
-                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Select Sub-Ledger</a></td>
+                                            <td style="text-align:center"  class="subLedgerField">' . $invoiceName . '<a style="display:' . $display . '" class="btn showModal">Sub Ledger</a></td>
                                             <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $viewCashInDet->description . '"/></td>
                                             <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $amount . '"/></div></td>
                                         </tr>';
@@ -328,7 +328,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             }
                             echo '<option value="0">Pilih</option>';
                             echo '</select></td>
-                                            <td style="text-align:center" class="subLedgerField">' . $name . '<a style="display:none" class="btn showModal">Select Sub-Ledger</a></td>
+                                            <td style="text-align:center" class="subLedgerField">' . $name . '<a style="display:none" class="btn showModal">Sub Ledger</a></td>
                                             <td><input type="text" name="AccCashInDet[description][]" id="AccCashInDet[description][]" style="width:95%"  value="' . $_POST['AccCashInDet']['description'][$i] . '"/></td>
                                             <td><div class="input-prepend"> <span class="add-on">Rp.</span><input type="text" name="AccCashInDet[amount][]" id="AccCashInDet[amount][]" class="angka totalDet" value="' . $_POST['AccCashInDet']['amount'][$i] . '"/></div></td>
                                         </tr>';
@@ -520,7 +520,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
     });
 
     function removeSub(elements) {
-        $(elements).html('<a style="display:" class="btn showModal">Select Sub-Ledger</a>');
+        $(elements).html('<a style="display:" class="btn showModal">Sub Ledger</a>');
     }
     $("body").on("click", ".removeSub", function () {
         $(this).parent().parent().find(".inVoiceDet").val(0);

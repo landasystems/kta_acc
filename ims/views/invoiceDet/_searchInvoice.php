@@ -1,50 +1,33 @@
-<div class="well">
-    Select Supplier / Customer's Name : 
+<div class="well well-small">
     <?php
     $data = array(0 => 'Pilih') + CHtml::listData($array, 'id', 'name');
-    $this->widget('bootstrap.widgets.TbSelect2', array(
-        'asDropDownList' => TRUE,
-        'data' => $data,
-        'name' => 'accountName',
-        'options' => array(
-            "placeholder" => 'Pilih',
-            "allowClear" => true,
-        ),
-        'htmlOptions' => array(
-            'id' => 'accountName',
-            'style' => 'width:100%;',
-            ''
-        ),
-    ));
+    echo CHtml::dropDownList('accountName', '', $data, array('style'=>'width:100%'));
     ?>
 </div>
 <input type="hidden" name="type_account" id="type_account" value="">
-<div class="well">
-    Supplier / Customer's Invoices : 
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th style="text-align: center;width:10%;">Code</th>
-                <th style="text-align: center;width:40%">Keterangan</th>
-                <th style="text-align: center;width:20%">Nilai</th>
-                <th style="text-align: center;width:20%">Balance</th>
-                <th style="text-align: center;width:10%">#</th>
-            </tr>
-        </thead>
-        <tbody id="detail">
 
-        </tbody>
-    </table>
-</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="text-align: center;width:10%;">Kode</th>
+            <th style="text-align: center;width:40%">Keterangan</th>
+            <th style="text-align: center;width:20%">Nilai</th>
+            <th style="text-align: center;width:20%">Balance</th>
+            <th style="text-align: center;width:10%">#</th>
+        </tr>
+    </thead>
+    <tbody id="detail">
+
+    </tbody>
+</table>
+
 <input type="hidden" value="" id="selectedClass"/>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#accountName").select2();
-    });
+//    $("#accountName").select2();
 
     $("body").on("click", ".delInvoice", function () {
         var id = $(this).attr("det_id");
-        var answer = confirm("Are you sure want to delete this Invoice? If you do that, all of approved transaction related with this invoce won't deleted!");
+        var answer = confirm("YYakin mau menghapus invoice ini ? semua transaksi yang berkaitan dengan invoice ini akan ikut terhapus juga!");
         if (answer) {
             $.ajax({
                 type: 'POST',
@@ -53,8 +36,8 @@
                 success: function (data) {
                     selectInvoice();
                 },
-                error : function(){
-                                $.toaster({priority : 'error', message : "Terjadi Kesalahan"});
+                error: function () {
+                    $.toaster({priority: 'error', message: "Terjadi Kesalahan"});
                 }
             });
         }
