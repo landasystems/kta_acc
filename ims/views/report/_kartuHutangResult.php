@@ -1,5 +1,17 @@
-<div class='printableArea'>
+<div id='printableArea'>
+    <style type="text/css">
+        .table td, th {
+            padding: 0px;
+            margin: 0px;
+            border-collapse: collapse;
+            font-size:11px;
+        }
+        .table{
+            border-collapse: collapse;
+        }
+        /*body {}*/
 
+    </style>
     <table width="100%">
         <tr>
             <td></td>
@@ -11,48 +23,49 @@
 
     </table>
 
-    <table class="table table-bordered" style="border-collapse: separate" border="1">
+    <table class="table table-bordered" border="1">
         <thead>
             <tr>
-                <th colspan="2" width="5%"><p align="center">Date</p></th>
-        <th width="25%"><p align="center">Description</p></th>
-        <th width="5%"><p align="center">Reff</p></th>
-        <th width="5%"><p align="center">Invoice</p></th>
-        <th width="20%"><p align="center">Debet</p></th>
-        <th  width="20%"><p align="center">Credit</p></th>
-        <th width="20%"><p align="center">Saldo</p></th>
-        </tr>
+                <th colspan="2" width="5%" style="width:5%;text-align: center;"></th>
+                <th width="25%" style="text-align: center;">Description</th>
+                <th width="5%" style="text-align: center;">Reff</th>
+                <th width="5%" style="text-align: center;">Invoice</th>
+                <th width="20%" style="text-align: center;">Debet</th>
+                <th  width="20%" style="text-align: center;">Credit</th>
+                <th width="20%" style="text-align: center;">Saldo</th>
+            </tr>
 
 
         </thead>
-        <tr>
+        <tbody>
+            <tr>
+                <?php
+                $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)), $id);
+                ?>
+                <th></th>
+                <th></th>
+                <th>Saldo Awal</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th style="text-align:right;"><?php echo landa()->rp($balance); ?></th>
+            </tr>
             <?php
-            $balance = AccCoaDet::model()->saldoKartu(date('Y-m-d', strtotime($start)),$id);
-            ?>
-            <th></th>
-            <th></th>
-            <th>Saldo Awal</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th style="text-align:right;"><?php echo landa()->rp($balance); ?></th>
-        </tr>
-        <?php
-        $total = 0;
-        $monthYear = "";
-        $i = 0;
-        $saldo = $balance;
-        $tDebet = 0;
-        $tCredit = 0;
-        foreach ($accCoaDet as $a) {
-            $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
-            $monthYear = date('M Y', strtotime($a->date_coa));
+            $total = 0;
+            $monthYear = "";
+            $i = 0;
+            $saldo = $balance;
+            $tDebet = 0;
+            $tCredit = 0;
+            foreach ($accCoaDet as $a) {
+                $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
+                $monthYear = date('M Y', strtotime($a->date_coa));
 
-            $saldo =  $saldo + $a->debet - $a->credit;
-            $tDebet +=  $a->debet;
-            $tCredit +=  $a->credit;
-            echo '<tr>
+                $saldo = $saldo + $a->debet - $a->credit;
+                $tDebet += $a->debet;
+                $tCredit += $a->credit;
+                echo '<tr>
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
 			<td>' . $a->description . '</td>
@@ -62,8 +75,9 @@
 			<td name="cred" style="text-align:right">' . landa()->rp($a->credit, false) . ',- </td>
 			<td name="tdeb" style="text-align:right">' . landa()->rp($saldo) . ',- </td>
 			</tr>';
-        }
-        ?>
+            }
+            ?>
+        </tbody>
         <tfoot>
             <tr>
                 <th colspan="5">Saldo Akhir</th>
@@ -75,16 +89,3 @@
     </table>
 </div>
 
-<style type="text/css" media="print">
-    body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:17px}
-    table{width: 100%}
-</style>
-<script type="text/javascript">
-    function printDiv()
-    {
-
-        window.print();
-
-    }
-</script>

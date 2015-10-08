@@ -69,24 +69,24 @@ $this->breadcrumbs = array(
         ));
         ?>
         <?php
-//        if (isset($_POST['AccCoaSub']['created'])) {
-//            $this->widget(
-//                    'bootstrap.widgets.TbButtonGroup', array(
-//                'buttons' => array(
-//                    array(
-//                        'label' => 'Report',
-//                        'icon' => 'print',
-//                        'items' => array(
-//                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuHutang?created=' . str_replace("", "-", $_POST['AccCoaSub']['created'] . '&ap_id=' . $_POST['ap_id'] . '&type=ap'))),
-//                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),
-//                        )
-//                    ),
-//                ),
-//                    )
-//            );
-//        } else {
-//            echo '';
-//        }
+        if (isset($_POST['AccCoaDet']['created'])) {
+            $this->widget(
+                    'bootstrap.widgets.TbButtonGroup', array(
+                'buttons' => array(
+                    array(
+                        'label' => 'Report',
+                        'icon' => 'print',
+                        'items' => array(
+//                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuHutang?created=' . str_replace("", "-", $_POST['AccCoaDet']['created'] . '&ap_id=' . $_POST['ap_id'] . '&type=ap'))),
+                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),
+                        )
+                    ),
+                ),
+                    )
+            );
+        } else {
+            echo '';
+        }
         ?>
     </div>
 

@@ -1,9 +1,17 @@
-<div class='printableArea'>
+<div id='printableArea'>
     <style type="text/css" media="print">
-        body {visibility:hidden;}
-        .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:17px}
-        table{width: 100%}
-    </style>
+            .table td, th {
+                padding: 0px;
+                margin: 0px;
+                border-collapse: collapse;
+                font-size:11px;
+            }
+            .table{
+                border-collapse: collapse;
+            }
+            /*body {}*/
+
+        </style>
     <table width="100%">
         <tr>
             <td></td>
@@ -79,7 +87,11 @@
 </div>
 
 <script type="text/javascript">
-    function printDiv() {
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
         window.print();
+        document.body.innerHTML = originalContents;
     }
 </script>
