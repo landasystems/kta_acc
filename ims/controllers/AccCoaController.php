@@ -313,9 +313,9 @@ class AccCoaController extends Controller {
         $type = '';
         if ($ledger == "ar") {
             $type = 'customer';
-            $array = Customer::model()->findAll();
+            $array = Customer::model()->findAll(array('order'=> 'name'));
         } else if ($ledger == "ap") {
-            $array = Supplier::model()->findAll();
+            $array = Supplier::model()->findAll(array('order'=> 'name'));
             $type = 'supplier';
         } else if ($ledger == "as") {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
