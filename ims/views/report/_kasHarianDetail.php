@@ -1,4 +1,17 @@
 <div id='printableArea'>
+    <style type="text/css">
+        .table td, th {
+            padding: 0px;
+            margin: 0px;
+            border-collapse: collapse;
+            font-size:14px;
+        }
+        .table{
+            border-collapse: collapse;
+        }
+        /*body {}*/
+
+    </style>
     <div class="img-polaroid" style="border:none;">
         <table class="table table-bordered table tt" border="1" width="100%">
             <thead>
@@ -99,23 +112,3 @@
         </div>
     </div>
 </div>
-
-<style type="text/css" media="print">   
-    body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:1px;width: 100%;font-size:11px;}
-    table td{
-        padding : 0px !important;
-    }
-
-</style>
-
-<script type="text/javascript">
-    function printDiv(divName)
-    {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>

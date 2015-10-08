@@ -1,17 +1,17 @@
 <div id='printableArea'>
     <style type="text/css" media="print">
-        .table td {
-            padding: 0px !important;
-            margin: 0px !important;
+            .table td, th {
+                padding: 0px;
+                margin: 0px;
+                border-collapse: collapse;
+                font-size:11px;
+            }
+            .table{
+                border-collapse: collapse;
+            }
+            /*body {}*/
 
-        }
-        .table tr{
-            padding : 0px !important;
-            margin : 0px !important;
-        }
-        body {font-size:7.5pt;}
-
-    </style>
+        </style>
     <table width="100%">
         <tr>
             <td></td>

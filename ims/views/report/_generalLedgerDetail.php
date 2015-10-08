@@ -1,11 +1,16 @@
 <div id='printableArea'>
     <div class="img-polaroid" style="border: none">
         <style type="text/css" media="print">
-            .table td {
+            .table td, th {
                 padding: 0px;
-                margin: 1px;
+                margin: 0px;
+                border-collapse: collapse;
+                font-size:11px;
             }
-            body {font-size:7pt;}
+            .table{
+                border-collapse: collapse;
+            }
+            /*body {}*/
 
         </style>
         <?php
