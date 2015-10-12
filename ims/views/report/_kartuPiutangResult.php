@@ -1,38 +1,35 @@
 <div id='printableArea'>
-    <style type="text/css" media="print">
-            .table td, th {
-                padding: 0px;
-                margin: 0px;
-                border-collapse: collapse;
-                font-size:11px;
-            }
-            .table{
-                border-collapse: collapse;
-            }
-            /*body {}*/
+    <style type="text/css">
+        .table td, th {
+            padding: 3px;
+            margin: 0px;
+            border-collapse: collapse;
+            font-size:14px;
+        }
+        .table{
+            border-collapse: collapse;
+        }
+        /*body {}*/
 
-        </style>
-    <table width="100%">
-        <tr>
-            <td></td>
-            <td></td>
-            <td  style="text-align: center" colspan="2"><h2>KARTU PIUTANG REPORT</h2>
-                <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
-                <hr></td>
-        </tr>
-    </table>
+    </style>
+
+    <center>
+        <h2 style="margin-bottom: 0px">KARTU PIUTANG</h2>
+        <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
+        <hr style="margin: 10px">
+    </center>
 
     <table class="table table-bordered" style="border-collapse: separate" border="1">
         <thead>
             <tr>
-                <th colspan="2" width="5%"><p align="center">Date</p></th>
-        <th width="25%"><p align="center">Description</p></th>
-        <th width="5%"><p align="center">Reff</p></th>
-        <th width="5%"><p align="center">Invoice Code</p></th>
-        <th width="20%"><p align="center">Debet</p></th>
-        <th  width="20%"><p align="center">Credit</p></th>
-        <th width="20%"><p align="center">Saldo</p></th>
-        </tr>
+                <th colspan="2" width="5%">Date</th>
+                <th width="25%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Description</th>
+                <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Reff</th>
+                <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Invoice</th>
+                <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Debet</th>
+                <th  width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Credit</th>
+                <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Saldo</th>
+            </tr>
 
 
         </thead>
@@ -47,7 +44,7 @@
             <th></th>
             <th></th>
             <th></th>
-            <th style="text-align:right"><?php echo landa()->rp($balance); ?></th>
+            <th style="text-align:right !important"><?php echo landa()->rp($balance, false); ?></th>
         </tr>
         <?php
         $total = 0;
@@ -69,18 +66,18 @@
 			<td>' . $a->description . '</td>
 			<td>' . $a->code . '</td>
 			<td>' . $a->InvoiceDet->code . '</td>
-			<td name="deb" style="text-align:right">' . landa()->rp($a->debet, false) . ',- </td>
-			<td name="cred" style="text-align:right">' . landa()->rp($a->credit, false) . ',- </td>
-			<td name="tdeb" style="text-align:right">' . landa()->rp($saldo) . ',- </td>
+			<td name="deb" style="text-align:right">' . landa()->rp($a->debet, false) . ' </td>
+			<td name="cred" style="text-align:right">' . landa()->rp($a->credit, false) . ' </td>
+			<td name="tdeb" style="text-align:right">' . landa()->rp($saldo, false) . '</td>
 			</tr>';
         }
         ?>
         <tfoot>
             <tr>
                 <th colspan="5">Saldo Akhir</th>
-                <th style="text-align: right;"><?php echo landa()->rp($tDebet, false) . ',-' ?></th>
-                <th style="text-align: right;"><?php echo landa()->rp($tCredit, false) . ',-' ?></th>
-                <th style="text-align: right;"><?php echo landa()->rp($saldo, false) . ',-' ?></th>
+                <th style="text-align:right !important"><?php echo landa()->rp($tDebet, false)  ?></th>
+                <th style="text-align:right !important"><?php echo landa()->rp($tCredit, false)  ?></th>
+                <th style="text-align:right !important"><?php echo landa()->rp($saldo, false) ?></th>
             </tr>
         </tfoot>
     </table>

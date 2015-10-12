@@ -46,7 +46,7 @@ $this->breadcrumbs = array(
                         ),
                         'htmlOptions' => array(
                             'id' => 'AccCashIn_account',
-                            'style' => 'width:250px;'
+                            'style' => 'width:100%;'
                         ),
                     ));
                     ?> 
