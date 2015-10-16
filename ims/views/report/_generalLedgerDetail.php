@@ -29,16 +29,13 @@
             <b><?php echo '<td><h3>' . $acc->name . '</h3></td>'; ?> </b>
 
         <?php } else { ?>
-
-            <table width="100%">
-
-            </table>
             <table class="table table-bordered" border="1">
                 <thead>
                     <tr>
                         <td  style="text-align: center;border:none;border-right: none;" colspan="7"><h3>Ledger</h3>
                             <h4><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
-                            <hr></td>
+                            <hr>
+                        </td>
                     </tr>
                     <tr>
                         <td style="font-weight: bold;border:none;" width="10%">Nama Rekening</td>

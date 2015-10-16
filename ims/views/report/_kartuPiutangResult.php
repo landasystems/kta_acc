@@ -13,23 +13,24 @@
 
     </style>
 
-    <center>
-        <h2 style="margin-bottom: 0px">KARTU PIUTANG</h2>
-        <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
-        <hr style="margin: 10px">
-    </center>
-
     <table class="table table-bordered" style="border-collapse: separate" border="1">
         <thead>
             <tr>
-                <th colspan="2" width="5%">Date</th>
-                <th width="25%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Description</th>
-                <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Reff</th>
-                <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Invoice</th>
-                <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Debet</th>
-                <th  width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Credit</th>
-                <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Saldo</th>
-            </tr>
+                <th colspan="8" style="text-align: center;background-color: #FFFFFF">
+        <h2 style="margin-bottom: 0px">KARTU PIUTANG</h2>
+        <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
+        <hr style="margin: 10px">
+        </th>
+        </tr>
+        <tr>
+            <th colspan="2" width="5%">Date</th>
+            <th width="25%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Description</th>
+            <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Reff</th>
+            <th width="5%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Invoice</th>
+            <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Debet</th>
+            <th  width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Credit</th>
+            <th width="20%" style="background-color: #dcdcdc;-webkit-print-color-adjust: exact; text-align: center">Saldo</th>
+        </tr>
 
 
         </thead>
@@ -75,8 +76,8 @@
         <tfoot>
             <tr>
                 <th colspan="5">Saldo Akhir</th>
-                <th style="text-align:right !important"><?php echo landa()->rp($tDebet, false)  ?></th>
-                <th style="text-align:right !important"><?php echo landa()->rp($tCredit, false)  ?></th>
+                <th style="text-align:right !important"><?php echo landa()->rp($tDebet, false) ?></th>
+                <th style="text-align:right !important"><?php echo landa()->rp($tCredit, false) ?></th>
                 <th style="text-align:right !important"><?php echo landa()->rp($saldo, false) ?></th>
             </tr>
         </tfoot>
