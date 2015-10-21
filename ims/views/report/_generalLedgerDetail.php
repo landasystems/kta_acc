@@ -211,7 +211,7 @@
 
                             if ($a->reff_type == 'balance') {
                                 echo '<tr>
-                        <!--    <td style="text-align: center">' . $sDate . '</td> -->
+                        <!--    <td style="text-align: center"> </td> -->
                             <td style="text-align: center">' . date('d M Y', strtotime($a->date_coa)) . '</td>
                             <td style="text-align: center">' . $a->code . '</td>';
 //                                echo '<td style="text-align: center">' . $detCoas . '</td>';
