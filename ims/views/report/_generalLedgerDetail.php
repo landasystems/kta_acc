@@ -21,8 +21,9 @@
                 <tr>
                     <td  style="text-align: center" colspan="2"><h3>Ledger</h3>
                         <h4><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
-                        <hr></td>
-                </tr>   
+                        <hr>
+                    </td>
+                </tr>
             </table>
 
             <hr/>
@@ -32,7 +33,7 @@
             <table class="table table-bordered" border="1">
                 <thead>
                     <tr>
-                        <td  style="text-align: center;border:none;border-right: none;" colspan="7"><h3>Ledger</h3>
+                        <td  style="text-align: center;border:none;border-right: none;" colspan="6"><h3>Ledger</h3>
                             <h4><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
                             <hr>
                         </td>
@@ -40,13 +41,13 @@
                     <tr>
                         <td style="font-weight: bold;border:none;" width="10%">Nama Rekening</td>
                         <td style="font-weight: bold;border:none;" width="2%">:</td>
-                        <td colspan="2" style="text-align: left; font-weight: bold;border:none;"><?php echo $acc->name; ?>  <?php echo (!empty($kepada)) ? '( Terhadap :' . $kepada->name . ')' : '' ?> </td>
+                        <td style="text-align: left; font-weight: bold;border:none;"><?php echo $acc->name; ?>  <?php echo (!empty($kepada)) ? '( Terhadap :' . $kepada->name . ')' : '' ?> </td>
                         <td style="border:none;"></td>
                         <td style="border:none;">Kode Rekening : </td>
                         <td style="text-align: center; font-weight: bold;border:none;"><?php echo $acc->code; ?></td>
                     </tr> 
                     <tr>
-                        <th colspan="2" width="10%" style="text-align: center">TANGGAL</th>
+                        <th width="10%" style="text-align: center">TANGGAL</th>
                         <th width="8%" style="text-align: center">REFF</th>
                         <!--<th width="8%" style="text-align: center">KODE AKUN</th>-->
                         <th width="50%" style="text-align: center">URAIAN</th>
@@ -98,7 +99,7 @@
 
                             if ($key == 0 && $a->reff_type != "balance") {
                                 echo'<tr>
-                                <td></td>
+                                <!--    <td style="text-align: center"></td> -->
                                 <td></td>
                                 <td></td>
                                 <td>Saldo Awal</td>
@@ -146,11 +147,11 @@
                             $acDate = ($monthYear == date('M Y', strtotime($b['data']))and $no > 1 ) ? "" : date('M Y', strtotime($b['data']));
                             $monthYear = date('M Y', strtotime($b['data']));
                             $no++;
-                            $dCoa = date('d', strtotime($b['data']));
+                            $dCoa = date('d M Y', strtotime($b['data']));
 
                             $total += $b['debet'] - $b['credit'];
                             echo '<tr>';
-                            echo '<td style="text-align: center">' . $acDate . '</td>
+                            echo '<!--    <td style="text-align: center"></td> -->
                             <td style="text-align: center">' . $dCoa . '</td>'; //data tanggal
                             echo '<td>' . $key . '</td>'; //code 
 //                            echo '<td style="text-align: center">' . $detCoas . '</td>'; //code 
@@ -199,7 +200,6 @@
                                 echo'<tr>
                                 <td></td>
                                 <td></td>
-                                <td></td>
                                 <td>Saldo Awal</td>
                                 <td></td>
                                 <td></td>
@@ -211,8 +211,8 @@
 
                             if ($a->reff_type == 'balance') {
                                 echo '<tr>
-                            <td style="text-align: center">' . $sDate . '</td>
-                            <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
+                        <!--    <td style="text-align: center">' . $sDate . '</td> -->
+                            <td style="text-align: center">' . date('d M Y', strtotime($a->date_coa)) . '</td>
                             <td style="text-align: center">' . $a->code . '</td>';
 //                                echo '<td style="text-align: center">' . $detCoas . '</td>';
                                 echo '<td>' . $sDesc . '</td>
@@ -222,8 +222,8 @@
                             </tr>';
                             } else {
                                 echo'<tr>
-                            <td style="text-align: center">' . $sDate . '</td>
-                            <td style="text-align: center">' . date('d', strtotime($a->date_coa)) . '</td>
+                            <!--    <td style="text-align: center">' . $sDate . '</td> -->
+                            <td style="text-align: center">' . date('d M Y', strtotime($a->date_coa)) . '</td>
                             <td style="text-align: center">' . $a->code . '</td>';
 //                                echo '<td style="text-align: center">' . $detCoas . '</td>';
                                 echo '<td>' . $sDesc . '</td>
@@ -241,7 +241,7 @@
 
                 </tbody>
                 <tr>
-                    <th colspan="4">Saldo Akhir</th>
+                    <th colspan="3">Saldo Akhir</th>
                     <th style="text-align: right"><?php echo landa()->rp($totald, false, 2) ?></th>
                     <th style="text-align: right"><?php echo landa()->rp($totalk, false, 2) ?></th>
                     <th style="text-align: right"><?php echo landa()->rp($total, false, 2) ?></th>
