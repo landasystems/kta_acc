@@ -1,5 +1,4 @@
-<div class="well">
-    Select Supplier / Customer's Name : 
+<div class="well well-small">
     <?php
     $data = array(0 => 'Pilih') + CHtml::listData($array, 'id', 'name');
     $this->widget('bootstrap.widgets.TbSelect2', array(
@@ -19,7 +18,7 @@
     ?>
 </div>
 <input type="hidden" name="type_account" id="type_account" value="">
-<div class="well">
+<div class="well well-small">
     Supplier / Customer's Invoices : 
     <table class="table table-bordered">
         <thead>
