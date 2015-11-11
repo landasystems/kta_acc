@@ -286,7 +286,7 @@ $this->endWidget();
 
         //jika ada halaman berikutnya print br 3, agar pas cucok em
         if (($a + 1 ) < $jmlTable)
-            $content .= '<br/><br/><br/><br/><br/>';
+            $content .= '';
 
         echo $content;
     }
