@@ -313,9 +313,9 @@ class AccCoaController extends Controller {
         $type = '';
         if ($ledger == "ar") {
             $type = 'customer';
-            $array = Customer::model()->findAll();
+            $array = Customer::model()->findAll(array('order'=> 'name'));
         } else if ($ledger == "ap") {
-            $array = Supplier::model()->findAll();
+            $array = Supplier::model()->findAll(array('order'=> 'name'));
             $type = 'supplier';
         } else if ($ledger == "as") {
             $array = Product::model()->findAll(array('condition' => 'type="inv"'));
@@ -563,9 +563,9 @@ class AccCoaController extends Controller {
         if (isset($_POST['id']) && !empty($_POST['type'])) {
             $type = $_POST['type'];
             if ($type == 'customer') {
-                $account = Customer::model()->findByPk($_POST['id']);
+                $account = Customer::model()->find(array('condition'=>'id='.$_POST['id'],'order'=>'name'));
             } elseif ($type == 'supplier') {
-                $account = Supplier::model()->findByPk($_POST['id']);
+                $account = Supplier::model()->find(array('condition'=>'id='.$_POST['id'],'order'=>'name'));
             }
 
             $balance = InvoiceDet::model()->findAll(array(
@@ -583,10 +583,10 @@ class AccCoaController extends Controller {
                 $payment = (!empty($b->payment) ? $b->payment : 0);
                 if (!empty($charge)) { //jika belum lunas ditampilkan
                     echo '<tr>'
-                    . '<td style="width:10%">' . $b->code . '</td>'
+                    . '<td style="width:10%;text-align:center">' . $b->code . '</td>'
                     . '<td>' . $b->description . '</td>'
-                    . '<td style="text-align:right">' . landa()->rp($payment, false, 2) . '</td>'
-                    . '<td style="text-align:right">' . landa()->rp($charge, false, 2) . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($payment, false) . '</td>'
+                    . '<td style="text-align:right">' . landa()->rp($charge, false) . '</td>'
                     . '<td style="width:20%; text-align:center">'
                     . '<div class="ambil btn" title="Pilih" rel="tooltip" nilai="' . $payment . '" account="' . $account->name . '" code="' . $b->code . '" det_id="' . $b->id . '" desc="' . $b->description . '">'
                     . '<i class="icon-check"> </i>'

@@ -1,14 +1,11 @@
 <div class='printableArea'>
-
-    <table width="100%">
-        <tr>
-            <td  style="text-align: center" colspan="2"><h2>REKAP KARTU HUTANG</h2>
-                <?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?>
-                <hr></td>
-        </tr>   
-    </table>
     <table class="table table-bordered table">
         <thead>
+            <tr>
+                <td colspan="6" style="text-align: center" colspan="2"><h2>REKAP KARTU HUTANG</h2>
+                    <?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?>
+                    <hr></td>
+            </tr>
             <tr> 
                 <th width="10%" rowspan="2">Kode Supplier</th>
                 <th width="30%" rowspan="2">Nama Supplier</th>
@@ -20,6 +17,8 @@
                 <th width="15%">Debet</th>
                 <th width="15%">Credit</th>
             </tr>
+        </thead>
+        <tbody>
 
             <tr class="table-bordered">
                 <?php
@@ -52,7 +51,7 @@
                 }
                 ?>
             </tr>
-        </thead>
+        </tbody>
         <footer>
             <tr>
                 <th colspan="2">Saldo Total</th>

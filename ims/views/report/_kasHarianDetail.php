@@ -1,20 +1,36 @@
 <div id='printableArea'>
-    <div class="img-polaroid" style="border:none;">
+    <style type="text/css">
+        .table td, th {
+            padding: 3px;
+            margin: 0px;
+            border-collapse: collapse;
+            font-size:15px;
+        }
+        .table{
+            border-collapse: collapse;
+        }
+        /*body {}*/
+
+    </style>
+    <div style="border:none;">
+
+
         <table class="table table-bordered table tt" border="1" width="100%">
             <thead>
                 <tr>
-                    <td style="text-align: center;border:none" colspan="5"><h2>LAPORAN KAS HARIAN</h2>
-                        <h4><?php echo date('d F Y', strtotime($a)); ?></h4>
-                        <hr>
-                    </td>
-                </tr>
-                <tr> 
-                    <th width="10%" style="text-align:center;">REFF</th>
-                    <th width="5%" style="text-align:center;">REK</th>
-                    <th width="55%" style="text-align:center;">URAIAN</th>
-                    <th width="15%" style="text-align:center;">DEBIT</th>
-                    <th width="15%" style="text-align:center;">KREDIT</th>
-                </tr>
+                    <th colspan="5" style="background-color: #ffffff">
+            <h2 style="margin-bottom: 0px">LAPORAN KAS HARIAN</h2>
+            <h4 style="margin: 5px"><?php echo date('d F Y', strtotime($a)); ?></h4>
+            <hr style="margin: 10px"/>
+            </th>
+            </tr>
+            <tr> 
+                <th width="10%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
+                <th width="5%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REK</th>
+                <th width="55%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">URAIAN</th>
+                <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">DEBIT</th>
+                <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">KREDIT</th>
+            </tr>
             </thead>
             <tbody>
                 <?php
@@ -75,12 +91,12 @@
 
                 <tr>
                     <th colspan="3">Total</th>
-                    <th style="text-align: right"><?php echo landa()->rp($totald, $prefix); ?></th>
-                    <th style="text-align: right"><?php echo landa()->rp($totalk, $prefix); ?></th>
+                    <th style="text-align: right !important"><?php echo landa()->rp($totald, $prefix); ?></th>
+                    <th style="text-align: right !important"><?php echo landa()->rp($totalk, $prefix); ?></th>
                 </tr>
                 <tr>
                     <th colspan="3">Saldo Akhir</th>
-                    <th style="text-align: right"><?php echo landa()->rp($totald - $totalk, $prefix); ?></th>
+                    <th style="text-align: right !important"><?php echo landa()->rp($totald - $totalk, $prefix); ?></th>
                     <th></th>
                 </tr>
             </tbody>
@@ -99,23 +115,3 @@
         </div>
     </div>
 </div>
-
-<style type="text/css" media="print">   
-    body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:1px;width: 100%;font-size:11px;}
-    table td{
-        padding : 0px !important;
-    }
-
-</style>
-
-<script type="text/javascript">
-    function printDiv(divName)
-    {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>

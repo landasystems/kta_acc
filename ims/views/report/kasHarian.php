@@ -46,7 +46,7 @@ $this->breadcrumbs = array(
                         ),
                         'htmlOptions' => array(
                             'id' => 'AccCashIn_account',
-                            'style' => 'width:250px;'
+                            'style' => 'width:100%;'
                         ),
                     ));
                     ?> 
@@ -96,7 +96,7 @@ $this->breadcrumbs = array(
                     'icon' => 'print',
                     'items' => array(
                         array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKasHarian?created=' .str_replace("","-",$_POST['created'].'&cash='.$_POST['cash']))),
-                        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),
+                        array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),
                     )
                 ),
             ),
