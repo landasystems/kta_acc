@@ -52,7 +52,7 @@
                 ?>
             </tr>
         </tbody>
-        <footer>
+        <tfoot>
             <tr>
                 <th colspan="2">Saldo Total</th>
                 <th style="text-align:right !important"><?php echo landa()->rp($tbalance); ?></th>
@@ -60,7 +60,7 @@
                 <th style="text-align:right !important"><?php echo landa()->rp($tcredit); ?></th>
                 <th style="text-align:right !important"><?php echo landa()->rp($takhir); ?></th>
             </tr>
-        </footer>
+        </tfoot>
     </table>
 </div>
 
