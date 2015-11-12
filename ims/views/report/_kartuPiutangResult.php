@@ -4,7 +4,7 @@
             padding: 3px;
             margin: 0px;
             border-collapse: collapse;
-            font-size:14px;
+            font-size:12px;
         }
         .table{
             border-collapse: collapse;

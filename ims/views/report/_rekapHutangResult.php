@@ -66,7 +66,7 @@
 
 <style type="text/css" media="print">
     body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:17px}
+    .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:14px}
     table{width: 100%}
 </style>
 <script type="text/javascript">
