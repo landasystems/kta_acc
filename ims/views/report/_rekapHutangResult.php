@@ -1,10 +1,16 @@
-<div class='printableArea'>
-    <table class="table table-bordered table">
+<div id='printableArea'>
+    <style type="text/css" media="print">
+        body {visibility:hidden;}
+        .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:14px}
+        table{width: 100%}
+    </style>
+    <table class="table table-bordered table" border="1">
         <thead>
             <tr>
                 <td colspan="6" style="text-align: center" colspan="2"><h2>REKAP KARTU HUTANG</h2>
                     <?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?>
-                    <hr></td>
+                    <hr>
+                </td>
             </tr>
             <tr> 
                 <th width="10%" rowspan="2">Kode Supplier</th>
@@ -63,17 +69,3 @@
         </tfoot>
     </table>
 </div>
-
-<style type="text/css" media="print">
-    body {visibility:hidden;}
-    .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:14px}
-    table{width: 100%}
-</style>
-<script type="text/javascript">
-    function printDiv()
-    {
-
-        window.print();
-
-    }
-</script>

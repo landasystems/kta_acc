@@ -521,20 +521,33 @@ class ReportController extends Controller {
         $this->render('rekapStock', array('mCoaSub' => $mCoaSub));
     }
 
-    public function actionExcelRekapPiutang() {
+    public function actionExcelRekapHutang() {
         $_GET['xls'] = true;
-        $a = explode('-', $_GET['created']);
+        $a = explode(' - ', $_GET['created']);
         $start = date('Y-m-d', strtotime($a[0]));
         $end = date('Y-m-d', strtotime($a[1]));
-        $supplier = User::model()->listUsers('customer');
-        $type = $_GET['type'];
+        $supplier = Supplier::model()->findAll();
 
-        Yii::app()->request->sendFile('RekapPiutang-' . date('dmY') . '.xls', $this->renderPartial('_rekapPiutangResult', array(
+        Yii::app()->request->sendFile('RekapHutang -' . date('d-m-Y') . '.xls', $this->renderPartial('_rekapHutangResult', array(
                     'a' => $a,
                     'supplier' => $supplier,
                     'start' => $start,
                     'end' => $end,
-                    'type' => $type
+                        ), true)
+        );
+    }
+    public function actionExcelRekapPiutang() {
+        $_GET['xls'] = true;
+        $a = explode(' - ', $_GET['created']);
+        $start = date('Y-m-d', strtotime($a[0]));
+        $end = date('Y-m-d', strtotime($a[1]));
+        $supplier = Customer::model()->findAll();
+
+        Yii::app()->request->sendFile('RekapPiutang-' . date('d-m-Y') . '.xls', $this->renderPartial('_rekapPiutangResult', array(
+                    'a' => $a,
+                    'supplier' => $supplier,
+                    'start' => $start,
+                    'end' => $end,
                         ), true)
         );
     }
