@@ -1,10 +1,13 @@
 <div id='printableArea'>
     <style type="text/css" media="print">
-        body {visibility:hidden;}
-        .printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:14px}
+        /*body {visibility:hidden;}*/
+        #printableArea{visibility:visible;position: absolute;top:0;left:0px;width: 100%;font-size:12px}
+        #printableArea table{
+            border-collapse: collapse;
+        }
         table{width: 100%}
     </style>
-    <table class="table table-bordered table" border="1">
+    <table class="table table-bordered table" style="border-collapse:collapse;font-size: 11px;" border="1">;
         <thead>
             <tr>
                 <td colspan="6" style="text-align: center" colspan="2"><h2>REKAP KARTU HUTANG</h2>

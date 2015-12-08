@@ -7,12 +7,11 @@
     <table class="table table-bordered table">
         <thead>
             <tr>
-                <td  style="text-align: center" colspan="2"><h2>REKAP KARTU PIUTANG</h2>
+                <td  style="text-align: center" colspan="6"><h2>REKAP KARTU PIUTANG</h2>
                     <?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?>
                     <hr></td>
             </tr>  
             <tr> 
-
                 <th width="10%" rowspan="2">Kode. Customer</th>
                 <th width="30%" rowspan="2">Nama Customer</th>
                 <th width="15%" rowspan="2">Saldo Awal</th>
