@@ -116,7 +116,7 @@ class AccCoa extends CActiveRecord {
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
             'sort' => array(
-                'defaultOrder' => 'root, lft',
+                'defaultOrder' => 'root, lft, code',
             ),
         ));
     }

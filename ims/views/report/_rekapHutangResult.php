@@ -7,7 +7,7 @@
         }
         table{width: 100%}
     </style>
-    <table class="table table-bordered table" style="border-collapse:collapse;font-size: 11px;" border="1">;
+    <table class="table table-bordered table" style="border-collapse:collapse;font-size: 12px;" border="1">;
         <thead>
             <tr>
                 <td colspan="6" style="text-align: center" colspan="2"><h2>REKAP KARTU HUTANG</h2>

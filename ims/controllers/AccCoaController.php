@@ -632,7 +632,7 @@ class AccCoaController extends Controller {
     }
 
     public function actionGenerateExcel() {
-        $model = AccCoa::model()->findAll();
+        $model = AccCoa::model()->findAll(['order' => 'root, lft, code']);
         Yii::app()->request->sendFile('Excel Daftar Perkiraan - ' . date('dmY') . '.xls', $this->renderPartial('excelReport', array('model' => $model), true)
         );
     }
