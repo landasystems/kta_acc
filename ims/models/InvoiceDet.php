@@ -49,6 +49,7 @@ class InvoiceDet extends CActiveRecord {
             'User' => array(self::BELONGS_TO, 'User', 'user_id'),
             'Customer' => array(self::BELONGS_TO, 'Customer', 'user_id'),
             'Supplier' => array(self::BELONGS_TO, 'Supplier', 'user_id'),
+            'AccCoaDet' => array(self::HAS_MANY, 'AccCoaDet', 'invoice_det_id','condition' => 'AccCoaDet.reff_type = "invoice"'),
         );
     }
 

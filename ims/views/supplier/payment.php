@@ -1,5 +1,4 @@
 <?php
-
 $this->setPageTitle('Supplier Payment');
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
@@ -25,10 +24,10 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 Yii::app()->name;
                 echo param('clientName');
                 ?><br/>
-                <!--<span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php // echo $siteConfig->date_system                            ?></span>-->
+                <!--<span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php // echo $siteConfig->date_system                                   ?></span>-->
             </p>
         </legend>
-        
+
         <div class="well">
             <div class="control-group ">
                 <label class="control-label">Pilih Nama Supplier</label>
@@ -52,18 +51,41 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                     ?>
                 </div>
             </div>
+            <?php
+            echo $form->dateRangeRow(
+                    $tanggal, 'rentang', array(
+                'prepend' => '<i class="icon-calendar"></i>',
+                'options' => array('callback' => 'js:function(start, end){console.log(start.toString("MMMM d, yyyy") + " - " + end.toString("MMMM d, yyyy"));}'),
+                'value' => (isset($_POST['Supplier']['rentang'])) ? $_POST['Supplier']['rentang'] : ''
+                    )
+            );
+            ?>
+            <div class="form-group center">
+                <button class="btn btn-primary" onclick="return false;" id="cari-data"><i class="icon icon-search"></i> Cari</button>
+            </div>
         </div>
         <div class="detailInvoice">
             <?php
             if (!empty($_POST['supplier_list'])) {
+                $tanggal = (!empty($_POST['Supplier']['rentang'])) ? $_POST['Supplier']['rentang'] : "";
+                $andDate = '';
+                $andDate2 = '';
+                if (!empty($tanggal) || $tanggal != "") {
+                    $dateCondition = explode(' - ', $tanggal);
+                    $andDate = " AND (AccCoaDet.date_coa between '" . date('Y-m-d', strtotime($dateCondition[0])) . "' AND '" . date('Y-m-d', strtotime($dateCondition[1])) . "')";
+                    $andDate2 = " AND (t.date_coa between '" . date('Y-m-d', strtotime($dateCondition[0])) . "' AND '" . date('Y-m-d', strtotime($dateCondition[1])) . "')";
+                }
                 $userInvoice = AccCoaDet::model()->findAll(array(
                     'with' => array('InvoiceDet'),
-                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND (reff_type="invoice" OR InvoiceDet.is_new_invoice=1)'
+                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND (reff_type="invoice" OR InvoiceDet.is_new_invoice=1)'.$andDate2
                 ));
-                $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['supplier_list']));
-            }else{
+                $balance = InvoiceDet::model()->findAll(array(
+                    'with' => array('AccCoaDet'),
+                    'condition' => 'user_id = '.$_POST['supplier_list'].$andDate
+                        ));
+            } else {
                 $userInvoice = '';
-                $balance= '';
+                $balance = '';
             }
 //            $alert = false;
             $this->renderPartial('_payment', array(
@@ -79,21 +101,26 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 </div>
 <?php $this->endWidget(); ?>
 <script type="text/javascript">
-    $("#supplier_list").on("change", function () {
-        var id = $(this).val();
-        $.ajax({
-            type: 'POST',
-            data: {id: id},
-            url: "<?php echo url('supplier/invoiceDetail'); ?>",
-            success: function (data) {
-                $(".detailInvoice").html(data);
-                $('.datepicker').datepicker({ format: 'mm/dd/yyyy', startDate: '-3d' });
-                hitung();
-                $( ".term" ).datepicker();
-                $( ".dateStart" ).datepicker();
-            }
-        });
+    $("#cari-data").on("click", function () {
+        var idd = $("#supplier_list").val();
+        var tanggal = $("#Supplier_rentang").val();
+
+        if (idd.length > 0 || idd != 0) {
+            $.ajax({
+                type: 'POST',
+                data: {id: idd, tanggal: tanggal},
+                url: "<?php echo url('supplier/invoiceDetail'); ?>",
+                success: function (data) {
+                    $(".detailInvoice").html(data);
+                    $('.datepicker').datepicker({format: 'mm/dd/yyyy'});
+                    hitung();
+                    $(".term").datepicker();
+                    $(".dateStart").datepicker();
+                }
+            });
+        }
     });
+
     function hitung() {
         var total = 0;
         $('.nilai').each(function () {
@@ -101,7 +128,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         });
         $('#total_charge').val(total);
     }
-    
+
     $("body").on('click', ".addRow", function () {
         var aa = $(this).parent().parent().parent().parent().find(".addRows");
         var desc = $(this).parent().parent().parent().find(".description").val();
@@ -125,11 +152,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 $(".sup_id").val("");
                 $(".kosong").remove();
                 hitung();
-                $( ".dateStart" ).datepicker();
-                $( ".term" ).datepicker();
+                $(".dateStart").datepicker();
+                $(".term").datepicker();
             }
         });
     });
+
     $("body").on('click', '.delInv', function () {
         var id = $(this).parent().find(".id_invoice").val();
         var dell = $(this).parent().parent();

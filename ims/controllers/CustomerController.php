@@ -167,6 +167,7 @@ class CustomerController extends Controller {
         $header = Customer::model()->findAll(array(
             'order' => 't.name',
         ));
+        $tanggal = new Customer();
         $alert = false;
         if (isset($_POST['code'])) {
             for ($i = 0; $i < count($_POST['code']); $i++) {
@@ -206,7 +207,8 @@ class CustomerController extends Controller {
         }
         $this->render('receivable', array(
             'header' => $header,
-            'alert' => $alert
+            'alert' => $alert,
+            'tanggal' => $tanggal
         ));
     }
 
@@ -248,17 +250,32 @@ class CustomerController extends Controller {
     }
 
     public function actionInvoiceDetail() {
+        $tanggal = (!empty($_POST['tanggal'])) ? $_POST['tanggal'] : "";
+        $andDate = '';
+        $andDate2 = '';
+        
+        if(!empty($tanggal) || $tanggal != ""){
+            $dateCondition = explode(' - ',$tanggal);
+            $andDate = " AND (AccCoaDet.date_coa between '".date('Y-m-d',  strtotime($dateCondition[0]))."' AND '".date('Y-m-d',  strtotime($dateCondition[1]))."')";
+            $andDate2 = " AND (t.date_coa between '".date('Y-m-d',  strtotime($dateCondition[0]))."' AND '".date('Y-m-d',  strtotime($dateCondition[1]))."')";
+        }
+        
         $userInvoice = AccCoaDet::model()->findAll(array(
             'with' => array('InvoiceDet'),
-            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"'
+            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"'.$andDate2
         ));
         $ambil = ($_POST['id'] == 0) ? false : true;
-        $balance = InvoiceDet::model()->findAllByAttributes(array('user_id' => $_POST['id']));
+        $balance = InvoiceDet::model()->findAll(array(
+            'with' => array('AccCoaDet'),
+            'condition' => 'user_id = '.$_POST['id'].$andDate
+                ));
         echo $this->renderPartial('_receivable', array(
             'userInvoice' => $userInvoice,
             'ambil' => $ambil,
             'alert' => false,
-            'balance' => $balance
+            'balance' => $balance,
+            'andDate2' => $andDate2,
+            'andDate' => $andDate
                 ), true);
     }
 
