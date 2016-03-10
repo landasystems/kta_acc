@@ -44,21 +44,21 @@ $this->setPageTitle('Neraca Saldo');
         ));
         ?>
         <?php
-        if (isset($_POST['AccCoaDet']['created'])) {
+        if (isset($_POST['AccCoaDet']['created']) && !empty($_POST['AccCoaDet']['created'])) {
             $this->widget(
-                'bootstrap.widgets.TbButtonGroup', array(
-            'buttons' => array(
-                array(
-                    'label' => 'Report',
-                    'icon' => 'print',
-                    'items' => array(
-                        array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelNeracaSaldo?created=' . str_replace("", "-", $_POST['AccCoaDet']['created']))),
-                        array('label'=>'Print', 'icon'=>'icon-print', 'url'=>'javascript:void(0);return false', 'linkOptions'=>array('onclick'=>'printDiv("printableArea");return false;')),
-                    )
+                    'bootstrap.widgets.TbButtonGroup', array(
+                'buttons' => array(
+                    array(
+                        'label' => 'Report',
+                        'icon' => 'print',
+                        'items' => array(
+                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelNeracaSaldo?created=' . str_replace("", "-", $_POST['AccCoaDet']['created']))),
+                            array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),
+                        )
+                    ),
                 ),
-            ),
-                )
-        );
+                    )
+            );
         }
         ?>
     </div>
@@ -66,14 +66,15 @@ $this->setPageTitle('Neraca Saldo');
     <?php $this->endWidget(); ?>
 </div>
 <?php
-if (isset($_POST['AccCoaDet']['created'])) {
-        $a = explode('-', $_POST['AccCoaDet']['created']);
-        $start = date('Y-m-d', strtotime($a[0]));
-        $end = date('Y-m-d', strtotime($a[1]));
-        $accCoa = AccCoa::model()->findAll(array('condition'=>'type="detail"','order'=>'code'));
-        
-        $this->renderPartial('_neracaSaldoResult', array('a' => $a,'accCoa'=> $accCoa,'start'=>$start,'end'=>$end));
-    
+if (isset($_POST['AccCoaDet']['created']) && !empty($_POST['AccCoaDet']['created'])) {
+    $a = explode('-', $_POST['AccCoaDet']['created']);
+    $start = date('Y-m-d', strtotime($a[0]));
+    $end = date('Y-m-d', strtotime($a[1]));
+    $accCoa = AccCoa::model()->findAll(array('condition' => 'type="detail"', 'order' => 'code'));
+
+    $this->renderPartial('_neracaSaldoResult', array('a' => $a, 'accCoa' => $accCoa, 'start' => $start, 'end' => $end));
+} else if (isset($_POST['AccCoaDet']['created'])) {
+    echo '<div class="alert alert-danger">Masukkan <b>Tanggal</b></div>';
 }
 ?>
 

@@ -23,7 +23,7 @@ $this->setPageTitle('General Ledger Report');
         <div class="span11">
             <?php // echo $form->dropDownListRow($accCoa, 'id', CHtml::listData(Acc_coa::model()->findAll(), 'id', 'name'), array('class' => 'span5', 'empty' => 'Pilih'));  ?>      
             <div class="control-group ">
-                <label class="control-label">Nama Akun</label>
+                <label class="control-label">Nama Akun <span class="required">*</span></label>
                 <div class="controls">
                     <?php
                     $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
@@ -45,7 +45,7 @@ $this->setPageTitle('General Ledger Report');
                 </div>
             </div>
             <div class="control-group ">
-                <label class="control-label">Pada</label>
+                <label class="control-label">Pada </label>
                 <div class="controls">
                     <?php
 //                    $data2 = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
@@ -71,7 +71,7 @@ $this->setPageTitle('General Ledger Report');
                     $mCoaDet, 'created', array(
                 'prepend' => '<i class="icon-calendar"></i>',
                 'options' => array('callback' => 'js:function(start, end){console.log(start.toString("MMMM d, yyyy") + " - " + end.toString("MMMM d, yyyy"));}'),
-                'value' => (isset($_POST['AccCoaDet']['created'])) ? $_POST['AccCoaDet']['created'] : ''
+                'value' => (isset($_POST['AccCoaDet']['created'])) ? $_POST['AccCoaDet']['created'] : '',
                     )
             );
             ?>    
@@ -88,7 +88,7 @@ $this->setPageTitle('General Ledger Report');
         ));
         ?>
         <?php
-        if (isset($_POST['AccCoaDet']['created'])) {
+        if (isset($_POST['AccCoaDet']['created']) && !empty($_POST['AccCoaDet']['created']) && !empty($_POST['accacoa'])) {
             $this->widget('bootstrap.widgets.TbButtonGroup', array(
                 'htmlOptions' => array(
                     'class' => 'btn-mini'
@@ -118,7 +118,8 @@ $this->setPageTitle('General Ledger Report');
 </div>
 <?php
 if (isset($_POST['AccCoaDet']['created'])) {
-    if (!empty($_POST['AccCoaDet']['created'])) {
+    if (!empty($_POST['AccCoaDet']['created']) && !empty($_POST['accacoa'])) {
+//    if (!empty($_POST['AccCoaDet']['created'])) {
         $a = explode('-', $_POST['AccCoaDet']['created']);
         $start = date('Y-m-d', strtotime($a[0]));
         $end = date('Y-m-d', strtotime($a[1]));
@@ -134,6 +135,8 @@ if (isset($_POST['AccCoaDet']['created'])) {
             'checked' => $checked,
             'pada' => $pada
         ));
+    } else {
+        echo '<div class="alert alert-danger">Lengkapi <b>Nama Akun</b> dan <b>Tanggal</b></div>';
     }
 }
 ?>
