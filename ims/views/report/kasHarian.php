@@ -16,9 +16,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('Laporan Kas Harian');
-$this->breadcrumbs = array(
-    'Laporan Kas Harian',
-);
 ?>
 <script>
     function hide() {

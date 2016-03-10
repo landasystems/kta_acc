@@ -10,9 +10,12 @@ if ($type = 'export') {
         <table class="table table-bordered" id="tabless" border="1">
             <thead>
                 <tr>
-                    <td style="text-align: center;border:none" align="center" colspan="5"><h2>JURNAL UMUM</h2>
-                        <h4><?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?></h4>
-                        <hr></td>
+                    <td style="text-align: center;border:none" align="center" colspan="5">
+                        <h2 style="margin-bottom: 0;">JURNAL UMUM</h2>
+                        <h4 style="margin-bottom: 0;"><?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?></h4>
+                        Disiapkan Tanggal : <?= date('d F Y, H:i') ?>
+                        <hr style="margin: 10px"/>
+                    </td>
                 </tr>
                 <tr> 
                     <th colspan="2" width="10%">Tanggal</th>

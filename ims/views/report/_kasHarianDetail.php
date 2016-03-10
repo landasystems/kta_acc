@@ -18,19 +18,20 @@
         <table class="table table-bordered table tt" border="1" width="100%">
             <thead>
                 <tr>
-                    <th colspan="5" style="background-color: #ffffff">
-            <h2 style="margin-bottom: 0px">LAPORAN KAS HARIAN</h2>
-            <h4 style="margin: 5px"><?php echo date('d F Y', strtotime($a)); ?></h4>
-            <hr style="margin: 10px"/>
-            </th>
-            </tr>
-            <tr> 
-                <th width="10%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
-                <th width="5%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REK</th>
-                <th width="55%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">URAIAN</th>
-                <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">DEBIT</th>
-                <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">KREDIT</th>
-            </tr>
+                    <td colspan="5" style="background-color: #ffffff;text-align: center">
+                        <h2 style="margin-bottom: 0px">LAPORAN KAS HARIAN</h2>
+                        <h4 style="margin-bottom: 0px"><?php echo date('d F Y', strtotime($a)); ?></h4>
+                        Disiapkan Tanggal : <?= date('d F Y, H:i') ?>
+                        <hr style="margin: 10px"/>
+                    </td>
+                </tr>
+                <tr> 
+                    <th width="10%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
+                    <th width="5%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REK</th>
+                    <th width="55%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">URAIAN</th>
+                    <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">DEBIT</th>
+                    <th width="15%" style="text-align:center;background-color: #dcdcdc;-webkit-print-color-adjust: exact;">KREDIT</th>
+                </tr>
             </thead>
             <tbody>
                 <?php

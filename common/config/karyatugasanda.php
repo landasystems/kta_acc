@@ -1,6 +1,6 @@
 <?php
 //=========change this scope=========================================================
-$root = '/var/www/html/asrul/kta_acc/';
+$root = '/var/www/acc/';
 $themesUrl = 'http://localhost/asrul/kta_acc/common/';
 $db = 'kta_acc';
 $dbUser = 'root';

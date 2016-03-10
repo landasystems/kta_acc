@@ -19,9 +19,11 @@
             ?>
             <table width="100%">
                 <tr>
-                    <td  style="text-align: center" colspan="2"><h3>Ledger</h3>
-                        <h4><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
-                        <hr>
+                    <td  style="text-align: center" colspan="2">
+                        <h2 style="margin-bottom: 0px">LEDGER</h2>
+                        <h4 style="margin-bottom: 0px"><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
+                        Disiapkan Tanggal : <?= date('d F Y, H:i') ?>
+                        <hr style="margin: 10px"/>
                     </td>
                 </tr>
             </table>
@@ -33,9 +35,11 @@
             <table class="table table-bordered" border="1">
                 <thead>
                     <tr>
-                        <td  style="text-align: center;border:none;border-right: none;" colspan="6"><h3>Ledger</h3>
-                            <h4><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
-                            <hr>
+                        <td  style="text-align: center;border:none;border-right: none;" colspan="6">
+                            <h2 style="margin-bottom: 0px">LEDGER</h2>
+                            <h4 style="margin-bottom: 0px"><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
+                            Disiapkan Tanggal : <?= date('d F Y, H:i') ?>
+                            <hr style="margin: 10px"/>
                         </td>
                     </tr>
                     <tr>
@@ -128,19 +132,19 @@
                                 $detCoas .= $val->AccCoa->code . '<br>';
                             }
 
-                            if ($a->reff_type == "cash_in") {
+                            if ($b['reff_type'] == "cash_in") {
 
 //                                $accCode = (!empty($mCashIn[$b['reff_id']]->AccCoa->code)) ?  $mCashIn[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashIn[$b['reff_id']]->description_to)) ? ' - ' . $mCashIn[$b['reff_id']]->description_to : '';
-                                $dibayar = (!empty($mCashIn[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashIn[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
-                            } elseif ($a->reff_type == "cash_out") {
+                                $dibayar = (!empty($mCashIn[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashIn[$b['reff_id']]->AccCoa->name . $giroAn . ')' : 'a';
+                            } elseif ($b['reff_type'] == "cash_out") {
 //                                $accCode = (!empty($mCashOut[$b['reff_id']]->AccCoa->code)) ?  $mCashOut[$b['reff_id']]->AccCoa->code : '';
                                 $giroAn = (!empty($mCashOut[$b['reff_id']]->description_to)) ? ' - ' . $mCashOut[$b['reff_id']]->description_to : '';
-                                $dibayar = (!empty($mCashOut[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashOut[$b['reff_id']]->AccCoa->name . $giroAn . ')' : '';
+                                $dibayar = (!empty($mCashOut[$b['reff_id']]->AccCoa->name)) ? '<br/>(' . $mCashOut[$b['reff_id']]->AccCoa->name . $giroAn . ')' : 'b';
                             } else {
 //                                $accCode = '';
                                 $giroAn = '';
-                                $dibayar = '';
+                                $dibayar = 'c';
                             }
                             $description = ($b['description']);
                             $sDesc = ($b['reff_type'] == 'balance') ? 'Saldo Awal' : $b['description'] . $dibayar;
