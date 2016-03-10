@@ -56,7 +56,7 @@ $this->breadcrumbs = array(
     ?>
 
     <?php
-    if (isset($_POST['AccCoaDet']['created'])) {
+    if (isset($_POST['AccCoaDet']['created']) and ! empty($_POST['AccCoaDet']['created'])) {
         $this->widget(
                 'bootstrap.widgets.TbButtonGroup', array(
             'buttons' => array(
@@ -79,12 +79,14 @@ $this->breadcrumbs = array(
 </div>
 
 <?php
-if (isset($_POST['AccCoaDet']['created'])) {
+if (isset($_POST['AccCoaDet']['created']) and ! empty($_POST['AccCoaDet']['created'])) {
     $a = explode('-', $_POST['AccCoaDet']['created']);
     $start = date('Y-m-d', strtotime($a[0]));
     $end = date('Y-m-d', strtotime($a[1]));
     $accCoaDet = AccCoaDet::model()->findAll(array('condition' => '(reff_type<>"balance" OR reff_type<>"invoice") AND (date_coa>="' . $start . '" and date_coa<="' . $end . '")', 'order' => 'date_coa,id'));
 
     $this->renderPartial('_jurnalUmumResult', array('a' => $a, 'accCoaDet' => $accCoaDet, 'start' => $start, 'end' => $end));
+} else if (isset($_POST['AccCoaDet']['created'])) {
+    echo '<div class="alert alert-danger">Masukkan <b>Tanggal</b></div>';
 }
 ?>

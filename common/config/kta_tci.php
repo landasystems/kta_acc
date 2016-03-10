@@ -1,14 +1,14 @@
 <?php
 //=========change this scope=========================================================
-$root = '/var/www/html/asrul/kta_acc/';
-$themesUrl = 'http://localhost/asrul/kta_acc/common/';
-$db = 'kta_tci';
+$root = '/var/www/kta_acc/';
+$themesUrl = 'http://localhost/kta_acc/common/';
+$db = 'landa_acc';
 $dbUser = 'root';
 $dbPwd = 'landak';
 $client = 'kta_tci';
 $clientName = 'PT Karya Tugas Anda TCI';
 $menu = array('accounting');
-$rootUrl = 'http://localhost/asrul/kta_acc/ims/www/'.$client.'/';
+$rootUrl = 'http://localhost/kta_acc/ims/www/'.$client.'/';
 
 //===================================================================================
 ?>
