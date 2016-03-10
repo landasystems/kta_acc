@@ -11,9 +11,6 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 <?php
 $this->setPageTitle('General Ledger Report');
-$this->breadcrumbs = array(
-    'General Ledger Report',
-);
 ?>
 <script>
     function hide() {

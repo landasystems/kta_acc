@@ -16,9 +16,11 @@
         <table class="table table-bordered tt">
             <thead>
                 <tr>
-                    <td  style="text-align: center;border:none" colspan="6"><h4>NERACA SALDO</h4>
-                        <h5><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h5>
-                        <hr>
+                    <td  style="text-align: center;border:none" colspan="6">
+                        <h2 style="margin-bottom: 0px">NERACA SALDO</h2>
+                        <h4 style="margin-bottom: 0px"><?php echo date('d-M-Y', strtotime($start)) . " - " . date('d-M-Y', strtotime($end)); ?></h4>
+                        Disiapkan Tanggal : <?= date('d F Y, H:i') ?>
+                        <hr style="margin: 10px"/>
                     </td>
                 </tr> 
                 <tr>
