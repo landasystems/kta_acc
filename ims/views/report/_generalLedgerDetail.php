@@ -176,7 +176,8 @@
                                 'condition' => 'code="' . $a->code . '" AND acc_coa_id <>' . $a->acc_coa_id
                             ));
                             foreach ($coaCode as $keys => $val) {
-                                $detCoas .= $val->AccCoa->code . '<br>';
+                                $acc_code = (isset($val->AccCoa->code)) ? $val->AccCoa->code : '';
+                                $detCoas .= $acc_code . '<br>';
                             }
 
                             $sDate = ($monthYear == date('M Y', strtotime($a->date_coa)) and $no > 1) ? "" : date('M Y', strtotime($a->date_coa));
