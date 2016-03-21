@@ -129,7 +129,7 @@
                                 'condition' => 'code="' . $key . '" and acc_coa_id <>' . $b['coa_id']
                             ));
                             foreach ($coaCode as $keys => $val) {
-                                $detCoas .= $val->AccCoa->code . '<br>';
+                                $detCoas .= isset($val->AccCoa->code) ? $val->AccCoa->code : '-' . '<br>';
                             }
 
                             if ($b['reff_type'] == "cash_in") {
