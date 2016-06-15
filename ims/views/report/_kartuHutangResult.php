@@ -34,7 +34,7 @@ $nama = (isset($nama)) ? $nama->name : '-';
             <th colspan="2" width="5%" style="width:5%;text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">TGL</th>
             <th width="20%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">KETERANGAN</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
-            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">NO GIRO</th>
+            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">GIRO A/N</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">INVOICE</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">DEBET</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">CREDIT</th>
