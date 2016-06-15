@@ -23,7 +23,6 @@ $this->breadcrumbs = array(
 
 </script>
 <div class="well">
-
     <div class="row-fluid">
         <div class="span11">
             <div class="control-group ">
@@ -77,7 +76,6 @@ $this->breadcrumbs = array(
                         'label' => 'Report',
                         'icon' => 'print',
                         'items' => array(
-//                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuHutang?created=' . str_replace("", "-", $_POST['AccCoaDet']['created'] . '&ap_id=' . $_POST['ap_id'] . '&type=ap'))),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),
                         )
                     ),
@@ -89,7 +87,6 @@ $this->breadcrumbs = array(
         }
         ?>
     </div>
-
     <?php $this->endWidget(); ?>
 </div>
 
@@ -118,15 +115,19 @@ if (isset($_POST['AccCoaDet']['created'])) {
         }
 
         $giroOut = array();
-        $cashout = AccCashOut::model()->findAll(array('condition' => 'id IN (' . implode(',', $cOutId) . ')'));
-        foreach ($cashout as $v) {
-            $giroOut[$v->id] = $v->description_giro_an;
+        if (!empty($cOutId)) {
+            $cashout = AccCashOut::model()->findAll(array('condition' => 'id IN (' . implode(',', $cOutId) . ')'));
+            foreach ($cashout as $v) {
+                $giroOut[$v->id] = $v->description_giro_an;
+            }
         }
 
         $giroIn = array();
-        $cashIn = AccCashIn::model()->findAll(array('condition' => 'id IN (' . implode(',', $cOutId) . ')'));
-        foreach ($cashout as $v) {
-            $giroIn[$v->id] = $v->description_giro_an;
+        if (!empty($cInId)) {
+            $cashIn = AccCashIn::model()->findAll(array('condition' => 'id IN (' . implode(',', $cInId) . ')'));
+            foreach ($cashIn as $v) {
+                $giroIn[$v->id] = $v->description_giro_an;
+            }
         }
 
         $this->renderPartial('_kartuHutangResult', array(
