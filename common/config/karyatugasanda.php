@@ -2,7 +2,7 @@
 //=========change this scope=========================================================
 $root = '/var/www/acc/';
 $themesUrl = 'http://localhost/asrul/kta_acc/common/';
-$db = 'landa_ims_karyatugasanda';
+$db = 'kta_acc';
 $dbUser = 'root';
 $dbPwd = 'landak';
 $client = 'karyatugasanda';

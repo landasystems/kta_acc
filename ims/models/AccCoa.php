@@ -116,7 +116,8 @@ class AccCoa extends CActiveRecord {
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
             'sort' => array(
-                'defaultOrder' => 'root, lft, code',
+//                'defaultOrder' => 'root, lft, code',
+                'defaultOrder' => 'code',
             ),
         ));
     }
@@ -163,7 +164,8 @@ class AccCoa extends CActiveRecord {
     }
 
     public function getNestedName() {
-        $results = ($this->level == 1) ? $this->code . ' - ' . $this->name : str_repeat("|--", $this->level - 1) . $this->code . ' - ' . $this->name;
+        
+        $results = $this->code . ' - ' . $this->name;
 
         if ($this->type == 'general')
             $results = '<b>' . $results . '</b>';

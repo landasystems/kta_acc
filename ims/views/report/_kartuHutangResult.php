@@ -1,3 +1,7 @@
+<?php
+$nama = Supplier::model()->findByPk($id);
+$nama = (isset($nama)) ? $nama->name : '-';
+?>
 <div id='printableArea'>
     <style type="text/css">
         .table td, th {
@@ -19,21 +23,22 @@
     <table class="table table-bordered" border="1">
         <thead>
             <tr>
-                <th colspan="8" style="text-align: center;background-color: #FFFFFF">
-        <h2 style="margin-bottom: 0px">KARTU HUTANG</h2>
-        <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
-        <hr style="margin: 10px">
-        </th>
-        </tr>
-        <tr>
-            <th colspan="2" width="5%" style="width:5%;text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; "></th>
-            <th width="25%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Description</th>
-            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Reff</th>
-            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Invoice</th>
-            <th width="20%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Debet</th>
-            <th  width="20%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Credit</th>
-            <th width="20%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">Saldo</th>
-        </tr>
+                <th colspan="8" style="text-align: center;background-color: #FFFFFF;border: none;">
+                    <h2 style="margin-bottom: 0px">KARTU HUTANG</h2>
+                    <?php echo $nama ?><br/>
+                    <?php echo date('d F Y', strtotime($start)) . " - " . date('d F Y', strtotime($end)); ?>
+                    <hr style="margin: 10px">
+                </th>
+            </tr>
+            <tr>
+                <th colspan="2" width="5%" style="width:5%;text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">TGL</th>
+                <th width="25%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">KETERANGAN</th>
+                <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
+                <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">INVOICE</th>
+                <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">DEBET</th>
+                <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">CREDIT</th>
+                <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">SALDO</th>
+            </tr>
         </thead>
         <tbody>
             <tr>

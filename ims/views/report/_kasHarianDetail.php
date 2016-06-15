@@ -62,8 +62,8 @@
 
                     foreach ($cashindet as $ui) {
 //                $terimaDari = (isset($ui->AccCashIn->description_to)) ? '<br/>(' . $ui->AccCashIn->description_to . ')' : '';
-                        $acc = (isset($ui->AccCashIn->code_acc)) ? $ui->AccCashIn->code_acc : '';
-                        $acc_coa = (isset($ui->AccCoa->code)) ? $ui->AccCoa->code : '';
+                        $acc = (isset($ui->AccCashIn->code_acc)) ? $ui->AccCashIn->code_acc : '-';
+                        $acc_coa = (isset($ui->AccCoa->code)) ? $ui->AccCoa->code : '-';
 
                         echo '<tr><td style="text-align:center;">' . $acc . '</td>'
                         . '<td style="text-align:center;">' . $ui->AccCoa->code . '</td>'

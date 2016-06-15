@@ -114,8 +114,8 @@ input[type=radio]:checked+label {
     line-height: 12px;
     font-size: 13px;
     font-family: "Droid Sans", Helvetica, Arial, sans-serif;
-    word-spacing: 1.1pt;
-    letter-spacing: 4pt;
+    word-spacing: 2pt;
+    /*letter-spacing: 2pt;*/
     color: #000;
     background: 0 0
 }
