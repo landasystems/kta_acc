@@ -35,7 +35,8 @@
                     <label class="control-label">Induk Perkiraan</label>
                     <div class="controls">
                         <?php
-                        $data = array('0' => 'root') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+//                        $data = array('0' => 'root') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'root, lft')), 'id', 'nestedname');
+                        $data = array('0' => 'root') + CHtml::listData(AccCoa::model()->findAll(array('order' => 'code')), 'id', 'nestedname');
                         $this->widget('bootstrap.widgets.TbSelect2', array(
                             'asDropDownList' => TRUE,
                             'data' => $data,
@@ -43,7 +44,7 @@
                             'value' => (isset($model->parent_id) ? $model->parent_id : ''),
                             'options' => array(
                                 "allowClear" => true,
-                                "width" => "270px",
+                                "width" => "450px",
                             ),
                             'htmlOptions' => array(
                                 'id' => 'parent_id',

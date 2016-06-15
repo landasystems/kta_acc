@@ -87,9 +87,12 @@ $form = $this->beginWidget('CActiveForm', array(
             <div class="span12">
                 <div class="row-fluid">
                     <div class="form-actions" style="margin:0px -20px">
-                        <div class="span12 controls" style="padding:0px 0px 0px 5px">
-                            <?php echo $form->checkBox($model, 'rememberMe', array('class' => 'left', 'style' => 'width:20px')); ?> Keep me login
-                            <button type="submit" class="btn right" id="loginBtn"><span class="icon16 icomoon-icon-enter"></span> Login</button>
+                        <div class="row-fluid" style="margin-left: 10px;">
+                            <div class="span12 controls">
+                                <button type="submit" class="btn btn-large span12 btn-primary" id="loginBtn">
+                                    <span class="icon-user"></span> Login
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
