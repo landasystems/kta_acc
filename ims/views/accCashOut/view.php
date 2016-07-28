@@ -42,7 +42,7 @@ $this->endWidget();
             <div class="print">
                 <a href="#" onclick="js:printDiv('printableArea');
                         return false;">
-                    <span class="icon24 icon-print"></span> 
+                    <span class="icon24 icon-print"></span>
                 </a>
             </div>
         </div>
@@ -94,12 +94,12 @@ $this->endWidget();
                             <td><?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?></td>
                             <td><?php
 //                                if ($siteConfig->is_approval == "manual") {
-                                    $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_out" and reff_id= ' . $model->id));
-                                    if (isset($date)) {
-                                        $datePost = $date->date_coa;
-                                    } else {
-                                        $datePost = '';
-                                    }
+                                $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_out" and reff_id= ' . $model->id));
+                                if (isset($date)) {
+                                    $datePost = $date->date_coa;
+                                } else {
+                                    $datePost = '';
+                                }
 //                                }
                                 ?></td>
                         </tr>
@@ -134,10 +134,10 @@ $this->endWidget();
 
                             if (!empty($viewCashOutDet->invoice_det_id)) {
 //                                $account = InvoiceDet::model()->findByPk($viewCashOutDet->ar_id);
-                                if(!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type=="customer"){
+                                if (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "customer") {
                                     $customer = empty($viewCashOutDet->InvoiceDet->Customer->name) ? '-' : $viewCashOutDet->InvoiceDet->Customer->name;
                                     $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $customer;
-                                }elseif(!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type=="supplier"){
+                                } elseif (!empty($viewCashOutDet->InvoiceDet->id) && $viewCashOutDet->InvoiceDet->type == "supplier") {
                                     $supplier = empty($viewCashOutDet->InvoiceDet->Supplier->name) ? '-' : $viewCashOutDet->InvoiceDet->Supplier->name;
                                     $name = '[' . $viewCashOutDet->InvoiceDet->code . '] ' . $supplier;
                                 }
@@ -167,7 +167,7 @@ $this->endWidget();
                     </tfoot>
                 </table>
                 <br>
-                
+
             </fieldset>
         </div>
     </div>
@@ -178,7 +178,7 @@ $this->endWidget();
 <!--------------------------print------------------------------------->
 <style>
     .tbPrint td{
-        background: #e8edff; 
+        background: #e8edff;
         border-bottom: none ;
         border-left: none;
         border-right: none;
@@ -207,11 +207,11 @@ $this->endWidget();
                                                 <th class="print" width="200" style="text-align:center">Jumlah </th>
                                             </tr>';
         if ($a > 0) {
-            $detailCash .= '<tr>                        
+            $detailCash .= '<tr>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
-                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>                                            
+                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
                                                  <td class="print" style="border-bottom:none;border-top:none">Lanjutan</td>
-                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp, false) . '</td>    
+                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp, false) . '</td>
                                             </tr>';
         }
         for ($i = 0; $i < $batas; $i++) {
@@ -223,27 +223,27 @@ $this->endWidget();
                     $accCoaName = '-';
                 }
                 $detailCash .= '
-                                            <tr>                        
+                                            <tr>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $no . '</td>
-                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>                                            
+                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>
                                                  <td class="print" style="border-bottom:none;border-top:none">' . $viewCashOutDet[$indeks]->description . '</td>
-                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($viewCashOutDet[$indeks]->amount, false) . '</td>    
+                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($viewCashOutDet[$indeks]->amount, false) . '</td>
                                             </tr>';
                 $jumlahRp += $viewCashOutDet[$indeks]->amount;
             } else {
                 $detailCash .= '
-                                            <tr>                        
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
+                                            <tr>
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
                                             </tr>';
             }
             $no++;
             $indeks++;
         }
 
-        $detailCash .= '<tr>  
+        $detailCash .= '<tr>
                         <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
                         <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
                     </tr>
@@ -273,7 +273,7 @@ $this->endWidget();
         $content = str_replace('{cash_out}', $model->code, $content);
         $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
         $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', $model->User->name, $content);
+        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
         $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
         $content = str_replace('{adminName}', $adminName, $content);
         $content = str_replace('{adminApprove}', $adminDate, $content);

@@ -47,7 +47,7 @@ $this->endWidget();
                                         <td>' . date('d M Y H:i:s', strtotime($val->created)) . '</td>
                                         <td>' . $stt . '</td>
                                         <td>' . $val->description . '</td>
-                                        <td>' . $val->User->name . '</td>
+                                        <td>' . (isset($val->User->name) ? $val->User->name : '-') . '</td>
                                     </tr>';
             $no++;
         }

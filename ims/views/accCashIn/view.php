@@ -38,7 +38,7 @@ $this->endWidget();
             <div class="print">
                 <a href="#" onclick="js:printDiv('printableArea');
                         return false;">
-                    <span class="icon24 icon-print"></span> 
+                    <span class="icon24 icon-print"></span>
                 </a>
             </div>
         </div>
@@ -89,12 +89,12 @@ $this->endWidget();
                             <td><?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?></td>
                             <td><?php
 //                                if ($siteConfig->is_approval == "manual") {
-                                    $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
-                                    if (isset($date)) {
-                                        $datePost = $date->date_coa;
-                                    } else {
-                                        $datePost = '';
-                                    }
+                                $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
+                                if (isset($date)) {
+                                    $datePost = $date->date_coa;
+                                } else {
+                                    $datePost = '';
+                                }
 //                                }
                                 ?></td>
                         </tr>
@@ -128,10 +128,10 @@ $this->endWidget();
                             }
 
                             if (!empty($viewCashInDet->invoice_det_id)) {
-                                if(!empty($viewCashInDet->InvoiceDet->id) && $viewCashInDet->InvoiceDet->type=="customer"){
+                                if (!empty($viewCashInDet->InvoiceDet->id) && $viewCashInDet->InvoiceDet->type == "customer") {
                                     $customer = empty($viewCashInDet->InvoiceDet->Customer->name) ? '-' : $viewCashInDet->InvoiceDet->Customer->name;
                                     $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $customer;
-                                }elseif(!empty($viewCashInDet->InvoiceDet->id) && $viewCashInDet->InvoiceDet->type=="supplier"){
+                                } elseif (!empty($viewCashInDet->InvoiceDet->id) && $viewCashInDet->InvoiceDet->type == "supplier") {
                                     $supplier = empty($viewCashInDet->InvoiceDet->Supplier->name) ? '-' : $viewCashInDet->InvoiceDet->Supplier->name;
                                     $name = '[' . $viewCashInDet->InvoiceDet->code . '] ' . $supplier;
                                 }
@@ -159,7 +159,7 @@ $this->endWidget();
                     </tfoot>
                 </table>
                 <br>
-                
+
             </fieldset>
         </div>
     </div>
@@ -189,11 +189,11 @@ $this->endWidget();
                                             </tr>';
 
         if ($a > 0) {
-            $detailCash .= '<tr>                        
+            $detailCash .= '<tr>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
-                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>                                            
+                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
                                                  <td class="print" style="border-bottom:none;border-top:none">Lanjutan</td>
-                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp) . '</td>    
+                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp) . '</td>
                                             </tr>';
         }
 
@@ -206,27 +206,27 @@ $this->endWidget();
                     $accCoaName = '-';
                 }
                 $detailCash .= '
-                                            <tr>                        
+                                            <tr>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $no . '</td>
-                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>                                            
+                                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>
                                                  <td class="print" style="border-bottom:none;border-top:none">' . $viewCashInDet[$indeks]->description . '</td>
-                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($viewCashInDet[$indeks]->amount, false) . '</td>    
+                                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($viewCashInDet[$indeks]->amount, false) . '</td>
                                             </tr>';
                 $jumlahRp += $viewCashInDet[$indeks]->amount;
             } else {
                 $detailCash .= '
-                                            <tr>                        
+                                            <tr>
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>                                            
                                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
-                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>    
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
+                                                <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
                                             </tr>';
             }
             $no++;
             $indeks++;
         }
 
-        $detailCash .= '<tr>  
+        $detailCash .= '<tr>
                         <td class="print" colspan="3" style="text-align:center"><i>' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</i></td>
                         <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
                     </tr>
@@ -256,7 +256,7 @@ $this->endWidget();
         $content = str_replace('{cash_in}', $model->code, $content);
         $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
         $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', $model->User->name, $content);
+        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
         $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
         $content = str_replace('{adminName}', $adminName, $content);
         $content = str_replace('{adminApprove}', $adminDate, $content);
@@ -274,7 +274,7 @@ $this->endWidget();
         echo $content;
     }
     ?>
-</div>   
+</div>
 <script type="text/javascript">
     function printDiv(divName)
     {
