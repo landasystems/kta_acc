@@ -22,7 +22,7 @@ class SupplierController extends Controller {
     public function accessRules() {
         return array(
             array('allow', // r
-                'actions' => array('create','index', 'view','update','delete'),
+                'actions' => array('create', 'index', 'view', 'update', 'delete'),
                 'expression' => 'app()->controller->isValidAccess("Supplier","r")'
             ),
         );
@@ -154,14 +154,15 @@ class SupplierController extends Controller {
                 } else {
                     $payment = InvoiceDet::model()->findByPk($_POST['id'][$i]);
                 }
+                $payment->invoice_no = (!empty($_POST['invoice_no'][$i])) ? $_POST['invoice_no'][$i] : null;
                 $payment->code = (!empty($_POST['code'][$i])) ? $_POST['code'][$i] : null;
                 $payment->description = (!empty($_POST['description'][$i])) ? $_POST['description'][$i] : null;
                 $payment->user_id = (!empty($_POST['user_id'][$i])) ? $_POST['user_id'][$i] : null;
                 $payment->payment = (!empty($_POST['payment'][$i])) ? $_POST['payment'][$i] : null;
                 $payment->type = 'supplier';
-                if(!empty($_POST['term_date'][$i]))
+                if (!empty($_POST['term_date'][$i]))
                     $payment->term_date = date('Y-m-d', strtotime($_POST['term_date'][$i]));
-                
+
                 if ($payment->save()) {
                     if (empty($_POST['id_coaDet'][$i])) {
                         $coaDet = new AccCoaDet();
@@ -197,6 +198,9 @@ class SupplierController extends Controller {
             . '<input type="text" class="code" style="width:94%" name="code[]" value="' . $_POST['code'] . '">'
             . '</td>'
             . '<td>'
+            . '<input type="text" class="code" style="width:94%" name="invoice_no[]" value="' . $_POST['invoice_no'] . '">'
+            . '</td>'
+            . '<td>'
             . '<input type="text" class="dateStart" style="width:90%" name="date_coa[]" value="' . $_POST['date_coa'] . '">'
             . '</td>'
             . '<td>'
@@ -226,27 +230,28 @@ class SupplierController extends Controller {
                                 </tr>';
         }
     }
+
     public function actionInvoiceDetail() {
         $tanggal = (!empty($_POST['tanggal'])) ? $_POST['tanggal'] : "";
         $andDate = '';
         $andDate2 = '';
 //        $dateCondition = explode();
-        if(!empty($tanggal) || $tanggal != ""){
-            $dateCondition = explode(' - ',$tanggal);
-            $andDate = " AND (AccCoaDet.date_coa between '".date('Y-m-d',  strtotime($dateCondition[0]))."' AND '".date('Y-m-d',  strtotime($dateCondition[1]))."')";
-            $andDate2 = " AND (t.date_coa between '".date('Y-m-d',  strtotime($dateCondition[0]))."' AND '".date('Y-m-d',  strtotime($dateCondition[1]))."')";
+        if (!empty($tanggal) || $tanggal != "") {
+            $dateCondition = explode(' - ', $tanggal);
+            $andDate = " AND (AccCoaDet.date_coa between '" . date('Y-m-d', strtotime($dateCondition[0])) . "' AND '" . date('Y-m-d', strtotime($dateCondition[1])) . "')";
+            $andDate2 = " AND (t.date_coa between '" . date('Y-m-d', strtotime($dateCondition[0])) . "' AND '" . date('Y-m-d', strtotime($dateCondition[1])) . "')";
         }
-        
+
         $userInvoice = AccCoaDet::model()->findAll(array(
             'with' => array('InvoiceDet'),
-            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"'.$andDate2
+            'condition' => 'InvoiceDet.user_id=' . $_POST['id'] . ' AND reff_type="invoice"' . $andDate2
         ));
         $ambil = ($_POST['id'] == 0) ? false : true;
         $balance = InvoiceDet::model()->findAll(array(
             'with' => array('AccCoaDet'),
-            'condition' => 'user_id = '.$_POST['id'].$andDate
-                ));
-        
+            'condition' => 'user_id = ' . $_POST['id'] . $andDate
+        ));
+
         echo $this->renderPartial('_payment', array(
             'userInvoice' => $userInvoice,
             'ambil' => $ambil,

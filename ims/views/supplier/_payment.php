@@ -2,6 +2,7 @@
 <table class="responsive table table-bordered">
     <thead>
         <tr>
+            <th width="20%" style="max-width:10%">BBM</th>
             <th width="20%" style="max-width:10%">Invoice</th>
             <th width="10%">Tgl. Tagihan</th>
             <th width="10%">Tgl. Jatuh Tempo</th>
@@ -14,6 +15,9 @@
         <tr style="display:<?php echo ($ambil || isset($_POST['yt0'])) ? '' : 'none'; ?>">
             <td>
                 <input type="text" class="codes" style="width:94%;">
+            </td>
+            <td>
+                <input type="text" class="invoice_no" style="width:94%;">
             </td>
             <td style="text-align: center">
                 <?php
@@ -68,30 +72,31 @@
         </tr>
         <?php
         if (empty($balance)) {
-            echo '<tr class="kosong"><td colspan="6">Data Kosong</td></tr>';
+            echo '<tr class="kosong"><td colspan="7">Data Kosong</td></tr>';
         } else {
             $paymentss = 0;
             foreach ($balance as $res) {
                 $paymentss = $res->payment;
                 $coaDet = AccCoaDet::model()->find(array(
-                    'condition' => 'reff_type="invoice" AND invoice_det_id ='.$res->id,
+                    'condition' => 'reff_type="invoice" AND invoice_det_id =' . $res->id,
                     'order' => 'id ASC'
                 ));
                 $coaId = (!empty($coaDet->id)) ? $coaDet->id : '';
                 $coaDate = (!empty($coaDet->date_coa)) ? $coaDet->date_coa : '';
                 $termDate = (!empty($res->term_date)) ? $res->term_date : '';
                 echo '<tr>';
-                echo '<td><input type="text" class="code" name="code[]" value="' . $res->code . '" style="width:98%;"></td>';
-                echo '<td><input type="text" class="dateStart" style="width:95%" name="date_coa[]" value="' . $coaDate . '"></td>';
-                echo '<td><input type="text" class="term" style="width:95%" name="term_date[]" value="' . $termDate . '"></td>';
+                echo '<td><input type="text" class="code" name="code[]" value="' . $res->code . '" style="width:95%;"></td>';
+                echo '<td><input type="text" class="code" name="invoice_no[]" value="' . $res->invoice_no . '" style="width:95%;"></td>';
+                echo '<td><input type="text" class="dateStart" style="width:90%" name="date_coa[]" value="' . $coaDate . '"></td>';
+                echo '<td><input type="text" class="term" style="width:90%" name="term_date[]" value="' . $termDate . '"></td>';
                 echo '<td><input type="text" name="description[]" value="' . $res->description . '" style="width:98%;"></td>';
                 echo '<td><div class="input-prepend">
                                 <span class="add-on">Rp.</span>
-                                <input class="angka nilai" style="width:98%;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
+                                <input class="angka nilai" style="width:95%;" type="text" value="' . $paymentss . '" name="payment[]"></td>';
                 echo '<td>
                             <span style="width:12px" class="btn delInv"><i class="icon-trash"></i></span>
                             <input type="hidden" class="user" name="user_id[]" value="' . $res->user_id . '">
-                            <input type="hidden" class="id_invoice" name="id[]" value="' . $res->id. '">
+                            <input type="hidden" class="id_invoice" name="id[]" value="' . $res->id . '">
                             <input type="hidden" class="id_coaDet" name="id_coaDet[]" value="' . $coaId . '">
                         </td>';
                 echo '</tr>';
@@ -108,7 +113,7 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="4" style="text-align:center;font-weight:bold">Total <?php // echo $sTot           ?></td>    
+            <td colspan="5" style="text-align:center;font-weight:bold">Total <?php // echo $sTot                       ?></td>
             <td class="span2" style="text-align:center">
                 <div class="input-prepend">
                     <span class="add-on">Rp.</span>

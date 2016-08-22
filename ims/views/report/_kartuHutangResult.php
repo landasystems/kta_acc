@@ -34,8 +34,8 @@ $nama = (isset($nama)) ? $nama->name : '-';
             <th colspan="2" width="5%" style="width:5%;text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">TGL</th>
             <th width="20%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">KETERANGAN</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">REFF</th>
-            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">GIRO A/N</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">INVOICE</th>
+            <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">BBM</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">DEBET</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">CREDIT</th>
             <th width="5%" style="text-align: center;background-color: #dcdcdc;-webkit-print-color-adjust: exact; ">SALDO</th>
@@ -67,11 +67,11 @@ $nama = (isset($nama)) ? $nama->name : '-';
                 $sDate = ($monthYear == date('M Y', strtotime($a->date_coa))) ? "" : date('M Y', strtotime($a->date_coa));
                 $monthYear = date('M Y', strtotime($a->date_coa));
 
-                $giro = '';
-                if ($a->reff_type == "cash_out")
-                    $giro = isset($giroOut[$a->reff_id]) ? $giroOut[$a->reff_id] : '';
-                else if ($a->reff_type == "cash_in")
-                    $giro = isset($giroIn[$a->reff_id]) ? $giroIn[$a->reff_id] : '';
+//                $giro = '';
+//                if ($a->reff_type == "cash_out")
+//                    $giro = isset($giroOut[$a->reff_id]) ? $giroOut[$a->reff_id] : '';
+//                else if ($a->reff_type == "cash_in")
+//                    $giro = isset($giroIn[$a->reff_id]) ? $giroIn[$a->reff_id] : '';
 
                 $saldo = $saldo + $a->debet - $a->credit;
                 $tDebet += $a->debet;
@@ -80,9 +80,9 @@ $nama = (isset($nama)) ? $nama->name : '-';
 			<td>' . $sDate . '</td>
                         <td>' . date('d', strtotime($a->date_coa)) . '</td>
 			<td>' . $a->description . '</td>
-                        <td>' . $a->code . '</td>
-			<td>' . $giro . '</td>
-			<td>' . $a->InvoiceDet->code . '</td>
+			<td>' . $a->code . '</td>
+                        <td>' . (isset($a->InvoiceDet->invoice_no) ? $a->InvoiceDet->invoice_no : '-') . '</td>
+			<td>' . (isset($a->InvoiceDet->code) ? $a->InvoiceDet->code : '-') . '</td>
 			<td name="deb" style="text-align:right">' . landa()->rp($a->debet, false) . ' </td>
 			<td name="cred" style="text-align:right">' . landa()->rp($a->credit, false) . '</td>
 			<td name="tdeb" style="text-align:right">' . landa()->rp($saldo, false) . '</td>

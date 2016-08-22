@@ -104,38 +104,37 @@ if (isset($_POST['AccCoaDet']['created'])) {
             'condition' => 'InvoiceDet.user_id=' . $_POST['listUser'] . ' AND (date_coa>="' . date('Y-m-d', strtotime($start)) . '" AND date_coa<="' . date('Y-m-d', strtotime($end)) . '")'
         ));
 
-        $cOutId = array();
-        $cInId = array();
-
-        foreach ($accCoaDet as $val) {
-            if ($val->reff_type == "cash_out")
-                $cOutId[] = $val->reff_id;
-            else if ($val->reff_type == "cash_in")
-                $cInId[] = $val->reff_id;
-        }
-
-        $giroOut = array();
-        if (!empty($cOutId)) {
-            $cashout = AccCashOut::model()->findAll(array('condition' => 'id IN (' . implode(',', $cOutId) . ')'));
-            foreach ($cashout as $v) {
-                $giroOut[$v->id] = $v->description_giro_an;
-            }
-        }
-
-        $giroIn = array();
-        if (!empty($cInId)) {
-            $cashIn = AccCashIn::model()->findAll(array('condition' => 'id IN (' . implode(',', $cInId) . ')'));
-            foreach ($cashIn as $v) {
-                $giroIn[$v->id] = $v->description_giro_an;
-            }
-        }
+//        $cOutId = array();
+//        $cInId = array();
+//
+//        foreach ($accCoaDet as $val) {
+//            if ($val->reff_type == "cash_out")
+//                $cOutId[] = $val->reff_id;
+//            else if ($val->reff_type == "cash_in")
+//                $cInId[] = $val->reff_id;
+//        }
+//        $giroOut = array();
+//        if (!empty($cOutId)) {
+//            $cashout = AccCashOut::model()->findAll(array('condition' => 'id IN (' . implode(',', $cOutId) . ')'));
+//            foreach ($cashout as $v) {
+//                $giroOut[$v->id] = $v->description_giro_an;
+//            }
+//        }
+//
+//        $giroIn = array();
+//        if (!empty($cInId)) {
+//            $cashIn = AccCashIn::model()->findAll(array('condition' => 'id IN (' . implode(',', $cInId) . ')'));
+//            foreach ($cashIn as $v) {
+//                $giroIn[$v->id] = $v->description_giro_an;
+//            }
+//        }
 
         $this->renderPartial('_kartuHutangResult', array(
             'start' => $start,
             'end' => $end,
             'accCoaDet' => $accCoaDet,
-            'giroIn' => $giroIn,
-            'giroOut' => $giroOut,
+//            'giroIn' => $giroIn,
+//            'giroOut' => $giroOut,
             'id' => $_POST['listUser']
         ));
     }

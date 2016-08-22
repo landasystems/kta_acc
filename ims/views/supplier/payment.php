@@ -24,7 +24,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 Yii::app()->name;
                 echo param('clientName');
                 ?><br/>
-                <!--<span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php // echo $siteConfig->date_system                                   ?></span>-->
+                <!--<span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php // echo $siteConfig->date_system                                      ?></span>-->
             </p>
         </legend>
 
@@ -77,12 +77,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                 }
                 $userInvoice = AccCoaDet::model()->findAll(array(
                     'with' => array('InvoiceDet'),
-                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND (reff_type="invoice" OR InvoiceDet.is_new_invoice=1)'.$andDate2
+                    'condition' => 'InvoiceDet.user_id=' . $_POST['supplier_list'] . ' AND (reff_type="invoice" OR InvoiceDet.is_new_invoice=1)' . $andDate2
                 ));
                 $balance = InvoiceDet::model()->findAll(array(
                     'with' => array('AccCoaDet'),
-                    'condition' => 'user_id = '.$_POST['supplier_list'].$andDate
-                        ));
+                    'condition' => 'user_id = ' . $_POST['supplier_list'] . $andDate
+                ));
             } else {
                 $userInvoice = '';
                 $balance = '';
@@ -133,19 +133,21 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
         var aa = $(this).parent().parent().parent().parent().find(".addRows");
         var desc = $(this).parent().parent().parent().find(".description").val();
         var code = $(this).parent().parent().parent().find(".codes").val();
+        var invoice_no = $(this).parent().parent().parent().find(".invoice_no").val();
         var date_coa = $(this).parent().parent().parent().find(".dateCoa").val();
         var terms = $(this).parent().parent().parent().find(".terms").val();
         var payment = $(this).parent().parent().parent().find(".payment").val();
         var sup_id = $("#supplier_list").val();
         $.ajax({
             type: 'POST',
-            data: {code: code, terms: terms, payment: payment, desc: desc, sup_id: sup_id, date_coa: date_coa},
+            data: {invoice_no: invoice_no, code: code, terms: terms, payment: payment, desc: desc, sup_id: sup_id, date_coa: date_coa},
             url: "<?php echo url('supplier/addRow'); ?>",
             success: function (data) {
                 aa.replaceWith(data);
                 $(".addRows").val("");
                 $(".description").val("");
                 $(".codes").val("");
+                $(".invoice_no").val("");
                 $(".dateCoa").val("");
                 $(".terms").val("");
                 $(".payment").val("0");
@@ -191,4 +193,5 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     $("body").on('keyup', ".nilai", function () {
         hitung();
     });
+    hitung();
 </script>
