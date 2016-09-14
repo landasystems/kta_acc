@@ -202,15 +202,15 @@ $this->endWidget();
         $detailCash = '<table class="tbPrint">
                                             <tr>
                                                 <th class="print" width="50" style="text-align:center">No.</th>
-                                                <th class="print" width="130" style="text-align:center">Perkiraan </th>
-                                                <th class="print" style="text-align:center">Keterangan </th>
-                                                <th class="print" width="200" style="text-align:center">Jumlah </th>
+                                                <th class="print" width="130" style="text-align:center">Account </th>
+                                                <th class="print" style="text-align:center">Description </th>
+                                                <th class="print" width="200" style="text-align:center">Amount </th>
                                             </tr>';
         if ($a > 0) {
             $detailCash .= '<tr>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
                                                  <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
-                                                 <td class="print" style="border-bottom:none;border-top:none">Lanjutan</td>
+                                                 <td class="print" style="border-bottom:none;border-top:none">Continued</td>
                                                  <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jumlahRp, false) . '</td>
                                             </tr>';
         }
@@ -243,9 +243,14 @@ $this->endWidget();
             $indeks++;
         }
 
+//        $detailCash .= '<tr>
+//                        <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
+//                        <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
+//                    </tr>
+//                    </table>';
+
         $detailCash .= '<tr>
-                        <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
-                        <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
+                        <td class="print" colspan="4" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
                     </tr>
                     </table>';
 

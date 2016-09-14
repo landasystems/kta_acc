@@ -17,6 +17,7 @@
  * @property integer $parent_id
  */
 class AccCoa extends CActiveRecord {
+
     public $filee;
 
     /**
@@ -164,7 +165,7 @@ class AccCoa extends CActiveRecord {
     }
 
     public function getNestedName() {
-        
+
         $results = $this->code . ' - ' . $this->name;
 
         if ($this->type == 'general')
@@ -172,6 +173,7 @@ class AccCoa extends CActiveRecord {
 
         return $results;
     }
+
     public function getFullName() {
         $results = $this->code . ' - ' . $this->name;
 
@@ -278,6 +280,45 @@ class AccCoa extends CActiveRecord {
     }
 
     public function angkaTerbilang($number) {
+        if (!is_numeric($number))
+            return $number;
+        else
+            $string = '';
+        $angka = array('', ' satu', ' dua', ' tiga', ' empat', ' lima', ' enam', ' tujuh', ' delapan', ' sembilan');
+        $level = array('', ' ribu', ' juta', ' milyar', ' trilyun', ' bilyun', ' quartilyun', ' quintilyun');
+        $number = strrev($number);
+        for ($i = 0; $i < intval(ceil(strlen($number) / 3)); $i++) {
+            $char = substr($number, $i * 3, 3);
+            if ($char == 0)
+                continue;
+            elseif ((strrev($char) == 1) && ($i == 1))
+                $string = ' seribu' . $string;
+            else {
+                $string = $level[$i] . $string;
+                $satu = intval(substr($char, 0, 1));
+                $dua = intval(substr($char, 1, 1));
+                $tiga = intval(substr($char, 2, 1));
+                if (($dua == 1) && ($satu == 0))
+                    $string = ' sepuluh' . $string;
+                elseif (($dua == 1) && ($satu == 1))
+                    $string = ' sebelas' . $string;
+                elseif ($dua == 1)
+                    $string = $angka[$satu] . ' belas' . $string;
+                else {
+                    $string = $angka[$satu] . $string;
+                    if ($dua > 1)
+                        $string = $angka[$dua] . ' puluh' . $string;
+                }
+                if ($tiga == 1)
+                    $string = ' seratus' . $string;
+                elseif ($tiga > 1)
+                    $string = $angka[$tiga] . ' ratus' . $string;
+            }
+        }
+        return ucwords($string) . " rupiah";
+    }
+
+    public function angkaTerbilangEn($number) {
         if (!is_numeric($number))
             return $number;
         else
