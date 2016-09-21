@@ -243,16 +243,16 @@ $this->endWidget();
             $indeks++;
         }
 
-//        $detailCash .= '<tr>
-//                        <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
-//                        <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
-//                    </tr>
-//                    </table>';
-
         $detailCash .= '<tr>
-                        <td class="print" colspan="4" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
+                        <td class="print" colspan="3" style="text-align:center">' . AccCoa::model()->terbilangEn($jumlahRp) . ' rupiah</td>
+                        <td class="print" style="text-align:right">' . landa()->rp($jumlahRp, false) . '</td>
                     </tr>
                     </table>';
+
+//        $detailCash .= '<tr>
+//                        <td class="print" colspan="4" style="text-align:center">' . AccCoa::model()->angkaTerbilang($jumlahRp) . '</td>
+//                    </tr>
+//                    </table>';
 
         $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
         $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
