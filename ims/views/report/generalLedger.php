@@ -98,6 +98,7 @@ $this->setPageTitle('General Ledger Report');
                     array(
                         'label' => 'Report',
                         'icon' => 'print',
+                        'htmlOptions' => array("style" => "height:12px;"),
                         'items' => array(
                             array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelGeneralLedger?created=' . str_replace("", "-", $_POST['AccCoaDet']['created'] . '&id=' . $_POST['accacoa'] . '&pada=' . $_POST['pada']))),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),

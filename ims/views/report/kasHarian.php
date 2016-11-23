@@ -43,32 +43,37 @@ $this->setPageTitle('Laporan Kas Harian');
                         ),
                         'htmlOptions' => array(
                             'id' => 'AccCashIn_account',
-                            'style' => 'width:100%;'
+                            'style' => 'width:50%;'
                         ),
                     ));
                     ?> 
                 </div>
             </div>
-            <label class="control-label">Tanggal</label>
-            <div class="controls">
-                <?php
-                $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                    'name' => 'created',
-                    'value' => (isset($_POST['created'])) ? $_POST['created'] : '',
-                    // additional javascript options for the date picker plugin
-                    'options' => array(
-                        'showAnim' => 'fold',
-                        'changeMonth' => 'true',
-                        'changeYear' => 'true',
-                    ),
-                    'htmlOptions' => array(
-                        'style' => 'height:20px;',
-                        'id' => 'acccoa'
-                    ),
-                ));
-                ?>
-            </div>
+            <div class="control-group">
+                <label class="control-label">Tanggal</label>
+                <div class="controls">
+                    <div class="input-prepend">
+                        <span class="add-on"><i class="icon-calendar"></i></span>
+                        <?php
+                        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                            'name' => 'created',
+                            'value' => (isset($_POST['created'])) ? $_POST['created'] : '',
+                            // additional javascript options for the date picker plugin
+                            'options' => array(
+                                'showAnim' => 'fold',
+                                'changeMonth' => 'true',
+                                'changeYear' => 'true',
+                            ),
+                            'htmlOptions' => array(
+                                'style' => 'height:20px;',
+                                'id' => 'acccoa'
+                            ),
+                        ));
+                        ?>
+                    </div>
+                </div>
 
+            </div>
         </div>
     </div>
 
@@ -91,8 +96,9 @@ $this->setPageTitle('Laporan Kas Harian');
                 array(
                     'label' => 'Report',
                     'icon' => 'print',
+                    'htmlOptions' => array("style" => "height:15px;"),
                     'items' => array(
-                        array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKasHarian?created=' .str_replace("","-",$_POST['created'].'&cash='.$_POST['cash']))),
+                        array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKasHarian?created=' . str_replace("", "-", $_POST['created'] . '&cash=' . $_POST['cash']))),
                         array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),
                     )
                 ),

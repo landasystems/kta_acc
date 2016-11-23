@@ -63,6 +63,7 @@ $this->breadcrumbs = array(
                 array(
                     'label' => 'Report',
                     'icon' => 'print',
+                    'htmlOptions' => array("style" => "height:15px;"),
                     'items' => array(
                         array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelJurnalUmum?created=' . str_replace("", "-", $_POST['AccCoaDet']['created']))),
                         array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv("printableArea");return false;')),

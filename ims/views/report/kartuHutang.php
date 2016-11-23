@@ -75,6 +75,7 @@ $this->breadcrumbs = array(
                     array(
                         'label' => 'Report',
                         'icon' => 'print',
+                        'htmlOptions' => array("style" => "height:15px;"),
                         'items' => array(
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),
                         )

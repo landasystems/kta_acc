@@ -58,11 +58,28 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
             ?>
             <fieldset>
                 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error')); ?>
-                <div class="row" style="margin-left: 0px;">
-                    <table width="100%">
-                        <tr>
-                            <td width="50%"><?php echo $form->textFieldRow($model, 'code', array('class' => 'span2', 'maxlength' => 255, 'value' => $code, 'readonly' => true)); ?></td>
-                            <td width="50%"><label for="AccCashIn_accCoa">Masuk Ke</label>
+
+
+                <div class="row-fluid" style="margin-left: 0px;">
+                    <div class="span12 tab-pane fade active in">
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3">Tgl Pembuatan</label>
+                                <?php echo $form->hiddenField($model, 'code', array('class' => 'span4', 'maxlength' => 255, 'value' => $code, 'readonly' => true)); ?>
+                                    <?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span6', 'readonly' => true, 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>','labelOptions' => array('label' => false))); ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Diterima dari</label>
+                                <?php echo $form->textFieldRow($model, 'description_to', array('class' => 'span6', 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Keterangan</label>
+                                <?php echo $form->textAreaRow($model, 'description', array('class' => 'span6', 'value' => $desc, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                        </div>
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3" for="AccCashIn_accCoa">Masuk Ke</label>
                                 <?php
                                 $accessCoa = AccCoa::model()->accessCoa();
                                 $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('condition' => $accessCoa, 'order' => 'root, lft')), 'id', 'fullName');
@@ -77,31 +94,26 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                     ),
                                     'htmlOptions' => array(
                                         'id' => 'AccCashIn_account',
-                                        'style' => 'width:100%;',
+                                        'style' => 'width:350px;',
                                         'onChange' => 'checkSelected();'
                                     ),
                                 ));
-                                ?></td>
-                        </tr>
-                        <tr>
-                            <td> 
-                                <?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span2', 'readonly' => true, 'maxlength' => 255)); ?>
-                            </td>
-                            <td> <label for="TotalDebit">Total Debit</label>
+                                ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3" style="margin-left: -115px;">Total Debit</label>
                                 <div class="input-prepend">
                                     <span class="add-on">Rp.</span>
                                     <?php echo CHtml::textfield('totalDebit', $totalDebit, array('class' => 'angka', 'maxlength' => 255)); ?>
-                                </div></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'value' => $desc, 'maxlength' => 255)); ?></td>
-                            <td><?php echo $form->textFieldRow($model, 'description_to', array('class' => 'span4', 'maxlength' => 255)); ?></td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td><?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span4', 'maxlength' => 255)); ?></td>
-                        </tr>
-                    </table>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3" >Giro A.N</label>
+                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6', 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
             </fieldset>
@@ -432,18 +444,18 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                     </tr>
                     <?php
 //                    if ($siteConfig->autopostnumber == 0) {
-                        ?>
-                        <tr>
-                            <th>
-                                <label>No Posting </label>
-                            </th>
-                            <th>
-                                <?php
-                                echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
-                                ?>
-                            </th>
-                        </tr>
-                        <?php
+                    ?>
+                    <tr>
+                        <th>
+                            <label>No Posting </label>
+                        </th>
+                        <th>
+                            <?php
+                            echo CHtml::textfield('codeAcc', (isset($model->code_acc)) ? $model->code_acc : '', array('maxlength' => 255, 'placeholder' => 'Kosongkan untuk generate otomatis'));
+                            ?>
+                        </th>
+                    </tr>
+                    <?php
 //                    }
                     ?>
                 </table>
@@ -495,7 +507,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         var nol = 0;
 
         if (val1 === val2) {
-            $.toaster({priority : 'error', message : "debet dan kredit tidak boleh sama"});
+            $.toaster({priority: 'error', message: "debet dan kredit tidak boleh sama"});
             $("#account").select2('val', nol);
         } else {
             //do nothing
@@ -512,7 +524,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 
         $(".appeared").find(".subLedgerField").html(dell + '[ ' + code + ' ]' + acc);
         $(".appeared").find(".inVoiceDet").val(id);
-//        $(".appeared").find(".totalDet").val(nilai);
+        //        $(".appeared").find(".totalDet").val(nilai);
         $("#modalSub").modal("hide");
         $(".appeared").removeClass('appeared');
         calculate();
@@ -567,7 +579,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 }
             });
         } else {
-            $.toaster({priority : 'error', message : "code dan/atau nilai belum di inputkan!"});
+            $.toaster({priority: 'error', message: "code dan/atau nilai belum di inputkan!"});
         }
     });
     $(document).ready(function () {
@@ -616,7 +628,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
         if ($("#difference").val() == 0) {
             return true;
         } else {
-            $.toaster({priority : 'error', message : "Total Debet dan Kredit Harus Sama"});
+            $.toaster({priority: 'error', message: "Total Debet dan Kredit Harus Sama"});
             return false;
         }
     });

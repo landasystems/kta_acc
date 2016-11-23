@@ -7,9 +7,9 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 ?>
 
 <div class="row-fluid">
-    <div class="span6">
-        <?php echo $form->textFieldRow($model, 'code', array('class' => 'span3', 'maxlength' => 255)); ?>
-        <?php echo $form->textFieldRow($model, 'code_acc', array('class' => 'span3', 'maxlength' => 255)); ?><br>
+    <div class="span4">
+        <?php echo $form->textFieldRow($model, 'code', array('class' => 'span10', 'maxlength' => 255)); ?>
+        <?php echo $form->textFieldRow($model, 'code_acc', array('class' => 'span10', 'maxlength' => 255)); ?><br>
     </div>
     <div class="span6">
         Masuk Ke <br>
@@ -27,7 +27,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
             ),
             'htmlOptions' => array(
                 'id' => 'AccCashIn_account',
-                'style' => 'width:250px;',
+                'style' => 'width:350px;',
             ),
         ));
         ?>

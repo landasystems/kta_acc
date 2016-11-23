@@ -14,6 +14,12 @@ $this->widget('bootstrap.widgets.TbMenu', array(
         array('label' => 'Edit', 'icon' => 'icon-edit', 'url' => Yii::app()->controller->createUrl('update', array('id' => $model->id)), 'linkOptions' => array()),
     //array('label'=>'Print', 'icon'=>'icon-print', 'url'=>'javascript:void(0);return false', 'linkOptions'=>array('onclick'=>'printDiv();return false;')),
 )));
+ $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
+                                if (isset($date)) {
+                                    $datePost = $date->date_coa;
+                                } else {
+                                    $datePost = '';
+                                }
 $this->endWidget();
 ?>
 <div class="form">
@@ -53,11 +59,25 @@ $this->endWidget();
                     echo '';
                 }
                 ?>
-                <div class="row" style="margin-left: 0px;">
-                    <table width="100%">
-                        <tr>
-                            <td width="50%"><?php echo $form->textFieldRow($model, 'code', array('class' => 'span3', 'maxlength' => 255, 'value' => $model->code, 'disabled' => true)); ?></td>
-                            <td width="50%"><label for="AccCashIn_code">Masuk dari</label>
+                <div class="row-fluid" style="margin-left: 0px;">
+                    <div class="span12 tab-pane fade active in">
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3">Tgl Pembuatan</label>
+                                <?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span6', 'maxlength' => 255, 'disabled' => true, 'prepend' => '<i class="icon-calendar"></i>', 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Diterima dari</label>
+                                <?php echo $form->textFieldRow($model, 'description_to', array('class' => 'span6', 'maxlength' => 255, 'disabled' => true, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Keterangan</label>
+                                <?php echo $form->textAreaRow($model, 'description', array('class' => 'span6', 'maxlength' => 255, 'disabled' => true, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                        </div>
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3">Masuk Ke</label>
                                 <?php
                                 $data = array(0 => 'Pilih') + CHtml::listData(AccCoa::model()->findAll(array('condition' => 'type_sub_ledger="ks" OR type_sub_ledger="bk"', 'order' => 'root, lft')), 'id', 'nestedname');
                                 $this->widget('bootstrap.widgets.TbSelect2', array(
@@ -75,34 +95,22 @@ $this->endWidget();
                                         'disabled' => true
                                     ),
                                 ));
-                                ?></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span2', 'maxlength' => 255, 'disabled' => true, 'prepend' => '<i class="icon-calendar"></i>')); ?></td>
-                            <td> <label for="TotalDebit">Total Debit</label>
+                                ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Total Debit</label>
                                 <div class="input-prepend">
                                     <span class="add-on">Rp.</span>
-                                    <?php echo CHtml::textfield('totalDebit', $model->total, array('class' => 'span2', 'maxlength' => 255, 'disabled' => true, 'onkeyup' => 'this.value=this.value.replace(/[^\d]/,\'\')')); ?>
-                                </div></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?></td>
-                            <td><?php
-//                                if ($siteConfig->is_approval == "manual") {
-                                $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
-                                if (isset($date)) {
-                                    $datePost = $date->date_coa;
-                                } else {
-                                    $datePost = '';
-                                }
-//                                }
-                                ?></td>
-                        </tr>
-                        <tr>
-                            <td><?php echo $form->textFieldRow($model, 'description_to', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?></td>
-                            <td><?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?></td>
-                        </tr>
-                    </table>
+                                    <?php echo CHtml::textfield('totalDebit', $model->total, array('class' => 'span4', 'maxlength' => 255, 'disabled' => true, 'onkeyup' => 'this.value=this.value.replace(/[^\d]/,\'\')')); ?>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Giro A.N</label>
+                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6','disabled' => true, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <br>
                 <h4>Detail Dana</h4>
