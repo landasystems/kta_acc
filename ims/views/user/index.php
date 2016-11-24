@@ -29,14 +29,9 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'type' => 'striped bordered condensed',
     'template' => '{summary}{pager}{items}{pager}',
     'columns' => array(
-        array(
-            'name' => 'Foto',
-            'type' => 'raw',
-            'value' => '"$data->tagImg"',
-            'htmlOptions' => array('style' => 'text-align: center; width:180px;text-align:center;')
-        ),
-        'code',
         'name',
+        'email',
+        'phone',
         array(
             'class' => 'bootstrap.widgets.TbButtonColumn',
             'template' => '{view}{update}{delete}',

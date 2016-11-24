@@ -55,42 +55,22 @@
 
                 <table>
                     <tr>
-                        <td width="200">
-
-                            <?php
-//                          $imgs = '';
-                            $cc = '';
-                            if ($model->isNewRecord) {
-                                $img = Yii::app()->landa->urlImg('', '', '');
-                            } else {
-                                $img = Yii::app()->landa->urlImg('avatar/', $model->avatar_img, $_GET['id']);
-                                $del = '<div class="btn-group photo-det-btn">';
-                                $imgs = param('urlImg') . '350x350-noimage.jpg';
-                                $cc = CHtml::ajaxLink(
-                                                '<i class="icon-trash">Remove Photo</i>', url('user/removephoto', array('id' => $model->id)), array(
-                                            'type' => 'POST',
-                                            'success' => 'function( data )
-                                                    {
-                                                           $("#my_image").attr("src","' . $imgs . '");
-                                                           $("#yt0").fadeOut();
-                                                    }'), array('class' => 'btn btn-large btn-block btn-primary', 'style' => 'width: 360px;font-size: 15px;')
-                                        )
-                                        . '</div>';
-                            }
-                            echo '<img width="230" src="' . $img['medium'] . '" alt="" class="image img-polaroid" id="my_image"  /> ';
-                            echo $cc;
-                            ?>
-                            <br><br><div style="margin-left: -90px;"> <?php echo $form->fileFieldRow($model, 'avatar_img', array('class' => 'span3')); ?></div>
-
-                        </td>
                         <td style="vertical-align: top;">                                
                             <h3>Login Information</h3>
                             <hr/>
-                            <?php echo $form->textFieldRow($model, 'username', array('class' => 'span5', 'maxlength' => 20)); ?>
+                            <?php echo $form->textFieldRow($model, 'username', array('class' => 'span3', 'maxlength' => 20)); ?>
 
-                            <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 100)); ?>
+                            <?php echo $form->textFieldRow($model, 'email', array('class' => 'span3', 'maxlength' => 100)); ?>
 
                             <?php echo $form->passwordFieldRow($model, 'password', array('class' => 'span3', 'maxlength' => 255, 'hint' => 'Fill the password, to change',)); ?>
+
+                            
+                        </td>
+                        <td style="vertical-align: top">
+                           <h3>Profile Information</h3>
+                            <hr/>
+                            
+                            <?php echo $form->textFieldRow($model, 'name', array('class' => 'span3', 'maxlength' => 255)); ?> 
 
                             <?php
                             $mDepartement = Departement::model()->findAll(array());
@@ -98,43 +78,12 @@
                                 'empty' => 'Pilih',
                             ));
                             ?>
-
-                            <br/> 
-                            <h3>Profile Information</h3>
-                            <hr/>
-                            <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 25)); ?>
-
-                            <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 255)); ?> 
-
                             <?php echo $form->toggleButtonRow($model, 'enabled'); ?>
                             <?php
                             echo $form->textFieldRow(
                                     $model, 'phone', array('prepend' => '+62')
                             );
                             ?>
-
-                            <div class="control-group ">
-                                <?php
-                                echo CHtml::activeLabel($model, 'province_id', array('class' => 'control-label'));
-                                ?>
-                                <div class="controls">
-                                    <?php
-                                    echo CHtml::dropDownList('province_id', $model->City->province_id, CHtml::listData(Province::model()->findAll(), 'id', 'name'), array(
-                                        'empty' => 'Pilih',
-                                        'ajax' => array(
-                                            'type' => 'POST',
-                                            'url' => CController::createUrl('landa/city/dynacities'),
-                                            'update' => '#User_city_id',
-                                        ),
-                                    ));
-                                    ?>  
-                                </div>
-                            </div>
-
-
-                            <?php echo $form->dropDownListRow($model, 'city_id', CHtml::listData(City::model()->findAll('province_id=:province_id', array(':province_id' => (int) $model->City->province_id)), 'id', 'name'), array('class' => 'span3')); ?>
-                            <?php echo $form->textAreaRow($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
-
                         </td>
                     </tr>
                 </table>

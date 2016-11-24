@@ -21,10 +21,10 @@ class Auth extends CActiveRecord {
                     array('visible' => landa()->checkAccess('Supplier', 'r'), 'label' => 'Supplier', 'url' => array('/supplier'), 'auth_id' => 'Supplier', 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('userInvoice', 'r'), 'label' => 'Supplier Payment', 'url' => array('/supplier/payment'), 'auth_id' => 'userInvoice', 'crud' => array("r" => 1)),
                 )),
-//            array('visible' => landa()->checkAccess('Customer', 'r') || landa()->checkAccess('Customer', 'r'), 'label' => 'Customer', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-//                    array('label' => 'Customer', 'url' => array('/customer'), 'auth_id' => 'Customer', 'crud' => array("r" => 1)),
-//                    array('label' => 'Customer Invoice', 'url' => array('/customer/receivable'), 'auth_id' => 'Customer', 'crud' => array("r" => 1)),
-//                )),
+            array('visible' => landa()->checkAccess('Customer', 'r') || landa()->checkAccess('Customer', 'r'), 'label' => 'Customer', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
+                    array('label' => 'Customer', 'url' => array('/customer'), 'auth_id' => 'Customer', 'crud' => array("r" => 1)),
+                    array('label' => 'Customer Invoice', 'url' => array('/customer/receivable'), 'auth_id' => 'Customer', 'crud' => array("r" => 1)),
+                )),
             array('visible' => (landa()->checkAccess('AccCoa', 'r') || landa()->checkAccess('AccJurnal', 'r') || landa()->checkAccess('BeginningBalance', 'r') || landa()->checkAccess('BeginningBalanceKartu', 'r')), 'label' => 'Accounting', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
                     array('visible' => landa()->checkAccess('AccCoa', 'r'), 'label' => 'Daftar Perkiraan', 'url' => array('/accCoa'), 'auth_id' => 'AccCoa', 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('AccJurnal', 'r'), 'label' => 'Jurnal', 'url' => array('/accJurnal'), 'auth_id' => 'AccJurnal', 'crud' => array("r" => 1)),
@@ -41,8 +41,8 @@ class Auth extends CActiveRecord {
                     array(landa()->checkAccess('Report_NeracaSaldo', 'r'), 'label' => 'Neraca Saldo', 'url' => array('/report/neracaSaldo'), 'auth_id' => 'Report_NeracaSaldo', 'crud' => array("r" => 1)),
                 )),
             array('visible' => (landa()->checkAccess('kartuPiutang', 'r') || landa()->checkAccess('RekapPiutang', 'r') || landa()->checkAccess('kartuHutang', 'r') || landa()->checkAccess('RekapHutang', 'r')), 'label' => 'Buku Pembantu', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-//                    array('visible' => landa()->checkAccess('kartuPiutang', 'r'), 'label' => 'Kartu Piutang', 'url' => array('/report/kartuPiutang'), 'auth_id' => 'kartuPiutang', 'crud' => array("r" => 1)),
-//                    array('visible' => landa()->checkAccess('RekapPiutang', 'r'), 'label' => 'Rekap Kartu Piutang', 'url' => array('/report/RekapPiutang'), 'auth_id' => 'RekapPiutang', 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('kartuPiutang', 'r'), 'label' => 'Kartu Piutang', 'url' => array('/report/kartuPiutang'), 'auth_id' => 'kartuPiutang', 'crud' => array("r" => 1)),
+                    array('visible' => landa()->checkAccess('RekapPiutang', 'r'), 'label' => 'Rekap Kartu Piutang', 'url' => array('/report/RekapPiutang'), 'auth_id' => 'RekapPiutang', 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('kartuHutang', 'r'), 'label' => 'Kartu Hutang', 'url' => array('/report/kartuHutang'), 'auth_id' => 'kartuHutang', 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('RekapHutang', 'r'), 'label' => 'Rekap Kartu Hutang', 'url' => array('/report/RekapHutang'), 'auth_id' => 'RekapHutang', 'crud' => array("r" => 1)),
                 )),

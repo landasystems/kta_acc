@@ -31,11 +31,8 @@
                         <div class="nav-no-collapse">
                             <ul class="nav pull-right usernav">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown">
-                                        <?php
-                                        $img = user()->avatar_img;
-                                        echo '<img src="' . $img['small'] . '" alt="" class="image" /> ';
-                                        ?>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                        
                                         <span class="txt"><?php echo Yii::app()->user->getState('name'); ?></span>
                                         <b class="caret"></b>
                                     </a>

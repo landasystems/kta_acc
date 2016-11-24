@@ -51,6 +51,7 @@ $this->setPageTitle('Rekap Kartu Piutang');
                     array(
                         'label' => 'Report',
                         'icon' => 'print',
+                        'htmlOptions' => array("style" => "height:15px;"),
                         'items' => array(
                             array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('ExcelRekapPiutang',array('created'=>$_POST['AccCoaDet']['created'],'type'=>'ar')), 'linkOptions'=>array()),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printDiv();return false;')),

@@ -44,7 +44,7 @@
                             'value' => (isset($model->parent_id) ? $model->parent_id : ''),
                             'options' => array(
                                 "allowClear" => true,
-                                "width" => "450px",
+                                "width" => "390px",
                             ),
                             'htmlOptions' => array(
                                 'id' => 'parent_id',

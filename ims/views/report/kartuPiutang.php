@@ -40,7 +40,7 @@ $this->breadcrumbs = array(
                         'options' => array(
                             "placeholder" => 'Pilih',
                             "allowClear" => true,
-                            'width' => '50%',
+                            'width' => '350px',
                         ),
                         'htmlOptions' => array(
                             'id' => 'listUser',
@@ -77,6 +77,7 @@ $this->breadcrumbs = array(
                     array(
                         'label' => 'Report',
                         'icon' => 'print',
+                        'htmlOptions' => array("style" => "height:15px;"),
                         'items' => array(
 //                            array('label' => 'Export Ke Excel', 'url' => Yii::app()->controller->createUrl('report/GenerateExcelKartuPiutang?created=' . str_replace("", "-", $_POST['AccCoaSub']['created'] . '&ar_id=' . $_POST['ar_id'] . '&type=ar'))),
                             array('label' => 'Print', 'icon' => 'icon-print', 'url' => 'javascript:void(0);return false', 'linkOptions' => array('onclick' => 'printElement("printableArea");return false;')),

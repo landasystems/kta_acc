@@ -54,84 +54,96 @@ $this->endWidget();
                 } else {
                     echo '';
                 }
+                $date = AccCoaDet::model()->find(array('condition' => 'reff_type="jurnal" and reff_id= ' . $model->id));
+                if (isset($date)) {
+                    $datePost = $date->date_coa;
+                } else {
+                    $datePost = '';
+                }
                 ?>
                 <?php echo $form->errorSummary($model, 'Opps!!!', null, array('class' => 'alert alert-error span12', 'disabled' => true)); ?>
                 <br>
-                <div class="row" style="margin-left: 0px;">
-                    <?php echo $form->textFieldRow($model, 'code', array('class' => 'span3', 'maxlength' => 255, 'disabled' => true)); ?>
-
-                    <?php echo $form->datepickerRow($model, 'date_trans', array('class' => 'span2', 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>', 'disabled' => true, 'options' => array('todayBtn' => true, 'todayHighlight' => true, 'startDate' => date('j/m/Y'), 'format' => 'yyyy/m/d'))); ?>
-
-                    <?php
-//                    if ($siteConfig->is_approval == "manual") {
-                        $date = AccCoaDet::model()->find(array('condition' => 'reff_type="jurnal" and reff_id= ' . $model->id));
-                        if (isset($date)) {
-                            $datePost = $date->date_coa;
-                        } else {
-                            $datePost = '';
-                        }
-                        ?>
-                        <label for="Date_Post">Tanggal Posting</label>
-                        <div class="input-prepend">
-                            <span class="add-on"><i class="icon-calendar"></i></span>
-                            <?php
-                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-                                'name' => 'date_post',
-                                'value' => $datePost,
-                                'options' => array(
-                                    'showAnim' => 'fold',
-                                    'changeMonth' => 'true',
-                                    'changeYear' => 'true',
-                                    'dateFormat' => 'yy-mm-dd'
-                                ),
-                                'htmlOptions' => array(
-                                    'disabled' => true,
-                                    'style' => 'height:20px;',
-                                    'id' => 'acccoa',
-                                    'class' => 'span2',
-                                ),
-                            ));
-                            ?>
+                <div class="row-fluid" style="margin-left: 0px;">
+                    <div class="span12 tab-pane fade active in">
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3">No Transaksi</label>
+                                <?php echo $form->textFieldRow($model, 'code', array('class' => 'span6', 'maxlength' => 255, 'disabled' => true, 'labelOptions' => array('label' => false))); ?>
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Keterangan</label>
+                                <?php echo $form->textAreaRow($model, 'description', array('class' => 'span6', 'maxlength' => 255, 'disabled' => true, 'labelOptions' => array('label' => false))); ?>
+                            </div>
                         </div>
-                    <?php echo $form->textAreaRow($model, 'description', array('class' => 'span4', 'maxlength' => 255, 'disabled' => true)); ?>
-                </div>
+                        <div class="control-group span6">
+                            <div class="control-group">
+                                <label class="control-label span3">Tgl Pembuatan</label>
+                                <?php echo $form->datepickerRow($model, 'date_trans', array('class' => 'span6', 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>', 'labelOptions' => array('label' => false), 'disabled' => true, 'options' => array('todayBtn' => true, 'todayHighlight' => true, 'startDate' => date('j/m/Y'), 'format' => 'yyyy/m/d'))); ?>
 
-                <br>
-                <h4>Detail Dana</h4>
-                <table class="responsive table table-bordered">
-                    <thead>
-                        <tr>
-                            <th width="20">#</th>
-                            <th>Kode Akun</th>
-                            <th>Sub Ledger</th>
-                            <th>Keterangan</th>
-                            <th>Debit</th>
-                            <th>Kredit</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        foreach ($detailJurnal as $val) {
-                            if (isset($val->AccCoa->name)) {
-                                $accCoaName = $val->AccCoa->code . ' - ' . $val->AccCoa->name;
-                            } else {
-                                $accCoaName = '-';
-                            }
+                            </div>
+                            <div class="control-group">
+                                <label class="control-label span3">Tgl Posting</label>
+                                <div class="input-prepend">
+                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                    <?php
+                                    $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                        'name' => 'date_post',
+                                        'value' => $datePost,
+                                        'options' => array(
+                                            'showAnim' => 'fold',
+                                            'changeMonth' => 'true',
+                                            'changeYear' => 'true',
+                                            'dateFormat' => 'yy-mm-dd'
+                                        ),
+                                        'htmlOptions' => array(
+                                            'disabled' => true,
+                                            'style' => 'height:20px;',
+                                            'id' => 'acccoa',
+                                            'class' => 'span6',
+                                        ),
+                                    ));
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                            if (!empty($val->invoice_det_id)) {
-                                if(!empty($val->InvoiceDet->id) && $val->InvoiceDet->type=="customer"){
-                                    $customer = empty($val->InvoiceDet->Customer->name) ? '-' : $val->InvoiceDet->Customer->name;
-                                    $name = '[' . $val->InvoiceDet->code . '] ' . $customer;
-                                }elseif(!empty($val->InvoiceDet->id) && $val->InvoiceDet->type=="supplier"){
-                                    $supplier = empty($val->InvoiceDet->Supplier->name) ? '-' : $val->InvoiceDet->Supplier->name;
-                                    $name = '[' . $val->InvoiceDet->code . '] ' . $supplier;
+                    <br>
+                    <h4>Detail Dana</h4>
+                    <table class="responsive table table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="20">#</th>
+                                <th>Kode Akun</th>
+                                <th>Sub Ledger</th>
+                                <th>Keterangan</th>
+                                <th>Debit</th>
+                                <th>Kredit</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $no = 1;
+                            foreach ($detailJurnal as $val) {
+                                if (isset($val->AccCoa->name)) {
+                                    $accCoaName = $val->AccCoa->code . ' - ' . $val->AccCoa->name;
+                                } else {
+                                    $accCoaName = '-';
                                 }
-                            } else {
-                                $name = "-";
-                            }
 
-                            echo '
+                                if (!empty($val->invoice_det_id)) {
+                                    if (!empty($val->InvoiceDet->id) && $val->InvoiceDet->type == "customer") {
+                                        $customer = empty($val->InvoiceDet->Customer->name) ? '-' : $val->InvoiceDet->Customer->name;
+                                        $name = '[' . $val->InvoiceDet->code . '] ' . $customer;
+                                    } elseif (!empty($val->InvoiceDet->id) && $val->InvoiceDet->type == "supplier") {
+                                        $supplier = empty($val->InvoiceDet->Supplier->name) ? '-' : $val->InvoiceDet->Supplier->name;
+                                        $name = '[' . $val->InvoiceDet->code . '] ' . $supplier;
+                                    }
+                                } else {
+                                    $name = "-";
+                                }
+
+                                echo '
                                     <tr>
                                         <td>' . $no . '</td>
                                         <td>' . $accCoaName . '</td>
@@ -140,42 +152,42 @@ $this->endWidget();
                                         <td>' . landa()->rp($val->debet, true, 2) . '</td>
                                         <td>' . landa()->rp($val->credit, true, 2) . '</td>
                                     </tr>';
-                            $no++;
-                        }
-                        ?>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4"><b>Total</b></td>
-                            <td><?php echo landa()->rp($model->total_debet, true, 2) ?></td>
-                            <td><?php echo landa()->rp($model->total_credit, true, 2) ?></td>
-                        </tr>
-                    </tfoot>
-                </table>
-                <br>
-                
-            </fieldset>
-        </div>
-    </div>
-    <?php $this->endWidget(); ?>
-</div>
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4"><b>Total</b></td>
+                                <td><?php echo landa()->rp($model->total_debet, true, 2) ?></td>
+                                <td><?php echo landa()->rp($model->total_credit, true, 2) ?></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                    <br>
 
-<!--------------------------print------------------------------------->
-<div id="printableArea" style="width: 100%;display: none">
-    <?php
-    $no = 1;
-    $jmlCash = count($detailJurnal);
-    $jmlTable = (int) count($detailJurnal) / 8;
-    if ($jmlCash <= 8) {
-        $batas = 8;
-    } else {
-        $batas = 8;
-    }
-    $jmlDebet = 0;
-    $jmlCredit = 0;
-    $indeks = 0;
-    for ($a = 0; $a < $jmlTable; $a++) {
-        $detailCash = ' <table class="tbPrint">
+                    </fieldset>
+                </div>
+        </div>
+        <?php $this->endWidget(); ?>
+    </div>
+
+    <!--------------------------print------------------------------------->
+    <div id="printableArea" style="width: 100%;display: none">
+        <?php
+        $no = 1;
+        $jmlCash = count($detailJurnal);
+        $jmlTable = (int) count($detailJurnal) / 8;
+        if ($jmlCash <= 8) {
+            $batas = 8;
+        } else {
+            $batas = 8;
+        }
+        $jmlDebet = 0;
+        $jmlCredit = 0;
+        $indeks = 0;
+        for ($a = 0; $a < $jmlTable; $a++) {
+            $detailCash = ' <table class="tbPrint">
                     <tr>
                         <th class="print" width="50" style="text-align:center">#</th>
                         <th class="print" width="130" style="text-align:center">Perkiraan </th>
@@ -183,92 +195,92 @@ $this->endWidget();
                         <th class="print" width="200" style="text-align:center">Debet</th>
                         <th class="print" width="200" style="text-align:center">Credit</th>
                     </tr>';
-        if ($a > 0) {
-            $detailCash .= '<tr>                        
+            if ($a > 0) {
+                $detailCash .= '<tr>                        
                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>
                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none"></td>                                            
                                 <td class="print" style="border-bottom:none;border-top:none">Saldo Lanjutan</td>
                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jmlDebet, false) . '</td>    
                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($jmlCredit, false) . '</td>    
                            </tr>';
-        }
-        for ($i = 0; $i < $batas; $i++) {
-            $val = $detailJurnal;
+            }
+            for ($i = 0; $i < $batas; $i++) {
+                $val = $detailJurnal;
 
-            if (!empty($val[$indeks])) {
-                if ($val[$indeks]->AccCoa !== NULL) {
-                    $accCoaName = $val[$i]->AccCoa->code;
-                } else {
-                    $accCoaName = '-';
-                }
-                $detailCash .= '<tr>                        
+                if (!empty($val[$indeks])) {
+                    if ($val[$indeks]->AccCoa !== NULL) {
+                        $accCoaName = $val[$i]->AccCoa->code;
+                    } else {
+                        $accCoaName = '-';
+                    }
+                    $detailCash .= '<tr>                        
                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $no . '</td>
                                 <td class="print" style="text-align:center;border-bottom:none;border-top:none">' . $accCoaName . '</td>                                            
                                 <td class="print" style="border-bottom:none;border-top:none">' . $val[$indeks]->description . '</td>
                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($val[$indeks]->debet, false) . '</td>    
                                 <td class="print" style="text-align:right;border-bottom:none;border-top:none">' . landa()->rp($val[$indeks]->credit, false) . '</td>    
                            </tr>';
-                $jmlDebet += $val[$indeks]->debet;
-                $jmlCredit += $val[$indeks]->credit;
-            } else {
-                $detailCash .= '<tr>                        
+                    $jmlDebet += $val[$indeks]->debet;
+                    $jmlCredit += $val[$indeks]->credit;
+                } else {
+                    $detailCash .= '<tr>                        
                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>                                            
                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>
                                 <td class="print" style="border-bottom:none;border-top:none">&nbsp;</td>   
                             </tr>';
+                }
+                $no++;
+                $indeks++;
             }
-            $no++;
-            $indeks++;
-        }
-        $detailCash .= '<tr>  
+            $detailCash .= '<tr>  
                         <td class="print" colspan="3"></td>
                         <td class="print" style="text-align:right">' . landa()->rp($jmlDebet, false) . '</td>
                         <td class="print" style="text-align:right">' . landa()->rp($jmlCredit, false) . '</td>
                     </tr>
                     </table>';
 
-        $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
-        $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
+            $adminStatus = (isset($model->AccAdmin->status)) ? $model->AccAdmin->status : '';
+            $managerStatus = (isset($model->AccManager->status)) ? $model->AccManager->status : '';
 
-        $adminName = (isset($model->AccAdmin->User->name) and $adminStatus == "confirm") ? $model->AccAdmin->User->name : '';
-        $adminDate = (isset($model->AccAdmin->created) and $adminStatus == "confirm") ? date('d M Y', strtotime($model->AccAdmin->created)) : '';
+            $adminName = (isset($model->AccAdmin->User->name) and $adminStatus == "confirm") ? $model->AccAdmin->User->name : '';
+            $adminDate = (isset($model->AccAdmin->created) and $adminStatus == "confirm") ? date('d M Y', strtotime($model->AccAdmin->created)) : '';
 
-        $managerName = (isset($model->AccManager->User->name) and $managerStatus == "confirm") ? $model->AccManager->User->name : '';
-        $managerDate = (isset($model->AccManager->created) and $managerStatus == "confirm") ? date('d M Y', strtotime($model->AccManager->created)) : '';
+            $managerName = (isset($model->AccManager->User->name) and $managerStatus == "confirm") ? $model->AccManager->User->name : '';
+            $managerDate = (isset($model->AccManager->created) and $managerStatus == "confirm") ? date('d M Y', strtotime($model->AccManager->created)) : '';
 
-        $dateApprove = ".........";
-        $noApprove = ".........";
-        if (!empty($model->code_acc))
-            $noApprove = $model->code_acc;
+            $dateApprove = ".........";
+            $noApprove = ".........";
+            if (!empty($model->code_acc))
+                $noApprove = $model->code_acc;
 
-        if (!empty($datePost))
-            $dateApprove = date('d M Y', strtotime($datePost));
+            if (!empty($datePost))
+                $dateApprove = date('d M Y', strtotime($datePost));
 
-        $content = $siteConfig->report_jurnal;
-        $content = str_replace('{jurnal}', $model->code, $content);
-        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
-        $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', (isset($model->User->name)) ? $model->User->name : '', $content);
-        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
-        $content = str_replace('{adminName}', $adminName, $content);
-        $content = str_replace('{adminApprove}', $adminDate, $content);
-        $content = str_replace('{managerName}', $managerName, $content);
-        $content = str_replace('{managerApprove}', $managerDate, $content);
-        $content = str_replace("{no_approval}", $noApprove, $content);
-        $content = str_replace("{date_approval}", $dateApprove, $content);
-        echo $content . "<br>";
-    }
-    ?>
-</div>  
-<script type="text/javascript">
-    function printDiv(divName)
-    {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-        document.body.innerHTML = printContents;
-        window.print();
-        document.body.innerHTML = originalContents;
-    }
-</script>
+            $content = $siteConfig->report_jurnal;
+            $content = str_replace('{jurnal}', $model->code, $content);
+            $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
+            $content = str_replace('{detail_cash}', $detailCash, $content);
+            $content = str_replace('{tellerName}', (isset($model->User->name)) ? $model->User->name : '', $content);
+            $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
+            $content = str_replace('{adminName}', $adminName, $content);
+            $content = str_replace('{adminApprove}', $adminDate, $content);
+            $content = str_replace('{managerName}', $managerName, $content);
+            $content = str_replace('{managerApprove}', $managerDate, $content);
+            $content = str_replace("{no_approval}", $noApprove, $content);
+            $content = str_replace("{date_approval}", $dateApprove, $content);
+            echo $content . "<br>";
+        }
+        ?>
+    </div>  
+    <script type="text/javascript">
+        function printDiv(divName)
+        {
+            var printContents = document.getElementById(divName).innerHTML;
+            var originalContents = document.body.innerHTML;
+            document.body.innerHTML = printContents;
+            window.print();
+            document.body.innerHTML = originalContents;
+        }
+    </script>

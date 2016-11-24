@@ -42,7 +42,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                         'options' => array(
                             "placeholder" => 'Pilih',
                             "allowClear" => true,
-                            'width' => '50%',
+                            'width' => '300px',
                         ),
                         'htmlOptions' => array(
                             'id' => 'supplier_list',

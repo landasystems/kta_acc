@@ -52,7 +52,7 @@ $this->widget('bootstrap.widgets.TbGridView', array(
     'id' => 'acc-coa-grid',
     'dataProvider' => $model->search(),
     'type' => 'striped bordered condensed',
-    'template' => '{summary}{pager}{items}{pager}',
+    'template' => '{summary}{items}{pager}',
     'columns' => array(
         array(
             'name' => 'name',

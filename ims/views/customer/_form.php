@@ -25,13 +25,13 @@
                 <table>
                     <tr>
                         <td style="vertical-align: top;">
-                            <br/> 
-                            <h3>Profile Information</h3>
-                            <hr/>
-                            <?php echo $form->textFieldRow($model, 'code', array('class' => 'span5', 'maxlength' => 25)); ?>
+                            <?php echo $form->textFieldRow($model, 'code', array('class' => 'spa35', 'maxlength' => 25)); ?>
 
-                            <?php echo $form->textFieldRow($model, 'name', array('class' => 'span5', 'maxlength' => 255)); ?> 
-                            <?php echo $form->textFieldRow($model, 'email', array('class' => 'span5', 'maxlength' => 255)); ?> 
+                            <?php echo $form->textFieldRow($model, 'name', array('class' => 'span3', 'maxlength' => 255)); ?> 
+                            <?php echo $form->textFieldRow($model, 'email', array('class' => 'span3', 'maxlength' => 255)); ?> 
+
+                        </td>
+                        <td>
 
                             <?php
                             echo $form->textFieldRow(
@@ -61,7 +61,7 @@
                                         'options' => array(
                                             'allowClear' => true,
                                             'minimumInputLength' => 3,
-                                            'width' => '100%;margin:0px;text-align:left',
+                                            'width' => '350px;margin:0px;text-align:left',
                                             'minimumInputLength' => '3',
                                             'initSelection' => 'js:function(element, callback) 
                                                                 { 
@@ -88,7 +88,7 @@
                                     ?>
                                 </div>
                             </div>
-                            <?php echo $form->textAreaRow($model, 'address', array('class' => 'span5', 'maxlength' => 255)); ?>
+                            <?php echo $form->textAreaRow($model, 'address', array('class' => 'span4', 'maxlength' => 255)); ?>
 
                         </td>
                     </tr>
