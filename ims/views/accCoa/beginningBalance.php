@@ -1,5 +1,5 @@
 <?php
-$this->setPageTitle('Beginning Balance');
+$this->setPageTitle('Saldo Awal');
 foreach (Yii::app()->user->getFlashes() as $key => $message) {
     echo '<div class="alert alert-' . $key . '">' . $message . '</div>';
 }
@@ -8,12 +8,47 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
 <div class="form">
 
     <div class="col-xs-12 col-md-6">
-
+        <?php
+        $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+            'id' => 'acc-beginning-balance-form',
+            'enableAjaxValidation' => false,
+            'method' => 'post',
+            'type' => 'vertical',
+            'htmlOptions' => array(
+                'enctype' => 'multipart/form-data',
+                'name' => 'beginning-balance',
+            )
+        ));
+        ?>
         <legend>
             <p class="note">
                 <span class="required">-</span> Mengubah saldo awal akan berpengaruh terhadap transaksi yang telah diinput<br/>
-                <span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php echo $siteConfig->date_system?></span>
+                <!--<span class="required">-</span> Saldo awal akan di setting pada tanggal <span class="label label-info"><?php echo $siteConfig->date_system ?></span>-->
             </p>
+            <div class="control-group">
+                <label class="control-label span3" style="margin-left:0px"><span class="required">-</span> Saldo awal akan di setting pada tanggal : </label>
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on"><i class="icon-calendar"></i></span>
+                            <?php
+                            $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+                                'name' => 'date_system',
+                                'value' => (isset($siteConfig->date_system)) ? $siteConfig->date_system : '',
+                                // additional javascript options for the date picker plugin
+                                'options' => array(
+                                    'showAnim' => 'fold',
+                                    'changeMonth' => 'true',
+                                    'changeYear' => 'true',
+                                ),
+                                'htmlOptions' => array(
+                                    'style' => 'height:20px;',
+                                    'id' => 'acccoa'
+                                ),
+                            ));
+                            ?>
+                        </div>
+                    </div>
+                </div>
         </legend>
 
         <div id="yw22" class="tabs-left">
@@ -28,20 +63,11 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                 }
                 ?>
             </ul>
-            <?php
-            $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-                'id' => 'acc-beginning-balance-form',
-                'enableAjaxValidation' => false,
-                'method' => 'post',
-                'type' => 'vertical',
-                'htmlOptions' => array(
-                    'enctype' => 'multipart/form-data',
-                    'name' => 'beginning-balance',
-                )
-            ));
-            ?>
+
             <div class="tab-content">
+                
                 <?php
+                ///////////
                 $no = 0;
                 $valDebet = 0;
                 $valCredit = 0;

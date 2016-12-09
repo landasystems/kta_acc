@@ -11,7 +11,7 @@ class Auth extends CActiveRecord {
         return array(
             array('visible' => landa()->checkAccess('Dashboard', 'r'), 'label' => 'Dashboard', 'url' => array('/dashboard'), 'auth_id' => 'Dashboard'),
             array('visible' => landa()->checkAccess('SiteConfig', 'r') || landa()->checkAccess('Departement', 'r') || landa()->checkAccess('Roles', 'r') || landa()->checkAccess('User', 'r'), 'label' => 'Settings', 'url' => array('#'), 'submenuOptions' => array('class' => 'sub'), 'items' => array(
-                    array('visible' => landa()->checkAccess('SiteConfig', 'r'), 'auth_id' => 'SiteConfig', 'label' => 'Site config', 'url' => array('/siteConfig/update/1'), 'crud' => array("r" => 1)),
+//                    array('visible' => landa()->checkAccess('SiteConfig', 'r'), 'auth_id' => 'SiteConfig', 'label' => 'Site config', 'url' => array('/siteConfig/update/1'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Departement', 'r'), 'auth_id' => 'Departement', 'label' => 'Unit Kerja', 'url' => array('/departement'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('Roles', 'r'), 'auth_id' => 'Roles', 'label' => 'Access', 'url' => array('/roles'), 'crud' => array("r" => 1)),
                     array('visible' => landa()->checkAccess('User', 'r'), 'label' => 'User', 'url' => array('/user'), 'auth_id' => 'User', 'crud' => array("r" => 1)),

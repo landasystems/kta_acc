@@ -66,7 +66,7 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                             <div class="control-group">
                                 <label class="control-label span3">Tgl Pembuatan</label>
                                 <?php echo $form->hiddenField($model, 'code', array('class' => 'span4', 'maxlength' => 255, 'value' => $code, 'readonly' => true)); ?>
-                                    <?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span6', 'readonly' => true, 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>','labelOptions' => array('label' => false))); ?>
+                                <?php echo $form->textFieldRow($model, 'date_trans', array('class' => 'span6', 'readonly' => true, 'maxlength' => 255, 'prepend' => '<i class="icon-calendar"></i>', 'labelOptions' => array('label' => false))); ?>
                             </div>
                             <div class="control-group">
                                 <label class="control-label span3">Diterima dari</label>
@@ -104,7 +104,9 @@ foreach (Yii::app()->user->getFlashes() as $key => $message) {
                                 <label class="control-label span3" style="margin-left: -115px;">Total Debit</label>
                                 <div class="input-prepend">
                                     <span class="add-on">Rp.</span>
-                                    <?php echo CHtml::textfield('totalDebit', $totalDebit, array('class' => 'angka', 'maxlength' => 255)); ?>
+                                    <?php // echo CHtml::textfield('totalDebit', $totalDebit, array('class' => 'angka', 'maxlength' => 255)); ?>
+                                    <?php echo $form->textFieldRow($model, 'totalDebit', array('class' => 'span3', 'value' => $totalDebit, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+
                                 </div>
                             </div>
                             <div class="control-group">

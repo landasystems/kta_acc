@@ -127,7 +127,6 @@ if (isset($_POST['AccCoaDet']['created'])) {
         $checked = (isset($_POST['isCompared']));
         $pada = $_POST['pada'];
 
-
 //        $acc_id = AccCoa::model()->findAll(array('condition' => 'parent_id=' . $_POST['accacoa']));
         $this->renderPartial('_generalLedgerResult', array(
             'start' => $start,

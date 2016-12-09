@@ -33,9 +33,15 @@ class AccCoaController extends Controller {
      * @param integer $id the ID of the model to be displayed
      */
     public function actionView($id) {
-        $this->render('view', array(
-            'model' => $this->loadModel($id),
-        ));
+        cs()->registerScript('read', '
+                    $("form input, form textarea, form select").each(function(){
+                    $(this).prop("disabled", true);
+                });');
+        $_GET['v'] = true;
+        $this->actionUpdate($id);
+//        $this->render('view', array(
+//            'model' => $this->loadModel($id),
+//        ));
     }
 
     /**
@@ -58,7 +64,7 @@ class AccCoaController extends Controller {
                 $child->type = $_POST['AccCoa']['type'];
                 $child->type_sub_ledger = $_POST['AccCoa']['type_sub_ledger'];
                 $child->group = $_POST['AccCoa']['group'];
-
+               
                 if ($child->appendTo($root)) {
                     /* $accCoaDet = new AccCoaDet;
                       $accCoaDet->acc_coa_id = $child->id;
@@ -84,18 +90,18 @@ class AccCoaController extends Controller {
                 $model->type_sub_ledger = $_POST['AccCoa']['type_sub_ledger'];
                 $model->group = $_POST['AccCoa']['group'];
 
-                $model->saveNode();
-                if (!empty($model->id))
+//                $model->saveNode();
+                if ( $model->saveNode())
                     $this->redirect(array('view', 'id' => $model->id));
             }
         }
 
-        if (!isset($_POST['AccCoa']['filee'])) { //jika bukan dari import excel
+//        if (!isset($_POST['AccCoa']['filee'])) { //jika bukan dari import excel
             $this->render('create', array(
                 'model' => $model,
                 'accCoaDet' => $accCoaDet,
             ));
-        }
+//        }
     }
 
     /**
@@ -214,6 +220,8 @@ class AccCoaController extends Controller {
         $model = AccCoa::model()->findAll(array('order' => 'root, lft', 'order' => 'id asc'));
         $tabHeader = AccCoa::model()->findAll(array('condition' => 'level = 1 '));
         $siteConfig = SiteConfig::model()->findByPk(1);
+        $siteConfig->date_system = date('Y-m-d', strtotime($_POST['date_system']));
+        $siteConfig->save();
         $coaDet = array();
 
         if (isset($_POST['debet']) or isset($_POST['credit'])) {

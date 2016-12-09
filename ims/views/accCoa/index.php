@@ -29,7 +29,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
         array('label' => 'Pencarian', 'icon' => 'icon-search', 'url' => '#', 'linkOptions' => array('class' => 'search-button')),
 //        array('label' => 'Export ke PDF', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GeneratePdf'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
         array('label' => 'Export ke Excel', 'icon' => 'icon-download', 'url' => Yii::app()->controller->createUrl('GenerateExcel'), 'linkOptions' => array('target' => '_blank'), 'visible' => true),
-        array('label' => 'Import dari Excel', 'icon' => 'iconic-icon-upload', 'url' => Yii::app()->controller->createUrl('importExcel'), 'linkOptions' => array(), 'visible' => true),
+//        array('label' => 'Import dari Excel', 'icon' => 'iconic-icon-upload', 'url' => Yii::app()->controller->createUrl('importExcel'), 'linkOptions' => array(), 'visible' => true),
         array('label'=>'Print', 'icon'=>'icon-print', 'url'=>'javascript:void(0);return false', 'linkOptions'=>array('onclick'=>'printDiv();return false;')),
     ),
 ));

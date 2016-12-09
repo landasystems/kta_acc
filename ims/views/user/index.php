@@ -14,7 +14,7 @@ $this->widget('bootstrap.widgets.TbMenu', array(
     'items' => array(
         array('label' => 'Tambah', 'icon' => 'icon-plus', 'url' => Yii::app()->controller->createUrl('create', array('type' => $type)), 'linkOptions' => array()),
         array('label' => 'Daftar', 'icon' => 'icon-th-list', 'url' => Yii::app()->controller->createUrl('index'), 'active' => true, 'linkOptions' => array()),
-        array('label' => 'Export Excel', 'icon' => 'icomoon-icon-file-excel', 'url' => Yii::app()->controller->createUrl('user/generateExcel'), 'linkOptions' => array()),
+//        array('label' => 'Export Excel', 'icon' => 'icomoon-icon-file-excel', 'url' => Yii::app()->controller->createUrl('user/generateExcel'), 'linkOptions' => array()),
     ),
 ));
 $this->endWidget();

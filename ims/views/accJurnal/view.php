@@ -257,20 +257,72 @@ $this->endWidget();
 
             if (!empty($datePost))
                 $dateApprove = date('d M Y', strtotime($datePost));
+            ?>
+            <table class="tbPrint">
+                <tbody>
+                    <tr>
+                        <td class="print" colspan="3">
+                            <h3 style="margin: 0px">PT. KARYA TUGAS ANDA</h3> </td>
+                    </tr>
+                    <tr class="print" style="padding:0px">
+                        <td width="35%">&nbsp;</td>
+                        <td colspan="2">
+                            <h2 style="margin: 0px">Jurnal Memorial</h2> </td>
+                    </tr>
+                    <tr class="print" style="padding:0px">
+                        <td>&nbsp;</td>
+                        <td width="10">NO</td>
+                        <td>: <?php echo $model->code?></td>
+                    </tr>
+                    <tr class="print" style="padding:0px">
+                        <td>&nbsp;</td>
+                        <td width="10">TGL.</td>
+                        <td>: <?php echo date('d M Y', strtotime($model->date_trans))?></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div><?php echo $detailCash?></div>
+            <table class="tbPrint">
+                <tbody>
+                    <tr class="print">
+                        <td height="70" valign="top">Penjelasan :</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="tbPrint">
+                <tbody>
+                    <tr>
+                        <td class="print" style="text-align:center" width="30%">Pimpinan</td>
+                        <td class="print" style="text-align:center">Administrasi</td>
+                        <td class="print" style="text-align:center" width="30%">Disetujui Oleh</td>
+                    </tr>
+                    <tr height="60">
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr class="print">
+                        <td>TGL.</td>
+                        <td>TGL.</td>
+                        <td>TGL.</td>
+                    </tr>
+                </tbody>
+            </table>
 
-            $content = $siteConfig->report_jurnal;
-            $content = str_replace('{jurnal}', $model->code, $content);
-            $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
-            $content = str_replace('{detail_cash}', $detailCash, $content);
-            $content = str_replace('{tellerName}', (isset($model->User->name)) ? $model->User->name : '', $content);
-            $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
-            $content = str_replace('{adminName}', $adminName, $content);
-            $content = str_replace('{adminApprove}', $adminDate, $content);
-            $content = str_replace('{managerName}', $managerName, $content);
-            $content = str_replace('{managerApprove}', $managerDate, $content);
-            $content = str_replace("{no_approval}", $noApprove, $content);
-            $content = str_replace("{date_approval}", $dateApprove, $content);
-            echo $content . "<br>";
+            <?php
+//            $content = $siteConfig->report_jurnal;
+//            $content = str_replace('{jurnal}', $model->code, $content);
+//            $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
+//            $content = str_replace('{detail_cash}', $detailCash, $content);
+//            $content = str_replace('{tellerName}', (isset($model->User->name)) ? $model->User->name : '', $content);
+//            $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
+//            $content = str_replace('{adminName}', $adminName, $content);
+//            $content = str_replace('{adminApprove}', $adminDate, $content);
+//            $content = str_replace('{managerName}', $managerName, $content);
+//            $content = str_replace('{managerApprove}', $managerDate, $content);
+//            $content = str_replace("{no_approval}", $noApprove, $content);
+//            $content = str_replace("{date_approval}", $dateApprove, $content);
+//            echo $content . "<br>";
         }
         ?>
     </div>  

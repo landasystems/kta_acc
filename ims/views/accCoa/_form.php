@@ -77,30 +77,32 @@
                 }
                 ?>
                 <div class="control-group sub_ledger" style="display:<?php echo $class ?>;">
-                    <label class="control-label">Type Sub Ledger</label>
-                    <div class="controls">
-                        <?php
-                        echo CHtml::dropDownList('AccCoa[type_sub_ledger]', 5, AccCoa::model()->typeSub(), array('class' => 'span3', 'empty' => 'Pilih', 'options' => array($model->type_sub_ledger => array('selected' => true))));
-                        ?>
-                    </div>
+                    <!--<div class="controls">-->
+                    <?php
+//                        echo CHtml::dropDownList('AccCoa[type_sub_ledger]', 5, AccCoa::model()->typeSub(), array('class' => 'span3', 'empty' => 'Pilih', 'options' => array($model->type_sub_ledger => array('selected' => true))));
+                    echo $form->radioButtonListRow($model, 'type_sub_ledger', AccCoa::model()->typeSub(), array('class' => 'span3'));
+                    ?>
+                    <!--</div>-->
                 </div>
             </div>
         </div>
+        <?php if (!isset($_GET['v'])) { ?>
+            <div class="form-actions">
 
-        <div class="form-actions">
-            <?php
-            $this->widget('bootstrap.widgets.TbButton', array(
-                'buttonType' => 'submit',
-                'type' => 'primary',
-                'icon' => 'ok white',
-                'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
-                'htmlOptions' => array(
-                ),
-            ));
-            ?>
-        </div>
-    </fieldset>
+                <?php
+                $this->widget('bootstrap.widgets.TbButton', array(
+                    'buttonType' => 'submit',
+                    'type' => 'primary',
+                    'icon' => 'ok white',
+                    'label' => $model->isNewRecord ? 'Tambah' : 'Simpan',
+                    'htmlOptions' => array(
+                    ),
+                ));
+                ?>
+            </div>
+            <?php } ?>
+        </fieldset>
 
-    <?php $this->endWidget(); ?>
+        <?php $this->endWidget(); ?>
 
 </div>

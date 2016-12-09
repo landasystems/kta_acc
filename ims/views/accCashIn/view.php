@@ -14,12 +14,12 @@ $this->widget('bootstrap.widgets.TbMenu', array(
         array('label' => 'Edit', 'icon' => 'icon-edit', 'url' => Yii::app()->controller->createUrl('update', array('id' => $model->id)), 'linkOptions' => array()),
     //array('label'=>'Print', 'icon'=>'icon-print', 'url'=>'javascript:void(0);return false', 'linkOptions'=>array('onclick'=>'printDiv();return false;')),
 )));
- $date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
-                                if (isset($date)) {
-                                    $datePost = $date->date_coa;
-                                } else {
-                                    $datePost = '';
-                                }
+$date = AccCoaDet::model()->find(array('condition' => 'reff_type="cash_in" and reff_id= ' . $model->id));
+if (isset($date)) {
+    $datePost = $date->date_coa;
+} else {
+    $datePost = '';
+}
 $this->endWidget();
 ?>
 <div class="form">
@@ -106,8 +106,8 @@ $this->endWidget();
                             </div>
                             <div class="control-group">
                                 <label class="control-label span3">Giro A.N</label>
-                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6','disabled' => true, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
-                            
+                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6', 'disabled' => true, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+
                             </div>
                         </div>
                     </div>
@@ -187,6 +187,7 @@ $this->endWidget();
     }
     $jumlahRp = 0;
     $indeks = 0;
+    $content = '';
     for ($a = 0; $a < $jmlTable; $a++) {
         $detailCash = '<table class="tbPrint">
                                             <tr>
@@ -257,24 +258,62 @@ $this->endWidget();
         if (!empty($datePost))
             $dateApprove = date('d M Y', strtotime($datePost));
 
-        $accCoaName = (isset($model->AccCoa->name)) ? $model->AccCoa->name : '';
-
-        $content = $siteConfig->report_cash_in;
-        $content = str_replace('{account}', $accCoaName, $content);
-        $content = str_replace('{cash_in}', $model->code, $content);
-        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
-        $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
-        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
-        $content = str_replace('{adminName}', $adminName, $content);
-        $content = str_replace('{adminApprove}', $adminDate, $content);
-        $content = str_replace('{managerName}', $managerName, $content);
-        $content = str_replace('{managerApprove}', $managerDate, $content);
-        $content = str_replace("{no_approval}", $noApprove, $content);
-        $content = str_replace("{date_approval}", $dateApprove, $content);
-        $content = str_replace("{description_to}", $model->description_to, $content);
-        $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
-
+//        $accCoaName = (isset($model->AccCoa->name)) ? $model->AccCoa->name : '';
+//        $prints = "";
+//        $content = base64_decode($prints);
+//        $content = str_replace('{account}', $accCoaName, $content);
+//        $content = str_replace('{cash_in}', $model->code, $content);
+//        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
+//        $content = str_replace('{detail_cash}', $detailCash, $content);
+//        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
+//        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
+//        $content = str_replace('{adminName}', $adminName, $content);
+//        $content = str_replace('{adminApprove}', $adminDate, $content);
+//        $content = str_replace('{managerName}', $managerName, $content);
+//        $content = str_replace('{managerApprove}', $managerDate, $content);
+//        $content = str_replace("{no_approval}", $noApprove, $content);
+//        $content = str_replace("{date_approval}", $dateApprove, $content);
+//        $content = str_replace("{description_to}", $model->description_to, $content);
+//        $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
+        ?>
+        <table class="tbPrint">
+            <tbody>
+                <tr>
+                    <td class="print" style="text-align:center;" width="20%"><?php echo $model->code?>
+                        <br /> <?php echo date('d M Y', strtotime($model->date_trans)) ?></td>
+                    <td class="print" style="text-align: center" width="60%">
+                        <h4 style="line-height: 10px">BUKTI PENERIMAAN</h4> <b>Kas / Bank [ <?php echo $accCoaName ?> ]</b></td>
+                    <td class="print" style="text-align:center;" width="20%"><?php echo $noApprove ?>
+                        <br /> <?php echo $dateApprove ?></td>
+                </tr>
+                <tr>
+                    <td align="left" class="print" colspan="3">Diterima Dari : <?php echo $model->description_to?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div><?php echo $detailCash;?></div>
+        <table class="tbPrint">
+            <tbody>
+                <tr>
+                    <td class="print" rowspan="2" style="vertical-align: top" width="180">Giro a.n : <?php echo $model->description_giro_an?></td>
+                    <td class="print" width="200">|&nbsp;&nbsp;|Tunai|&nbsp;&nbsp;|Cek|&nbsp;&nbsp;|B. Giro</td>
+                    <td class="print">No. : <?php echo $model->description_giro_an ?></td>
+                </tr>
+                <tr align="left">
+                    <td class="print">Bank :</td>
+                    <td class="print">Tgl. :</td>
+                </tr>
+                <tr>
+                    <td class="print" colspan="2" style="text-align:center" width="50%">Approved</td>
+                    <td class="print" style="text-align:center">Accepted</td>
+                </tr>
+                <tr height="100">
+                    <td class="print" colspan="2" style="border-right:none">&nbsp;</td>
+                    <td class="print" style="border-left:none">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <?php
         //jika ada halaman berikutnya print br 3, agar pas cucok em
         if (($a + 1 ) < $jmlTable)
             $content .= '<br/><br/><br/><br/><br/>';

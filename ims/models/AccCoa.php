@@ -430,14 +430,14 @@ class AccCoa extends CActiveRecord {
     }
 
     public function typeSub() {
-        return array("ks" => "Cash", "bk" => "Bank", "ar" => "Receivable", "as" => "Stock", "ap" => "Payable");
+        return array("ks" => "Cash & Bank", "ar" => "Receivable",  "ap" => "Payable");
     }
 
     public function getSubLedger($subLedger) {
         if ($subLedger == "ks") {
-            $val = "Cash";
+            $val = "Cash & Bank";
         } else if ($subLedger == "bk") {
-            $val = "Bank";
+            $val = "Cash & Bank";
         } else if ($subLedger == "ar") {
             $val = "Receivable";
         } else if ($subLedger == "as") {

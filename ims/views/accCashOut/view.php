@@ -110,12 +110,12 @@ if (isset($date)) {
                             </div>
                             <div class="control-group">
                                 <label class="control-label span3">Giro A.N</label>
-                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6','disabled' => true, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
-                            
+                                <?php echo $form->textFieldRow($model, 'description_giro_an', array('class' => 'span6', 'disabled' => true, 'maxlength' => 255, 'labelOptions' => array('label' => false))); ?>
+
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
                 <br>
                 <h4>Detail Dana</h4>
@@ -281,27 +281,65 @@ if (isset($date)) {
 
         $accCoaName = (isset($model->AccCoa->name)) ? $model->AccCoa->name : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 
-        $content = $siteConfig->report_cash_out;
-        $content = str_replace('{account}', $accCoaName, $content);
-        $content = str_replace('{cash_out}', $model->code, $content);
-        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
-        $content = str_replace('{detail_cash}', $detailCash, $content);
-        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
-        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
-        $content = str_replace('{adminName}', $adminName, $content);
-        $content = str_replace('{adminApprove}', $adminDate, $content);
-        $content = str_replace('{managerName}', $managerName, $content);
-        $content = str_replace('{managerApprove}', $managerDate, $content);
-        $content = str_replace("{no_approval}", $noApprove, $content);
-        $content = str_replace("{date_approval}", $dateApprove, $content);
-        $content = str_replace("{description_to}", $model->description_to, $content);
-        $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
-
+//        $content = $siteConfig->report_cash_out;
+//        $content = str_replace('{account}', $accCoaName, $content);
+//        $content = str_replace('{cash_out}', $model->code, $content);
+//        $content = str_replace('{date}', date('d M Y', strtotime($model->date_trans)), $content);
+//        $content = str_replace('{detail_cash}', $detailCash, $content);
+//        $content = str_replace('{tellerName}', (isset($model->User->name) ? $model->User->name : '-'), $content);
+//        $content = str_replace('{tellerApprove}', date('d M Y', strtotime($model->created)), $content);
+//        $content = str_replace('{adminName}', $adminName, $content);
+//        $content = str_replace('{adminApprove}', $adminDate, $content);
+//        $content = str_replace('{managerName}', $managerName, $content);
+//        $content = str_replace('{managerApprove}', $managerDate, $content);
+//        $content = str_replace("{no_approval}", $noApprove, $content);
+//        $content = str_replace("{date_approval}", $dateApprove, $content);
+//        $content = str_replace("{description_to}", $model->description_to, $content);
+//        $content = str_replace("{description_giro_an}", $model->description_giro_an, $content);
+       
         //jika ada halaman berikutnya print br 3, agar pas cucok em
         if (($a + 1 ) < $jmlTable)
             $content .= '';
 
-        echo $content;
+         ?>
+        <table class="tbPrint">
+            <tbody>
+                <tr>
+                    <td class="print" style="text-align:center;" width="20%"><?php echo $model->code?>
+                        <br /> <?php echo date('d M Y', strtotime($model->date_trans)) ?></td>
+                    <td class="print" style="text-align: center" width="60%">
+                        <h4 style="line-height: 10px">PAYMENT VOUCHER</h4> <b>Cash / Bank [ <?php echo $accCoaName?> ]</b></td>
+                    <td class="print" style="text-align:center;" width="20%"><?php echo $noApprove ?>
+                        <br /> <?php echo $dateApprove ?></td>
+                </tr>
+                <tr>
+                    <td align="left" class="print" colspan="3">Paid To : <?php echo $model->description_to ?></td>
+                </tr>
+            </tbody>
+        </table>
+        <div><?php echo $detailCash ?></div>
+        <table class="tbPrint">
+            <tbody>
+                <tr>
+                    <td class="print" rowspan="2" style="vertical-align: top" width="180">Giro p p : <?php echo $model->description_giro_an ?></td>
+                    <td class="print" width="200">|&nbsp;&nbsp;|Cash|&nbsp;&nbsp;|Cheque|&nbsp;&nbsp;|B. Giro</td>
+                    <td class="print">No. :</td>
+                </tr>
+                <tr align="left">
+                    <td class="print">Bank :</td>
+                    <td class="print">Date. :</td>
+                </tr>
+                <tr>
+                    <td class="print" colspan="2" style="text-align:center" width="50%">Approved</td>
+                    <td class="print" style="text-align:center" width="33%">Received</td>
+                </tr>
+                <tr height="100">
+                    <td class="print" colspan="2" style="border-right:none">&nbsp;</td>
+                    <td class="print" style="border-left:none">&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+        <?php
     }
     ?>
 </div>
